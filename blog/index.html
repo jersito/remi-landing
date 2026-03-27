@@ -70,12 +70,12 @@
 
   <!-- Categories -->
   <div class="blog-categories">
-    <a href="/blog/" class="cat-pill active">All</a>
-    <a href="#sleep" class="cat-pill">Sleep</a>
-    <a href="#feeding" class="cat-pill">Feeding</a>
-    <a href="#milestones" class="cat-pill">Milestones</a>
-    <a href="#diapers" class="cat-pill">Diapers & Health</a>
-    <a href="#tips" class="cat-pill">Parenting Tips</a>
+    <button class="cat-pill active" data-cat="all">All</button>
+    <button class="cat-pill" data-cat="sleep">Sleep</button>
+    <button class="cat-pill" data-cat="feeding">Feeding</button>
+    <button class="cat-pill" data-cat="milestones">Milestones</button>
+    <button class="cat-pill" data-cat="diapers">Diapers & Health</button>
+    <button class="cat-pill" data-cat="tips">Parenting Tips</button>
   </div>
 
   <!-- Post Grid -->
@@ -278,29 +278,17 @@
   </footer>
 
   <script>
-    // Category filter
-    const pills = document.querySelectorAll('.cat-pill');
-    const cards = document.querySelectorAll('.post-card');
-
-    pills.forEach(pill => {
-      pill.addEventListener('click', e => {
-        e.preventDefault();
-        pills.forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.cat-pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('.cat-pill').forEach(function(p) { p.classList.remove('active'); });
         pill.classList.add('active');
-
-        const href = pill.getAttribute('href');
-        const cat = href.replace('#', '');
-
-        cards.forEach(card => {
-          if (!cat || href === '/blog/') {
+        var cat = pill.getAttribute('data-cat');
+        document.querySelectorAll('.post-card').forEach(function(card) {
+          if (cat === 'all') {
             card.style.display = '';
           } else {
-            const cardCat = card.querySelector('.post-card-cat');
-            if (cardCat && cardCat.classList.contains(cat)) {
-              card.style.display = '';
-            } else {
-              card.style.display = 'none';
-            }
+            var badge = card.querySelector('.post-card-cat');
+            card.style.display = (badge && badge.classList.contains(cat)) ? '' : 'none';
           }
         });
       });
