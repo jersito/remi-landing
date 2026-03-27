@@ -277,6 +277,35 @@
     </div>
   </footer>
 
+  <script>
+    // Category filter
+    const pills = document.querySelectorAll('.cat-pill');
+    const cards = document.querySelectorAll('.post-card');
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', e => {
+        e.preventDefault();
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const href = pill.getAttribute('href');
+        const cat = href.replace('#', '');
+
+        cards.forEach(card => {
+          if (!cat || href === '/blog/') {
+            card.style.display = '';
+          } else {
+            const cardCat = card.querySelector('.post-card-cat');
+            if (cardCat && cardCat.classList.contains(cat)) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  </script>
   <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
