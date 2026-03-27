@@ -200,6 +200,37 @@ ul { list-style: none; }
   .store-badge { justify-content: center; }
 }
 
+/* ========== Coming Soon Overlay ========== */
+.store-badges-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.store-badges-wrapper .store-badge {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(40%);
+}
+.coming-soon-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.coming-soon-overlay span {
+  background: var(--primary);
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 6px 22px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  text-transform: uppercase;
+}
+
 /* ========== Phone Mockup ========== */
 .hero-visual { position: relative; display: flex; justify-content: center; }
 .phone-frame {
