@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Visit Summary - Remi</title>
+<meta name="description" content="View your baby's visit summary - feeding, sleep, diaper stats and health events tracked with Remi." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Baby Visit Summary - Remi" />
+<meta property="og:description" content="View feeding, sleep, and diaper stats tracked with the Remi baby tracker app." />
+<meta property="og:image" content="https://remibabyapp.com/og-image.png" />
+<meta property="og:site_name" content="Remi" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Baby Visit Summary - Remi" />
+<meta name="twitter:description" content="View feeding, sleep, and diaper stats tracked with the Remi baby tracker app." />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(165deg, #0f0f1e 0%, #1a1a2e 50%, #16162b 100%);
+    color: #E8E8F0;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .accent-bar {
+    height: 3px;
+    background: linear-gradient(90deg, #7A9DB0 0%, #9B8EC4 35%, #F2C4A4 70%, #5DA6E6 100%);
+  }
+
+  .page-wrap {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px 20px 32px;
+  }
+
+  /* Loading state */
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 16px;
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top: 3px solid #9B8EC4;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+
+  /* Error state */
+  .error-wrap {
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 15vh;
+  }
+  .error-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, #7A9DB0, #9B8EC4);
+    padding: 6px 14px;
+    border-radius: 10px;
+    margin-bottom: 28px;
+  }
+  .error-brand img { width: 22px; height: 22px; border-radius: 5px; }
+  .error-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 36px 32px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .error-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.7; }
+  .error-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 10px; color: #E85D75; }
+  .error-card p { color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.6; }
+  .error-footer { margin-top: 24px; font-size: 11px; color: rgba(255,255,255,0.15); font-weight: 600; letter-spacing: 0.5px; }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-top: 8px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, #7A9DB0, #9B8EC4);
+    padding: 6px 14px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+  }
+  .brand-logo { width: 22px; height: 22px; border-radius: 5px; }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .header .age { font-size: 17px; color: rgba(255,255,255,0.55); font-weight: 500; margin-bottom: 4px; }
+  .header .period { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 400; }
+
+  /* Cards (glassmorphism) */
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .card-icon {
+    font-size: 20px; width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 11px; background: rgba(255,255,255,0.10);
+  }
+  .card-title { font-size: 18px; font-weight: 700; color: #FFFFFF; }
+  .count {
+    margin-left: auto; font-size: 11px; font-weight: 600;
+    color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.10);
+    padding: 3px 10px; border-radius: 10px;
+  }
+
+  /* Stats */
+  .stats-row { display: flex; gap: 10px; margin-bottom: 16px; }
+  .stat-pill {
+    flex: 1; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px; padding: 14px 16px;
+  }
+  .stat-pill.accent-blue { background: rgba(122,157,176,0.12); border-color: rgba(122,157,176,0.2); }
+  .stat-pill.accent-purple { background: rgba(155,142,196,0.12); border-color: rgba(155,142,196,0.2); }
+  .stat-pill.accent-peach { background: rgba(242,196,164,0.12); border-color: rgba(242,196,164,0.2); }
+  .stat-pill.accent-sky { background: rgba(93,166,230,0.12); border-color: rgba(93,166,230,0.2); }
+  .stat-value { font-size: 28px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.5px; }
+  .stat-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 3px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* Breakdown bar */
+  .breakdown-container { margin-bottom: 14px; }
+  .breakdown-label-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .breakdown-label { font-size: 11px; font-weight: 600; }
+  .breakdown-track { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: rgba(255,255,255,0.10); }
+  .breakdown-fill-breast { height: 100%; background: linear-gradient(90deg, #7A9DB0, #8BAFC0); border-radius: 5px 0 0 5px; }
+  .breakdown-fill-bottle { height: 100%; background: linear-gradient(90deg, #F2C4A4, #E8B08E); border-radius: 0 5px 5px 0; }
+
+  /* Charts */
+  .chart-label { font-size: 10px; color: rgba(255,255,255,0.55); margin-bottom: 8px; margin-top: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  svg { display: block; margin-bottom: 4px; }
+
+  /* Warnings */
+  .warning-card { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.18); }
+  .warning-header-icon { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 11px; background: rgba(251,191,36,0.15); font-size: 18px; }
+  .warning-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; padding: 10px 12px; background: rgba(251,191,36,0.06); border-radius: 10px; border: 1px solid rgba(251,191,36,0.08); }
+  .warning-bullet { color: #FBBF24; font-size: 10px; line-height: 22px; flex-shrink: 0; }
+  .warning-text { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 20px; }
+  .warning-disclaimer { font-size: 10px; color: rgba(251,191,36,0.5); font-style: italic; margin-top: 6px; }
+
+  .empty { color: rgba(255,255,255,0.25); font-style: italic; font-size: 13px; padding: 8px 0; }
+
+  /* Health events (timeline) */
+  .health-timeline { position: relative; padding-left: 20px; }
+  .health-timeline::before { content: ''; position: absolute; left: 6px; top: 4px; bottom: 4px; width: 2px; background: linear-gradient(180deg, #7A9DB0, #9B8EC4); border-radius: 1px; opacity: 0.5; }
+  .health-row { position: relative; padding: 8px 0 14px 8px; }
+  .health-row::before { content: ''; position: absolute; left: -17px; top: 13px; width: 8px; height: 8px; background: #7A9DB0; border-radius: 50%; border: 2px solid #1a1a2e; box-shadow: 0 0 6px rgba(122,157,176,0.4); }
+  .health-row:last-child { padding-bottom: 0; }
+  .health-date { font-size: 10px; color: rgba(255,255,255,0.55); font-weight: 500; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .health-type { font-size: 14px; font-weight: 700; color: #FFFFFF; text-transform: capitalize; margin-bottom: 2px; }
+  .health-notes { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 18px; }
+
+  /* Footer */
+  .footer { margin-top: 32px; text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.10); }
+  .footer-brand { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: rgba(255,255,255,0.2); }
+  .footer-link { text-decoration: none; background: linear-gradient(135deg, #7A9DB0, #9B8EC4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
+  .footer-link:hover { opacity: 0.8; }
+
+  @media print {
+    body { background: #FFFFFF; color: #1E293B; }
+    .accent-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .header h1 { color: #0F172A; }
+    .header .age { color: #64748B; }
+    .header .period { color: #94A3B8; }
+    .header { border-bottom-color: #E2E8F0; }
+    .card { background: #FFFFFF; border: 1px solid #E2E8F0; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; }
+    .card-title { color: #0F172A; }
+    .count { color: #64748B; background: #F1F5F9; }
+    .card-icon { background: #F8FAFC; }
+    .stat-pill { background: #F8FAFC; border-color: #E2E8F0; }
+    .stat-value { color: #0F172A; }
+    .stat-label { color: #64748B; }
+    .chart-label { color: #64748B; }
+    .health-date { color: #64748B; }
+    .health-type { color: #0F172A; }
+    .health-notes { color: #475569; }
+    .health-row::before { border-color: #FFFFFF; }
+    .empty { color: #94A3B8; }
+    .footer { border-top-color: #E2E8F0; }
+    .footer-brand { color: #94A3B8; -webkit-text-fill-color: #94A3B8; }
+    .breakdown-track { background: #F1F5F9; }
+    .warning-card { background: #FFFBEB; border-color: #FDE68A; }
+    .warning-header-icon { background: rgba(245,158,11,0.12); }
+    .warning-row { background: rgba(255,255,255,0.5); border-color: #FDE68A; }
+    .warning-bullet { color: #D97706; }
+    .warning-text { color: #92400E; }
+    .warning-disclaimer { color: #B45309; }
+    .card-title { color: #0F172A; }
+  }
+</style>
+</head>
+<body>
+  <div class="accent-bar"></div>
+  <div class="page-wrap">
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <div class="loading-text">Loading visit summary...</div>
+    </div>
+    <div id="content" style="display:none;"></div>
+    <div id="error" style="display:none;"></div>
+  </div>
+
+<script>
+const LOGO_BASE64 = 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAGWklEQVR4AexWe1CUVRT/3W95rQTia9VQfKPig5DQ1BjIxLEH8kgpTf+Qh6SOZDNOClRDNTzUmcScohGWZkrHRwoLzuTYoDFkoIyZSBIPQRRFFJSEXZaF3e92vm95LWyiDk3/9M19nd+995zfPefcuyvgP/7+J/DEHohLzxm7M0MTGKvO3b4rIzs1LkNzJE6tyaK+IFadfVYeZ2oOx2Zq9sarc96LVZ9anHD8uN1gEX4sgY/Sc6fEqbM/i1VrrkLg9QqGXAZxn8DY+2B4h5SHUO/LwJbJY451jGMHB09jMBV2tNo1xmVkf78rPduf5q0WqwR2ZeRMJ8PHTIJYBbCPGTAPgNW1hD+uOIOx9YLAfiZ9+Tu/yfLsv3iA0tgMzQ6B8VKAhTFAgSH7mJ/CVrhAIdrYV2UfApxRHL9iDHtpgQPVISvjRjhDaS+ngwMD1GRna7fyHgIEfkrgFqrPXJT2tlg6dzpCXvZC0FJP+MycDEcHezgNU8J7hptZLwejQWqsOmsx9ea4klsWER4nAc9aVS5O2Ba8DK/5eMjGfNwnY9WS+XjLdwFe8XKHSeR9VdswCKmgT6AKcCQQrWeON+3FGj9vODtKkSOJCuhjjMF9ggpKW1tcuX6LEIuyMD5Ts0SITzvuSusDLKaeQpg3dQI2B/lj/Mjh0kEG7GxobkFTiw4z3cYNmOOiuEoQ7e1W0Mygp6fDwE01El7T3TBz4rjupMK08WPgKhknJT1O7hmAiDlj9qRx8CSitMSicCZ4041jcyxQK8JIJ0dsDvRD1Bu+FFMvrF++EB++vQL+nu6oudsIsWtPzd2mrlG/jggxOfcscQaoKAe4oyVsKSkEARsCXsLzo1z6qGCwtVFgufdsynAH1Df9JW+yI6yk5jZEThZlhKIiDcnSjYamLsSiG0YELABZGKEUMGWEAg62DNNdx2DM8OdkvLeRtJqlxR5TUV53TxYmqkaQq11BTzX0HZ1knWAyXt/0CIVl1SRYFs5Ys8A5a+kLO5Px7YucEDHPER9Qr3JW9p2Wx1yy31VdHJVoazfgThN5QcLkFUDd/Ye40fAAlbfvIf3HX9BpNHXN9HZMFOuJLL/WCwGtehG1LUaAss7RwRG8U2c+DXo/o8mEkpo74DITYOXCOfj1WjX+qK0nzLxuhquKiOlRV12KtXMdEDpHSZ4xz3W3XGCXBSNYHvmqO4/AafZoaRuqWojxWA/4+byICnJx34dEir8buftS5U1aDdgqFFhND05RWQ2+OJmHQ3lFOF9cgIkdVXh1og3cXWygGqag3JCXmxvGOBeNp4Q9EUF3yWi+GTW3+k6O765okVVcAb2hEy9MmwBBoGCap6ll9OgoUXazAYZOI3mtHZcqa6Fr02L+aBOCJunhO0aEsw0tpSM96hRxoqxNEnoqAy9KiVz9u0AIMcHnRIIKSV1F8u7lqtvYd/Isvj1TiOLyG6hrasajNr2c9bmFJRTn+zh8+gwuXMzHqPZqbFtgj+Vu9nCih1ZSwxlQ+sCItEtaNOl6nCxNieDiTmkgEUBKVEg+A0uXgP6VE5Pq+kacKrqKTEomTf451F6/CF/VA8T7PofwuUoEkNGpzgooBA4Drb/VasK5OgO+JMPHKJxag8XZyARPTIwIPU8DCFIj1VadbQwDfpLG/1Q7TRxV94w4/Wc79p/XIoXqnmIt9v+mw97iViSSnFjQioMkn6sxoFFrcWpZLfFLt6srSZAFanoIHIh53dCis1tF2X+I8EGLdCZdB0eLnpMhk9xLuSPh1jYTrqO/a1uTI4M3JSQk9DDrISBtkkgkhQdtMIliMAfKJWwIqo7CmCYaOzwSI4O/7q/PgkD35O6o0By6o590y909uY9CzOmJ60as9lq61pcBdlAU+bo2gU9IjgzZsjs6bMDvMeizSoBw+hOMKKmXK91Zuk1HudJmvLatzomzDhW9H7O4UTFb5MYFRnTM4iZxpp47jKpy6nBJigjxTooIik6JCjmSujGEnkhZi9XGKoH4TE0MOA+gMOhp1wmTCP+kyOC1Ke++2XwgJsaQHB7WSO9HRXJ0YLl0l/dEhFUkbwqt3Be58uEPYWH0gtGuJyxWCVCG5NFLvNTeqBidFBG8ZndkUMET6nvqZVYJJIcHlyWGBxcmRAdaPl9PrX7wDVYJDL5t6Fb86wQGo/o3AAAA//+DeUsHAAAABklEQVQDAEifaF9IfUm7AAAAAElFTkSuQmCC';
+const API_BASE = 'https://wxpddgplzocqxfpxdnpp.supabase.co/functions/v1/visit-summary';
+const LANDING_URL = 'https://remibabyapp.com';
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function formatDate(d) {
+  return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function calculateAge(dob) {
+  const birth = new Date(dob);
+  const now = new Date();
+  let months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
+  if (now.getDate() < birth.getDate()) months--;
+  if (months >= 1) return months + ' month' + (months !== 1 ? 's' : '') + ' old';
+  const weeks = Math.floor((now.getTime() - birth.getTime()) / (7 * 86400000));
+  return weeks + ' week' + (weeks !== 1 ? 's' : '') + ' old';
+}
+
+function getAgeMonths(dob) {
+  const birth = new Date(dob);
+  const now = new Date();
+  let months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
+  if (now.getDate() < birth.getDate()) months--;
+  return Math.max(0, months);
+}
+
+function daysBetween(start, d) {
+  const s = new Date(start); s.setHours(0,0,0,0);
+  const t = new Date(d); t.setHours(0,0,0,0);
+  return Math.floor((t.getTime() - s.getTime()) / 86400000);
+}
+
+function computeDailyFeeds(entries, totalDays, startDate) {
+  const b = new Array(totalDays).fill(0);
+  entries.forEach(e => { if (e.entry_type !== 'feeding') return; const i = daysBetween(startDate, e.occurred_at); if (i >= 0 && i < totalDays) b[i]++; });
+  return b;
+}
+
+function computeDailySleep(entries, totalDays, startDate) {
+  const b = new Array(totalDays).fill(0);
+  const sl = entries.filter(e => e.entry_type === 'sleep').sort((a,c) => new Date(a.occurred_at) - new Date(c.occurred_at));
+  for (let i = 0; i < sl.length; i++) {
+    if (sl[i].sleep_event !== 'fell_asleep') continue;
+    const w = sl.find((e,j) => j > i && e.sleep_event === 'woke_up');
+    if (!w) continue;
+    const hrs = (new Date(w.occurred_at) - new Date(sl[i].occurred_at)) / 3600000;
+    if (hrs <= 0 || hrs > 24) continue;
+    const idx = daysBetween(startDate, w.occurred_at);
+    if (idx >= 0 && idx < totalDays) b[idx] += Math.round(hrs * 10) / 10;
+  }
+  return b;
+}
+
+function computeDailyDiapers(entries, totalDays, startDate) {
+  const wet = new Array(totalDays).fill(0), dirty = new Array(totalDays).fill(0);
+  entries.forEach(e => {
+    if (e.entry_type !== 'diaper') return;
+    const i = daysBetween(startDate, e.occurred_at);
+    if (i < 0 || i >= totalDays) return;
+    if (e.diaper_type === 'wet' || e.diaper_type === 'both') wet[i]++;
+    if (e.diaper_type === 'dirty' || e.diaper_type === 'both') dirty[i]++;
+  });
+  return { wet, dirty };
+}
+
+function computeBreastBottleSplit(entries) {
+  const feeds = entries.filter(e => e.entry_type === 'feeding');
+  const breast = feeds.filter(f => f.feed_type === 'breast_left' || f.feed_type === 'breast_right' || f.feed_type === 'breast_both').length;
+  const bottle = feeds.filter(f => f.feed_type === 'bottle').length;
+  const total = breast + bottle;
+  if (total === 0) return { breastPct: 0, bottlePct: 0 };
+  const bp = Math.round((breast / total) * 100);
+  return { breastPct: bp, bottlePct: 100 - bp };
+}
+
+function computeAvgNaps(entries, totalDays) {
+  const napCount = entries.filter(e => e.entry_type === 'sleep' && e.sleep_event === 'fell_asleep').length;
+  return Math.round((napCount / Math.max(1, totalDays)) * 10) / 10;
+}
+
+function getHealthEvents(entries) {
+  return entries.filter(e => e.entry_type === 'health' || e.entry_type === 'note').map(e => {
+    const d = new Date(e.occurred_at);
+    return {
+      date: d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('en-GB', { hour: 'numeric', minute: '2-digit' }),
+      type: e.entry_type,
+      notes: e.notes || null
+    };
+  });
+}
+
+function computeWarnings(ageMonths, feeding, sleep, diaper) {
+  const w = [];
+  if (ageMonths < 6 && diaper.avgWetPerDay > 0 && diaper.avgWetPerDay < 6) w.push('Average wet diapers is ' + diaper.avgWetPerDay + '/day. The AAP recommends at least 6 per day for babies under 6 months.');
+  if (ageMonths < 6 && feeding.avgFeedingsPerDay > 0 && feeding.avgFeedingsPerDay < 6) w.push('Average feeds is ' + feeding.avgFeedingsPerDay + '/day. Babies under 6 months typically need 6-8 feeds per day.');
+  if (ageMonths >= 4 && sleep.avgHoursPerDay > 0) {
+    if (ageMonths < 12 && sleep.avgHoursPerDay < 12) w.push('Average sleep is ' + sleep.avgHoursPerDay + 'h/day. The AASM recommends 12-16 hours for babies 4-12 months.');
+    else if (ageMonths >= 12 && ageMonths < 24 && sleep.avgHoursPerDay < 11) w.push('Average sleep is ' + sleep.avgHoursPerDay + 'h/day. The AASM recommends 11-14 hours for toddlers 1-2 years.');
+  }
+  return w;
+}
+
+function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels) {
+  const W = 480, H = 110;
+  const pad = { top: 16, right: 8, bottom: 24, left: 32 };
+  const maxVal = Math.max(1, ...data, ...(secondaryData || []));
+  const plotW = W - pad.left - pad.right;
+  const plotH = H - pad.top - pad.bottom;
+  const hasPaired = !!secondaryData;
+  const slotW = plotW / data.length;
+  const gap = hasPaired ? 2 : 0;
+  const barW = hasPaired ? Math.max(3, (slotW - gap * 3) / 2) : Math.max(3, slotW - 3);
+
+  let svg = '';
+  [0.25, 0.5, 0.75, 1].forEach(frac => {
+    const y = pad.top + plotH - plotH * frac;
+    const val = Math.round(maxVal * frac * 10) / 10;
+    svg += '<line x1="' + pad.left + '" y1="' + y + '" x2="' + (W - pad.right) + '" y2="' + y + '" stroke="rgba(255,255,255,0.10)" stroke-width="0.5" stroke-dasharray="3,3"/>';
+    svg += '<text x="' + (pad.left - 6) + '" y="' + (y + 3) + '" fill="rgba(255,255,255,0.55)" font-size="8" font-family="sans-serif" text-anchor="end">' + (val % 1 === 0 ? val : val.toFixed(1)) + '</text>';
+  });
+
+  svg += '<line x1="' + pad.left + '" y1="' + (pad.top + plotH) + '" x2="' + (W - pad.right) + '" y2="' + (pad.top + plotH) + '" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>';
+
+  data.forEach((val, i) => {
+    const x = pad.left + i * slotW + (hasPaired ? gap : (slotW - barW) / 2);
+    const h = (val / maxVal) * plotH;
+    const y = pad.top + plotH - h;
+    const rx = Math.min(4, barW / 2);
+    if (h > 0) svg += '<rect x="' + x + '" y="' + y + '" width="' + barW + '" height="' + Math.max(0, h) + '" fill="' + color + '" rx="' + rx + '" ry="' + rx + '" opacity="1"/>';
+    if (secondaryData && secondaryData[i] > 0) {
+      const x2 = x + barW + gap;
+      const h2 = (secondaryData[i] / maxVal) * plotH;
+      const y2 = pad.top + plotH - h2;
+      svg += '<rect x="' + x2 + '" y="' + y2 + '" width="' + barW + '" height="' + Math.max(0, h2) + '" fill="' + secondaryColor + '" rx="' + rx + '" ry="' + rx + '" opacity="1"/>';
+    }
+  });
+
+  const labelCount = Math.min(data.length, 7);
+  const step = Math.max(1, Math.floor(data.length / labelCount));
+  data.forEach((_, i) => {
+    if (i % step !== 0 && i !== data.length - 1) return;
+    const x = pad.left + i * slotW + slotW / 2;
+    svg += '<text x="' + x + '" y="' + (H - 2) + '" fill="rgba(255,255,255,0.25)" font-size="8" font-family="sans-serif" text-anchor="middle">D' + (i + 1) + '</text>';
+  });
+
+  let legend = '';
+  if (hasPaired && legendLabels) {
+    legend = '<rect x="' + pad.left + '" y="' + (H + 6) + '" width="10" height="10" fill="' + color + '" rx="3"/>' +
+      '<text x="' + (pad.left + 14) + '" y="' + (H + 14) + '" fill="rgba(255,255,255,0.5)" font-size="9" font-family="sans-serif">' + legendLabels[0] + '</text>' +
+      '<rect x="' + (pad.left + 60) + '" y="' + (H + 6) + '" width="10" height="10" fill="' + secondaryColor + '" rx="3"/>' +
+      '<text x="' + (pad.left + 74) + '" y="' + (H + 14) + '" fill="rgba(255,255,255,0.5)" font-size="9" font-family="sans-serif">' + legendLabels[1] + '</text>';
+  }
+
+  const svgH = hasPaired ? H + 24 : H;
+  return '<svg width="100%" viewBox="0 0 ' + W + ' ' + svgH + '" xmlns="http://www.w3.org/2000/svg" style="max-width:' + W + 'px;">' + svg + legend + '</svg>';
+}
+
+function renderSummary(data) {
+  const { babyName, dateOfBirth, startDate, endDate, totalDays, feeding, sleep, diaper, entries } = data;
+  const start = formatDate(startDate);
+  const end = formatDate(endDate);
+  const ageLabel = calculateAge(dateOfBirth);
+  const ageMonths = getAgeMonths(dateOfBirth);
+
+  const dailyFeeds = computeDailyFeeds(entries, totalDays, startDate);
+  const dailySleep = computeDailySleep(entries, totalDays, startDate);
+  const { wet: dailyWet, dirty: dailyDirty } = computeDailyDiapers(entries, totalDays, startDate);
+  const { breastPct, bottlePct } = computeBreastBottleSplit(entries);
+  const healthEvents = getHealthEvents(entries);
+  const avgNaps = computeAvgNaps(entries, totalDays);
+  const warnings = computeWarnings(ageMonths, feeding, sleep, diaper);
+
+  const feedChart = feeding.totalFeedings > 0 ? buildBarSVG(dailyFeeds, '#7A9DB0') : '';
+  const sleepChart = sleep.avgHoursPerDay > 0 ? buildBarSVG(dailySleep, '#9B8EC4') : '';
+  const diaperChart = diaper.avgTotalPerDay > 0 ? buildBarSVG(dailyWet, '#5DA6E6', dailyDirty, '#D4956B', ['Wet', 'Dirty']) : '';
+
+  const breakdownBar = (breastPct > 0 || bottlePct > 0) ? '<div class="breakdown-container"><div class="breakdown-label-row"><span class="breakdown-label" style="color:#7A9DB0;">Breast ' + breastPct + '%</span><span class="breakdown-label" style="color:#F2C4A4;">Bottle ' + bottlePct + '%</span></div><div class="breakdown-track"><div class="breakdown-fill-breast" style="width:' + breastPct + '%;"></div><div class="breakdown-fill-bottle" style="width:' + bottlePct + '%;"></div></div></div>' : '';
+
+  const warningsSection = warnings.length === 0 ? '' : '<div class="card warning-card"><div class="card-header"><span class="warning-header-icon">&#x26A0;</span><span class="card-title" style="color:#FBBF24;">Concerns</span></div>' + warnings.map(w => '<div class="warning-row"><span class="warning-bullet">&#x25CF;</span><span class="warning-text">' + esc(w) + '</span></div>').join('') + '<p class="warning-disclaimer">Based on AAP/AASM guidelines. Not medical advice.</p></div>';
+
+  const healthSection = healthEvents.length > 0 ? '<div class="card"><div class="card-header"><span class="card-icon">&#x1FA7A;</span><span class="card-title">Health Events</span><span class="count">' + healthEvents.length + '</span></div><div class="health-timeline">' + healthEvents.map(ev => '<div class="health-row"><div class="health-date">' + esc(ev.date) + '</div><div class="health-type">' + (ev.type === 'health' ? 'Health' : 'Note') + '</div>' + (ev.notes ? '<div class="health-notes">' + esc(ev.notes) + '</div>' : '') + '</div>').join('') + '</div></div>' : '';
+
+  document.title = esc(babyName) + ' - Visit Summary';
+
+  return '<div class="header"><div class="brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" class="brand-logo" alt="Remi"/>Remi</div><h1>' + esc(babyName) + '</h1><p class="age">' + esc(ageLabel) + '</p><p class="period">' + start + ' to ' + end + '</p></div>' +
+    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F37C;</span><span class="card-title">Feeding</span></div>' + (feeding.totalFeedings > 0 ? '<div class="stats-row"><div class="stat-pill accent-blue"><div class="stat-value">' + feeding.avgFeedingsPerDay + '</div><div class="stat-label">Avg Feeds / Day</div></div>' + (feeding.avgAmountMl !== null ? '<div class="stat-pill accent-peach"><div class="stat-value">' + feeding.avgAmountMl + ' mL</div><div class="stat-label">Avg per Feed</div></div>' : '') + '</div>' + breakdownBar + '<p class="chart-label">Daily feed counts</p>' + feedChart : '<p class="empty">No feeding data recorded</p>') + '</div>' +
+    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F4A7;</span><span class="card-title">Diapers</span></div>' + (diaper.avgTotalPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-sky"><div class="stat-value">' + diaper.avgWetPerDay + '</div><div class="stat-label">Avg Wet / Day</div></div><div class="stat-pill accent-peach"><div class="stat-value">' + diaper.avgDirtyPerDay + '</div><div class="stat-label">Avg Dirty / Day</div></div></div><p class="chart-label">Daily diaper counts</p>' + diaperChart : '<p class="empty">No diaper data recorded</p>') + '</div>' +
+    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F634;</span><span class="card-title">Sleep</span></div>' + (sleep.avgHoursPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-purple"><div class="stat-value">' + sleep.avgHoursPerDay + 'h</div><div class="stat-label">Avg Total / Day</div></div><div class="stat-pill accent-blue"><div class="stat-value">' + avgNaps + '</div><div class="stat-label">Avg Naps / Day</div></div></div><p class="chart-label">Daily sleep hours</p>' + sleepChart : '<p class="empty">No sleep data recorded</p>') + '</div>' +
+    warningsSection +
+    healthSection +
+    '<div class="footer"><div class="footer-brand">Shared via <a href="' + LANDING_URL + '" target="_blank" rel="noopener" class="footer-link">Remi</a> &middot; ' + formatDate(new Date()) + '</div></div>';
+}
+
+function showError(message) {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('error').style.display = 'block';
+  document.getElementById('error').innerHTML = '<div class="error-wrap"><div class="error-brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" alt="Remi"/>Remi</div><div class="error-card"><div class="error-icon">&#x26A0;</div><h2>Something went wrong</h2><p>' + esc(message) + '</p></div><div class="error-footer">Remi Baby Tracker</div></div>';
+}
+
+async function init() {
+  const params = new URLSearchParams(window.location.search);
+  const shareId = params.get('id');
+
+  if (!shareId) {
+    showError('No share ID provided. Please check your link.');
+    return;
+  }
+
+  try {
+    const res = await fetch(API_BASE + '?id=' + encodeURIComponent(shareId));
+    const data = await res.json();
+
+    if (!res.ok) {
+      showError(data.error || 'Failed to load visit summary.');
+      return;
+    }
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+    document.getElementById('content').innerHTML = renderSummary(data);
+  } catch (err) {
+    showError('Unable to load visit summary. Please try again later.');
+  }
+}
+
+init();
+</script>
+</body>
+</html>
