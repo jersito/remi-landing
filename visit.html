@@ -462,9 +462,9 @@ function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels, c
       var h1 = (val / maxVal) * plotH;
       var h2 = secondaryData[i] ? (secondaryData[i] / maxVal) * plotH : 0;
       var baseY = pad.top + plotH;
-      var topRx = h2 > 0 ? 0 : rx; /* flat top if secondary stacks above */
-      if (h1 > 0) svg += '<rect x="' + x + '" y="' + (baseY - h1) + '" width="' + barW + '" height="' + h1 + '" fill="' + color + '" rx="' + topRx + '" ry="' + topRx + '" opacity="1"/>';
-      if (h2 > 0) svg += '<rect x="' + x + '" y="' + (baseY - h1 - h2) + '" width="' + barW + '" height="' + h2 + '" fill="' + secondaryColor + '" rx="' + rx + '" ry="' + rx + '" opacity="1"/>';
+      /* Both bars square when stacked to avoid odd rounded transition */
+      if (h1 > 0) svg += '<rect x="' + x + '" y="' + (baseY - h1) + '" width="' + barW + '" height="' + h1 + '" fill="' + color + '" rx="0" ry="0" opacity="1"/>';
+      if (h2 > 0) svg += '<rect x="' + x + '" y="' + (baseY - h1 - h2) + '" width="' + barW + '" height="' + h2 + '" fill="' + secondaryColor + '" rx="0" ry="0" opacity="1"/>';
     } else {
       var h = (val / maxVal) * plotH;
       var y = pad.top + plotH - h;
