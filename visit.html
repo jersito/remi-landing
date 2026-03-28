@@ -371,13 +371,24 @@ function getHealthEvents(entries) {
   });
 }
 
-function computeWarnings(ageMonths, feeding, sleep, diaper) {
+function computeWarnings(ageMonths, feeding, sleep, diaper, entries) {
   var w = [];
   if (ageMonths < 6 && diaper.avgWetPerDay > 0 && diaper.avgWetPerDay < 6) w.push('Average wet diapers is ' + diaper.avgWetPerDay + '/day. The AAP recommends at least 6 per day for babies under 6 months.');
   if (ageMonths < 6 && feeding.avgFeedingsPerDay > 0 && feeding.avgFeedingsPerDay < 6) w.push('Average feeds is ' + feeding.avgFeedingsPerDay + '/day. Babies under 6 months typically need 6-8 feeds per day.');
   if (ageMonths >= 4 && sleep.avgHoursPerDay > 0) {
     if (ageMonths < 12 && sleep.avgHoursPerDay < 12) w.push('Average sleep is ' + sleep.avgHoursPerDay + 'h/day. The AASM recommends 12-16 hours for babies 4-12 months.');
     else if (ageMonths >= 12 && ageMonths < 24 && sleep.avgHoursPerDay < 11) w.push('Average sleep is ' + sleep.avgHoursPerDay + 'h/day. The AASM recommends 11-14 hours for toddlers 1-2 years.');
+  }
+  /* Check for pale/white/clay stools which can indicate biliary issues */
+  if (entries) {
+    var paleStool = entries.find(function(e) {
+      return e.entry_type === 'diaper' && e.notes && /pale|white|clay|chalky/i.test(e.notes);
+    });
+    if (paleStool) {
+      var d = new Date(paleStool.occurred_at);
+      var dateStr = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      w.push('Pale/white stool noted on ' + dateStr + '. Pale or clay-colored stools can indicate a bile duct issue. The AAP recommends prompt evaluation.');
+    }
   }
   return w;
 }
@@ -587,7 +598,7 @@ function renderSummary(data) {
   var bottlePct = splitData.bottlePct;
   var healthEvents = getHealthEvents(entries);
   var avgNaps = computeAvgNaps(entries, totalDays);
-  var warnings = computeWarnings(ageMonths, feeding, sleep, diaper);
+  var warnings = computeWarnings(ageMonths, feeding, sleep, diaper, entries);
 
   var feedChart = feeding.totalFeedings > 0 ? buildBarSVG(dailyFeeds, '#7A9DB0', null, null, null, 'feeding', startDate) : '';
   var sleepChart = sleep.avgHoursPerDay > 0 ? buildBarSVG(dailySleep, '#9B8EC4', null, null, null, 'sleep', startDate) : '';
@@ -769,6 +780,18 @@ function generateDemoData(numDays) {
         notes: healthDays[d].notes
       });
     }
+  }
+
+  /* Add a pale stool entry for 30d demo to trigger stool concern */
+  if (totalDays >= 14) {
+    var paleDay = new Date(startDate);
+    paleDay.setDate(paleDay.getDate() + Math.floor(totalDays * 0.7));
+    entries.push({
+      entry_type: 'diaper',
+      occurred_at: new Date(paleDay.getFullYear(), paleDay.getMonth(), paleDay.getDate(), 11, 20).toISOString(),
+      diaper_type: 'dirty',
+      notes: 'Pale, almost white, clay-like consistency'
+    });
   }
 
   entries.sort(function(a, b) { return new Date(a.occurred_at) - new Date(b.occurred_at); });
