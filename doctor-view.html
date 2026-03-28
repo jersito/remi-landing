@@ -84,33 +84,63 @@
 
     /* Preview phone frame */
     .dv-preview {
-      background: #0f0f1e; border-radius: 32px; padding: 12px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-      position: relative; overflow: hidden;
-      border: 3px solid #2a2a3e;
-      max-width: 340px; margin: 0 auto;
+      grid-column: 1 / -1;
+      margin-top: 32px;
     }
-    .dv-preview-notch {
-      width: 100px; height: 5px; background: #2a2a3e; border-radius: 3px;
-      margin: 0 auto 8px;
+    .dv-dash {
+      background: #1a1a2e; border-radius: 16px; padding: 28px 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.06);
     }
-    .dv-preview-iframe {
-      width: 100%; height: 520px; border: none; border-radius: 20px;
-      background: #1a1a2e;
+    .dv-dash-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-    .dv-preview-label {
-      text-align: center; font-size: 11px; color: rgba(255,255,255,0.3);
-      margin-top: 8px; font-weight: 600; letter-spacing: 0.5px;
+    .dv-dash-title { color: #E8E8F0; font-size: 1rem; font-weight: 700; }
+    .dv-dash-subtitle { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+    .dv-dash-badge {
+      background: rgba(122,157,176,0.15); color: #7A9DB0; font-size: 0.72rem;
+      padding: 4px 10px; border-radius: 20px; font-weight: 600;
     }
-    .dv-preview-dots {
-      display: flex; justify-content: center; gap: 6px; margin-top: 10px;
+    .dv-dash-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
     }
-    .dv-preview-dots span {
-      width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2);
-      transition: background 0.3s, transform 0.3s;
+    @media (max-width: 768px) { .dv-dash-grid { grid-template-columns: 1fr; } }
+    .dv-dash-card {
+      background: rgba(255,255,255,0.04); border-radius: 12px; padding: 18px 16px;
+      border: 1px solid rgba(255,255,255,0.06);
     }
-    .dv-preview-dots span.active {
-      background: rgba(122,157,176,0.8); transform: scale(1.3);
+    .dv-dash-card-head {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+    }
+    .dv-dash-card-icon { font-size: 18px; }
+    .dv-dash-card-name { color: #E8E8F0; font-size: 0.85rem; font-weight: 600; }
+    .dv-dash-stats {
+      display: flex; gap: 12px; margin-bottom: 14px;
+    }
+    .dv-dash-stat { flex: 1; }
+    .dv-dash-stat-val { color: #E8E8F0; font-size: 1.1rem; font-weight: 700; }
+    .dv-dash-stat-lbl { color: rgba(255,255,255,0.35); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .dv-dash-chart { height: 80px; position: relative; }
+    .dv-dash-chart svg { width: 100%; height: 100%; }
+    .dv-dash-alert {
+      margin-top: 16px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 10px; padding: 14px 16px;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .dv-dash-alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .dv-dash-alert-text { color: #FCA5A5; font-size: 0.82rem; line-height: 1.5; }
+    .dv-dash-alert-text strong { color: #FCA5A5; }
+    .dv-dash-legend {
+      display: flex; gap: 14px; margin-top: 6px;
+    }
+    .dv-dash-legend span {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 0.65rem; color: rgba(255,255,255,0.4);
+    }
+    .dv-dash-legend i {
+      display: inline-block; width: 8px; height: 8px; border-radius: 2px; font-style: normal;
     }
 
     /* Pain point */
@@ -208,10 +238,61 @@
         </div>
       </div>
       <div class="dv-preview">
-        <div class="dv-preview-notch"></div>
-        <iframe class="dv-preview-iframe" id="demoIframe" src="/visit.html?id=demo" title="Remi Visit Summary Demo" loading="lazy"></iframe>
-        <div class="dv-preview-dots" id="previewDots"></div>
-        <div class="dv-preview-label">Auto-scrolling through charts</div>
+        <div class="dv-dash">
+          <div class="dv-dash-header">
+            <div>
+              <div class="dv-dash-title">Emma &middot; 5 months old</div>
+              <div class="dv-dash-subtitle">27 Feb &ndash; 28 Mar 2026 &middot; 30 days</div>
+            </div>
+            <span class="dv-dash-badge">Demo Data</span>
+          </div>
+          <div class="dv-dash-grid">
+            <!-- Feeding Card -->
+            <div class="dv-dash-card">
+              <div class="dv-dash-card-head"><span class="dv-dash-card-icon">&#x1F37C;</span><span class="dv-dash-card-name">Feeding</span></div>
+              <div class="dv-dash-stats">
+                <div class="dv-dash-stat"><div class="dv-dash-stat-val">8.3</div><div class="dv-dash-stat-lbl">Feeds / Day</div></div>
+                <div class="dv-dash-stat"><div class="dv-dash-stat-val">114 mL</div><div class="dv-dash-stat-lbl">Avg / Bottle</div></div>
+                <div class="dv-dash-stat"><div class="dv-dash-stat-val">18 min</div><div class="dv-dash-stat-lbl">Avg / Breast</div></div>
+              </div>
+              <div class="dv-dash-chart" id="dashFeedChart"></div>
+              <div class="dv-dash-legend">
+                <span><i style="background:#7A9DB0;"></i> Breast</span>
+                <span><i style="background:#F2C4A4;"></i> Bottle</span>
+              </div>
+            </div>
+            <!-- Diapers Card -->
+            <div class="dv-dash-card">
+              <div class="dv-dash-card-head"><span class="dv-dash-card-icon">&#x1F4A7;</span><span class="dv-dash-card-name">Diapers</span></div>
+              <div class="dv-dash-stats">
+                <div class="dv-dash-stat"><div class="dv-dash-stat-val">4.3</div><div class="dv-dash-stat-lbl">Wet / Day</div></div>
+                <div class="dv-dash-stat"><div class="dv-dash-stat-val">1.7</div><div class="dv-dash-stat-lbl">Dirty / Day</div></div>
+              </div>
+              <div class="dv-dash-chart" id="dashDiaperChart"></div>
+              <div class="dv-dash-legend">
+                <span><i style="background:#7ecdf4;"></i> Wet</span>
+                <span><i style="background:#F2C4A4;"></i> Dirty</span>
+              </div>
+            </div>
+            <!-- Sleep Card -->
+            <div class="dv-dash-card">
+              <div class="dv-dash-card-head"><span class="dv-dash-card-icon">&#x1F634;</span><span class="dv-dash-card-name">Sleep</span></div>
+              <div class="dv-dash-stats">
+                <div class="dv-dash-stat"><div class="dv-dash-stat-val">12h</div><div class="dv-dash-stat-lbl">Total / Day</div></div>
+                <div class="dv-dash-stat"><div class="dv-dash-stat-val">3.2</div><div class="dv-dash-stat-lbl">Naps / Day</div></div>
+              </div>
+              <div class="dv-dash-chart" id="dashSleepChart"></div>
+            </div>
+          </div>
+          <!-- Alert banner -->
+          <div class="dv-dash-alert">
+            <span class="dv-dash-alert-icon">&#x26A0;&#xFE0F;</span>
+            <div class="dv-dash-alert-text">
+              <strong>Pale/white stool noted on 20 Mar.</strong> Pale or clay-colored stools can indicate a bile duct issue. The AAP recommends prompt evaluation.<br/>
+              <strong>Avg wet diapers is 4.3/day.</strong> The AAP recommends at least 6 per day for babies under 6 months.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -399,49 +480,44 @@
 
   <script>
   (function() {
-    var iframe = document.getElementById('demoIframe');
-    var dotsContainer = document.getElementById('previewDots');
-    var currentIdx = 0;
-    var cards = [];
-    var intervalId;
+    /* Seeded random for deterministic demo data */
+    function seededRand(seed) { var s = seed; return function() { s = (s * 16807 + 0) % 2147483647; return (s - 1) / 2147483646; }; }
+    var rand = seededRand(42);
 
-    iframe.addEventListener('load', function() {
-      try {
-        var doc = iframe.contentDocument || iframe.contentWindow.document;
-        cards = Array.prototype.slice.call(doc.querySelectorAll('.card'));
-        if (!cards.length) return;
-
-        /* Build dot indicators */
-        dotsContainer.innerHTML = '';
-        for (var i = 0; i < cards.length; i++) {
-          var dot = document.createElement('span');
-          if (i === 0) dot.className = 'active';
-          dotsContainer.appendChild(dot);
-        }
-
-        /* Disable user scrolling inside the iframe */
-        doc.documentElement.style.overflow = 'hidden';
-        doc.body.style.overflow = 'hidden';
-
-        /* Start auto-scroll cycle */
-        currentIdx = 0;
-        scrollToCard(0);
-        intervalId = setInterval(function() {
-          currentIdx = (currentIdx + 1) % cards.length;
-          scrollToCard(currentIdx);
-        }, 4000);
-      } catch (e) { /* cross-origin fallback: just show iframe as-is */ }
-    });
-
-    function scrollToCard(idx) {
-      if (!cards[idx]) return;
-      cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
-      /* Update dots */
-      var dots = dotsContainer.querySelectorAll('span');
-      for (var i = 0; i < dots.length; i++) {
-        dots[i].className = i === idx ? 'active' : '';
+    function miniBarSVG(primary, secondary, color1, color2) {
+      var n = primary.length, maxVal = 0;
+      for (var i = 0; i < n; i++) {
+        var sum = primary[i] + (secondary ? secondary[i] : 0);
+        if (sum > maxVal) maxVal = sum;
       }
+      if (maxVal === 0) maxVal = 1;
+      var w = 100, h = 100, gap = 1, barW = (w - gap * (n - 1)) / n;
+      var rects = '';
+      for (var i = 0; i < n; i++) {
+        var x = i * (barW + gap);
+        var h1 = (primary[i] / maxVal) * h;
+        var h2 = secondary ? (secondary[i] / maxVal) * h : 0;
+        if (h1 > 0) rects += '<rect x="' + x.toFixed(1) + '" y="' + (h - h1).toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + h1.toFixed(1) + '" fill="' + color1 + '" rx="1"/>';
+        if (h2 > 0) rects += '<rect x="' + x.toFixed(1) + '" y="' + (h - h1 - h2).toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + h2.toFixed(1) + '" fill="' + color2 + '" rx="1"/>';
+      }
+      return '<svg viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none">' + rects + '</svg>';
     }
+
+    /* Generate 14 days of demo data */
+    var days = 14;
+    var breast = [], bottle = [], wet = [], dirty = [], sleep = [];
+    for (var i = 0; i < days; i++) {
+      breast.push(Math.floor(rand() * 4) + 4);
+      bottle.push(Math.floor(rand() * 3) + 1);
+      wet.push(Math.floor(rand() * 3) + 3);
+      dirty.push(Math.floor(rand() * 2) + 1);
+      sleep.push(+(10 + rand() * 5).toFixed(1));
+    }
+
+    document.getElementById('dashFeedChart').innerHTML = miniBarSVG(breast, bottle, '#7A9DB0', '#F2C4A4');
+    document.getElementById('dashDiaperChart').innerHTML = miniBarSVG(wet, dirty, '#7ecdf4', '#F2C4A4');
+    /* Sleep is single series */
+    document.getElementById('dashSleepChart').innerHTML = miniBarSVG(sleep, null, '#9B8EC4', null);
   })();
   </script>
   <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
