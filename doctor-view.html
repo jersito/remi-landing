@@ -187,7 +187,8 @@
     /* Parents section */
     .dv-parents { padding: 64px 0; background: var(--white); }
     .dv-parents .section-header { text-align: center; margin-bottom: 36px; }
-    .dv-parents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 800px; margin: 0 auto; }
+    .dv-parents-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; max-width: 800px; margin: 0 auto; }
+    .dv-parent-item { flex: 0 1 220px; }
     @media (max-width: 768px) { .dv-parents-grid { grid-template-columns: 1fr; } }
     .dv-parent-item { text-align: center; padding: 20px; }
     .dv-parent-item .icon { font-size: 28px; margin-bottom: 10px; }
@@ -420,6 +421,16 @@
           <div class="icon">&#129309;</div>
           <h3>Partner Sync</h3>
           <p>Both parents log into the same account, so nighttime feeds and daytime naps are captured no matter who is on duty.</p>
+        </div>
+        <div class="dv-parent-item">
+          <div class="icon">&#128276;</div>
+          <h3>Gentle Reminders</h3>
+          <p>If a parent usually tracks feeds but forgot today, Remi notices the gap and nudges them next time they open the app.</p>
+        </div>
+        <div class="dv-parent-item">
+          <div class="icon">&#128172;</div>
+          <h3>Smart Follow-ups</h3>
+          <p>Remi asks clinically useful follow-up questions -- like stool color or consistency -- so the data you receive is more complete.</p>
         </div>
       </div>
     </div>
