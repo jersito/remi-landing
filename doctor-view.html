@@ -52,20 +52,19 @@
     /* Hero */
     .dv-hero {
       background: linear-gradient(165deg, #f0f7fb 0%, #fefaf7 50%, #fef0e6 100%);
-      padding: 80px 0 60px; position: relative; overflow: hidden;
+      padding: 80px 0 60px; position: relative; overflow: visible;
     }
     .dv-hero .shape { position: absolute; border-radius: 50%; opacity: 0.12; pointer-events: none; }
     .dv-hero .shape-a { width: 300px; height: 300px; top: -80px; right: -60px; background: var(--blue); }
     .dv-hero .shape-b { width: 200px; height: 200px; bottom: -60px; left: -40px; background: var(--peach); }
-    .dv-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .dv-hero-grid { display: flex; flex-direction: column; align-items: center; text-align: center; }
     @media (max-width: 768px) {
-      .dv-hero-grid { grid-template-columns: 1fr; text-align: center; }
       .dv-hero-copy p { margin: 0 auto 24px; }
       .dv-btn-row { justify-content: center; }
     }
     .dv-hero-copy h1 { margin-bottom: 16px; font-size: clamp(1.7rem, 4.2vw, 2.6rem); line-height: 1.2; }
     .dv-hero-copy .h1-accent { color: var(--blue-dark); }
-    .dv-hero-copy p { font-size: 1.05rem; margin-bottom: 24px; max-width: 500px; line-height: 1.6; }
+    .dv-hero-copy p { font-size: 1.05rem; margin: 0 auto 24px; max-width: 560px; line-height: 1.6; }
     .dv-btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
     .btn-demo {
       display: inline-flex; align-items: center; gap: 8px;
@@ -84,64 +83,70 @@
 
     /* Preview phone frame */
     .dv-preview {
-      grid-column: 1 / -1;
-      margin-top: 32px;
+      position: relative; height: 380px;
+      margin-top: 20px;
     }
-    .dv-dash {
-      background: #1a1a2e; border-radius: 16px; padding: 28px 24px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.06);
+    .dv-fan-card {
+      position: absolute; width: 280px;
+      background: var(--white); border-radius: 16px; padding: 22px 20px;
+      box-shadow: 0 8px 32px rgba(44,62,80,0.12);
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      transform-origin: bottom center;
     }
-    .dv-dash-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 20px; padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+    .dv-fan-card:hover {
+      transform: translateY(-8px) rotate(0deg) !important;
+      box-shadow: 0 16px 48px rgba(44,62,80,0.18);
+      z-index: 10 !important;
     }
-    .dv-dash-title { color: #E8E8F0; font-size: 1rem; font-weight: 700; }
-    .dv-dash-subtitle { color: rgba(255,255,255,0.4); font-size: 0.8rem; }
-    .dv-dash-badge {
-      background: rgba(122,157,176,0.15); color: #7A9DB0; font-size: 0.72rem;
-      padding: 4px 10px; border-radius: 20px; font-weight: 600;
+    .dv-fan-left {
+      left: 50%; margin-left: -280px;
+      transform: rotate(-5deg);
+      z-index: 1;
     }
-    .dv-dash-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    .dv-fan-center {
+      left: 50%; margin-left: -140px;
+      transform: rotate(0deg);
+      z-index: 3;
     }
-    @media (max-width: 768px) { .dv-dash-grid { grid-template-columns: 1fr; } }
-    .dv-dash-card {
-      background: rgba(255,255,255,0.04); border-radius: 12px; padding: 18px 16px;
-      border: 1px solid rgba(255,255,255,0.06);
+    .dv-fan-right {
+      left: 50%; margin-left: 0px;
+      transform: rotate(5deg);
+      z-index: 2;
     }
-    .dv-dash-card-head {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+    @media (max-width: 900px) {
+      .dv-preview { height: auto; display: flex; flex-direction: column; gap: 16px; align-items: center; }
+      .dv-fan-card { position: relative; left: auto; margin-left: 0; transform: none; width: 100%; max-width: 320px; }
     }
-    .dv-dash-card-icon { font-size: 18px; }
-    .dv-dash-card-name { color: #E8E8F0; font-size: 0.85rem; font-weight: 600; }
-    .dv-dash-stats {
-      display: flex; gap: 12px; margin-bottom: 14px;
+    .dv-fan-head {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
     }
-    .dv-dash-stat { flex: 1; }
-    .dv-dash-stat-val { color: #E8E8F0; font-size: 1.1rem; font-weight: 700; }
-    .dv-dash-stat-lbl { color: rgba(255,255,255,0.35); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    .dv-dash-chart { height: 80px; position: relative; }
-    .dv-dash-chart svg { width: 100%; height: 100%; }
-    .dv-dash-alert {
-      margin-top: 16px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
-      border-radius: 10px; padding: 14px 16px;
-      display: flex; align-items: flex-start; gap: 10px;
+    .dv-fan-icon { font-size: 20px; }
+    .dv-fan-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .dv-fan-stats {
+      display: flex; gap: 12px; margin-bottom: 16px;
     }
-    .dv-dash-alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-    .dv-dash-alert-text { color: #FCA5A5; font-size: 0.82rem; line-height: 1.5; }
-    .dv-dash-alert-text strong { color: #FCA5A5; }
-    .dv-dash-legend {
-      display: flex; gap: 14px; margin-top: 6px;
+    .dv-fan-stat { flex: 1; }
+    .dv-fan-stat-val { font-size: 1.15rem; font-weight: 800; color: var(--text); }
+    .dv-fan-stat-lbl { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+    .dv-fan-chart { height: 72px; margin-bottom: 8px; }
+    .dv-fan-chart svg { width: 100%; height: 100%; }
+    .dv-fan-legend {
+      display: flex; gap: 12px;
     }
-    .dv-dash-legend span {
+    .dv-fan-legend span {
       display: flex; align-items: center; gap: 4px;
-      font-size: 0.65rem; color: rgba(255,255,255,0.4);
+      font-size: 0.65rem; color: var(--text-light);
     }
-    .dv-dash-legend i {
+    .dv-fan-legend i {
       display: inline-block; width: 8px; height: 8px; border-radius: 2px; font-style: normal;
     }
+    .dv-fan-alert {
+      margin-top: 12px; background: #FEF2F2; border: 1px solid #FECACA;
+      border-radius: 8px; padding: 10px 12px;
+      font-size: 0.72rem; color: #991B1B; line-height: 1.45;
+    }
+    .dv-fan-alert strong { color: #991B1B; }
 
     /* Pain point */
     .dv-pain { padding: 80px 0; background: var(--white); }
@@ -238,60 +243,43 @@
         </div>
       </div>
       <div class="dv-preview">
-        <div class="dv-dash">
-          <div class="dv-dash-header">
-            <div>
-              <div class="dv-dash-title">Emma &middot; 5 months old</div>
-              <div class="dv-dash-subtitle">27 Feb &ndash; 28 Mar 2026 &middot; 30 days</div>
-            </div>
-            <span class="dv-dash-badge">Demo Data</span>
+        <!-- Feeding Card (left, rotated) -->
+        <div class="dv-fan-card dv-fan-left">
+          <div class="dv-fan-head"><span class="dv-fan-icon">&#x1F37C;</span><span class="dv-fan-name">Feeding</span></div>
+          <div class="dv-fan-stats">
+            <div class="dv-fan-stat"><div class="dv-fan-stat-val">8.3</div><div class="dv-fan-stat-lbl">Feeds / Day</div></div>
+            <div class="dv-fan-stat"><div class="dv-fan-stat-val">114 mL</div><div class="dv-fan-stat-lbl">Avg / Bottle</div></div>
           </div>
-          <div class="dv-dash-grid">
-            <!-- Feeding Card -->
-            <div class="dv-dash-card">
-              <div class="dv-dash-card-head"><span class="dv-dash-card-icon">&#x1F37C;</span><span class="dv-dash-card-name">Feeding</span></div>
-              <div class="dv-dash-stats">
-                <div class="dv-dash-stat"><div class="dv-dash-stat-val">8.3</div><div class="dv-dash-stat-lbl">Feeds / Day</div></div>
-                <div class="dv-dash-stat"><div class="dv-dash-stat-val">114 mL</div><div class="dv-dash-stat-lbl">Avg / Bottle</div></div>
-                <div class="dv-dash-stat"><div class="dv-dash-stat-val">18 min</div><div class="dv-dash-stat-lbl">Avg / Breast</div></div>
-              </div>
-              <div class="dv-dash-chart" id="dashFeedChart"></div>
-              <div class="dv-dash-legend">
-                <span><i style="background:#7A9DB0;"></i> Breast</span>
-                <span><i style="background:#F2C4A4;"></i> Bottle</span>
-              </div>
-            </div>
-            <!-- Diapers Card -->
-            <div class="dv-dash-card">
-              <div class="dv-dash-card-head"><span class="dv-dash-card-icon">&#x1F4A7;</span><span class="dv-dash-card-name">Diapers</span></div>
-              <div class="dv-dash-stats">
-                <div class="dv-dash-stat"><div class="dv-dash-stat-val">4.3</div><div class="dv-dash-stat-lbl">Wet / Day</div></div>
-                <div class="dv-dash-stat"><div class="dv-dash-stat-val">1.7</div><div class="dv-dash-stat-lbl">Dirty / Day</div></div>
-              </div>
-              <div class="dv-dash-chart" id="dashDiaperChart"></div>
-              <div class="dv-dash-legend">
-                <span><i style="background:#7ecdf4;"></i> Wet</span>
-                <span><i style="background:#F2C4A4;"></i> Dirty</span>
-              </div>
-            </div>
-            <!-- Sleep Card -->
-            <div class="dv-dash-card">
-              <div class="dv-dash-card-head"><span class="dv-dash-card-icon">&#x1F634;</span><span class="dv-dash-card-name">Sleep</span></div>
-              <div class="dv-dash-stats">
-                <div class="dv-dash-stat"><div class="dv-dash-stat-val">12h</div><div class="dv-dash-stat-lbl">Total / Day</div></div>
-                <div class="dv-dash-stat"><div class="dv-dash-stat-val">3.2</div><div class="dv-dash-stat-lbl">Naps / Day</div></div>
-              </div>
-              <div class="dv-dash-chart" id="dashSleepChart"></div>
-            </div>
+          <div class="dv-fan-chart" id="dashFeedChart"></div>
+          <div class="dv-fan-legend">
+            <span><i style="background:#7A9DB0;"></i> Breast</span>
+            <span><i style="background:#F2C4A4;"></i> Bottle</span>
           </div>
-          <!-- Alert banner -->
-          <div class="dv-dash-alert">
-            <span class="dv-dash-alert-icon">&#x26A0;&#xFE0F;</span>
-            <div class="dv-dash-alert-text">
-              <strong>Pale/white stool noted on 20 Mar.</strong> Pale or clay-colored stools can indicate a bile duct issue. The AAP recommends prompt evaluation.<br/>
-              <strong>Avg wet diapers is 4.3/day.</strong> The AAP recommends at least 6 per day for babies under 6 months.
-            </div>
+        </div>
+        <!-- Diapers Card (center, front) -->
+        <div class="dv-fan-card dv-fan-center">
+          <div class="dv-fan-head"><span class="dv-fan-icon">&#x1F4A7;</span><span class="dv-fan-name">Diapers</span></div>
+          <div class="dv-fan-stats">
+            <div class="dv-fan-stat"><div class="dv-fan-stat-val">4.3</div><div class="dv-fan-stat-lbl">Wet / Day</div></div>
+            <div class="dv-fan-stat"><div class="dv-fan-stat-val">1.7</div><div class="dv-fan-stat-lbl">Dirty / Day</div></div>
           </div>
+          <div class="dv-fan-chart" id="dashDiaperChart"></div>
+          <div class="dv-fan-legend">
+            <span><i style="background:#93B5C6;"></i> Wet</span>
+            <span><i style="background:#F2C4A4;"></i> Dirty</span>
+          </div>
+          <div class="dv-fan-alert">
+            <strong>&#x26A0; Pale stool on 20 Mar</strong> -- AAP recommends prompt evaluation for clay-colored stools.
+          </div>
+        </div>
+        <!-- Sleep Card (right, rotated) -->
+        <div class="dv-fan-card dv-fan-right">
+          <div class="dv-fan-head"><span class="dv-fan-icon">&#x1F634;</span><span class="dv-fan-name">Sleep</span></div>
+          <div class="dv-fan-stats">
+            <div class="dv-fan-stat"><div class="dv-fan-stat-val">12h</div><div class="dv-fan-stat-lbl">Total / Day</div></div>
+            <div class="dv-fan-stat"><div class="dv-fan-stat-val">3.2</div><div class="dv-fan-stat-lbl">Naps / Day</div></div>
+          </div>
+          <div class="dv-fan-chart" id="dashSleepChart"></div>
         </div>
       </div>
     </div>
@@ -515,8 +503,7 @@
     }
 
     document.getElementById('dashFeedChart').innerHTML = miniBarSVG(breast, bottle, '#7A9DB0', '#F2C4A4');
-    document.getElementById('dashDiaperChart').innerHTML = miniBarSVG(wet, dirty, '#7ecdf4', '#F2C4A4');
-    /* Sleep is single series */
+    document.getElementById('dashDiaperChart').innerHTML = miniBarSVG(wet, dirty, '#93B5C6', '#F2C4A4');
     document.getElementById('dashSleepChart').innerHTML = miniBarSVG(sleep, null, '#9B8EC4', null);
   })();
   </script>
