@@ -332,6 +332,19 @@ function computeDailyFeeds(entries, totalDays, startDate) {
   return b;
 }
 
+function computeDailyFeedsByType(entries, totalDays, startDate) {
+  var breast = new Array(totalDays).fill(0);
+  var bottle = new Array(totalDays).fill(0);
+  entries.forEach(function(e) {
+    if (e.entry_type !== 'feeding') return;
+    var i = daysBetween(startDate, e.occurred_at);
+    if (i < 0 || i >= totalDays) return;
+    if (e.feed_type === 'bottle') bottle[i]++;
+    else breast[i]++;
+  });
+  return { breast: breast, bottle: bottle };
+}
+
 function computeDailySleep(entries, totalDays, startDate) {
   var b = new Array(totalDays).fill(0);
   var sl = entries.filter(function(e) { return e.entry_type === 'sleep'; }).sort(function(a,c) { return new Date(a.occurred_at) - new Date(c.occurred_at); });
@@ -413,13 +426,17 @@ function computeWarnings(ageMonths, feeding, sleep, diaper, entries) {
 function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels, chartType, startDate) {
   var W = 480, H = 110;
   var pad = { top: 16, right: 8, bottom: 24, left: 32 };
-  var maxVal = Math.max(1, Math.max.apply(null, data), Math.max.apply(null, secondaryData || [0]));
+  var hasStacked = !!secondaryData;
+  /* For stacked bars, max is sum of both values */
+  var maxVal = 1;
+  for (var mi = 0; mi < data.length; mi++) {
+    var total = data[mi] + (hasStacked && secondaryData[mi] ? secondaryData[mi] : 0);
+    if (total > maxVal) maxVal = total;
+  }
   var plotW = W - pad.left - pad.right;
   var plotH = H - pad.top - pad.bottom;
-  var hasPaired = !!secondaryData;
   var slotW = plotW / data.length;
-  var gap = hasPaired ? 2 : 0;
-  var barW = hasPaired ? Math.max(3, (slotW - gap * 3) / 2) : Math.max(3, slotW - 3);
+  var barW = Math.max(3, slotW - 3);
 
   var svg = '';
   [0.25, 0.5, 0.75, 1].forEach(function(frac) {
@@ -432,22 +449,26 @@ function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels, c
   svg += '<line x1="' + pad.left + '" y1="' + (pad.top + plotH) + '" x2="' + (W - pad.right) + '" y2="' + (pad.top + plotH) + '" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>';
 
   data.forEach(function(val, i) {
-    var x = pad.left + i * slotW + (hasPaired ? gap : (slotW - barW) / 2);
-    var h = (val / maxVal) * plotH;
-    var y = pad.top + plotH - h;
+    var x = pad.left + i * slotW + (slotW - barW) / 2;
     var rx = Math.min(4, barW / 2);
 
-    /* Wrap each day in a group for click interactivity */
     svg += '<g class="bar-group" data-day-index="' + i + '" style="cursor:pointer;">';
-    /* Invisible click target covering the full slot height */
     svg += '<rect x="' + (pad.left + i * slotW) + '" y="' + pad.top + '" width="' + slotW + '" height="' + plotH + '" fill="transparent" />';
-    if (h > 0) svg += '<rect x="' + x + '" y="' + y + '" width="' + barW + '" height="' + Math.max(0, h) + '" fill="' + color + '" rx="' + rx + '" ry="' + rx + '" opacity="1"/>';
-    if (secondaryData && secondaryData[i] > 0) {
-      var x2 = x + barW + gap;
-      var h2 = (secondaryData[i] / maxVal) * plotH;
-      var y2 = pad.top + plotH - h2;
-      svg += '<rect x="' + x2 + '" y="' + y2 + '" width="' + barW + '" height="' + Math.max(0, h2) + '" fill="' + secondaryColor + '" rx="' + rx + '" ry="' + rx + '" opacity="1"/>';
+
+    if (hasStacked) {
+      /* Stacked: primary on bottom, secondary on top */
+      var h1 = (val / maxVal) * plotH;
+      var h2 = secondaryData[i] ? (secondaryData[i] / maxVal) * plotH : 0;
+      var baseY = pad.top + plotH;
+      var topRx = h2 > 0 ? 0 : rx; /* flat top if secondary stacks above */
+      if (h1 > 0) svg += '<rect x="' + x + '" y="' + (baseY - h1) + '" width="' + barW + '" height="' + h1 + '" fill="' + color + '" rx="' + topRx + '" ry="' + topRx + '" opacity="1"/>';
+      if (h2 > 0) svg += '<rect x="' + x + '" y="' + (baseY - h1 - h2) + '" width="' + barW + '" height="' + h2 + '" fill="' + secondaryColor + '" rx="' + rx + '" ry="' + rx + '" opacity="1"/>';
+    } else {
+      var h = (val / maxVal) * plotH;
+      var y = pad.top + plotH - h;
+      if (h > 0) svg += '<rect x="' + x + '" y="' + y + '" width="' + barW + '" height="' + Math.max(0, h) + '" fill="' + color + '" rx="' + rx + '" ry="' + rx + '" opacity="1"/>';
     }
+
     svg += '</g>';
   });
 
@@ -470,14 +491,14 @@ function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels, c
   });
 
   var legend = '';
-  if (hasPaired && legendLabels) {
+  if (hasStacked && legendLabels) {
     legend = '<rect x="' + pad.left + '" y="' + (H + 6) + '" width="10" height="10" fill="' + color + '" rx="3"/>' +
       '<text x="' + (pad.left + 14) + '" y="' + (H + 14) + '" fill="rgba(255,255,255,0.5)" font-size="9" font-family="sans-serif">' + legendLabels[0] + '</text>' +
       '<rect x="' + (pad.left + 60) + '" y="' + (H + 6) + '" width="10" height="10" fill="' + secondaryColor + '" rx="3"/>' +
       '<text x="' + (pad.left + 74) + '" y="' + (H + 14) + '" fill="rgba(255,255,255,0.5)" font-size="9" font-family="sans-serif">' + legendLabels[1] + '</text>';
   }
 
-  var svgH = hasPaired ? H + 24 : H;
+  var svgH = hasStacked ? H + 24 : H;
   return '<svg width="100%" viewBox="0 0 ' + W + ' ' + svgH + '" xmlns="http://www.w3.org/2000/svg" style="max-width:' + W + 'px;" data-chart-type="' + (chartType || '') + '">' + svg + legend + '</svg>';
 }
 
@@ -653,11 +674,11 @@ function renderSummary(data) {
   var ageLabel = calculateAge(dateOfBirth);
   var ageMonths = getAgeMonths(dateOfBirth);
 
-  var dailyFeeds = computeDailyFeeds(entries, totalDays, startDate);
   var dailySleep = computeDailySleep(entries, totalDays, startDate);
   var diaperData = computeDailyDiapers(entries, totalDays, startDate);
   var dailyWet = diaperData.wet;
   var dailyDirty = diaperData.dirty;
+  var feedsByType = computeDailyFeedsByType(entries, totalDays, startDate);
   var splitData = computeBreastBottleSplit(entries);
   var breastPct = splitData.breastPct;
   var bottlePct = splitData.bottlePct;
@@ -665,7 +686,7 @@ function renderSummary(data) {
   var avgNaps = computeAvgNaps(entries, totalDays);
   var warnings = computeWarnings(ageMonths, feeding, sleep, diaper, entries);
 
-  var feedChart = feeding.totalFeedings > 0 ? buildBarSVG(dailyFeeds, '#7A9DB0', null, null, null, 'feeding', startDate) : '';
+  var feedChart = feeding.totalFeedings > 0 ? buildBarSVG(feedsByType.breast, '#7A9DB0', feedsByType.bottle, '#F2C4A4', ['Breast', 'Bottle'], 'feeding', startDate) : '';
   var sleepChart = sleep.avgHoursPerDay > 0 ? buildBarSVG(dailySleep, '#9B8EC4', null, null, null, 'sleep', startDate) : '';
   var diaperChart = diaper.avgTotalPerDay > 0 ? buildBarSVG(dailyWet, '#5DA6E6', dailyDirty, '#D4956B', ['Wet', 'Dirty'], 'diaper', startDate) : '';
 
@@ -695,7 +716,7 @@ function renderSummary(data) {
 
   return '<div class="header"><div class="brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" class="brand-logo" alt="Remi"/></div><h1>' + esc(babyName) + '</h1><p class="age">' + esc(ageLabel) + '</p>' + (dobLabel ? '<p class="dob">' + esc(dobLabel) + '</p>' : '') + '<p class="period">' + start + ' to ' + end + '</p></div>' +
     rangeSelector +
-    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F37C;</span><span class="card-title">Feeding</span></div>' + (feeding.totalFeedings > 0 ? '<div class="stats-row"><div class="stat-pill accent-blue"><div class="stat-value">' + feeding.avgFeedingsPerDay + '</div><div class="stat-label">Avg Feeds / Day</div></div>' + (feeding.avgAmountMl !== null ? '<div class="stat-pill accent-peach"><div class="stat-value">' + feeding.avgAmountMl + ' mL</div><div class="stat-label">Avg per Feed</div></div>' : '') + '</div>' + breakdownBar + '<p class="chart-label">Daily feed counts</p>' + feedChart + feedNotable + '<div class="day-detail" id="detail-feeding"></div>' : '<p class="empty">No feeding data recorded</p>') + '</div>' +
+    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F37C;</span><span class="card-title">Feeding</span></div>' + (feeding.totalFeedings > 0 ? '<div class="stats-row"><div class="stat-pill accent-blue"><div class="stat-value">' + feeding.avgFeedingsPerDay + '</div><div class="stat-label">Avg Feeds / Day</div></div>' + (feeding.avgAmountMl !== null ? '<div class="stat-pill accent-peach"><div class="stat-value">' + feeding.avgAmountMl + ' mL</div><div class="stat-label">Avg per Bottle</div></div>' : '') + (feeding.avgDurationMin !== null ? '<div class="stat-pill accent-blue" style="background:rgba(122,157,176,0.08);"><div class="stat-value">' + feeding.avgDurationMin + ' min</div><div class="stat-label">Avg per Breast</div></div>' : '') + '</div>' + breakdownBar + '<p class="chart-label">Daily feed counts</p>' + feedChart + feedNotable + '<div class="day-detail" id="detail-feeding"></div>' : '<p class="empty">No feeding data recorded</p>') + '</div>' +
     '<div class="card"><div class="card-header"><span class="card-icon">&#x1F4A7;</span><span class="card-title">Diapers</span></div>' + (diaper.avgTotalPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-sky"><div class="stat-value">' + diaper.avgWetPerDay + '</div><div class="stat-label">Avg Wet / Day</div></div><div class="stat-pill accent-peach"><div class="stat-value">' + diaper.avgDirtyPerDay + '</div><div class="stat-label">Avg Dirty / Day</div></div></div><p class="chart-label">Daily diaper counts</p>' + diaperChart + diaperNotable + '<div class="day-detail" id="detail-diaper"></div>' : '<p class="empty">No diaper data recorded</p>') + '</div>' +
     '<div class="card"><div class="card-header"><span class="card-icon">&#x1F634;</span><span class="card-title">Sleep</span></div>' + (sleep.avgHoursPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-purple"><div class="stat-value">' + sleep.avgHoursPerDay + 'h</div><div class="stat-label">Avg Total / Day</div></div><div class="stat-pill accent-blue"><div class="stat-value">' + avgNaps + '</div><div class="stat-label">Avg Naps / Day</div></div></div><p class="chart-label">Daily sleep hours</p>' + sleepChart + sleepNotable + '<div class="day-detail" id="detail-sleep"></div>' : '<p class="empty">No sleep data recorded</p>') + '</div>' +
     warningsSection +
