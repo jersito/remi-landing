@@ -233,13 +233,12 @@
       </div>
       <div class="dv-bento">
         <div class="dv-bento-grid">
-          <!-- Feeding Card (full width) -->
-          <div class="dv-bento-card dv-bento-card--full">
+          <!-- Feeding Card -->
+          <div class="dv-bento-card">
             <div class="dv-bento-head"><span class="dv-bento-icon">&#x1F37C;</span><span class="dv-bento-name">Feeding</span></div>
             <div class="dv-bento-stats">
               <div class="dv-bento-stat"><div class="dv-bento-stat-val">8.3</div><div class="dv-bento-stat-lbl">Feeds / Day</div></div>
               <div class="dv-bento-stat"><div class="dv-bento-stat-val">114 mL</div><div class="dv-bento-stat-lbl">Avg / Bottle</div></div>
-              <div class="dv-bento-stat"><div class="dv-bento-stat-val">18 min</div><div class="dv-bento-stat-lbl">Avg / Breast</div></div>
             </div>
             <div class="dv-bento-chart" id="dashFeedChart"></div>
             <div class="dv-bento-legend">
@@ -247,8 +246,17 @@
               <span><i style="background:#F2C4A4;"></i> Bottle</span>
             </div>
           </div>
-          <!-- Diapers Card -->
+          <!-- Sleep Card -->
           <div class="dv-bento-card">
+            <div class="dv-bento-head"><span class="dv-bento-icon">&#x1F634;</span><span class="dv-bento-name">Sleep</span></div>
+            <div class="dv-bento-stats">
+              <div class="dv-bento-stat"><div class="dv-bento-stat-val">12h</div><div class="dv-bento-stat-lbl">Total / Day</div></div>
+              <div class="dv-bento-stat"><div class="dv-bento-stat-val">3.2</div><div class="dv-bento-stat-lbl">Naps / Day</div></div>
+            </div>
+            <div class="dv-bento-chart" id="dashSleepChart"></div>
+          </div>
+          <!-- Diapers Card (full width, has alert) -->
+          <div class="dv-bento-card dv-bento-card--full">
             <div class="dv-bento-head"><span class="dv-bento-icon">&#x1F4A7;</span><span class="dv-bento-name">Diapers</span></div>
             <div class="dv-bento-stats">
               <div class="dv-bento-stat"><div class="dv-bento-stat-val">4.3</div><div class="dv-bento-stat-lbl">Wet / Day</div></div>
@@ -260,17 +268,8 @@
               <span><i style="background:#F2C4A4;"></i> Dirty</span>
             </div>
             <div class="dv-bento-alert">
-              <strong>&#x26A0; Pale stool on 20 Mar</strong> -- AAP recommends prompt evaluation for clay-colored stools.
+              <strong>&#x26A0; Pale stool noted on 20 Mar.</strong> Pale or clay-colored stools can indicate a bile duct issue. The AAP recommends prompt evaluation.
             </div>
-          </div>
-          <!-- Sleep Card -->
-          <div class="dv-bento-card">
-            <div class="dv-bento-head"><span class="dv-bento-icon">&#x1F634;</span><span class="dv-bento-name">Sleep</span></div>
-            <div class="dv-bento-stats">
-              <div class="dv-bento-stat"><div class="dv-bento-stat-val">12h</div><div class="dv-bento-stat-lbl">Total / Day</div></div>
-              <div class="dv-bento-stat"><div class="dv-bento-stat-val">3.2</div><div class="dv-bento-stat-lbl">Naps / Day</div></div>
-            </div>
-            <div class="dv-bento-chart" id="dashSleepChart"></div>
           </div>
         </div>
         <div class="dv-bento-caption">Sample data from a 30-day report &middot; <a href="/visit.html?id=demo">View full demo</a></div>
@@ -283,8 +282,8 @@
     <div class="container">
       <div class="section-header">
         <span class="section-tag">The Problem</span>
-        <h2>Parents forget. Paper logs get lost. Remi remembers everything.</h2>
-        <p>Most well-child visits start with incomplete verbal reports. Remi replaces guesswork with structured, continuous data.</p>
+        <h2>Verbal reports are unreliable. Paper logs have gaps. Remi captures everything.</h2>
+        <p>Most well-child visits begin with incomplete recall. Remi replaces subjective reporting with structured, continuous data.</p>
       </div>
       <div class="dv-compare">
         <div class="dv-compare-card dv-compare-bad">
@@ -325,32 +324,32 @@
         <div class="dv-clin-card">
           <div class="dv-clin-icon">&#127868;</div>
           <h3>Feeding Trends with Type Split</h3>
-          <p>Daily feed counts with breast vs. bottle breakdown over 7 and 30 days. Track supplementation trends, cluster feeding patterns, and frequency changes across the reporting period.</p>
+          <p>Breast vs. bottle breakdown with daily counts over 7 and 30 days. Identify supplementation trends, cluster feeding, and frequency shifts.</p>
         </div>
         <div class="dv-clin-card">
           <div class="dv-clin-icon">&#128167;</div>
           <h3>Hydration Monitoring</h3>
-          <p>Wet diaper counts tracked daily as a key dehydration indicator. Especially critical for newborns where output below 6 wet diapers/day warrants assessment. Stacked charts show wet vs. stool separately.</p>
+          <p>Daily wet diaper counts as a dehydration indicator. Flags output below 6/day for infants under 6 months per AAP guidelines. Wet vs. stool charted separately.</p>
         </div>
         <div class="dv-clin-card">
           <div class="dv-clin-icon">&#128164;</div>
           <h3>Sleep Architecture</h3>
-          <p>Total sleep hours, nap count and distribution, and overnight consolidation patterns. Identify whether sleep is fragmented across short naps or consolidating into age-appropriate blocks.</p>
+          <p>Total hours, nap count, and overnight consolidation. See whether sleep is fragmented or consolidating into age-appropriate blocks per AASM guidelines.</p>
         </div>
         <div class="dv-clin-card">
           <div class="dv-clin-icon">&#128221;</div>
           <h3>Stool Logging with Notes</h3>
-          <p>Parents log color, consistency, and freeform notes with each diaper change. Useful for GI assessment, formula transition monitoring, and identifying patterns that may indicate intolerance.</p>
+          <p>Color, consistency, and freeform notes per change. Supports GI assessment, formula transition monitoring, and intolerance pattern detection.</p>
         </div>
         <div class="dv-clin-card">
           <div class="dv-clin-icon">&#9888;&#65039;</div>
           <h3>Guideline-Based Alerts</h3>
-          <p>Automatic comparison against AAP and AASM age-appropriate benchmarks for feeding frequency, diaper output, and sleep totals. Flagged concerns appear prominently with the relevant threshold cited.</p>
+          <p>Automatic comparison against AAP and AASM age-appropriate benchmarks. Flagged concerns appear prominently with the specific threshold cited.</p>
         </div>
         <div class="dv-clin-card">
           <div class="dv-clin-icon">&#127777;&#65039;</div>
           <h3>Health Event Timeline</h3>
-          <p>Temperatures, symptoms, and medications logged in chronological context alongside feeding and sleep data. See how an illness event correlates with changes in intake, output, and rest patterns.</p>
+          <p>Temperatures, symptoms, and medications in chronological context. Correlate illness events with changes in intake, output, and sleep.</p>
         </div>
       </div>
     </div>
@@ -401,9 +400,9 @@
   <section class="dv-parents">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag light">For Parents</span>
-        <h2>Easy enough for sleep-deprived parents to use every day.</h2>
-        <p>The data you see in the visit summary comes from effortless daily logging by the parent.</p>
+        <span class="section-tag light">Data Quality</span>
+        <h2>Will parents actually log consistently? Yes.</h2>
+        <p>Remi is designed for sleep-deprived parents. Low-friction input means higher compliance and more complete data for you.</p>
       </div>
       <div class="dv-parents-grid">
         <div class="dv-parent-item">
@@ -445,8 +444,8 @@
         <p>Structured infant data for better clinical conversations.</p>
       </div>
       <div class="footer-trust">
-        <span>&#128274; Encrypted</span>
-        <span>&#128737;&#65039; GDPR compliant</span>
+        <span>&#128274; End-to-end encrypted</span>
+        <span>&#128737;&#65039; HIPAA aware</span>
         <span>&#128581; No ads, no data selling</span>
       </div>
       <div class="footer-links">
