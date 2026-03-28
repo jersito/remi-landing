@@ -52,11 +52,11 @@
     /* Hero */
     .dv-hero {
       background: linear-gradient(165deg, #f0f7fb 0%, #fefaf7 50%, #fef0e6 100%);
-      padding: 80px 0 80px; position: relative; overflow: visible;
+      padding: 80px 0 80px; position: relative; overflow: hidden;
     }
-    .dv-hero .shape { position: absolute; border-radius: 50%; opacity: 0.12; pointer-events: none; }
-    .dv-hero .shape-a { width: 300px; height: 300px; top: -80px; right: -60px; background: var(--blue); }
-    .dv-hero .shape-b { width: 200px; height: 200px; bottom: -60px; left: -40px; background: var(--peach); }
+    .dv-hero .shape { position: absolute; border-radius: 50%; opacity: 0.08; pointer-events: none; }
+    .dv-hero .shape-a { width: 240px; height: 240px; top: -60px; right: -40px; background: var(--blue); }
+    .dv-hero .shape-b { width: 160px; height: 160px; bottom: -40px; left: -30px; background: var(--peach); }
     .dv-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
     @media (max-width: 768px) {
       .dv-hero-grid { grid-template-columns: 1fr; text-align: center; }
@@ -64,7 +64,6 @@
       .dv-btn-row { justify-content: center; }
     }
     .dv-hero-copy h1 { margin-bottom: 16px; font-size: clamp(1.7rem, 4.2vw, 2.6rem); line-height: 1.2; }
-    .dv-hero-copy .h1-accent { color: var(--blue-dark); }
     .dv-hero-copy p { font-size: 1.05rem; margin-bottom: 24px; max-width: 500px; line-height: 1.6; }
     .dv-btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
     .btn-demo {
@@ -82,80 +81,60 @@
     }
     .btn-outline:hover { transform: scale(1.04); background: rgba(122,157,176,0.06); }
 
-    /* Preview phone frame */
-    .dv-preview {
-      position: relative; height: 440px;
-      min-width: 480px;
+    /* Bento grid preview */
+    .dv-bento {
+      transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
+      transform-style: preserve-3d;
     }
-    .dv-preview-caption {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      text-align: center; font-size: 0.82rem; color: var(--text-light);
+    .dv-bento-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
     }
-    .dv-preview-caption a {
-      color: var(--blue-dark); font-weight: 600; text-decoration: none;
+    .dv-bento-card {
+      background: var(--white); border-radius: 14px; padding: 18px 16px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.04), 0 12px 24px rgba(0,0,0,0.06);
     }
-    .dv-preview-caption a:hover { text-decoration: underline; }
-    .dv-fan-card {
-      position: absolute; width: 210px;
-      background: var(--white); border-radius: 16px; padding: 18px 16px;
-      box-shadow: 0 8px 32px rgba(44,62,80,0.12);
-      border: 1px solid rgba(0,0,0,0.06);
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      transform-origin: bottom center;
+    .dv-bento-card--full { grid-column: 1 / -1; }
+    .dv-bento-head {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
     }
-    .dv-fan-card:hover {
-      transform: translateY(-8px) rotate(0deg) !important;
-      box-shadow: 0 16px 48px rgba(44,62,80,0.18);
-      z-index: 10 !important;
+    .dv-bento-icon { font-size: 18px; }
+    .dv-bento-name { font-size: 0.88rem; font-weight: 700; color: var(--text); }
+    .dv-bento-stats {
+      display: flex; gap: 16px; margin-bottom: 12px;
     }
-    .dv-fan-left {
-      left: 0; top: 40px;
-      transform: rotate(-4deg);
-      z-index: 1;
-    }
-    .dv-fan-center {
-      left: 50%; margin-left: -105px; top: 0;
-      transform: rotate(0deg);
-      z-index: 3;
-    }
-    .dv-fan-right {
-      right: 0; top: 40px;
-      transform: rotate(4deg);
-      z-index: 2;
-    }
-    @media (max-width: 768px) {
-      .dv-preview { height: auto; min-width: 0; display: flex; flex-direction: column; gap: 16px; align-items: center; }
-      .dv-fan-card { position: relative; left: auto; right: auto; margin-left: 0; transform: none; width: 100%; max-width: 300px; }
-    }
-    .dv-fan-head {
-      display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
-    }
-    .dv-fan-icon { font-size: 20px; }
-    .dv-fan-name { font-size: 0.95rem; font-weight: 700; color: var(--text); }
-    .dv-fan-stats {
-      display: flex; gap: 12px; margin-bottom: 16px;
-    }
-    .dv-fan-stat { flex: 1; }
-    .dv-fan-stat-val { font-size: 1rem; font-weight: 800; color: var(--text); }
-    .dv-fan-stat-lbl { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
-    .dv-fan-chart { height: 72px; margin-bottom: 8px; }
-    .dv-fan-chart svg { width: 100%; height: 100%; }
-    .dv-fan-legend {
+    .dv-bento-stat {}
+    .dv-bento-stat-val { font-size: 1.05rem; font-weight: 800; color: var(--text); }
+    .dv-bento-stat-lbl { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+    .dv-bento-chart { height: 64px; margin-bottom: 6px; }
+    .dv-bento-chart svg { width: 100%; height: 100%; }
+    .dv-bento-legend {
       display: flex; gap: 12px;
     }
-    .dv-fan-legend span {
+    .dv-bento-legend span {
       display: flex; align-items: center; gap: 4px;
-      font-size: 0.65rem; color: var(--text-light);
+      font-size: 0.62rem; color: var(--text-light);
     }
-    .dv-fan-legend i {
-      display: inline-block; width: 8px; height: 8px; border-radius: 2px; font-style: normal;
+    .dv-bento-legend i {
+      display: inline-block; width: 7px; height: 7px; border-radius: 2px; font-style: normal;
     }
-    .dv-fan-alert {
-      margin-top: 12px; background: #FEF2F2; border: 1px solid #FECACA;
-      border-radius: 8px; padding: 10px 12px;
-      font-size: 0.72rem; color: #991B1B; line-height: 1.45;
+    .dv-bento-alert {
+      margin-top: 10px; background: #FEF2F2; border: 1px solid #FECACA;
+      border-radius: 6px; padding: 8px 10px;
+      font-size: 0.68rem; color: #991B1B; line-height: 1.4;
     }
-    .dv-fan-alert strong { color: #991B1B; }
+    .dv-bento-alert strong { color: #991B1B; }
+    .dv-bento-caption {
+      text-align: center; font-size: 0.78rem; color: var(--text-light); margin-top: 14px;
+    }
+    .dv-bento-caption a {
+      color: var(--blue-dark); font-weight: 600; text-decoration: none;
+    }
+    .dv-bento-caption a:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      .dv-bento { transform: none; }
+      .dv-bento-grid { grid-template-columns: 1fr; }
+      .dv-bento-card--full { grid-column: auto; }
+    }
 
     /* Pain point */
     .dv-pain { padding: 80px 0; background: var(--white); }
@@ -177,7 +156,8 @@
     @media (max-width: 768px) { .dv-clinical-grid { grid-template-columns: 1fr; } }
     .dv-clin-card {
       background: var(--white); border-radius: var(--radius); padding: 28px 24px;
-      border: 1px solid rgba(0,0,0,0.06); transition: transform 0.2s;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.04), 0 12px 24px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
     }
     .dv-clin-card:hover { transform: translateY(-3px); }
     .dv-clin-icon { font-size: 28px; margin-bottom: 12px; }
@@ -251,46 +231,49 @@
           <a href="#clinical-data" class="btn-outline">See What's Included</a>
         </div>
       </div>
-      <div class="dv-preview">
-        <!-- Feeding Card (left, rotated) -->
-        <div class="dv-fan-card dv-fan-left">
-          <div class="dv-fan-head"><span class="dv-fan-icon">&#x1F37C;</span><span class="dv-fan-name">Feeding</span></div>
-          <div class="dv-fan-stats">
-            <div class="dv-fan-stat"><div class="dv-fan-stat-val">8.3</div><div class="dv-fan-stat-lbl">Feeds / Day</div></div>
-            <div class="dv-fan-stat"><div class="dv-fan-stat-val">114 mL</div><div class="dv-fan-stat-lbl">Avg / Bottle</div></div>
+      <div class="dv-bento">
+        <div class="dv-bento-grid">
+          <!-- Feeding Card (full width) -->
+          <div class="dv-bento-card dv-bento-card--full">
+            <div class="dv-bento-head"><span class="dv-bento-icon">&#x1F37C;</span><span class="dv-bento-name">Feeding</span></div>
+            <div class="dv-bento-stats">
+              <div class="dv-bento-stat"><div class="dv-bento-stat-val">8.3</div><div class="dv-bento-stat-lbl">Feeds / Day</div></div>
+              <div class="dv-bento-stat"><div class="dv-bento-stat-val">114 mL</div><div class="dv-bento-stat-lbl">Avg / Bottle</div></div>
+              <div class="dv-bento-stat"><div class="dv-bento-stat-val">18 min</div><div class="dv-bento-stat-lbl">Avg / Breast</div></div>
+            </div>
+            <div class="dv-bento-chart" id="dashFeedChart"></div>
+            <div class="dv-bento-legend">
+              <span><i style="background:#7A9DB0;"></i> Breast</span>
+              <span><i style="background:#F2C4A4;"></i> Bottle</span>
+            </div>
           </div>
-          <div class="dv-fan-chart" id="dashFeedChart"></div>
-          <div class="dv-fan-legend">
-            <span><i style="background:#7A9DB0;"></i> Breast</span>
-            <span><i style="background:#F2C4A4;"></i> Bottle</span>
+          <!-- Diapers Card -->
+          <div class="dv-bento-card">
+            <div class="dv-bento-head"><span class="dv-bento-icon">&#x1F4A7;</span><span class="dv-bento-name">Diapers</span></div>
+            <div class="dv-bento-stats">
+              <div class="dv-bento-stat"><div class="dv-bento-stat-val">4.3</div><div class="dv-bento-stat-lbl">Wet / Day</div></div>
+              <div class="dv-bento-stat"><div class="dv-bento-stat-val">1.7</div><div class="dv-bento-stat-lbl">Dirty / Day</div></div>
+            </div>
+            <div class="dv-bento-chart" id="dashDiaperChart"></div>
+            <div class="dv-bento-legend">
+              <span><i style="background:#93B5C6;"></i> Wet</span>
+              <span><i style="background:#F2C4A4;"></i> Dirty</span>
+            </div>
+            <div class="dv-bento-alert">
+              <strong>&#x26A0; Pale stool on 20 Mar</strong> -- AAP recommends prompt evaluation for clay-colored stools.
+            </div>
+          </div>
+          <!-- Sleep Card -->
+          <div class="dv-bento-card">
+            <div class="dv-bento-head"><span class="dv-bento-icon">&#x1F634;</span><span class="dv-bento-name">Sleep</span></div>
+            <div class="dv-bento-stats">
+              <div class="dv-bento-stat"><div class="dv-bento-stat-val">12h</div><div class="dv-bento-stat-lbl">Total / Day</div></div>
+              <div class="dv-bento-stat"><div class="dv-bento-stat-val">3.2</div><div class="dv-bento-stat-lbl">Naps / Day</div></div>
+            </div>
+            <div class="dv-bento-chart" id="dashSleepChart"></div>
           </div>
         </div>
-        <!-- Diapers Card (center, front) -->
-        <div class="dv-fan-card dv-fan-center">
-          <div class="dv-fan-head"><span class="dv-fan-icon">&#x1F4A7;</span><span class="dv-fan-name">Diapers</span></div>
-          <div class="dv-fan-stats">
-            <div class="dv-fan-stat"><div class="dv-fan-stat-val">4.3</div><div class="dv-fan-stat-lbl">Wet / Day</div></div>
-            <div class="dv-fan-stat"><div class="dv-fan-stat-val">1.7</div><div class="dv-fan-stat-lbl">Dirty / Day</div></div>
-          </div>
-          <div class="dv-fan-chart" id="dashDiaperChart"></div>
-          <div class="dv-fan-legend">
-            <span><i style="background:#93B5C6;"></i> Wet</span>
-            <span><i style="background:#F2C4A4;"></i> Dirty</span>
-          </div>
-          <div class="dv-fan-alert">
-            <strong>&#x26A0; Pale stool on 20 Mar</strong> -- AAP recommends prompt evaluation for clay-colored stools.
-          </div>
-        </div>
-        <!-- Sleep Card (right, rotated) -->
-        <div class="dv-fan-card dv-fan-right">
-          <div class="dv-fan-head"><span class="dv-fan-icon">&#x1F634;</span><span class="dv-fan-name">Sleep</span></div>
-          <div class="dv-fan-stats">
-            <div class="dv-fan-stat"><div class="dv-fan-stat-val">12h</div><div class="dv-fan-stat-lbl">Total / Day</div></div>
-            <div class="dv-fan-stat"><div class="dv-fan-stat-val">3.2</div><div class="dv-fan-stat-lbl">Naps / Day</div></div>
-          </div>
-          <div class="dv-fan-chart" id="dashSleepChart"></div>
-        </div>
-        <div class="dv-preview-caption">Sample data from a 30-day report &middot; <a href="/visit.html?id=demo">View full demo</a></div>
+        <div class="dv-bento-caption">Sample data from a 30-day report &middot; <a href="/visit.html?id=demo">View full demo</a></div>
       </div>
     </div>
   </section>
@@ -385,7 +368,7 @@
         <div class="dv-step">
           <div class="dv-step-num">1</div>
           <h3>Parent Shares a Link</h3>
-          <p>The parent generates a visit summary from the Remi app and shares it via QR code, link, or printable PDF. They choose whether to include 1, 7, or 30 days of data.</p>
+          <p>The parent generates a visit summary from the Remi app and shares it via QR code, link, or printable PDF. They choose whether to include 7 or 30 days of data.</p>
         </div>
         <div class="dv-step">
           <div class="dv-step-num">2</div>
