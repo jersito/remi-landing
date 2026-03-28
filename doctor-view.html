@@ -52,7 +52,7 @@
     /* Hero */
     .dv-hero {
       background: linear-gradient(165deg, #f0f7fb 0%, #fefaf7 50%, #fef0e6 100%);
-      padding: 80px 0 60px; position: relative; overflow: visible;
+      padding: 80px 0 80px; position: relative; overflow: visible;
     }
     .dv-hero .shape { position: absolute; border-radius: 50%; opacity: 0.12; pointer-events: none; }
     .dv-hero .shape-a { width: 300px; height: 300px; top: -80px; right: -60px; background: var(--blue); }
@@ -84,9 +84,17 @@
 
     /* Preview phone frame */
     .dv-preview {
-      position: relative; height: 420px;
+      position: relative; height: 440px;
       min-width: 480px;
     }
+    .dv-preview-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      text-align: center; font-size: 0.82rem; color: var(--text-light);
+    }
+    .dv-preview-caption a {
+      color: var(--blue-dark); font-weight: 600; text-decoration: none;
+    }
+    .dv-preview-caption a:hover { text-decoration: underline; }
     .dv-fan-card {
       position: absolute; width: 210px;
       background: var(--white); border-radius: 16px; padding: 18px 16px;
@@ -282,6 +290,7 @@
           </div>
           <div class="dv-fan-chart" id="dashSleepChart"></div>
         </div>
+        <div class="dv-preview-caption">Sample data from a 30-day report &middot; <a href="/visit.html?id=demo">View full demo</a></div>
       </div>
     </div>
   </section>
