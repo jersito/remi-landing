@@ -7,6 +7,18 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://remibabyapp.com/doctor-view.html</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://remibabyapp.com/visit.html</loc>
+    <lastmod>2026-03-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://remibabyapp.com/privacy.html</loc>
     <lastmod>2026-03-27</lastmod>
     <changefreq>yearly</changefreq>
@@ -14,7 +26,7 @@
   </url>
   <url>
     <loc>https://remibabyapp.com/blog/</loc>
-    <lastmod>2026-03-27</lastmod>
+    <lastmod>2026-03-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -111,6 +123,12 @@
   <url>
     <loc>https://remibabyapp.com/blog/cradle-cap-baby.html</loc>
     <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://remibabyapp.com/blog/baby-eczema-basics.html</loc>
+    <lastmod>2026-03-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
