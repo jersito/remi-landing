@@ -69,20 +69,11 @@
     padding-top: 15vh;
   }
   .error-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #fff;
-    background: linear-gradient(135deg, #7A9DB0, #9B8EC4);
-    padding: 6px 14px;
-    border-radius: 10px;
+    display: block;
+    text-align: center;
     margin-bottom: 28px;
   }
-  .error-brand img { width: 22px; height: 22px; border-radius: 5px; }
+  .error-brand img { height: 36px; }
   .error-card {
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.07);
@@ -105,20 +96,11 @@
     border-bottom: 1px solid rgba(255,255,255,0.10);
   }
   .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #fff;
-    background: linear-gradient(135deg, #7A9DB0, #9B8EC4);
-    padding: 6px 14px;
-    border-radius: 10px;
+    display: block;
+    text-align: center;
     margin-bottom: 16px;
   }
-  .brand-logo { width: 22px; height: 22px; border-radius: 5px; }
+  .brand-logo { height: 36px; }
   .header h1 {
     font-size: 32px;
     font-weight: 800;
@@ -205,6 +187,27 @@
   .footer-link { text-decoration: none; background: linear-gradient(135deg, #7A9DB0, #9B8EC4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
   .footer-link:hover { opacity: 0.8; }
 
+  /* Range selector */
+  .range-selector { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+  .range-btn {
+    padding: 8px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15);
+    background: transparent; color: rgba(255,255,255,0.5); font-weight: 600; font-size: 14px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .range-btn:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); }
+  .range-btn.active { background: linear-gradient(135deg, #7A9DB0, #9B8EC4); color: #fff; border-color: transparent; }
+
+  /* Day detail panel */
+  .day-detail {
+    margin-top: 8px; padding: 12px 16px; border-radius: 12px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+    font-size: 13px; color: rgba(255,255,255,0.7); display: none;
+  }
+  .day-detail.visible { display: block; }
+  .day-detail-title { font-weight: 700; color: #fff; margin-bottom: 6px; font-size: 14px; }
+  .day-detail-row { display: flex; justify-content: space-between; padding: 3px 0; }
+  .day-detail-row span:first-child { color: rgba(255,255,255,0.5); }
+
   @media print {
     body { background: #FFFFFF; color: #1E293B; }
     .accent-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -236,6 +239,7 @@
     .warning-text { color: #92400E; }
     .warning-disclaimer { color: #B45309; }
     .card-title { color: #0F172A; }
+    .range-selector { display: none; }
   }
 </style>
 </head>
@@ -251,9 +255,15 @@
   </div>
 
 <script>
-const LOGO_BASE64 = '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';
-const API_BASE = 'https://wxpddgplzocqxfpxdnpp.supabase.co/functions/v1/visit-summary';
-const LANDING_URL = 'https://remibabyapp.com';
+var LOGO_BASE64 = 'iVBORw0KGgoAAAANSUhEUgAAAHgAAAAqCAYAAAB4Ip8uAAAbDklEQVR42u18e5RcVZnv79t7n3Pq1dWd9gshoEkgzThCQHldCePgAxFIYtcdR10QgXB1Ta6jzEACuKprHAyMMyrgiIS8wMcsqyBpgvIQxgRBxBEiAh0CBAiQYJJO0o/qqjqPvfd3/zhV3dVJBzKYuQqLvVKbelWdOnef/fuev+/bAd7iYGYqFosyv2GDAjPhMI2O+j3z+bzAu+OPHuqtANABgIgMANP4fOnKeyZYDo+Qgo5ka6aTkGMJNNlaCyY7ERYtRCIgwGfiPkFSM/FuBu1kppcV8MKYzLjtl+dOqzXPBQClXM68jfeYAPCfcvJDBrbY0WGJiAEgv3pdm1XO6dbibFhzGhgzhZCtyvUgpBjxXGwtmBkgAgEgEiNmtsYgrNUMBP2BiJ4gEvdZyfde+7lzX2lYi85OUKFA9l2ADzPAsansRGNzr17z0w8T4SJm+wnH8SZLKaG1hokiWGsYDMtgHnF3JhrxlFT/nuNryEkQoihSjYkYmINQ+AJYDYyMAIE+ZepkMJhqXvhzjl7n7yw6rxhCdz65SumJ60as9lq61pcBdlAU+bo2gU9IjgzZsjs6bMDvMeizSoBw+hOMKKmXK91Zuk1HudJmvLatzomzDhW9H7O4UTFb5MYFRnTM4iZxpp47jKpy6nBJigjxTooIik6JCjmSujGEnkhZi9XGKoH4TE0MOA+gMOhp1wmTCP+kyOC1Ke++2XwgJsaQHB7WSO9HRXJ0YLl0l/dEhFUkbwqt3Be58uEPYWH0gtGuJyxWCVCG5NFLvNTeqBidFBG8ZndkUMET6nvqZVYJJIcHlyWGBxcmRAdaPl9PrX7wDVYJDL5t6Fb86wQGo/o3AAAA//+DeUsHAAAABklEQVQDAEifaF9IfUm7AAAAAElFTkSuQmCC';
+var API_BASE = 'https://wxpddgplzocqxfpxdnpp.supabase.co/functions/v1/visit-summary';
+var LANDING_URL = 'https://remibabyapp.com';
+
+/* Global state for chart interactivity */
+var _globalEntries = [];
+var _globalStartDate = null;
+var _isDemoMode = false;
+var _currentDemoDays = 30;
 
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -263,81 +273,96 @@ function formatDate(d) {
   return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
+function formatShortDate(d) {
+  return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
 function calculateAge(dob) {
-  const birth = new Date(dob);
-  const now = new Date();
-  let months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
+  var birth = new Date(dob);
+  var now = new Date();
+  var months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
   if (now.getDate() < birth.getDate()) months--;
   if (months >= 1) return months + ' month' + (months !== 1 ? 's' : '') + ' old';
-  const weeks = Math.floor((now.getTime() - birth.getTime()) / (7 * 86400000));
+  var weeks = Math.floor((now.getTime() - birth.getTime()) / (7 * 86400000));
   return weeks + ' week' + (weeks !== 1 ? 's' : '') + ' old';
 }
 
 function getAgeMonths(dob) {
-  const birth = new Date(dob);
-  const now = new Date();
-  let months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
+  var birth = new Date(dob);
+  var now = new Date();
+  var months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
   if (now.getDate() < birth.getDate()) months--;
   return Math.max(0, months);
 }
 
 function daysBetween(start, d) {
-  const s = new Date(start); s.setHours(0,0,0,0);
-  const t = new Date(d); t.setHours(0,0,0,0);
+  var s = new Date(start); s.setHours(0,0,0,0);
+  var t = new Date(d); t.setHours(0,0,0,0);
   return Math.floor((t.getTime() - s.getTime()) / 86400000);
 }
 
+function seededRandom(seed) {
+  var s = seed;
+  return function() {
+    s = (s * 16807 + 0) % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
+
 function computeDailyFeeds(entries, totalDays, startDate) {
-  const b = new Array(totalDays).fill(0);
-  entries.forEach(e => { if (e.entry_type !== 'feeding') return; const i = daysBetween(startDate, e.occurred_at); if (i >= 0 && i < totalDays) b[i]++; });
+  var b = new Array(totalDays).fill(0);
+  entries.forEach(function(e) { if (e.entry_type !== 'feeding') return; var i = daysBetween(startDate, e.occurred_at); if (i >= 0 && i < totalDays) b[i]++; });
   return b;
 }
 
 function computeDailySleep(entries, totalDays, startDate) {
-  const b = new Array(totalDays).fill(0);
-  const sl = entries.filter(e => e.entry_type === 'sleep').sort((a,c) => new Date(a.occurred_at) - new Date(c.occurred_at));
-  for (let i = 0; i < sl.length; i++) {
+  var b = new Array(totalDays).fill(0);
+  var sl = entries.filter(function(e) { return e.entry_type === 'sleep'; }).sort(function(a,c) { return new Date(a.occurred_at) - new Date(c.occurred_at); });
+  for (var i = 0; i < sl.length; i++) {
     if (sl[i].sleep_event !== 'fell_asleep') continue;
-    const w = sl.find((e,j) => j > i && e.sleep_event === 'woke_up');
+    var w = null;
+    for (var j = i + 1; j < sl.length; j++) {
+      if (sl[j].sleep_event === 'woke_up') { w = sl[j]; break; }
+    }
     if (!w) continue;
-    const hrs = (new Date(w.occurred_at) - new Date(sl[i].occurred_at)) / 3600000;
+    var hrs = (new Date(w.occurred_at) - new Date(sl[i].occurred_at)) / 3600000;
     if (hrs <= 0 || hrs > 24) continue;
-    const idx = daysBetween(startDate, w.occurred_at);
+    var idx = daysBetween(startDate, w.occurred_at);
     if (idx >= 0 && idx < totalDays) b[idx] += Math.round(hrs * 10) / 10;
   }
   return b;
 }
 
 function computeDailyDiapers(entries, totalDays, startDate) {
-  const wet = new Array(totalDays).fill(0), dirty = new Array(totalDays).fill(0);
-  entries.forEach(e => {
+  var wet = new Array(totalDays).fill(0), dirty = new Array(totalDays).fill(0);
+  entries.forEach(function(e) {
     if (e.entry_type !== 'diaper') return;
-    const i = daysBetween(startDate, e.occurred_at);
+    var i = daysBetween(startDate, e.occurred_at);
     if (i < 0 || i >= totalDays) return;
     if (e.diaper_type === 'wet' || e.diaper_type === 'both') wet[i]++;
     if (e.diaper_type === 'dirty' || e.diaper_type === 'both') dirty[i]++;
   });
-  return { wet, dirty };
+  return { wet: wet, dirty: dirty };
 }
 
 function computeBreastBottleSplit(entries) {
-  const feeds = entries.filter(e => e.entry_type === 'feeding');
-  const breast = feeds.filter(f => f.feed_type === 'breast_left' || f.feed_type === 'breast_right' || f.feed_type === 'breast_both').length;
-  const bottle = feeds.filter(f => f.feed_type === 'bottle').length;
-  const total = breast + bottle;
+  var feeds = entries.filter(function(e) { return e.entry_type === 'feeding'; });
+  var breast = feeds.filter(function(f) { return f.feed_type === 'breast_left' || f.feed_type === 'breast_right' || f.feed_type === 'breast_both'; }).length;
+  var bottle = feeds.filter(function(f) { return f.feed_type === 'bottle'; }).length;
+  var total = breast + bottle;
   if (total === 0) return { breastPct: 0, bottlePct: 0 };
-  const bp = Math.round((breast / total) * 100);
+  var bp = Math.round((breast / total) * 100);
   return { breastPct: bp, bottlePct: 100 - bp };
 }
 
 function computeAvgNaps(entries, totalDays) {
-  const napCount = entries.filter(e => e.entry_type === 'sleep' && e.sleep_event === 'fell_asleep').length;
+  var napCount = entries.filter(function(e) { return e.entry_type === 'sleep' && e.sleep_event === 'fell_asleep'; }).length;
   return Math.round((napCount / Math.max(1, totalDays)) * 10) / 10;
 }
 
 function getHealthEvents(entries) {
-  return entries.filter(e => e.entry_type === 'health' || e.entry_type === 'note').map(e => {
-    const d = new Date(e.occurred_at);
+  return entries.filter(function(e) { return e.entry_type === 'health' || e.entry_type === 'note'; }).map(function(e) {
+    var d = new Date(e.occurred_at);
     return {
       date: d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ' ' + d.toLocaleTimeString('en-GB', { hour: 'numeric', minute: '2-digit' }),
       type: e.entry_type,
@@ -347,7 +372,7 @@ function getHealthEvents(entries) {
 }
 
 function computeWarnings(ageMonths, feeding, sleep, diaper) {
-  const w = [];
+  var w = [];
   if (ageMonths < 6 && diaper.avgWetPerDay > 0 && diaper.avgWetPerDay < 6) w.push('Average wet diapers is ' + diaper.avgWetPerDay + '/day. The AAP recommends at least 6 per day for babies under 6 months.');
   if (ageMonths < 6 && feeding.avgFeedingsPerDay > 0 && feeding.avgFeedingsPerDay < 6) w.push('Average feeds is ' + feeding.avgFeedingsPerDay + '/day. Babies under 6 months typically need 6-8 feeds per day.');
   if (ageMonths >= 4 && sleep.avgHoursPerDay > 0) {
@@ -357,50 +382,62 @@ function computeWarnings(ageMonths, feeding, sleep, diaper) {
   return w;
 }
 
-function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels) {
-  const W = 480, H = 110;
-  const pad = { top: 16, right: 8, bottom: 24, left: 32 };
-  const maxVal = Math.max(1, ...data, ...(secondaryData || []));
-  const plotW = W - pad.left - pad.right;
-  const plotH = H - pad.top - pad.bottom;
-  const hasPaired = !!secondaryData;
-  const slotW = plotW / data.length;
-  const gap = hasPaired ? 2 : 0;
-  const barW = hasPaired ? Math.max(3, (slotW - gap * 3) / 2) : Math.max(3, slotW - 3);
+function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels, chartType, startDate) {
+  var W = 480, H = 110;
+  var pad = { top: 16, right: 8, bottom: 24, left: 32 };
+  var maxVal = Math.max(1, Math.max.apply(null, data), Math.max.apply(null, secondaryData || [0]));
+  var plotW = W - pad.left - pad.right;
+  var plotH = H - pad.top - pad.bottom;
+  var hasPaired = !!secondaryData;
+  var slotW = plotW / data.length;
+  var gap = hasPaired ? 2 : 0;
+  var barW = hasPaired ? Math.max(3, (slotW - gap * 3) / 2) : Math.max(3, slotW - 3);
 
-  let svg = '';
-  [0.25, 0.5, 0.75, 1].forEach(frac => {
-    const y = pad.top + plotH - plotH * frac;
-    const val = Math.round(maxVal * frac * 10) / 10;
+  var svg = '';
+  [0.25, 0.5, 0.75, 1].forEach(function(frac) {
+    var y = pad.top + plotH - plotH * frac;
+    var val = Math.round(maxVal * frac * 10) / 10;
     svg += '<line x1="' + pad.left + '" y1="' + y + '" x2="' + (W - pad.right) + '" y2="' + y + '" stroke="rgba(255,255,255,0.10)" stroke-width="0.5" stroke-dasharray="3,3"/>';
     svg += '<text x="' + (pad.left - 6) + '" y="' + (y + 3) + '" fill="rgba(255,255,255,0.55)" font-size="8" font-family="sans-serif" text-anchor="end">' + (val % 1 === 0 ? val : val.toFixed(1)) + '</text>';
   });
 
   svg += '<line x1="' + pad.left + '" y1="' + (pad.top + plotH) + '" x2="' + (W - pad.right) + '" y2="' + (pad.top + plotH) + '" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>';
 
-  data.forEach((val, i) => {
-    const x = pad.left + i * slotW + (hasPaired ? gap : (slotW - barW) / 2);
-    const h = (val / maxVal) * plotH;
-    const y = pad.top + plotH - h;
-    const rx = Math.min(4, barW / 2);
+  data.forEach(function(val, i) {
+    var x = pad.left + i * slotW + (hasPaired ? gap : (slotW - barW) / 2);
+    var h = (val / maxVal) * plotH;
+    var y = pad.top + plotH - h;
+    var rx = Math.min(4, barW / 2);
+
+    /* Wrap each day in a group for click interactivity */
+    svg += '<g class="bar-group" data-day-index="' + i + '" style="cursor:pointer;">';
+    /* Invisible click target covering the full slot height */
+    svg += '<rect x="' + (pad.left + i * slotW) + '" y="' + pad.top + '" width="' + slotW + '" height="' + plotH + '" fill="transparent" />';
     if (h > 0) svg += '<rect x="' + x + '" y="' + y + '" width="' + barW + '" height="' + Math.max(0, h) + '" fill="' + color + '" rx="' + rx + '" ry="' + rx + '" opacity="1"/>';
     if (secondaryData && secondaryData[i] > 0) {
-      const x2 = x + barW + gap;
-      const h2 = (secondaryData[i] / maxVal) * plotH;
-      const y2 = pad.top + plotH - h2;
+      var x2 = x + barW + gap;
+      var h2 = (secondaryData[i] / maxVal) * plotH;
+      var y2 = pad.top + plotH - h2;
       svg += '<rect x="' + x2 + '" y="' + y2 + '" width="' + barW + '" height="' + Math.max(0, h2) + '" fill="' + secondaryColor + '" rx="' + rx + '" ry="' + rx + '" opacity="1"/>';
     }
+    svg += '</g>';
   });
 
-  const labelCount = Math.min(data.length, 7);
-  const step = Math.max(1, Math.floor(data.length / labelCount));
-  data.forEach((_, i) => {
+  var labelCount = Math.min(data.length, 7);
+  var step = Math.max(1, Math.floor(data.length / labelCount));
+  data.forEach(function(_, i) {
     if (i % step !== 0 && i !== data.length - 1) return;
-    const x = pad.left + i * slotW + slotW / 2;
-    svg += '<text x="' + x + '" y="' + (H - 2) + '" fill="rgba(255,255,255,0.25)" font-size="8" font-family="sans-serif" text-anchor="middle">D' + (i + 1) + '</text>';
+    var x = pad.left + i * slotW + slotW / 2;
+    var labelText = 'D' + (i + 1);
+    if (startDate) {
+      var labelDate = new Date(startDate);
+      labelDate.setDate(labelDate.getDate() + i);
+      labelText = formatShortDate(labelDate);
+    }
+    svg += '<text x="' + x + '" y="' + (H - 2) + '" fill="rgba(255,255,255,0.25)" font-size="8" font-family="sans-serif" text-anchor="middle">' + labelText + '</text>';
   });
 
-  let legend = '';
+  var legend = '';
   if (hasPaired && legendLabels) {
     legend = '<rect x="' + pad.left + '" y="' + (H + 6) + '" width="10" height="10" fill="' + color + '" rx="3"/>' +
       '<text x="' + (pad.left + 14) + '" y="' + (H + 14) + '" fill="rgba(255,255,255,0.5)" font-size="9" font-family="sans-serif">' + legendLabels[0] + '</text>' +
@@ -408,42 +445,179 @@ function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels) {
       '<text x="' + (pad.left + 74) + '" y="' + (H + 14) + '" fill="rgba(255,255,255,0.5)" font-size="9" font-family="sans-serif">' + legendLabels[1] + '</text>';
   }
 
-  const svgH = hasPaired ? H + 24 : H;
-  return '<svg width="100%" viewBox="0 0 ' + W + ' ' + svgH + '" xmlns="http://www.w3.org/2000/svg" style="max-width:' + W + 'px;">' + svg + legend + '</svg>';
+  var svgH = hasPaired ? H + 24 : H;
+  return '<svg width="100%" viewBox="0 0 ' + W + ' ' + svgH + '" xmlns="http://www.w3.org/2000/svg" style="max-width:' + W + 'px;" data-chart-type="' + (chartType || '') + '">' + svg + legend + '</svg>';
+}
+
+function showDayDetail(chartType, dayIdx) {
+  /* Hide all detail panels first */
+  var panels = document.querySelectorAll('.day-detail');
+  for (var p = 0; p < panels.length; p++) {
+    panels[p].classList.remove('visible');
+  }
+
+  var panel = document.getElementById('detail-' + chartType);
+  if (!panel || !_globalEntries || !_globalStartDate) return;
+
+  var dayStart = new Date(_globalStartDate);
+  dayStart.setDate(dayStart.getDate() + dayIdx);
+  dayStart.setHours(0,0,0,0);
+  var dayEnd = new Date(dayStart);
+  dayEnd.setDate(dayEnd.getDate() + 1);
+
+  var dayLabel = dayStart.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+
+  var dayEntries = _globalEntries.filter(function(e) {
+    var t = new Date(e.occurred_at);
+    return t >= dayStart && t < dayEnd;
+  });
+
+  var html = '<div class="day-detail-title">' + esc(dayLabel) + '</div>';
+  var rows = [];
+
+  if (chartType === 'feeding') {
+    var feeds = dayEntries.filter(function(e) { return e.entry_type === 'feeding'; });
+    if (feeds.length === 0) {
+      html += '<div style="color:rgba(255,255,255,0.4);font-style:italic;">No feeds recorded</div>';
+    } else {
+      feeds.forEach(function(f) {
+        var t = new Date(f.occurred_at);
+        var timeStr = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        var typeLabel = f.feed_type === 'bottle' ? 'Bottle' : 'Breast';
+        var detail = '';
+        if (f.feed_amount_ml) detail = f.feed_amount_ml + ' mL';
+        else if (f.feed_duration_min) detail = f.feed_duration_min + ' min';
+        rows.push('<div class="day-detail-row"><span>' + timeStr + ' - ' + typeLabel + '</span><span>' + detail + '</span></div>');
+      });
+      html += rows.join('');
+    }
+  } else if (chartType === 'diaper') {
+    var diapers = dayEntries.filter(function(e) { return e.entry_type === 'diaper'; });
+    if (diapers.length === 0) {
+      html += '<div style="color:rgba(255,255,255,0.4);font-style:italic;">No diaper changes recorded</div>';
+    } else {
+      diapers.forEach(function(d) {
+        var t = new Date(d.occurred_at);
+        var timeStr = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        var typeLabel = d.diaper_type === 'both' ? 'Wet + Dirty' : d.diaper_type === 'wet' ? 'Wet' : 'Dirty';
+        var notes = d.notes ? ' - ' + esc(d.notes) : '';
+        rows.push('<div class="day-detail-row"><span>' + timeStr + ' - ' + typeLabel + notes + '</span><span></span></div>');
+      });
+      html += rows.join('');
+    }
+  } else if (chartType === 'sleep') {
+    var sleepEntries = dayEntries.filter(function(e) { return e.entry_type === 'sleep'; }).sort(function(a,b) { return new Date(a.occurred_at) - new Date(b.occurred_at); });
+    /* Also include fell_asleep from previous day that woke up today */
+    var allSleep = _globalEntries.filter(function(e) { return e.entry_type === 'sleep'; }).sort(function(a,b) { return new Date(a.occurred_at) - new Date(b.occurred_at); });
+    var sessions = [];
+    for (var i = 0; i < allSleep.length; i++) {
+      if (allSleep[i].sleep_event !== 'fell_asleep') continue;
+      var woke = null;
+      for (var j = i + 1; j < allSleep.length; j++) {
+        if (allSleep[j].sleep_event === 'woke_up') { woke = allSleep[j]; break; }
+      }
+      if (!woke) continue;
+      var wokeTime = new Date(woke.occurred_at);
+      var fellTime = new Date(allSleep[i].occurred_at);
+      /* Show sessions where woke_up falls on this day */
+      if (wokeTime >= dayStart && wokeTime < dayEnd) {
+        var dur = (wokeTime - fellTime) / 3600000;
+        if (dur > 0 && dur <= 24) {
+          sessions.push({ fell: fellTime, woke: wokeTime, hours: Math.round(dur * 10) / 10 });
+        }
+      }
+    }
+    if (sessions.length === 0) {
+      html += '<div style="color:rgba(255,255,255,0.4);font-style:italic;">No sleep sessions recorded</div>';
+    } else {
+      sessions.forEach(function(s) {
+        var fellStr = s.fell.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        var wokeStr = s.woke.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        rows.push('<div class="day-detail-row"><span>Fell asleep ' + fellStr + ', woke ' + wokeStr + '</span><span>' + s.hours + 'h</span></div>');
+      });
+      html += rows.join('');
+    }
+  }
+
+  panel.innerHTML = html;
+  panel.classList.add('visible');
+}
+
+function attachChartListeners() {
+  var groups = document.querySelectorAll('.bar-group');
+  for (var i = 0; i < groups.length; i++) {
+    (function(g) {
+      g.addEventListener('click', function() {
+        var dayIdx = parseInt(this.getAttribute('data-day-index'));
+        var svg = this.closest('svg');
+        var chartType = svg ? svg.getAttribute('data-chart-type') : '';
+        if (chartType) showDayDetail(chartType, dayIdx);
+      });
+    })(groups[i]);
+  }
 }
 
 function renderSummary(data) {
-  const { babyName, dateOfBirth, startDate, endDate, totalDays, feeding, sleep, diaper, entries } = data;
-  const start = formatDate(startDate);
-  const end = formatDate(endDate);
-  const ageLabel = calculateAge(dateOfBirth);
-  const ageMonths = getAgeMonths(dateOfBirth);
+  var babyName = data.babyName;
+  var dateOfBirth = data.dateOfBirth;
+  var startDate = data.startDate;
+  var endDate = data.endDate;
+  var totalDays = data.totalDays;
+  var feeding = data.feeding;
+  var sleep = data.sleep;
+  var diaper = data.diaper;
+  var entries = data.entries;
 
-  const dailyFeeds = computeDailyFeeds(entries, totalDays, startDate);
-  const dailySleep = computeDailySleep(entries, totalDays, startDate);
-  const { wet: dailyWet, dirty: dailyDirty } = computeDailyDiapers(entries, totalDays, startDate);
-  const { breastPct, bottlePct } = computeBreastBottleSplit(entries);
-  const healthEvents = getHealthEvents(entries);
-  const avgNaps = computeAvgNaps(entries, totalDays);
-  const warnings = computeWarnings(ageMonths, feeding, sleep, diaper);
+  /* Store globally for chart interactivity */
+  _globalEntries = entries;
+  _globalStartDate = startDate;
 
-  const feedChart = feeding.totalFeedings > 0 ? buildBarSVG(dailyFeeds, '#7A9DB0') : '';
-  const sleepChart = sleep.avgHoursPerDay > 0 ? buildBarSVG(dailySleep, '#9B8EC4') : '';
-  const diaperChart = diaper.avgTotalPerDay > 0 ? buildBarSVG(dailyWet, '#5DA6E6', dailyDirty, '#D4956B', ['Wet', 'Dirty']) : '';
+  var start = formatDate(startDate);
+  var end = formatDate(endDate);
+  var ageLabel = calculateAge(dateOfBirth);
+  var ageMonths = getAgeMonths(dateOfBirth);
 
-  const breakdownBar = (breastPct > 0 || bottlePct > 0) ? '<div class="breakdown-container"><div class="breakdown-label-row"><span class="breakdown-label" style="color:#7A9DB0;">Breast ' + breastPct + '%</span><span class="breakdown-label" style="color:#F2C4A4;">Bottle ' + bottlePct + '%</span></div><div class="breakdown-track"><div class="breakdown-fill-breast" style="width:' + breastPct + '%;"></div><div class="breakdown-fill-bottle" style="width:' + bottlePct + '%;"></div></div></div>' : '';
+  var dailyFeeds = computeDailyFeeds(entries, totalDays, startDate);
+  var dailySleep = computeDailySleep(entries, totalDays, startDate);
+  var diaperData = computeDailyDiapers(entries, totalDays, startDate);
+  var dailyWet = diaperData.wet;
+  var dailyDirty = diaperData.dirty;
+  var splitData = computeBreastBottleSplit(entries);
+  var breastPct = splitData.breastPct;
+  var bottlePct = splitData.bottlePct;
+  var healthEvents = getHealthEvents(entries);
+  var avgNaps = computeAvgNaps(entries, totalDays);
+  var warnings = computeWarnings(ageMonths, feeding, sleep, diaper);
 
-  const warningsSection = warnings.length === 0 ? '' : '<div class="card warning-card"><div class="card-header"><span class="warning-header-icon">&#x26A0;</span><span class="card-title" style="color:#FBBF24;">Concerns</span></div>' + warnings.map(w => '<div class="warning-row"><span class="warning-bullet">&#x25CF;</span><span class="warning-text">' + esc(w) + '</span></div>').join('') + '<p class="warning-disclaimer">Based on AAP/AASM guidelines. Not medical advice.</p></div>';
+  var feedChart = feeding.totalFeedings > 0 ? buildBarSVG(dailyFeeds, '#7A9DB0', null, null, null, 'feeding', startDate) : '';
+  var sleepChart = sleep.avgHoursPerDay > 0 ? buildBarSVG(dailySleep, '#9B8EC4', null, null, null, 'sleep', startDate) : '';
+  var diaperChart = diaper.avgTotalPerDay > 0 ? buildBarSVG(dailyWet, '#5DA6E6', dailyDirty, '#D4956B', ['Wet', 'Dirty'], 'diaper', startDate) : '';
 
-  const healthSection = healthEvents.length > 0 ? '<div class="card"><div class="card-header"><span class="card-icon">&#x1FA7A;</span><span class="card-title">Health Events</span><span class="count">' + healthEvents.length + '</span></div><div class="health-timeline">' + healthEvents.map(ev => '<div class="health-row"><div class="health-date">' + esc(ev.date) + '</div><div class="health-type">' + (ev.type === 'health' ? 'Health' : 'Note') + '</div>' + (ev.notes ? '<div class="health-notes">' + esc(ev.notes) + '</div>' : '') + '</div>').join('') + '</div></div>' : '';
+  var breakdownBar = (breastPct > 0 || bottlePct > 0) ? '<div class="breakdown-container"><div class="breakdown-label-row"><span class="breakdown-label" style="color:#7A9DB0;">Breast ' + breastPct + '%</span><span class="breakdown-label" style="color:#F2C4A4;">Bottle ' + bottlePct + '%</span></div><div class="breakdown-track"><div class="breakdown-fill-breast" style="width:' + breastPct + '%;"></div><div class="breakdown-fill-bottle" style="width:' + bottlePct + '%;"></div></div></div>' : '';
+
+  var warningsSection = warnings.length === 0 ? '' : '<div class="card warning-card"><div class="card-header"><span class="warning-header-icon">&#x26A0;</span><span class="card-title" style="color:#FBBF24;">Concerns</span></div>' + warnings.map(function(w) { return '<div class="warning-row"><span class="warning-bullet">&#x25CF;</span><span class="warning-text">' + esc(w) + '</span></div>'; }).join('') + '<p class="warning-disclaimer">Based on AAP/AASM guidelines. Not medical advice.</p></div>';
+
+  var healthSection = healthEvents.length > 0 ? '<div class="card"><div class="card-header"><span class="card-icon">&#x1FA7A;</span><span class="card-title">Health Events</span><span class="count">' + healthEvents.length + '</span></div><div class="health-timeline">' + healthEvents.map(function(ev) { return '<div class="health-row"><div class="health-date">' + esc(ev.date) + '</div><div class="health-type">' + (ev.type === 'health' ? 'Health' : 'Note') + '</div>' + (ev.notes ? '<div class="health-notes">' + esc(ev.notes) + '</div>' : '') + '</div>'; }).join('') + '</div></div>' : '';
 
   document.title = esc(babyName) + ' - Visit Summary';
 
-  const dobLabel = dateOfBirth ? 'DOB: ' + formatDate(dateOfBirth) : '';
-  return '<div class="header"><div class="brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" class="brand-logo" alt="Remi"/>Remi</div><h1>' + esc(babyName) + '</h1><p class="age">' + esc(ageLabel) + '</p>' + (dobLabel ? '<p class="dob">' + esc(dobLabel) + '</p>' : '') + '<p class="period">' + start + ' to ' + end + '</p></div>' +
-    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F37C;</span><span class="card-title">Feeding</span></div>' + (feeding.totalFeedings > 0 ? '<div class="stats-row"><div class="stat-pill accent-blue"><div class="stat-value">' + feeding.avgFeedingsPerDay + '</div><div class="stat-label">Avg Feeds / Day</div></div>' + (feeding.avgAmountMl !== null ? '<div class="stat-pill accent-peach"><div class="stat-value">' + feeding.avgAmountMl + ' mL</div><div class="stat-label">Avg per Feed</div></div>' : '') + '</div>' + breakdownBar + '<p class="chart-label">Daily feed counts</p>' + feedChart : '<p class="empty">No feeding data recorded</p>') + '</div>' +
-    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F4A7;</span><span class="card-title">Diapers</span></div>' + (diaper.avgTotalPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-sky"><div class="stat-value">' + diaper.avgWetPerDay + '</div><div class="stat-label">Avg Wet / Day</div></div><div class="stat-pill accent-peach"><div class="stat-value">' + diaper.avgDirtyPerDay + '</div><div class="stat-label">Avg Dirty / Day</div></div></div><p class="chart-label">Daily diaper counts</p>' + diaperChart : '<p class="empty">No diaper data recorded</p>') + '</div>' +
-    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F634;</span><span class="card-title">Sleep</span></div>' + (sleep.avgHoursPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-purple"><div class="stat-value">' + sleep.avgHoursPerDay + 'h</div><div class="stat-label">Avg Total / Day</div></div><div class="stat-pill accent-blue"><div class="stat-value">' + avgNaps + '</div><div class="stat-label">Avg Naps / Day</div></div></div><p class="chart-label">Daily sleep hours</p>' + sleepChart : '<p class="empty">No sleep data recorded</p>') + '</div>' +
+  var dobLabel = dateOfBirth ? 'DOB: ' + formatDate(dateOfBirth) : '';
+
+  /* Range selector for demo mode */
+  var rangeSelector = '';
+  if (_isDemoMode) {
+    rangeSelector = '<div class="range-selector">' +
+      '<button class="range-btn' + (_currentDemoDays === 1 ? ' active' : '') + '" data-days="1">1D</button>' +
+      '<button class="range-btn' + (_currentDemoDays === 7 ? ' active' : '') + '" data-days="7">7D</button>' +
+      '<button class="range-btn' + (_currentDemoDays === 30 ? ' active' : '') + '" data-days="30">30D</button>' +
+      '</div>';
+  }
+
+  return '<div class="header"><div class="brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" class="brand-logo" alt="Remi"/></div><h1>' + esc(babyName) + '</h1><p class="age">' + esc(ageLabel) + '</p>' + (dobLabel ? '<p class="dob">' + esc(dobLabel) + '</p>' : '') + '<p class="period">' + start + ' to ' + end + '</p></div>' +
+    rangeSelector +
+    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F37C;</span><span class="card-title">Feeding</span></div>' + (feeding.totalFeedings > 0 ? '<div class="stats-row"><div class="stat-pill accent-blue"><div class="stat-value">' + feeding.avgFeedingsPerDay + '</div><div class="stat-label">Avg Feeds / Day</div></div>' + (feeding.avgAmountMl !== null ? '<div class="stat-pill accent-peach"><div class="stat-value">' + feeding.avgAmountMl + ' mL</div><div class="stat-label">Avg per Feed</div></div>' : '') + '</div>' + breakdownBar + '<p class="chart-label">Daily feed counts</p>' + feedChart + '<div class="day-detail" id="detail-feeding"></div>' : '<p class="empty">No feeding data recorded</p>') + '</div>' +
+    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F4A7;</span><span class="card-title">Diapers</span></div>' + (diaper.avgTotalPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-sky"><div class="stat-value">' + diaper.avgWetPerDay + '</div><div class="stat-label">Avg Wet / Day</div></div><div class="stat-pill accent-peach"><div class="stat-value">' + diaper.avgDirtyPerDay + '</div><div class="stat-label">Avg Dirty / Day</div></div></div><p class="chart-label">Daily diaper counts</p>' + diaperChart + '<div class="day-detail" id="detail-diaper"></div>' : '<p class="empty">No diaper data recorded</p>') + '</div>' +
+    '<div class="card"><div class="card-header"><span class="card-icon">&#x1F634;</span><span class="card-title">Sleep</span></div>' + (sleep.avgHoursPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-purple"><div class="stat-value">' + sleep.avgHoursPerDay + 'h</div><div class="stat-label">Avg Total / Day</div></div><div class="stat-pill accent-blue"><div class="stat-value">' + avgNaps + '</div><div class="stat-label">Avg Naps / Day</div></div></div><p class="chart-label">Daily sleep hours</p>' + sleepChart + '<div class="day-detail" id="detail-sleep"></div>' : '<p class="empty">No sleep data recorded</p>') + '</div>' +
     warningsSection +
     healthSection +
     '<div class="footer"><div class="footer-brand">Shared via <a href="' + LANDING_URL + '" target="_blank" rel="noopener" class="footer-link">Remi</a> &middot; ' + formatDate(new Date()) + '</div></div>';
@@ -452,62 +626,173 @@ function renderSummary(data) {
 function showError(message) {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('error').style.display = 'block';
-  document.getElementById('error').innerHTML = '<div class="error-wrap"><div class="error-brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" alt="Remi"/>Remi</div><div class="error-card"><div class="error-icon">&#x26A0;</div><h2>Something went wrong</h2><p>' + esc(message) + '</p></div><div class="error-footer">Remi Baby Tracker</div></div>';
+  document.getElementById('error').innerHTML = '<div class="error-wrap"><div class="error-brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" alt="Remi"/></div><div class="error-card"><div class="error-icon">&#x26A0;</div><h2>Something went wrong</h2><p>' + esc(message) + '</p></div><div class="error-footer">Remi Baby Tracker</div></div>';
 }
 
-function generateDemoData() {
-  const now = new Date();
-  const dob = new Date(now);
+function generateDemoData(numDays) {
+  var totalDays = numDays || 30;
+  var today = new Date();
+  var seed = today.getFullYear() * 1000 + Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+  var rng = seededRandom(seed);
+
+  var now = new Date();
+  var dob = new Date(now);
   dob.setMonth(dob.getMonth() - 5);
   dob.setDate(15);
-  const endDate = new Date(now);
+  var endDate = new Date(now);
   endDate.setHours(23,59,59,0);
-  const startDate = new Date(now);
-  startDate.setDate(startDate.getDate() - 6);
+  var startDate = new Date(now);
+  startDate.setDate(startDate.getDate() - (totalDays - 1));
   startDate.setHours(0,0,0,0);
-  const totalDays = 7;
 
   var entries = [];
   var feedTypes = ['breast', 'bottle', 'breast', 'breast', 'bottle', 'breast', 'breast'];
+
+  /* Varied diaper notes for realism */
+  var stoolNotes = [
+    'Yellow, seedy',
+    'Green, slightly loose',
+    'Yellow, normal consistency',
+    'Brownish-yellow, soft',
+    'Dark yellow, thick',
+    'Greenish, mucusy',
+    'Yellow, watery',
+    null, null, null, null, null
+  ];
+
+  /* Health events spread across the month */
+  var healthDays = {};
+  if (totalDays >= 7) {
+    var healthEventList = [
+      { dayOffset: 2, type: 'health', notes: 'Slight temperature of 99.5F, monitoring closely' },
+      { dayOffset: Math.floor(totalDays * 0.15), type: 'note', notes: 'Started reaching for toys during tummy time' },
+      { dayOffset: Math.floor(totalDays * 0.25), type: 'health', notes: 'Mild congestion, using saline drops' },
+      { dayOffset: Math.floor(totalDays * 0.35), type: 'note', notes: 'First time rolling from tummy to back' },
+      { dayOffset: Math.floor(totalDays * 0.5), type: 'health', notes: 'Fussy during feeding, possible teething discomfort' },
+      { dayOffset: Math.floor(totalDays * 0.6), type: 'note', notes: 'Laughed out loud for the first time' },
+      { dayOffset: Math.floor(totalDays * 0.75), type: 'health', notes: 'Small rash on cheeks, likely drool rash' },
+      { dayOffset: Math.floor(totalDays * 0.85), type: 'note', notes: 'Grabbing feet during diaper changes' },
+      { dayOffset: Math.floor(totalDays * 0.95), type: 'note', notes: 'Responding to name, turning head consistently' }
+    ];
+    for (var he = 0; he < healthEventList.length; he++) {
+      var evt = healthEventList[he];
+      if (evt.dayOffset < totalDays) {
+        healthDays[evt.dayOffset] = evt;
+      }
+    }
+  }
+
   for (var d = 0; d < totalDays; d++) {
     var day = new Date(startDate);
     day.setDate(day.getDate() + d);
-    var feedCount = 7 + Math.floor(Math.random() * 3);
+
+    /* Varied feed counts: 6-10 range */
+    var feedCount = 6 + Math.floor(rng() * 5);
     for (var f = 0; f < feedCount; f++) {
-      var h = 6 + Math.floor(f * (16 / feedCount)) + Math.floor(Math.random() * 2);
+      var h = 6 + Math.floor(f * (16 / feedCount)) + Math.floor(rng() * 2);
       var ft = feedTypes[(d + f) % feedTypes.length];
-      var entry = { entry_type: 'feeding', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), h, Math.floor(Math.random()*50)).toISOString(), feed_type: ft };
-      if (ft === 'bottle') { entry.feed_amount_ml = 90 + Math.floor(Math.random() * 60); }
-      else { entry.feed_duration_min = 12 + Math.floor(Math.random() * 15); }
+      var entry = {
+        entry_type: 'feeding',
+        occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), h, Math.floor(rng() * 50)).toISOString(),
+        feed_type: ft === 'breast' ? 'breast_both' : 'bottle'
+      };
+      if (ft === 'bottle') {
+        entry.feed_amount_ml = 80 + Math.floor(rng() * 70);
+      } else {
+        entry.feed_duration_min = 10 + Math.floor(rng() * 18);
+      }
       entries.push(entry);
     }
-    var napTimes = [[9,10],[13,15]];
-    for (var n = 0; n < napTimes.length; n++) {
-      entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), napTimes[n][0], 0).toISOString(), sleep_event: 'fell_asleep' });
-      entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), napTimes[n][1], 0).toISOString(), sleep_event: 'woke_up' });
-    }
-    entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 19, 30).toISOString(), sleep_event: 'fell_asleep' });
-    var nextDay = new Date(day); nextDay.setDate(nextDay.getDate() + 1);
-    entries.push({ entry_type: 'sleep', occurred_at: new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate(), 6, 0).toISOString(), sleep_event: 'woke_up' });
 
-    var diaperTypes = ['wet','wet','dirty','wet','both','wet','wet'];
-    for (var dp = 0; dp < 7; dp++) {
-      entries.push({ entry_type: 'diaper', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 6 + dp * 2, 15 + Math.floor(Math.random()*30)).toISOString(), diaper_type: diaperTypes[dp] });
+    /* Varied nap patterns: some days 2 naps, some days 3 */
+    var napVariant = rng();
+    var napTimes;
+    if (napVariant < 0.3) {
+      /* 3 naps */
+      napTimes = [[9, 9 + 0.75 + rng() * 0.5], [12, 12 + 1 + rng() * 0.5], [15, 15 + 0.5 + rng() * 0.5]];
+    } else if (napVariant < 0.8) {
+      /* 2 naps */
+      napTimes = [[9, 10 + rng() * 0.5], [13, 14.5 + rng()]];
+    } else {
+      /* 1 longer nap */
+      napTimes = [[11, 13.5 + rng()]];
     }
-    if (d === 2) {
-      entries.push({ entry_type: 'health', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 10, 0).toISOString(), notes: 'Slight temperature of 99.5F, monitoring closely' });
+    for (var n = 0; n < napTimes.length; n++) {
+      var fellH = Math.floor(napTimes[n][0]);
+      var fellM = Math.floor((napTimes[n][0] - fellH) * 60);
+      var wokeH = Math.floor(napTimes[n][1]);
+      var wokeM = Math.floor((napTimes[n][1] - wokeH) * 60);
+      entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), fellH, fellM).toISOString(), sleep_event: 'fell_asleep' });
+      entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), wokeH, wokeM).toISOString(), sleep_event: 'woke_up' });
     }
-    if (d === 5) {
-      entries.push({ entry_type: 'note', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 14, 0).toISOString(), notes: 'Started reaching for toys during tummy time' });
+
+    /* Night sleep with slight variation */
+    var nightFell = 19 + Math.floor(rng() * 2);
+    var nightFellMin = Math.floor(rng() * 30);
+    entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), nightFell, nightFellMin).toISOString(), sleep_event: 'fell_asleep' });
+    var nextDay = new Date(day); nextDay.setDate(nextDay.getDate() + 1);
+    var wakeH = 5 + Math.floor(rng() * 2);
+    var wakeM = Math.floor(rng() * 45);
+    entries.push({ entry_type: 'sleep', occurred_at: new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate(), wakeH, wakeM).toISOString(), sleep_event: 'woke_up' });
+
+    /* Diapers with varied count (5-9) and occasional notes */
+    var diaperCount = 5 + Math.floor(rng() * 5);
+    var baseDiaperTypes = ['wet','wet','dirty','wet','both','wet','wet','dirty','wet'];
+    for (var dp = 0; dp < diaperCount; dp++) {
+      var dType = baseDiaperTypes[dp % baseDiaperTypes.length];
+      /* Randomize type slightly */
+      var typeRoll = rng();
+      if (typeRoll < 0.1) dType = 'both';
+      else if (typeRoll < 0.3) dType = 'dirty';
+      else dType = 'wet';
+
+      var diaperEntry = {
+        entry_type: 'diaper',
+        occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 6 + Math.floor(dp * (14 / diaperCount)), 5 + Math.floor(rng() * 45)).toISOString(),
+        diaper_type: dType
+      };
+
+      /* Add stool notes for some dirty/both diapers */
+      if ((dType === 'dirty' || dType === 'both') && rng() < 0.5) {
+        var noteIdx = Math.floor(rng() * stoolNotes.length);
+        if (stoolNotes[noteIdx]) diaperEntry.notes = stoolNotes[noteIdx];
+      }
+
+      entries.push(diaperEntry);
+    }
+
+    /* Health events */
+    if (healthDays[d]) {
+      entries.push({
+        entry_type: healthDays[d].type,
+        occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 8 + Math.floor(rng() * 8), Math.floor(rng() * 50)).toISOString(),
+        notes: healthDays[d].notes
+      });
     }
   }
-  entries.sort(function(a,b){ return new Date(a.occurred_at) - new Date(b.occurred_at); });
 
-  var totalFeedings = entries.filter(function(e){ return e.entry_type === 'feeding'; }).length;
-  var bottleEntries = entries.filter(function(e){ return e.entry_type === 'feeding' && e.feed_amount_ml; });
-  var breastEntries = entries.filter(function(e){ return e.entry_type === 'feeding' && e.feed_duration_min; });
-  var avgMl = bottleEntries.length > 0 ? Math.round(bottleEntries.reduce(function(s,e){ return s + e.feed_amount_ml; }, 0) / bottleEntries.length) : null;
-  var avgDur = breastEntries.length > 0 ? Math.round(breastEntries.reduce(function(s,e){ return s + e.feed_duration_min; }, 0) / breastEntries.length) : null;
+  entries.sort(function(a, b) { return new Date(a.occurred_at) - new Date(b.occurred_at); });
+
+  var totalFeedings = entries.filter(function(e) { return e.entry_type === 'feeding'; }).length;
+  var bottleEntries = entries.filter(function(e) { return e.entry_type === 'feeding' && e.feed_amount_ml; });
+  var breastEntries = entries.filter(function(e) { return e.entry_type === 'feeding' && e.feed_duration_min; });
+  var avgMl = bottleEntries.length > 0 ? Math.round(bottleEntries.reduce(function(s, e) { return s + e.feed_amount_ml; }, 0) / bottleEntries.length) : null;
+  var avgDur = breastEntries.length > 0 ? Math.round(breastEntries.reduce(function(s, e) { return s + e.feed_duration_min; }, 0) / breastEntries.length) : null;
+
+  /* Compute actual diaper averages from entries */
+  var wetTotal = 0, dirtyTotal = 0;
+  entries.forEach(function(e) {
+    if (e.entry_type !== 'diaper') return;
+    if (e.diaper_type === 'wet' || e.diaper_type === 'both') wetTotal++;
+    if (e.diaper_type === 'dirty' || e.diaper_type === 'both') dirtyTotal++;
+  });
+  var avgWet = Math.round((wetTotal / totalDays) * 10) / 10;
+  var avgDirty = Math.round((dirtyTotal / totalDays) * 10) / 10;
+
+  /* Compute actual avg sleep from entries */
+  var sleepData = computeDailySleep(entries, totalDays, startDate.toISOString());
+  var totalSleepHrs = sleepData.reduce(function(s, v) { return s + v; }, 0);
+  var avgSleep = Math.round((totalSleepHrs / totalDays) * 10) / 10;
 
   return {
     babyName: 'Emma',
@@ -515,16 +800,39 @@ function generateDemoData() {
     startDate: startDate.toISOString(),
     endDate: endDate.toISOString(),
     totalDays: totalDays,
-    feeding: { totalFeedings: totalFeedings, avgFeedingsPerDay: Math.round(totalFeedings / totalDays * 10) / 10, avgAmountMl: avgMl, avgDurationMin: avgDur },
-    sleep: { avgHoursPerDay: 13.5 },
-    diaper: { avgWetPerDay: 5.7, avgDirtyPerDay: 1.9, avgTotalPerDay: 7.6 },
+    feeding: {
+      totalFeedings: totalFeedings,
+      avgFeedingsPerDay: Math.round(totalFeedings / totalDays * 10) / 10,
+      avgAmountMl: avgMl,
+      avgDurationMin: avgDur
+    },
+    sleep: { avgHoursPerDay: avgSleep },
+    diaper: { avgWetPerDay: avgWet, avgDirtyPerDay: avgDirty, avgTotalPerDay: Math.round((avgWet + avgDirty) * 10) / 10 },
     entries: entries
   };
 }
 
+function renderDemo(numDays) {
+  _currentDemoDays = numDays || 30;
+  var data = generateDemoData(_currentDemoDays);
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+  document.getElementById('content').innerHTML = renderSummary(data);
+  attachChartListeners();
+
+  /* Attach range button click handlers */
+  var buttons = document.querySelectorAll('.range-btn');
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', function() {
+      var days = parseInt(this.getAttribute('data-days'));
+      renderDemo(days);
+    });
+  }
+}
+
 async function init() {
-  const params = new URLSearchParams(window.location.search);
-  const shareId = params.get('id');
+  var params = new URLSearchParams(window.location.search);
+  var shareId = params.get('id');
 
   if (!shareId) {
     showError('No share ID provided. Please check your link.');
@@ -532,16 +840,14 @@ async function init() {
   }
 
   if (shareId === 'demo') {
-    const data = generateDemoData();
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('content').style.display = 'block';
-    document.getElementById('content').innerHTML = renderSummary(data);
+    _isDemoMode = true;
+    renderDemo(30);
     return;
   }
 
   try {
-    const res = await fetch(API_BASE + '?id=' + encodeURIComponent(shareId));
-    const data = await res.json();
+    var res = await fetch(API_BASE + '?id=' + encodeURIComponent(shareId));
+    var data = await res.json();
 
     if (!res.ok) {
       showError(data.error || 'Failed to load visit summary.');
@@ -551,6 +857,7 @@ async function init() {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('content').style.display = 'block';
     document.getElementById('content').innerHTML = renderSummary(data);
+    attachChartListeners();
   } catch (err) {
     showError('Unable to load visit summary. Please try again later.');
   }
