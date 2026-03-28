@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Doctor Visit Summary - Remi Baby Tracker</title>
-  <meta name="description" content="Share a beautiful, professional visit summary with your pediatrician. Remi generates feeding, sleep, and diaper reports instantly." />
-  <meta name="keywords" content="baby tracker, pediatrician visit, doctor visit summary, baby health report, feeding log, sleep tracker, diaper tracker" />
+  <title>Remi for Pediatricians - Clinical Visit Summaries from Parent-Logged Data</title>
+  <meta name="description" content="Remi generates structured visit summaries from parent-logged feeding, sleep, and diaper data. Feeding trends, hydration signals, sleep architecture, and guideline-based alerts, delivered to your browser." />
+  <meta name="keywords" content="pediatrician baby tracker, clinical visit summary, infant feeding trends, diaper hydration monitoring, AAP guidelines baby, pediatric visit report, baby health data" />
   <link rel="canonical" href="https://remibabyapp.com/doctor-view.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://remibabyapp.com/doctor-view.html" />
-  <meta property="og:title" content="Doctor Visit Summary - Remi Baby Tracker" />
-  <meta property="og:description" content="One-tap visit summaries for your pediatrician. Beautiful reports with feeding, sleep, and diaper data." />
+  <meta property="og:title" content="Remi for Pediatricians - Clinical Visit Summaries" />
+  <meta property="og:description" content="Structured feeding, sleep, and diaper reports generated from continuous parent logging. Guideline-based alerts included." />
   <meta property="og:image" content="https://remibabyapp.com/og-image.png" />
   <meta property="og:site_name" content="Remi" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Doctor Visit Summary - Remi" />
-  <meta name="twitter:description" content="One-tap visit summaries for your pediatrician. Beautiful reports with feeding, sleep, and diaper data." />
+  <meta name="twitter:title" content="Remi for Pediatricians" />
+  <meta name="twitter:description" content="Clinical visit summaries from parent-logged infant data. Feeding trends, hydration signals, sleep architecture." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,34 +31,42 @@
   <meta name="robots" content="index, follow" />
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* Nav */
+    .dv-nav {
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+      padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .dv-nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .dv-nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem;
+      color: var(--text); text-decoration: none;
+    }
+    .dv-nav-brand img { height: 32px; border-radius: 8px; }
+    .dv-nav-links { display: flex; gap: 24px; align-items: center; }
+    .dv-nav-links a { font-weight: 600; font-size: 0.95rem; color: var(--text-muted); transition: color 0.2s; }
+    .dv-nav-links a:hover { color: var(--blue-dark); }
+    @media (max-width: 600px) { .dv-nav-links { display: none; } }
+
+    /* Hero */
     .dv-hero {
       background: linear-gradient(165deg, #f0f7fb 0%, #fefaf7 50%, #fef0e6 100%);
-      padding: 80px 0 60px;
-      position: relative;
-      overflow: hidden;
+      padding: 80px 0 60px; position: relative; overflow: hidden;
     }
-    .dv-hero .shape { position: absolute; border-radius: 50%; opacity: 0.15; pointer-events: none; }
+    .dv-hero .shape { position: absolute; border-radius: 50%; opacity: 0.12; pointer-events: none; }
     .dv-hero .shape-a { width: 300px; height: 300px; top: -80px; right: -60px; background: var(--blue); }
     .dv-hero .shape-b { width: 200px; height: 200px; bottom: -60px; left: -40px; background: var(--peach); }
-
-    .dv-hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-    }
+    .dv-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
     @media (max-width: 768px) {
       .dv-hero-grid { grid-template-columns: 1fr; text-align: center; }
-      .dv-hero-copy .hero-cta { justify-content: center; }
+      .dv-hero-copy p { margin: 0 auto 24px; }
+      .dv-btn-row { justify-content: center; }
     }
-
-    .dv-hero-copy h1 { margin-bottom: 16px; font-size: clamp(1.8rem, 4.5vw, 2.8rem); }
+    .dv-hero-copy h1 { margin-bottom: 16px; font-size: clamp(1.7rem, 4.2vw, 2.6rem); line-height: 1.2; }
     .dv-hero-copy .h1-accent { color: var(--blue-dark); }
-    .dv-hero-copy p { font-size: 1.1rem; margin-bottom: 24px; max-width: 480px; }
-    @media (max-width: 768px) { .dv-hero-copy p { margin: 0 auto 24px; } }
-
+    .dv-hero-copy p { font-size: 1.05rem; margin-bottom: 24px; max-width: 500px; line-height: 1.6; }
     .dv-btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
-    @media (max-width: 768px) { .dv-btn-row { justify-content: center; } }
     .btn-demo {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 14px 28px; border-radius: 60px; font-weight: 700; font-size: 1rem;
@@ -74,14 +82,11 @@
     }
     .btn-outline:hover { transform: scale(1.04); background: rgba(122,157,176,0.06); }
 
+    /* Preview card */
     .dv-preview {
-      background: #1a1a2e;
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-      color: #E8E8F0;
-      position: relative;
-      overflow: hidden;
+      background: #1a1a2e; border-radius: 20px; padding: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.18); color: #E8E8F0;
+      position: relative; overflow: hidden;
     }
     .dv-preview-bar { height: 3px; background: linear-gradient(90deg, #7A9DB0, #9B8EC4, #F2C4A4, #5DA6E6); border-radius: 3px; margin-bottom: 20px; }
     .dv-preview-header { text-align: center; margin-bottom: 20px; }
@@ -94,59 +99,54 @@
     .dv-preview-brand img { width: 18px; height: 18px; border-radius: 4px; }
     .dv-preview-name { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 4px; }
     .dv-preview-age { font-size: 14px; color: rgba(255,255,255,0.5); }
-    .dv-preview-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .dv-preview-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 14px; }
     @media (max-width: 500px) { .dv-preview-cards { grid-template-columns: 1fr; } }
     .dv-stat-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px; padding: 16px; text-align: center;
     }
     .dv-stat-icon { font-size: 20px; margin-bottom: 6px; }
     .dv-stat-value { font-size: 20px; font-weight: 800; color: #fff; }
     .dv-stat-label { font-size: 11px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.5px; }
+    .dv-flags {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 10px; padding: 8px 14px; font-size: 13px; color: #FDE68A;
+    }
 
-    /* Features grid */
-    .dv-features {
-      padding: 80px 0;
-      background: var(--white);
-    }
-    .dv-features .section-header { text-align: center; margin-bottom: 48px; }
-    .dv-features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-    @media (max-width: 768px) { .dv-features-grid { grid-template-columns: 1fr; } }
-    .dv-feature-card {
-      background: var(--cream);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      text-align: center;
-      transition: transform 0.2s;
-    }
-    .dv-feature-card:hover { transform: translateY(-4px); }
-    .dv-feature-icon { font-size: 36px; margin-bottom: 16px; }
-    .dv-feature-card h3 { margin-bottom: 8px; }
-    .dv-feature-card p { font-size: 0.95rem; }
+    /* Pain point */
+    .dv-pain { padding: 80px 0; background: var(--white); }
+    .dv-pain .section-header { text-align: center; margin-bottom: 48px; }
+    .dv-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 800px; margin: 0 auto; }
+    @media (max-width: 768px) { .dv-compare { grid-template-columns: 1fr; } }
+    .dv-compare-card { border-radius: var(--radius); padding: 28px; }
+    .dv-compare-bad { background: #FEF2F2; border: 1px solid #FECACA; }
+    .dv-compare-good { background: #F0FDF4; border: 1px solid #BBF7D0; }
+    .dv-compare-card h3 { font-size: 1rem; margin-bottom: 16px; }
+    .dv-compare-card ul { list-style: none; padding: 0; margin: 0; }
+    .dv-compare-card li { font-size: 0.92rem; padding: 6px 0; display: flex; align-items: flex-start; gap: 8px; }
+    .dv-compare-card li span { flex-shrink: 0; }
 
-    /* How it works */
-    .dv-how {
-      padding: 80px 0;
-      background: var(--beige);
+    /* Clinical data grid */
+    .dv-clinical { padding: 80px 0; background: var(--beige); }
+    .dv-clinical .section-header { text-align: center; margin-bottom: 48px; }
+    .dv-clinical-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    @media (max-width: 768px) { .dv-clinical-grid { grid-template-columns: 1fr; } }
+    .dv-clin-card {
+      background: var(--white); border-radius: var(--radius); padding: 28px 24px;
+      border: 1px solid rgba(0,0,0,0.06); transition: transform 0.2s;
     }
+    .dv-clin-card:hover { transform: translateY(-3px); }
+    .dv-clin-icon { font-size: 28px; margin-bottom: 12px; }
+    .dv-clin-card h3 { font-size: 1rem; margin-bottom: 8px; color: var(--text); }
+    .dv-clin-card p { font-size: 0.9rem; line-height: 1.55; color: var(--text-muted); }
+
+    /* How it works for the practice */
+    .dv-how { padding: 80px 0; background: var(--white); }
     .dv-how .section-header { text-align: center; margin-bottom: 48px; }
-    .dv-steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
+    .dv-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 860px; margin: 0 auto; }
     @media (max-width: 768px) { .dv-steps { grid-template-columns: 1fr; } }
-    .dv-step {
-      text-align: center;
-      padding: 24px;
-    }
+    .dv-step { text-align: center; padding: 24px; }
     .dv-step-num {
       width: 40px; height: 40px; border-radius: 50%;
       background: var(--blue-dark); color: #fff;
@@ -154,73 +154,27 @@
       font-weight: 800; font-size: 1.1rem; margin-bottom: 16px;
     }
     .dv-step h3 { margin-bottom: 8px; }
-    .dv-step p { font-size: 0.95rem; }
+    .dv-step p { font-size: 0.92rem; line-height: 1.55; }
 
-    /* Concerns section */
-    .dv-concerns {
-      padding: 80px 0;
-      background: var(--white);
-    }
-    .dv-concerns-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-    @media (max-width: 768px) { .dv-concerns-grid { grid-template-columns: 1fr; } }
-    .dv-warning-card {
-      background: #FFFBEB;
-      border: 1px solid #FDE68A;
-      border-radius: var(--radius);
-      padding: 28px;
-    }
-    .dv-warning-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-    .dv-warning-icon {
-      width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
-      border-radius: 11px; background: rgba(245,158,11,0.12); font-size: 18px;
-    }
-    .dv-warning-title { font-weight: 700; color: #92400E; }
-    .dv-warning-item {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 10px 14px; margin-bottom: 8px;
-      background: rgba(255,255,255,0.6); border-radius: 10px; border: 1px solid rgba(253,230,138,0.5);
-    }
-    .dv-warning-bullet { color: #D97706; font-size: 10px; margin-top: 4px; }
-    .dv-warning-text { font-size: 0.9rem; color: #92400E; }
-    .dv-warning-disclaimer { font-size: 0.75rem; color: #B45309; margin-top: 12px; font-style: italic; }
+    /* Demo section */
+    .dv-demo { padding: 80px 0; background: var(--beige); text-align: center; }
+    .dv-demo .section-header { margin-bottom: 32px; }
+    .dv-demo-note { font-size: 0.92rem; color: var(--text-muted); margin-top: 16px; }
+
+    /* Parents section */
+    .dv-parents { padding: 64px 0; background: var(--white); }
+    .dv-parents .section-header { text-align: center; margin-bottom: 36px; }
+    .dv-parents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 800px; margin: 0 auto; }
+    @media (max-width: 768px) { .dv-parents-grid { grid-template-columns: 1fr; } }
+    .dv-parent-item { text-align: center; padding: 20px; }
+    .dv-parent-item .icon { font-size: 28px; margin-bottom: 10px; }
+    .dv-parent-item h3 { font-size: 0.95rem; margin-bottom: 6px; }
+    .dv-parent-item p { font-size: 0.88rem; color: var(--text-muted); }
 
     /* CTA */
-    .dv-cta {
-      padding: 80px 0;
-      background: linear-gradient(165deg, #f0f7fb 0%, #fef0e6 100%);
-      text-align: center;
-    }
+    .dv-cta { padding: 80px 0; background: linear-gradient(165deg, #f0f7fb 0%, #fef0e6 100%); text-align: center; }
     .dv-cta h2 { margin-bottom: 16px; }
-    .dv-cta p { max-width: 500px; margin: 0 auto 28px; font-size: 1.1rem; }
-
-    /* Nav bar */
-    .dv-nav {
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(12px);
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .dv-nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .dv-nav-brand {
-      display: flex; align-items: center; gap: 10px;
-      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem;
-      color: var(--text); text-decoration: none;
-    }
-    .dv-nav-brand img { height: 32px; border-radius: 8px; }
-    .dv-nav-links { display: flex; gap: 24px; align-items: center; }
-    .dv-nav-links a { font-weight: 600; font-size: 0.95rem; color: var(--text-muted); transition: color 0.2s; }
-    .dv-nav-links a:hover { color: var(--blue-dark); }
-    @media (max-width: 600px) { .dv-nav-links { display: none; } }
+    .dv-cta p { max-width: 520px; margin: 0 auto 28px; font-size: 1.05rem; line-height: 1.6; }
   </style>
 </head>
 <body>
@@ -233,8 +187,8 @@
         Remi
       </a>
       <div class="dv-nav-links">
-        <a href="/#how-it-works">How It Works</a>
-        <a href="/#why">Features</a>
+        <a href="#clinical-data">Clinical Data</a>
+        <a href="#how-it-works">For Practices</a>
         <a href="/visit.html?id=demo" class="btn btn-nav">View Demo</a>
       </div>
     </div>
@@ -246,12 +200,12 @@
     <div class="shape shape-b"></div>
     <div class="container dv-hero-grid">
       <div class="dv-hero-copy">
-        <span class="section-tag">Doctor Visit Ready</span>
-        <h1>Walk into every checkup<br/><span class="h1-accent">fully prepared.</span></h1>
-        <p>Remi turns your daily logs into a beautiful, professional visit summary. Share it as a PDF, or let your pediatrician scan a QR code to view it on their phone or computer.</p>
+        <span class="section-tag">For Pediatricians</span>
+        <h1>The visit summary your<br/>EHR can't generate.</h1>
+        <p>Remi turns continuous parent logging into structured clinical summaries with feeding trends, hydration signals, sleep architecture, and guideline-based alerts. Viewable on any device, no install required.</p>
         <div class="dv-btn-row">
           <a href="/visit.html?id=demo" class="btn-demo">&#128270; View Live Demo</a>
-          <a href="/" class="btn-outline">Learn More</a>
+          <a href="#clinical-data" class="btn-outline">See What's Included</a>
         </div>
       </div>
       <div class="dv-preview">
@@ -259,7 +213,7 @@
         <div class="dv-preview-header">
           <div class="dv-preview-brand">
             <img src="/favicon-32x32.png" alt="Remi" />
-            Remi
+            Remi Visit Summary
           </div>
           <div class="dv-preview-name">Emma</div>
           <div class="dv-preview-age">5 months old</div>
@@ -268,137 +222,168 @@
           <div class="dv-stat-card">
             <div class="dv-stat-icon">&#127868;</div>
             <div class="dv-stat-value">8.3</div>
-            <div class="dv-stat-label">Feeds / Day</div>
+            <div class="dv-stat-label">Avg Feeds / Day</div>
           </div>
           <div class="dv-stat-card">
             <div class="dv-stat-icon">&#128164;</div>
             <div class="dv-stat-value">13.5h</div>
-            <div class="dv-stat-label">Sleep / Day</div>
+            <div class="dv-stat-label">Avg Sleep / Day</div>
           </div>
           <div class="dv-stat-card">
             <div class="dv-stat-icon">&#128167;</div>
             <div class="dv-stat-value">7.6</div>
-            <div class="dv-stat-label">Diapers / Day</div>
+            <div class="dv-stat-label">Avg Diapers / Day</div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- What's Included -->
-  <section class="dv-features">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">What's Included</span>
-        <h2>Everything your doctor needs to see.</h2>
-        <p>No more flipping through notes or trying to remember. Every detail is tracked, computed, and ready to share.</p>
-      </div>
-      <div class="dv-features-grid">
-        <div class="dv-feature-card">
-          <div class="dv-feature-icon">&#127868;</div>
-          <h3>Feeding Overview</h3>
-          <p>Average feeds per day, breast vs. bottle split, and daily trend charts showing exactly how your baby is eating.</p>
-        </div>
-        <div class="dv-feature-card">
-          <div class="dv-feature-icon">&#128164;</div>
-          <h3>Sleep Patterns</h3>
-          <p>Total hours per day, average nap count, and a day-by-day chart so your doctor can spot sleep trends at a glance.</p>
-        </div>
-        <div class="dv-feature-card">
-          <div class="dv-feature-icon">&#128167;</div>
-          <h3>Diaper Tracking</h3>
-          <p>Wet and dirty counts per day with a stacked chart. Key hydration indicators your pediatrician checks for.</p>
-        </div>
-        <div class="dv-feature-card">
-          <div class="dv-feature-icon">&#9888;&#65039;</div>
-          <h3>Smart Concerns</h3>
-          <p>Remi flags potential concerns based on AAP and AASM guidelines, like low diaper counts or below-average sleep.</p>
-        </div>
-        <div class="dv-feature-card">
-          <div class="dv-feature-icon">&#129658;</div>
-          <h3>Health Events</h3>
-          <p>Temperatures, symptoms, and notes are shown in a timeline so your doctor gets the full picture.</p>
-        </div>
-        <div class="dv-feature-card">
-          <div class="dv-feature-icon">&#128202;</div>
-          <h3>Visual Charts</h3>
-          <p>Daily bar charts for feeding, sleep, and diapers. Trends are easier to spot when they are visual.</p>
+        <div class="dv-flags">
+          &#9888;&#65039; 2 guideline flags identified
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How Sharing Works -->
-  <section class="dv-how">
+  <!-- Pain Point -->
+  <section class="dv-pain">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag light">Sharing Made Simple</span>
-        <h2>Two ways to share with your doctor.</h2>
-        <p>Choose the method that works best for your appointment.</p>
+        <span class="section-tag">The Problem</span>
+        <h2>Parents forget. Paper logs get lost. Remi remembers everything.</h2>
+        <p>Most well-child visits start with incomplete verbal reports. Remi replaces guesswork with structured, continuous data.</p>
+      </div>
+      <div class="dv-compare">
+        <div class="dv-compare-card dv-compare-bad">
+          <h3>&#10060; What you typically get</h3>
+          <ul>
+            <li><span>&#8226;</span>"She's eating pretty well, I think"</li>
+            <li><span>&#8226;</span>"He sleeps okay, maybe 12 hours?"</li>
+            <li><span>&#8226;</span>"Diapers seem normal"</li>
+            <li><span>&#8226;</span>"She had a fever... last Tuesday? Or Wednesday?"</li>
+            <li><span>&#8226;</span>Crumpled paper log with gaps</li>
+            <li><span>&#8226;</span>No trend data across multiple days</li>
+          </ul>
+        </div>
+        <div class="dv-compare-card dv-compare-good">
+          <h3>&#9989; What Remi provides</h3>
+          <ul>
+            <li><span>&#8226;</span>8.3 feeds/day avg, 62% breast / 38% bottle</li>
+            <li><span>&#8226;</span>13.5h total sleep, 3.2 naps/day, consolidated overnight</li>
+            <li><span>&#8226;</span>7.6 diapers/day, 5.1 wet, 2.5 stool</li>
+            <li><span>&#8226;</span>Fever 101.2F on March 18, Tylenol given at 2:15pm</li>
+            <li><span>&#8226;</span>7-day and 30-day trend charts</li>
+            <li><span>&#8226;</span>AAP/AASM guideline flags with thresholds</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clinical Data -->
+  <section class="dv-clinical" id="clinical-data">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Clinical Data Points</span>
+        <h2>The data that matters for assessment.</h2>
+        <p>Every summary includes structured data across six clinical categories, with multi-day trends and drill-down capability.</p>
+      </div>
+      <div class="dv-clinical-grid">
+        <div class="dv-clin-card">
+          <div class="dv-clin-icon">&#127868;</div>
+          <h3>Feeding Trends with Type Split</h3>
+          <p>Daily feed counts with breast vs. bottle breakdown over 7 and 30 days. Track supplementation trends, cluster feeding patterns, and frequency changes across the reporting period.</p>
+        </div>
+        <div class="dv-clin-card">
+          <div class="dv-clin-icon">&#128167;</div>
+          <h3>Hydration Monitoring</h3>
+          <p>Wet diaper counts tracked daily as a key dehydration indicator. Especially critical for newborns where output below 6 wet diapers/day warrants assessment. Stacked charts show wet vs. stool separately.</p>
+        </div>
+        <div class="dv-clin-card">
+          <div class="dv-clin-icon">&#128164;</div>
+          <h3>Sleep Architecture</h3>
+          <p>Total sleep hours, nap count and distribution, and overnight consolidation patterns. Identify whether sleep is fragmented across short naps or consolidating into age-appropriate blocks.</p>
+        </div>
+        <div class="dv-clin-card">
+          <div class="dv-clin-icon">&#128221;</div>
+          <h3>Stool Logging with Notes</h3>
+          <p>Parents log color, consistency, and freeform notes with each diaper change. Useful for GI assessment, formula transition monitoring, and identifying patterns that may indicate intolerance.</p>
+        </div>
+        <div class="dv-clin-card">
+          <div class="dv-clin-icon">&#9888;&#65039;</div>
+          <h3>Guideline-Based Alerts</h3>
+          <p>Automatic comparison against AAP and AASM age-appropriate benchmarks for feeding frequency, diaper output, and sleep totals. Flagged concerns appear prominently with the relevant threshold cited.</p>
+        </div>
+        <div class="dv-clin-card">
+          <div class="dv-clin-icon">&#127777;&#65039;</div>
+          <h3>Health Event Timeline</h3>
+          <p>Temperatures, symptoms, and medications logged in chronological context alongside feeding and sleep data. See how an illness event correlates with changes in intake, output, and rest patterns.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works for the Practice -->
+  <section class="dv-how" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">For Your Practice</span>
+        <h2>No software to install. No accounts to create.</h2>
+        <p>Remi fits into your existing workflow with zero overhead for your staff.</p>
       </div>
       <div class="dv-steps">
         <div class="dv-step">
           <div class="dv-step-num">1</div>
-          <h3>PDF Report</h3>
-          <p>Generate a printable PDF with all stats, charts, and concerns. Print it or share it digitally before your visit.</p>
+          <h3>Parent Shares a Link</h3>
+          <p>The parent generates a visit summary from the Remi app and shares it via QR code, link, or printable PDF. They choose whether to include 1, 7, or 30 days of data.</p>
         </div>
         <div class="dv-step">
           <div class="dv-step-num">2</div>
-          <h3>QR Code Link</h3>
-          <p>Generate a QR code that your doctor can scan in seconds. The summary opens in their browser, no app needed.</p>
+          <h3>You Open It Anywhere</h3>
+          <p>The summary opens in any browser on your phone, tablet, or workstation. No app download, no login, no account needed. Interactive charts load instantly.</p>
         </div>
         <div class="dv-step">
           <div class="dv-step-num">3</div>
-          <h3>Secure & Temporary</h3>
-          <p>Shared links expire after 48 hours. Your data stays private and is only visible to those with the link.</p>
+          <h3>Review and Drill Down</h3>
+          <p>Click any bar on the trend charts to drill down into individual log entries for that day. See the exact times, amounts, and parent notes behind each data point.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Concerns Preview -->
-  <section class="dv-concerns">
+  <!-- Interactive Demo -->
+  <section class="dv-demo" id="demo">
     <div class="container">
-      <div class="dv-concerns-grid">
-        <div>
-          <span class="section-tag">Smart Alerts</span>
-          <h2>Guideline-based health flags.</h2>
-          <p style="margin-bottom: 20px;">Remi checks your baby's data against established AAP and AASM guidelines for their age. If something falls outside the typical range, it gets flagged so your doctor knows what to look at.</p>
-          <ul style="list-style: none; padding: 0;">
-            <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.95rem;">
-              <span style="color: var(--blue-dark); font-weight: 700;">&#10003;</span>
-              Diaper output below threshold for age
-            </li>
-            <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.95rem;">
-              <span style="color: var(--blue-dark); font-weight: 700;">&#10003;</span>
-              Feed frequency below recommended range
-            </li>
-            <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.95rem;">
-              <span style="color: var(--blue-dark); font-weight: 700;">&#10003;</span>
-              Sleep totals outside typical ranges
-            </li>
-            <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 0.95rem;">
-              <span style="color: var(--blue-dark); font-weight: 700;">&#10003;</span>
-              Age-appropriate thresholds (0-6mo, 6-12mo, 12-24mo)
-            </li>
-          </ul>
+      <div class="section-header">
+        <span class="section-tag">Interactive Demo</span>
+        <h2>See it yourself.</h2>
+        <p>This is the actual visit summary interface, populated with sample data. Charts are interactive. Click any bar to see individual entries.</p>
+      </div>
+      <a href="/visit.html?id=demo" class="btn-demo" style="font-size: 1.1rem; padding: 16px 36px;">&#128270; Open the Live Demo</a>
+      <p class="dv-demo-note">No signup or login required. Opens in your current browser.</p>
+    </div>
+  </section>
+
+  <!-- For Parents -->
+  <section class="dv-parents">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag light">For Parents</span>
+        <h2>Easy enough for sleep-deprived parents to use every day.</h2>
+        <p>The data you see in the visit summary comes from effortless daily logging by the parent.</p>
+      </div>
+      <div class="dv-parents-grid">
+        <div class="dv-parent-item">
+          <div class="icon">&#127908;</div>
+          <h3>Voice and Text Logging</h3>
+          <p>Parents just say or type what happened. "She had 4oz at 2pm" and Remi parses it automatically. No forms, no dropdowns.</p>
         </div>
-        <div>
-          <div class="dv-warning-card">
-            <div class="dv-warning-header">
-              <div class="dv-warning-icon">&#9888;&#65039;</div>
-              <div class="dv-warning-title">Concerns</div>
-            </div>
-            <div class="dv-warning-item">
-              <span class="dv-warning-bullet">&#9679;</span>
-              <span class="dv-warning-text">Wet diapers averaging 4.2/day. Under 6 months, AAP recommends at least 6 wet diapers per day.</span>
-            </div>
-            <div class="dv-warning-item">
-              <span class="dv-warning-bullet">&#9679;</span>
-              <span class="dv-warning-text">Sleep averaging 10.5 hours/day. AASM recommends 12-16 hours for infants 4-12 months.</span>
-            </div>
-            <p class="dv-warning-disclaimer">Based on AAP/AASM guidelines. Not medical advice.</p>
-          </div>
+        <div class="dv-parent-item">
+          <div class="icon">&#128200;</div>
+          <h3>Pattern Recognition</h3>
+          <p>Remi shows parents their baby's trends too, helping them spot patterns and feel more confident at appointments.</p>
+        </div>
+        <div class="dv-parent-item">
+          <div class="icon">&#129309;</div>
+          <h3>Partner Sync</h3>
+          <p>Both parents log into the same account, so nighttime feeds and daytime naps are captured no matter who is on duty.</p>
         </div>
       </div>
     </div>
@@ -407,11 +392,11 @@
   <!-- CTA -->
   <section class="dv-cta">
     <div class="container">
-      <h2>See it in action.</h2>
-      <p>Check out the live demo to see exactly what your doctor will see. No signup required.</p>
+      <h2>See what your patients' data could look like.</h2>
+      <p>Open the live demo to explore a complete visit summary. Then recommend Remi to the parents in your practice who could benefit from structured tracking.</p>
       <div class="dv-btn-row" style="justify-content: center;">
         <a href="/visit.html?id=demo" class="btn-demo">&#128270; View Live Demo</a>
-        <a href="/" class="btn-outline">Back to Home</a>
+        <a href="/" class="btn-outline">Learn About Remi</a>
       </div>
     </div>
   </section>
@@ -421,7 +406,7 @@
     <div class="container footer-inner">
       <div class="footer-brand">
         <img src="remi-logo.png" alt="Remi" class="footer-logo" />
-        <p>Made with love (and very little sleep) &#128155;</p>
+        <p>Structured infant data for better clinical conversations.</p>
       </div>
       <div class="footer-trust">
         <span>&#128274; Encrypted</span>
