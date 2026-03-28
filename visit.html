@@ -127,6 +127,7 @@
     letter-spacing: -0.3px;
   }
   .header .age { font-size: 17px; color: rgba(255,255,255,0.55); font-weight: 500; margin-bottom: 4px; }
+  .header .dob { font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 400; margin-bottom: 4px; }
   .header .period { font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 400; }
 
   /* Cards (glassmorphism) */
@@ -209,6 +210,7 @@
     .accent-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .header h1 { color: #0F172A; }
     .header .age { color: #64748B; }
+    .header .dob { color: #94A3B8; }
     .header .period { color: #94A3B8; }
     .header { border-bottom-color: #E2E8F0; }
     .card { background: #FFFFFF; border: 1px solid #E2E8F0; backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; }
@@ -249,7 +251,7 @@
   </div>
 
 <script>
-const LOGO_BASE64 = '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';
+const LOGO_BASE64 = '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';
 const API_BASE = 'https://wxpddgplzocqxfpxdnpp.supabase.co/functions/v1/visit-summary';
 const LANDING_URL = 'https://remibabyapp.com';
 
@@ -437,7 +439,8 @@ function renderSummary(data) {
 
   document.title = esc(babyName) + ' - Visit Summary';
 
-  return '<div class="header"><div class="brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" class="brand-logo" alt="Remi"/>Remi</div><h1>' + esc(babyName) + '</h1><p class="age">' + esc(ageLabel) + '</p><p class="period">' + start + ' to ' + end + '</p></div>' +
+  const dobLabel = dateOfBirth ? 'DOB: ' + formatDate(dateOfBirth) : '';
+  return '<div class="header"><div class="brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" class="brand-logo" alt="Remi"/>Remi</div><h1>' + esc(babyName) + '</h1><p class="age">' + esc(ageLabel) + '</p>' + (dobLabel ? '<p class="dob">' + esc(dobLabel) + '</p>' : '') + '<p class="period">' + start + ' to ' + end + '</p></div>' +
     '<div class="card"><div class="card-header"><span class="card-icon">&#x1F37C;</span><span class="card-title">Feeding</span></div>' + (feeding.totalFeedings > 0 ? '<div class="stats-row"><div class="stat-pill accent-blue"><div class="stat-value">' + feeding.avgFeedingsPerDay + '</div><div class="stat-label">Avg Feeds / Day</div></div>' + (feeding.avgAmountMl !== null ? '<div class="stat-pill accent-peach"><div class="stat-value">' + feeding.avgAmountMl + ' mL</div><div class="stat-label">Avg per Feed</div></div>' : '') + '</div>' + breakdownBar + '<p class="chart-label">Daily feed counts</p>' + feedChart : '<p class="empty">No feeding data recorded</p>') + '</div>' +
     '<div class="card"><div class="card-header"><span class="card-icon">&#x1F4A7;</span><span class="card-title">Diapers</span></div>' + (diaper.avgTotalPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-sky"><div class="stat-value">' + diaper.avgWetPerDay + '</div><div class="stat-label">Avg Wet / Day</div></div><div class="stat-pill accent-peach"><div class="stat-value">' + diaper.avgDirtyPerDay + '</div><div class="stat-label">Avg Dirty / Day</div></div></div><p class="chart-label">Daily diaper counts</p>' + diaperChart : '<p class="empty">No diaper data recorded</p>') + '</div>' +
     '<div class="card"><div class="card-header"><span class="card-icon">&#x1F634;</span><span class="card-title">Sleep</span></div>' + (sleep.avgHoursPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-purple"><div class="stat-value">' + sleep.avgHoursPerDay + 'h</div><div class="stat-label">Avg Total / Day</div></div><div class="stat-pill accent-blue"><div class="stat-value">' + avgNaps + '</div><div class="stat-label">Avg Naps / Day</div></div></div><p class="chart-label">Daily sleep hours</p>' + sleepChart : '<p class="empty">No sleep data recorded</p>') + '</div>' +
@@ -452,12 +455,87 @@ function showError(message) {
   document.getElementById('error').innerHTML = '<div class="error-wrap"><div class="error-brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" alt="Remi"/>Remi</div><div class="error-card"><div class="error-icon">&#x26A0;</div><h2>Something went wrong</h2><p>' + esc(message) + '</p></div><div class="error-footer">Remi Baby Tracker</div></div>';
 }
 
+function generateDemoData() {
+  const now = new Date();
+  const dob = new Date(now);
+  dob.setMonth(dob.getMonth() - 5);
+  dob.setDate(15);
+  const endDate = new Date(now);
+  endDate.setHours(23,59,59,0);
+  const startDate = new Date(now);
+  startDate.setDate(startDate.getDate() - 6);
+  startDate.setHours(0,0,0,0);
+  const totalDays = 7;
+
+  var entries = [];
+  var feedTypes = ['breast', 'bottle', 'breast', 'breast', 'bottle', 'breast', 'breast'];
+  for (var d = 0; d < totalDays; d++) {
+    var day = new Date(startDate);
+    day.setDate(day.getDate() + d);
+    var feedCount = 7 + Math.floor(Math.random() * 3);
+    for (var f = 0; f < feedCount; f++) {
+      var h = 6 + Math.floor(f * (16 / feedCount)) + Math.floor(Math.random() * 2);
+      var ft = feedTypes[(d + f) % feedTypes.length];
+      var entry = { entry_type: 'feeding', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), h, Math.floor(Math.random()*50)).toISOString(), feed_type: ft };
+      if (ft === 'bottle') { entry.feed_amount_ml = 90 + Math.floor(Math.random() * 60); }
+      else { entry.feed_duration_min = 12 + Math.floor(Math.random() * 15); }
+      entries.push(entry);
+    }
+    var napTimes = [[9,10],[13,15]];
+    for (var n = 0; n < napTimes.length; n++) {
+      entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), napTimes[n][0], 0).toISOString(), sleep_event: 'fell_asleep' });
+      entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), napTimes[n][1], 0).toISOString(), sleep_event: 'woke_up' });
+    }
+    entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 19, 30).toISOString(), sleep_event: 'fell_asleep' });
+    var nextDay = new Date(day); nextDay.setDate(nextDay.getDate() + 1);
+    entries.push({ entry_type: 'sleep', occurred_at: new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate(), 6, 0).toISOString(), sleep_event: 'woke_up' });
+
+    var diaperTypes = ['wet','wet','dirty','wet','both','wet','wet'];
+    for (var dp = 0; dp < 7; dp++) {
+      entries.push({ entry_type: 'diaper', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 6 + dp * 2, 15 + Math.floor(Math.random()*30)).toISOString(), diaper_type: diaperTypes[dp] });
+    }
+    if (d === 2) {
+      entries.push({ entry_type: 'health', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 10, 0).toISOString(), notes: 'Slight temperature of 99.5F, monitoring closely' });
+    }
+    if (d === 5) {
+      entries.push({ entry_type: 'note', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), 14, 0).toISOString(), notes: 'Started reaching for toys during tummy time' });
+    }
+  }
+  entries.sort(function(a,b){ return new Date(a.occurred_at) - new Date(b.occurred_at); });
+
+  var totalFeedings = entries.filter(function(e){ return e.entry_type === 'feeding'; }).length;
+  var bottleEntries = entries.filter(function(e){ return e.entry_type === 'feeding' && e.feed_amount_ml; });
+  var breastEntries = entries.filter(function(e){ return e.entry_type === 'feeding' && e.feed_duration_min; });
+  var avgMl = bottleEntries.length > 0 ? Math.round(bottleEntries.reduce(function(s,e){ return s + e.feed_amount_ml; }, 0) / bottleEntries.length) : null;
+  var avgDur = breastEntries.length > 0 ? Math.round(breastEntries.reduce(function(s,e){ return s + e.feed_duration_min; }, 0) / breastEntries.length) : null;
+
+  return {
+    babyName: 'Emma',
+    dateOfBirth: dob.toISOString().split('T')[0],
+    startDate: startDate.toISOString(),
+    endDate: endDate.toISOString(),
+    totalDays: totalDays,
+    feeding: { totalFeedings: totalFeedings, avgFeedingsPerDay: Math.round(totalFeedings / totalDays * 10) / 10, avgAmountMl: avgMl, avgDurationMin: avgDur },
+    sleep: { avgHoursPerDay: 13.5 },
+    diaper: { avgWetPerDay: 5.7, avgDirtyPerDay: 1.9, avgTotalPerDay: 7.6 },
+    entries: entries
+  };
+}
+
 async function init() {
   const params = new URLSearchParams(window.location.search);
   const shareId = params.get('id');
 
   if (!shareId) {
     showError('No share ID provided. Please check your link.');
+    return;
+  }
+
+  if (shareId === 'demo') {
+    const data = generateDemoData();
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+    document.getElementById('content').innerHTML = renderSummary(data);
     return;
   }
 
