@@ -102,6 +102,16 @@
       text-align: center; font-size: 11px; color: rgba(255,255,255,0.3);
       margin-top: 8px; font-weight: 600; letter-spacing: 0.5px;
     }
+    .dv-preview-dots {
+      display: flex; justify-content: center; gap: 6px; margin-top: 10px;
+    }
+    .dv-preview-dots span {
+      width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .dv-preview-dots span.active {
+      background: rgba(122,157,176,0.8); transform: scale(1.3);
+    }
 
     /* Pain point */
     .dv-pain { padding: 80px 0; background: var(--white); }
@@ -199,8 +209,9 @@
       </div>
       <div class="dv-preview">
         <div class="dv-preview-notch"></div>
-        <iframe class="dv-preview-iframe" src="/visit.html?id=demo" title="Remi Visit Summary Demo" loading="lazy"></iframe>
-        <div class="dv-preview-label">Scroll to explore</div>
+        <iframe class="dv-preview-iframe" id="demoIframe" src="/visit.html?id=demo" title="Remi Visit Summary Demo" loading="lazy"></iframe>
+        <div class="dv-preview-dots" id="previewDots"></div>
+        <div class="dv-preview-label">Auto-scrolling through charts</div>
       </div>
     </div>
   </section>
@@ -386,6 +397,53 @@
     </div>
   </footer>
 
+  <script>
+  (function() {
+    var iframe = document.getElementById('demoIframe');
+    var dotsContainer = document.getElementById('previewDots');
+    var currentIdx = 0;
+    var cards = [];
+    var intervalId;
+
+    iframe.addEventListener('load', function() {
+      try {
+        var doc = iframe.contentDocument || iframe.contentWindow.document;
+        cards = Array.prototype.slice.call(doc.querySelectorAll('.card'));
+        if (!cards.length) return;
+
+        /* Build dot indicators */
+        dotsContainer.innerHTML = '';
+        for (var i = 0; i < cards.length; i++) {
+          var dot = document.createElement('span');
+          if (i === 0) dot.className = 'active';
+          dotsContainer.appendChild(dot);
+        }
+
+        /* Disable user scrolling inside the iframe */
+        doc.documentElement.style.overflow = 'hidden';
+        doc.body.style.overflow = 'hidden';
+
+        /* Start auto-scroll cycle */
+        currentIdx = 0;
+        scrollToCard(0);
+        intervalId = setInterval(function() {
+          currentIdx = (currentIdx + 1) % cards.length;
+          scrollToCard(currentIdx);
+        }, 4000);
+      } catch (e) { /* cross-origin fallback: just show iframe as-is */ }
+    });
+
+    function scrollToCard(idx) {
+      if (!cards[idx]) return;
+      cards[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      /* Update dots */
+      var dots = dotsContainer.querySelectorAll('span');
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].className = i === idx ? 'active' : '';
+      }
+    }
+  })();
+  </script>
   <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
