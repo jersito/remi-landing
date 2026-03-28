@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ | Remi - Baby Tracker App</title>
+  <meta name="description" content="Frequently asked questions about Remi - Baby Tracker App. Learn about features, pricing, data security, sharing with your pediatrician, and more." />
+  <link rel="canonical" href="https://remibabyapp.com/faq.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://remibabyapp.com/faq.html" />
+  <meta property="og:title" content="FAQ | Remi - Baby Tracker App" />
+  <meta property="og:description" content="Frequently asked questions about Remi. Learn about features, pricing, security, and more." />
+  <meta property="og:image" content="https://remibabyapp.com/og-image.png" />
+  <meta property="og:site_name" content="Remi" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .faq-hero {
+      background: linear-gradient(135deg, #7A9DB0 0%, #93B5C6 50%, #A8C5D6 100%);
+      padding: 100px 0 60px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .faq-hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .faq-hero p {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.05rem;
+    }
+    .faq-content {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+    .faq-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 32px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--blue-dark);
+      text-decoration: none;
+    }
+    .faq-back:hover {
+      color: var(--navy);
+    }
+    .faq-section-title {
+      font-size: 1.3rem;
+      color: var(--navy);
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--blue-soft);
+    }
+    .faq-section-title:first-of-type {
+      margin-top: 0;
+    }
+    .faq-item {
+      margin-bottom: 8px;
+    }
+    .faq-item details {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+      transition: box-shadow 0.2s;
+    }
+    .faq-item details[open] {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .faq-item summary {
+      padding: 18px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+    .faq-item summary::after {
+      content: "+";
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--blue-dark);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .faq-item details[open] summary::after {
+      transform: rotate(45deg);
+    }
+    .faq-item summary:hover {
+      color: var(--blue-dark);
+    }
+    .faq-answer {
+      padding: 0 24px 20px;
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+    }
+    .faq-answer p {
+      margin-bottom: 12px;
+    }
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+    .faq-answer a {
+      color: var(--blue-dark);
+      text-decoration: underline;
+    }
+    .faq-answer a:hover {
+      color: var(--navy);
+    }
+    .faq-answer ul {
+      list-style: disc;
+      padding-left: 24px;
+      margin-bottom: 12px;
+    }
+    .faq-answer ul li {
+      margin-bottom: 6px;
+    }
+    .faq-cta {
+      background: var(--blue-soft);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      margin-top: 48px;
+    }
+    .faq-cta h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--navy);
+    }
+    .faq-cta p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .faq-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 60px;
+      background: var(--blue-dark);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .faq-cta a:hover {
+      transform: scale(1.04);
+      box-shadow: 0 6px 24px rgba(122,157,176,0.35);
+      color: var(--white);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="faq-hero">
+    <div class="container">
+      <h1>Frequently Asked Questions</h1>
+      <p>Everything you need to know about Remi.</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <div class="faq-content">
+    <a href="/" class="faq-back">&larr; Back to Remi</a>
+
+    <h2 class="faq-section-title">Getting Started</h2>
+
+    <div class="faq-item">
+      <details>
+        <summary>Is Remi really free?</summary>
+        <div class="faq-answer">
+          <p>Yes. Remi's core features are completely free, with no credit card required. You can log feeds, sleep, diapers, and milestones by voice or text, sync with a partner, and share visit summaries with your pediatrician, all at no cost.</p>
+          <p>We may introduce optional premium features (Remi Premium) in the future, but the core tracking experience will always be free.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>What platforms is Remi available on?</summary>
+        <div class="faq-answer">
+          <p>Remi is coming soon to both iOS (App Store) and Android (Google Play). Sign up on our website to be notified when we launch.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Can both parents use the same account?</summary>
+        <div class="faq-answer">
+          <p>Yes. Remi is designed for shared parenting. Both parents (or any caregivers) can log into the same account and see the same data in real time. When one parent logs a feed at 3am, the other parent sees it instantly. No more "when was the last feed?" texts.</p>
+        </div>
+      </details>
+    </div>
+
+    <h2 class="faq-section-title">Features</h2>
+
+    <div class="faq-item">
+      <details>
+        <summary>How does voice logging work?</summary>
+        <div class="faq-answer">
+          <p>Just tap the microphone button and speak naturally. Say something like "she had 4 ounces at 2pm" or "he napped for an hour" and Remi will understand what you mean and log the entry automatically.</p>
+          <p>Your speech is converted to text on your device. We never store or save any audio recordings. You can also type your entries if you prefer.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>What can I track with Remi?</summary>
+        <div class="faq-answer">
+          <p>Remi supports logging for:</p>
+          <ul>
+            <li><strong>Feeding</strong> - breast, bottle, solids, with amounts and duration.</li>
+            <li><strong>Sleep</strong> - naps and nighttime sleep, with start and end times.</li>
+            <li><strong>Diapers</strong> - wet, dirty, or both, with optional notes about color and consistency.</li>
+            <li><strong>Milestones</strong> - first smile, first steps, and everything in between.</li>
+            <li><strong>Health events</strong> - temperatures, symptoms, and medications.</li>
+            <li><strong>Reminders</strong> - pediatrician appointments, questions to ask, and more.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>How do I share data with my pediatrician?</summary>
+        <div class="faq-answer">
+          <p>Remi generates a clean, structured visit summary that your pediatrician can view in any web browser. No app needed on their end.</p>
+          <p>To share, tap the "Share" button in the app and choose from three options:</p>
+          <ul>
+            <li><strong>QR Code</strong> - your doctor scans it with their phone or tablet.</li>
+            <li><strong>Link</strong> - send a secure link via text or email.</li>
+            <li><strong>PDF</strong> - download and print a summary to bring to the appointment.</li>
+          </ul>
+          <p>The visit summary includes trend charts, daily averages, and guideline-based alerts. <a href="/doctor-view.html">See a demo of what it looks like.</a></p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>What is Remi Premium?</summary>
+        <div class="faq-answer">
+          <p>Remi Premium is a planned optional upgrade that will include additional features beyond core tracking. Details and pricing will be announced when it becomes available.</p>
+          <p>The core baby tracking features (logging, syncing, sharing with your doctor) will always remain free. Premium will be for parents who want extra tools and insights.</p>
+        </div>
+      </details>
+    </div>
+
+    <h2 class="faq-section-title">Privacy and Security</h2>
+
+    <div class="faq-item">
+      <details>
+        <summary>Is my baby's data secure?</summary>
+        <div class="faq-answer">
+          <p>Absolutely. Security is a top priority for us. Your data is protected with:</p>
+          <ul>
+            <li><strong>Encryption in transit and at rest</strong> - all data is encrypted using TLS/SSL and encrypted storage.</li>
+            <li><strong>Row-level security</strong> - database policies ensure you can only access your own data.</li>
+            <li><strong>No ads, no data selling</strong> - we will never sell, rent, or share your data with advertisers or data brokers.</li>
+            <li><strong>GDPR compliant</strong> - we follow strict data protection standards.</li>
+          </ul>
+          <p>For full details, read our <a href="/privacy.html">Privacy Policy</a>.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Can I delete my data?</summary>
+        <div class="faq-answer">
+          <p>Yes. You have full control over your data at all times. You can delete individual entries from within the app, or delete your entire account to permanently remove all data from our servers. Once deleted, your data cannot be recovered.</p>
+        </div>
+      </details>
+    </div>
+
+    <h2 class="faq-section-title">Important Disclaimer</h2>
+
+    <div class="faq-item">
+      <details open>
+        <summary>Does Remi replace medical advice?</summary>
+        <div class="faq-answer">
+          <p><strong>No.</strong> Remi is a tracking and organization tool, not a medical device. While Remi can show trends and flag data that falls outside published guidelines (like AAP or AASM benchmarks), these are informational alerts, not diagnoses.</p>
+          <p>Always consult your pediatrician or a qualified healthcare provider for medical advice about your baby's health. Remi is designed to complement your doctor visits by giving your pediatrician better data to work with, not to replace professional care.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-cta">
+      <h3>Still have questions?</h3>
+      <p>We're happy to help. Reach out and we'll get back to you within 24 hours.</p>
+      <a href="/contact.html">&#9993; Contact Us</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="remi-logo.png" alt="Remi" class="footer-logo" />
+        <p>Made with love (and very little sleep) &#128155;</p>
+      </div>
+      <div class="footer-trust">
+        <span>&#128274; Encrypted</span>
+        <span>&#128737;&#65039; GDPR compliant</span>
+        <span>&#128581; No ads, no data selling</span>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/faq.html">FAQ</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Remi. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

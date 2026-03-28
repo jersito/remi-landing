@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Remi - Baby Tracker App</title>
+  <meta name="description" content="Get in touch with the Remi team. We're here to help with questions about the baby tracker app, your account, or anything else." />
+  <link rel="canonical" href="https://remibabyapp.com/contact.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://remibabyapp.com/contact.html" />
+  <meta property="og:title" content="Contact Us | Remi - Baby Tracker App" />
+  <meta property="og:description" content="Get in touch with the Remi team. We're here to help." />
+  <meta property="og:image" content="https://remibabyapp.com/og-image.png" />
+  <meta property="og:site_name" content="Remi" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .contact-hero {
+      background: linear-gradient(135deg, #7A9DB0 0%, #93B5C6 50%, #A8C5D6 100%);
+      padding: 100px 0 60px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .contact-hero p {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.05rem;
+    }
+    .contact-content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+    .contact-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 32px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--blue-dark);
+      text-decoration: none;
+    }
+    .contact-back:hover {
+      color: var(--navy);
+    }
+    .contact-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.04);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .contact-card .contact-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    .contact-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: var(--navy);
+    }
+    .contact-card p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      border-radius: 60px;
+      background: var(--blue-dark);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-email:hover {
+      transform: scale(1.04);
+      box-shadow: 0 6px 24px rgba(122,157,176,0.35);
+      color: var(--white);
+    }
+    .contact-response {
+      background: var(--blue-soft);
+      border-radius: var(--radius-sm);
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .contact-response p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    .contact-response strong {
+      color: var(--text);
+    }
+    .contact-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 480px) {
+      .contact-links { grid-template-columns: 1fr; }
+      .contact-card { padding: 32px 24px; }
+    }
+    .contact-link-card {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.04);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+    .contact-link-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+    .contact-link-card .link-icon {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+    .contact-link-card h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .contact-link-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="contact-hero">
+    <div class="container">
+      <h1>Contact Us</h1>
+      <p>We'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <div class="contact-content">
+    <a href="/" class="contact-back">&larr; Back to Remi</a>
+
+    <div class="contact-card">
+      <div class="contact-icon">&#128140;</div>
+      <h2>Get in Touch</h2>
+      <p>Have a question, suggestion, or just want to say hi? We're a small team of parents who built Remi because we needed it ourselves. We read every message and genuinely want to help.</p>
+      <a href="mailto:support@remibabyapp.com" class="contact-email">
+        &#9993; support@remibabyapp.com
+      </a>
+    </div>
+
+    <div class="contact-response">
+      <p><strong>Response times:</strong> We aim to reply within 24 hours on weekdays. Weekend messages will be answered the following Monday. For urgent account or security issues, please include "URGENT" in your subject line.</p>
+    </div>
+
+    <h3 style="font-size: 1.1rem; margin-bottom: 16px; color: var(--navy);">Helpful Resources</h3>
+    <div class="contact-links">
+      <a href="/faq.html" class="contact-link-card">
+        <div class="link-icon">&#10067;</div>
+        <h3>FAQ</h3>
+        <p>Answers to common questions about Remi, features, and your account.</p>
+      </a>
+      <a href="/privacy.html" class="contact-link-card">
+        <div class="link-icon">&#128274;</div>
+        <h3>Privacy Policy</h3>
+        <p>Learn how we collect, use, and protect your family's data.</p>
+      </a>
+      <a href="/terms.html" class="contact-link-card">
+        <div class="link-icon">&#128220;</div>
+        <h3>Terms of Service</h3>
+        <p>The terms and conditions for using Remi.</p>
+      </a>
+      <a href="/doctor-view.html" class="contact-link-card">
+        <div class="link-icon">&#129658;</div>
+        <h3>For Pediatricians</h3>
+        <p>Learn how Remi helps during well-child visits.</p>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="remi-logo.png" alt="Remi" class="footer-logo" />
+        <p>Made with love (and very little sleep) &#128155;</p>
+      </div>
+      <div class="footer-trust">
+        <span>&#128274; Encrypted</span>
+        <span>&#128737;&#65039; GDPR compliant</span>
+        <span>&#128581; No ads, no data selling</span>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/faq.html">FAQ</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Remi. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
