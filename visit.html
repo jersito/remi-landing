@@ -160,9 +160,12 @@
   /* Charts */
   .chart-label { font-size: 10px; color: rgba(255,255,255,0.55); margin-bottom: 8px; margin-top: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
   svg { display: block; margin-bottom: 4px; }
+  .bar-group { transition: filter 0.15s; }
   .bar-group rect:first-child { transition: fill 0.15s; }
   .bar-group:hover rect:first-child { fill: rgba(255,255,255,0.08) !important; }
+  .bar-group:hover { filter: brightness(1.4); }
   .bar-group.selected rect:first-child { fill: rgba(255,255,255,0.12) !important; }
+  .bar-group.selected { filter: brightness(1.5); }
 
   /* Notable entries */
   .notable-entries {
