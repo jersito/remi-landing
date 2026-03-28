@@ -243,13 +243,12 @@ ul { list-style: none; }
   margin: 0 auto; position: relative; z-index: 3;
 }
 .phone-screen {
-  background: var(--beige); border-radius: 28px; overflow: hidden;
+  background: #3A5565; border-radius: 28px; overflow: hidden;
   display: flex; flex-direction: column; min-height: 460px;
-  margin-top: -12px; border-top: 12px solid #3A5565;
+  margin-top: -12px;
 }
 .phone-header {
   background: #3A5565; padding: 20px 12px 12px; display: flex; gap: 6px; align-items: center;
-  border-radius: 28px 28px 0 0;
 }
 .phone-pill {
   background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.45);
