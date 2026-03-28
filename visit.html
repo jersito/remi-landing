@@ -726,8 +726,8 @@ function generateDemoData(numDays) {
       entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), wokeH, wokeM).toISOString(), sleep_event: 'woke_up' });
     }
 
-    /* Night sleep with slight variation */
-    var nightFell = 19 + Math.floor(rng() * 2);
+    /* Night sleep with slight variation (shorter to trigger sleep concern) */
+    var nightFell = 20 + Math.floor(rng() * 2);
     var nightFellMin = Math.floor(rng() * 30);
     entries.push({ entry_type: 'sleep', occurred_at: new Date(day.getFullYear(), day.getMonth(), day.getDate(), nightFell, nightFellMin).toISOString(), sleep_event: 'fell_asleep' });
     var nextDay = new Date(day); nextDay.setDate(nextDay.getDate() + 1);
@@ -735,8 +735,8 @@ function generateDemoData(numDays) {
     var wakeM = Math.floor(rng() * 45);
     entries.push({ entry_type: 'sleep', occurred_at: new Date(nextDay.getFullYear(), nextDay.getMonth(), nextDay.getDate(), wakeH, wakeM).toISOString(), sleep_event: 'woke_up' });
 
-    /* Diapers with varied count (5-9) and occasional notes */
-    var diaperCount = 5 + Math.floor(rng() * 5);
+    /* Diapers with varied count (4-7) to show realistic range including low days */
+    var diaperCount = 4 + Math.floor(rng() * 4);
     var baseDiaperTypes = ['wet','wet','dirty','wet','both','wet','wet','dirty','wet'];
     for (var dp = 0; dp < diaperCount; dp++) {
       var dType = baseDiaperTypes[dp % baseDiaperTypes.length];
