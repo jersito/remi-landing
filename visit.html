@@ -313,9 +313,9 @@ function getAgeMonths(dob) {
 }
 
 function daysBetween(start, d) {
-  var s = new Date(start); s.setHours(0,0,0,0);
-  var t = new Date(d); t.setHours(0,0,0,0);
-  return Math.floor((t.getTime() - s.getTime()) / 86400000);
+  var s = new Date(start); s.setHours(12,0,0,0);
+  var t = new Date(d); t.setHours(12,0,0,0);
+  return Math.round((t.getTime() - s.getTime()) / 86400000);
 }
 
 function seededRandom(seed) {
@@ -454,7 +454,11 @@ function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels, c
   var labelCount = Math.min(data.length, 7);
   var step = Math.max(1, Math.floor(data.length / labelCount));
   data.forEach(function(_, i) {
-    if (i % step !== 0 && i !== data.length - 1) return;
+    var isLast = i === data.length - 1;
+    var isStep = i % step === 0;
+    /* Skip last label if too close to previous step label */
+    if (isLast && !isStep && (data.length - 1) % step < step / 2) return;
+    if (!isStep && !isLast) return;
     var x = pad.left + i * slotW + slotW / 2;
     var labelText = 'D' + (i + 1);
     if (startDate) {
