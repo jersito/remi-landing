@@ -526,6 +526,13 @@ ul { list-style: none; }
   font-size: 0.82rem; font-weight: 600; color: var(--text);
 }
 .pain-solution-icon { font-size: 1.1rem; flex-shrink: 0; }
+.pain-card-link {
+  display: block; padding: 10px 28px; text-align: center;
+  font-size: 0.82rem; font-weight: 700; color: var(--blue-dark);
+  border-top: 1px solid rgba(147,181,198,0.08);
+  transition: color 0.2s;
+}
+.pain-card-link:hover { color: var(--navy); }
 .pain-card:nth-child(2) .pain-quote { background: var(--peach-soft); color: #B8764A; }
 .pain-card:nth-child(3) .pain-quote { background: #F0E4EB; color: #8A5A6E; }
 
