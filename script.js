@@ -68,32 +68,3 @@ function typeLoop() {
 // Start typing after a short delay
 setTimeout(typeLoop, 1200);
 
-// ========== Smooth Scroll for Anchor Links ==========
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => {
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  });
-});
-
-// ========== Bar Chart Animation ==========
-const chartObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const bars = entry.target.querySelectorAll('.bar');
-      bars.forEach((bar, i) => {
-        const h = bar.style.getPropertyValue('--h');
-        bar.style.height = '0%';
-        setTimeout(() => { bar.style.height = h; }, 100 + i * 80);
-      });
-      chartObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.3 });
-
-const miniChart = document.querySelector('.mini-chart');
-if (miniChart) chartObserver.observe(miniChart);

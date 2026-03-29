@@ -44,19 +44,6 @@ p { color: var(--text-muted); line-height: 1.65; }
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
-/* ========== Buttons ========== */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 14px 32px; border-radius: 60px; font-weight: 700; font-size: 1rem;
-  background: var(--blue-dark); color: var(--white); border: none; cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.btn:hover { transform: scale(1.04); box-shadow: 0 6px 24px rgba(122,157,176,0.35); }
-.btn-lg { padding: 18px 44px; font-size: 1.1rem; }
-.btn-white { background: var(--white); color: var(--blue-dark); }
-.btn-white:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.12); }
-.btn-nav { padding: 12px 28px; font-size: 0.9rem; }
-
 /* ========== Section Tags ========== */
 .section-tag {
   display: inline-block; padding: 6px 16px; border-radius: 30px;
@@ -77,42 +64,6 @@ ul { list-style: none; }
 @media (prefers-reduced-motion: reduce) {
   .fade-up { opacity: 1; transform: none; transition: none; }
   .float-icon, .shape { animation: none !important; }
-}
-
-/* ========== Nav ========== */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(122,157,176,0.95); backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.nav-inner {
-  display: flex; align-items: center; justify-content: space-between;
-  height: 64px;
-}
-.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.1rem; color: #fff; }
-.logo-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
-.nav-links { display: flex; align-items: center; gap: 28px; }
-.nav-links a { font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.8); transition: color 0.2s; }
-.nav-links a:hover { color: #fff; }
-.mobile-menu-btn {
-  display: none; background: none; border: none; cursor: pointer;
-  width: 28px; height: 20px; position: relative; flex-direction: column; justify-content: space-between;
-}
-.mobile-menu-btn span {
-  display: block; width: 100%; height: 2.5px; background: #fff; border-radius: 2px;
-  transition: transform 0.3s, opacity 0.3s;
-}
-.mobile-menu {
-  display: none; flex-direction: column; padding: 16px 24px 24px; gap: 16px;
-  background: var(--blue-dark); border-top: 1px solid rgba(255,255,255,0.1);
-}
-.mobile-menu a { font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.85); }
-.mobile-menu .btn { text-align: center; background: #fff; color: var(--blue-dark); }
-
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .mobile-menu-btn { display: flex; }
-  .mobile-menu.open { display: flex; }
 }
 
 /* ========== Hero ========== */
@@ -157,49 +108,10 @@ ul { list-style: none; }
 .hero-sub { font-size: 1.2rem; margin-top: 18px; max-width: 460px; line-height: 1.75; color: rgba(255,255,255,0.88); }
 .hero-sub em { color: #fff; font-style: normal; font-weight: 700; }
 .hero-cta { margin-top: 32px; }
-.hero-proof { margin-top: 24px; display: flex; align-items: center; gap: 10px; }
-.hero-proof .stars { color: #ffe066; font-size: 1rem; letter-spacing: 2px; }
-.hero-proof span { font-size: 0.85rem; color: rgba(255,255,255,0.7); font-weight: 500; }
-
 .hero-wave {
   display: block; width: 100%; height: 60px; position: absolute; bottom: -1px; left: 0; z-index: 2;
 }
 .hero-wave path { fill: var(--cream); }
-
-/* ========== Store Badges ========== */
-.store-badges { display: flex; gap: 12px; }
-.store-badge {
-  display: flex; align-items: center; gap: 10px; padding: 12px 22px;
-  border-radius: 14px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-.store-badge:hover { transform: scale(1.04); }
-.store-text { display: flex; flex-direction: column; line-height: 1.2; }
-.store-text small { font-size: 0.65rem; font-weight: 500; opacity: 0.8; }
-.store-text strong { font-size: 0.95rem; font-weight: 700; }
-
-/* Hero store badges — solid white, prominent */
-.hero .store-badge {
-  background: rgba(255,255,255,0.92); color: var(--text);
-  border: 1px solid rgba(255,255,255,0.5);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-.hero .store-badge svg { fill: var(--text); }
-.hero .store-badge:hover { background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
-
-/* CTA store badges — solid white */
-.cta-badges .store-badge {
-  background: rgba(255,255,255,0.92); color: var(--text);
-  border: 1px solid rgba(255,255,255,0.5);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-.cta-badges .store-badge svg { fill: var(--text); }
-.cta-badges .store-badge:hover { background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
-
-@media (max-width: 480px) {
-  .store-badges { flex-direction: column; align-items: stretch; }
-  .store-badge { justify-content: center; }
-}
 
 /* ========== Email Signup Form ========== */
 .signup-form {
@@ -243,37 +155,6 @@ ul { list-style: none; }
   }
   .signup-input { padding: 12px 16px; text-align: center; }
   .signup-btn { width: 100%; text-align: center; border-radius: 16px; }
-}
-
-/* ========== Coming Soon Overlay ========== */
-.store-badges-wrapper {
-  position: relative;
-  display: inline-block;
-}
-.store-badges-wrapper .store-badge {
-  opacity: 0.45;
-  pointer-events: none;
-  filter: grayscale(40%);
-}
-.coming-soon-overlay {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-.coming-soon-overlay span {
-  background: var(--primary);
-  color: #fff;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 800;
-  font-size: 0.95rem;
-  padding: 6px 22px;
-  border-radius: 20px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  text-transform: uppercase;
 }
 
 /* ========== Phone Mockup ========== */
@@ -379,8 +260,6 @@ ul { list-style: none; }
   .hero-grid { grid-template-columns: 1fr; text-align: center; }
   .hero-sub { margin-left: auto; margin-right: auto; }
   .hero-cta { display: flex; justify-content: center; }
-  .hero .store-badges { justify-content: center; }
-  .hero-proof { justify-content: center; }
   .hero-logo { margin-left: auto; margin-right: auto; }
   .hero-visual { margin-top: 32px; }
   .phone-frame { width: 230px; }
@@ -436,61 +315,6 @@ ul { list-style: none; }
 .how-reminder span { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
 .how-reminder p { font-size: 0.92rem; line-height: 1.55; color: var(--text-muted); margin: 0; }
 .how-reminder strong { color: var(--text); }
-
-.steps-row {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
-  position: relative; z-index: 1; max-width: 960px; margin: 0 auto;
-}
-.step-card {
-  background: var(--white); border-radius: var(--radius);
-  padding: 32px 28px; text-align: center;
-  border: 1px solid rgba(147,181,198,0.2);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-}
-.step-num {
-  width: 36px; height: 36px; border-radius: 50%; background: var(--blue); color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 0.95rem; margin: 0 auto 16px;
-}
-.step-illustration {
-  height: 80px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
-}
-.mini-bubble {
-  background: var(--blue-soft); color: var(--text); padding: 8px 16px; border-radius: 16px;
-  font-size: 0.8rem; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-.mini-card {
-  background: var(--blue-soft); color: var(--text); padding: 10px 16px; border-radius: 12px;
-  font-size: 0.75rem; display: flex; align-items: center; gap: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-.mini-card span { font-size: 1rem; }
-.mini-reminder {
-  background: var(--peach-soft); color: var(--text); padding: 10px 16px; border-radius: 12px;
-  font-size: 0.75rem; display: flex; align-items: center; gap: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 3px solid var(--peach);
-}
-.mini-reminder span { font-size: 1rem; }
-.mini-bars {
-  display: flex; align-items: flex-end; gap: 5px; height: 60px;
-}
-.mb {
-  width: 16px; border-radius: 4px 4px 0 0; background: rgba(147,181,198,0.25);
-}
-.mb.active { background: var(--blue); }
-
-.step-arrow {
-  display: none; /* Grid layout doesn't need arrows */
-}
-
-.step-card p { font-size: 0.95rem; }
-
-@media (max-width: 768px) {
-  .steps-row { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 480px) {
-  .steps-row { grid-template-columns: 1fr; }
-}
 
 /* ========== Pain Points (We Get It) ========== */
 .pain-points {
@@ -593,7 +417,6 @@ ul { list-style: none; }
   70% { box-shadow: 0 0 0 14px rgba(147,181,198,0); }
   100% { box-shadow: 0 0 0 0 rgba(147,181,198,0); }
 }
-.sync-copy {}
 .sync-copy .section-tag { margin-bottom: 14px; }
 .sync-copy h2 { margin-bottom: 12px; }
 .sync-copy > p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 24px; }
@@ -622,7 +445,7 @@ ul { list-style: none; }
 .doctor-copy h2 { margin-bottom: 12px; }
 .doctor-copy > p { font-size: 1.05rem; line-height: 1.7; margin-bottom: 28px; }
 .doctor-preview {
-  background: var(--cream); border-radius: 14px; padding: 20px 24px;
+  background: var(--white); border-radius: 14px; padding: 20px 24px;
   margin-bottom: 20px;
   border: 1px solid rgba(147,181,198,0.12);
 }
@@ -755,15 +578,11 @@ ul { list-style: none; }
 .cta-content { position: relative; z-index: 1; }
 .cta-content h2 { color: #fff; margin-bottom: 14px; }
 .cta-content p { font-size: 1.15rem; color: rgba(255,255,255,0.85); max-width: 400px; margin: 0 auto 32px; }
-.cta-badges { justify-content: center; }
-.cta-free { font-size: 0.85rem; color: rgba(255,255,255,0.95); font-weight: 600; display: inline-block; margin-top: 4px; }
-
 /* ========== Footer ========== */
 .footer { padding: 48px 0; background: var(--navy); color: rgba(255,255,255,0.55); }
 .footer-inner {
   display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center;
 }
-.logo-text { font-weight: 800; font-size: 1.1rem; color: var(--white); }
 .footer-logo { height: 40px; width: auto; display: block; margin: 0 auto; }
 .footer-brand p { font-size: 0.85rem; margin-top: 4px; color: rgba(255,255,255,0.4); }
 .footer-trust {
