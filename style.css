@@ -15,6 +15,7 @@
   --text-muted: #5a6978;
   --text-light: #8a9baa;
   --white: #ffffff;
+  --primary: #7A9DB0;
   --radius: 24px;
   --radius-sm: 14px;
   --shadow: 0 4px 20px rgba(0,0,0,0.04);
@@ -198,6 +199,49 @@ ul { list-style: none; }
 @media (max-width: 480px) {
   .store-badges { flex-direction: column; align-items: stretch; }
   .store-badge { justify-content: center; }
+}
+
+/* ========== Email Signup Form ========== */
+.signup-form {
+  display: flex; gap: 10px; max-width: 420px;
+}
+.signup-input {
+  flex: 1; padding: 14px 18px; border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+  color: #fff; font-size: 0.95rem; font-family: inherit; font-weight: 500;
+  outline: none; transition: border-color 0.2s, background 0.2s;
+}
+.signup-input::placeholder { color: rgba(255,255,255,0.55); }
+.signup-input:focus {
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.22);
+}
+.signup-btn {
+  padding: 14px 24px; border-radius: 14px; border: none;
+  background: #fff; color: var(--blue-dark);
+  font-size: 0.9rem; font-weight: 700; font-family: inherit;
+  cursor: pointer; white-space: nowrap;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.signup-btn:hover { transform: scale(1.03); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.signup-btn:disabled { opacity: 0.8; cursor: default; transform: none; }
+.signup-btn.signup-success { background: #d4edda; color: #155724; }
+.signup-note {
+  font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 10px; font-weight: 500;
+}
+
+/* CTA signup form variant */
+.signup-form-cta { max-width: 420px; margin: 0 auto; justify-content: center; }
+.signup-form-cta .signup-input {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.3);
+}
+.cta-signup-note { color: rgba(255,255,255,0.55); }
+
+@media (max-width: 480px) {
+  .signup-form { flex-direction: column; }
+  .signup-btn { text-align: center; }
 }
 
 /* ========== Coming Soon Overlay ========== */
@@ -490,7 +534,7 @@ ul { list-style: none; }
 
 /* ========== Partner Sync Section ========== */
 .sync-section {
-  padding: 100px 0; background: var(--cream);
+  padding: 100px 0; background: var(--white);
 }
 .sync-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
@@ -499,12 +543,19 @@ ul { list-style: none; }
   display: flex; align-items: center; justify-content: center; gap: 16px;
 }
 .sync-phone {
-  width: 160px; background: #3A5565; border-radius: 20px; padding: 5px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  width: 150px; background: #3A5565; border-radius: 28px; padding: 5px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+  position: relative;
+}
+.sync-phone-notch {
+  width: 56px; height: 16px; background: #3A5565; border-radius: 0 0 10px 10px;
+  margin: 0 auto; position: relative; z-index: 2;
 }
 .sync-phone-screen {
-  background: var(--beige); border-radius: 16px; padding: 14px 10px;
+  background: var(--beige); border-radius: 22px; padding: 12px 10px 24px;
+  margin-top: -8px;
   display: flex; flex-direction: column; gap: 8px;
+  min-height: 280px;
 }
 .sync-header {
   font-size: 0.65rem; font-weight: 700; color: var(--text-muted);
@@ -554,7 +605,7 @@ ul { list-style: none; }
 
 /* ========== Doctor Ready Section ========== */
 .doctor-section {
-  padding: 100px 0; background: var(--white);
+  padding: 100px 0; background: var(--cream);
 }
 .doctor-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
@@ -620,7 +671,7 @@ ul { list-style: none; }
 
 /* ========== Trust & Privacy Section ========== */
 .trust-section {
-  padding: 80px 0; background: var(--beige);
+  padding: 80px 0; background: var(--white);
 }
 .trust-content { text-align: center; max-width: 720px; margin: 0 auto; }
 .trust-content .section-tag { margin-bottom: 14px; }
@@ -631,7 +682,7 @@ ul { list-style: none; }
 }
 .trust-badge {
   display: flex; align-items: flex-start; gap: 14px; text-align: left;
-  background: var(--white); border-radius: 14px; padding: 18px 22px;
+  background: var(--cream); border-radius: 14px; padding: 18px 22px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.04);
   border: 1px solid rgba(147,181,198,0.1);
 }
@@ -642,6 +693,49 @@ ul { list-style: none; }
 
 @media (max-width: 480px) {
   .trust-badges { gap: 12px; }
+}
+
+/* ========== Origin Story / Social Proof ========== */
+.origin-section {
+  padding: 80px 0; background: var(--cream);
+}
+.origin-content {
+  max-width: 640px; margin: 0 auto; text-align: center;
+}
+.origin-quote {
+  margin-bottom: 28px;
+}
+.origin-quote-mark {
+  font-size: 4rem; line-height: 1; color: var(--blue); opacity: 0.3;
+  font-family: Georgia, serif; display: block; margin-bottom: -16px;
+}
+.origin-quote blockquote {
+  font-family: 'Nunito', sans-serif; font-size: 1.6rem; font-weight: 800;
+  color: var(--text); font-style: italic; line-height: 1.3;
+  margin: 0 0 10px;
+}
+.origin-quote cite {
+  font-size: 0.88rem; font-style: normal; color: var(--text-muted); font-weight: 500;
+}
+.origin-story {
+  font-size: 1rem; line-height: 1.75; color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.origin-byline {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.88rem; font-weight: 700; color: var(--text);
+  background: var(--white); padding: 10px 20px; border-radius: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* ========== Doctor Chart Labels ========== */
+.doctor-chart-label {
+  font-size: 0.65rem; font-weight: 600; color: var(--text-light);
+  text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px;
+}
+.doctor-bar-val {
+  font-size: 0.62rem; font-weight: 700; color: var(--text-muted);
+  width: 22px; text-align: right; flex-shrink: 0;
 }
 
 /* ========== Final CTA ========== */
