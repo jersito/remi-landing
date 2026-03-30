@@ -211,6 +211,27 @@
           </div>
         </div>
 
+        <!-- AI QUALITY & SESSION DEPTH -->
+        <div class="section">
+          <h2>AI Quality & Session Depth <span class="tag">Fix Issues</span></h2>
+          <div class="chart-grid">
+            <div class="chart-card">
+              <h3>AI Misunderstandings</h3>
+              <div id="frustrationStats"></div>
+              <div style="margin-top:12px">
+                <h3>Top Corrections</h3>
+                <table class="data-table" id="frustrationTable"><thead><tr><th>User said</th><th>Count</th></tr></thead><tbody></tbody></table>
+              </div>
+              <div class="insight" id="frustrationInsight"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Messages per Session</h3>
+              <div id="sessionDepthStats"></div>
+              <div class="insight" id="sessionInsight"></div>
+            </div>
+          </div>
+        </div>
+
         <!-- TOP PROMPTS -->
         <div class="section">
           <h2>Top Chat Prompts <span class="tag">User Behavior</span></h2>
@@ -268,6 +289,7 @@
   <script>
     const API_BASE = 'https://wxpddgplzocqxfpxdnpp.supabase.co/functions/v1/analytics-dashboard';
     let storedPassword = '';
+    let byNameCache = {};
 
     document.getElementById('passwordInput').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') handleLogin();
@@ -315,6 +337,8 @@
     }
 
     function renderData(data) {
+      byNameCache = data.byName || {};
+
       // KPIs
       document.getElementById('statEvents').textContent = data.totalEvents.toLocaleString();
       document.getElementById('statHouseholds').textContent = (data.totalHouseholds ?? 0).toLocaleString();
@@ -344,6 +368,10 @@
       document.getElementById('statManual').textContent = (data.manualEntries ?? 0).toLocaleString();
       document.getElementById('statReminders').textContent = (data.remindersCreated ?? 0).toLocaleString();
       document.getElementById('statNotes').textContent = (data.notesCreated ?? 0).toLocaleString();
+
+      // Frustration & session depth
+      renderFrustration(data.frustrationCount, data.topFrustrations);
+      renderSessionDepth(data.avgMsgsPerSession, data.maxSessionDepth);
 
       // Top prompts
       renderPrompts(data.topPrompts);
@@ -570,6 +598,69 @@
         insight.innerHTML = `<strong>${convRate}% conversion</strong> is typical for mobile subscriptions. The referral alternative may be reducing direct purchases (which is fine if it drives growth).`;
       } else {
         insight.innerHTML = `<strong>${convRate}% conversion</strong> is strong. Your pricing and value prop are working well.`;
+      }
+    }
+
+    function renderFrustration(count, topList) {
+      const container = document.getElementById('frustrationStats');
+      const tbody = document.querySelector('#frustrationTable tbody');
+      const insight = document.getElementById('frustrationInsight');
+      const totalChats = byNameCache?.chat_message_sent || 1;
+      const pct = totalChats > 0 ? ((count / totalChats) * 100).toFixed(1) : '0.0';
+
+      container.innerHTML = `
+        <div style="display:flex; gap:24px; margin-bottom:8px">
+          <div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Corrections</div>
+            <div style="font-size:28px; font-weight:700; color:#e74c3c">${count}</div>
+          </div>
+          <div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">% of Messages</div>
+            <div style="font-size:28px; font-weight:700; color:${parseFloat(pct) > 10 ? '#e74c3c' : '#4CAF50'}">${pct}%</div>
+          </div>
+        </div>`;
+
+      if (!topList || topList.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="2" style="color:rgba(44,44,52,0.35)">No corrections detected yet</td></tr>';
+      } else {
+        const maxVal = Math.max(...topList.map(t => t.count), 1);
+        tbody.innerHTML = topList.map(({ hint, count: c }) => {
+          const barPct = (c / maxVal) * 60;
+          return `<tr><td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">"${hint}"</td><td><span class="count-bar" style="width:${barPct}px"></span>${c}</td></tr>`;
+        }).join('');
+      }
+
+      if (parseFloat(pct) > 10) {
+        insight.innerHTML = '<strong>High correction rate.</strong> Users are frequently correcting the AI. Review the top corrections to find common failure patterns.';
+      } else if (parseFloat(pct) > 5) {
+        insight.innerHTML = 'Moderate correction rate. Check if specific entry types cause more misunderstandings.';
+      } else {
+        insight.innerHTML = 'Low correction rate. The AI is understanding users well.';
+      }
+    }
+
+    function renderSessionDepth(avg, max) {
+      const container = document.getElementById('sessionDepthStats');
+      const insight = document.getElementById('sessionInsight');
+
+      container.innerHTML = `
+        <div style="display:flex; gap:24px; margin-bottom:12px">
+          <div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Avg Messages / Session</div>
+            <div style="font-size:28px; font-weight:700; color:#7A9DB0">${avg}</div>
+          </div>
+          <div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Max in One Session</div>
+            <div style="font-size:28px; font-weight:700; color:#D4956A">${max}</div>
+          </div>
+        </div>`;
+
+      if (avg <= 1.5) {
+        insight.innerHTML = '<strong>Most users send 1-2 messages per session.</strong> This is expected for a quick-logging app. Users open it, log something, and leave.';
+      } else if (avg <= 4) {
+        insight.innerHTML = 'Users are having short conversations. They may be logging multiple events or asking follow-up questions.';
+      } else {
+        insight.innerHTML = '<strong>High engagement.</strong> Users are having real conversations with Remi, not just logging.';
       }
     }
 
