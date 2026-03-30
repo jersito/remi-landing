@@ -232,6 +232,27 @@
           </div>
         </div>
 
+        <!-- REVENUE & PROFIT -->
+        <div class="section">
+          <h2>Revenue & Profit <span class="tag">Financials</span></h2>
+          <div class="stat-grid">
+            <div class="stat-card"><div class="label">Total Revenue</div><div class="value" id="statRevenue" style="color:#4CAF50">--</div></div>
+            <div class="stat-card"><div class="label">Total AI Cost</div><div class="value" id="statCostSummary" style="color:#f44336">--</div></div>
+            <div class="stat-card"><div class="label">Net Profit</div><div class="value" id="statNetProfit">--</div></div>
+            <div class="stat-card"><div class="label">Profit Margin</div><div class="value" id="statMargin">--</div></div>
+          </div>
+          <div class="chart-grid">
+            <div class="chart-card">
+              <h3>Revenue by Tier</h3>
+              <table class="data-table" id="revenueTierTable"><thead><tr><th>Tier</th><th>Sales</th><th>Revenue</th></tr></thead><tbody></tbody></table>
+            </div>
+            <div class="chart-card">
+              <h3>Daily Revenue vs Cost</h3>
+              <div id="profitChart" style="font-family:monospace;font-size:13px"></div>
+            </div>
+          </div>
+        </div>
+
         <!-- AI COST TRACKING -->
         <div class="section">
           <h2>AI Cost Tracking <span class="tag">OpenAI Usage</span></h2>
@@ -394,6 +415,9 @@
       // Frustration & session depth
       renderFrustration(data.frustrationCount, data.topFrustrations);
       renderSessionDepth(data.avgMsgsPerSession, data.maxSessionDepth);
+
+      // Revenue & profit
+      renderRevenue(data.revenue, data.aiCost);
 
       // AI cost tracking
       renderAiCost(data.aiCost);
@@ -687,6 +711,60 @@
       } else {
         insight.innerHTML = '<strong>High engagement.</strong> Users are having real conversations with Remi, not just logging.';
       }
+    }
+
+    function renderRevenue(revenue, aiCost) {
+      const totalRev = revenue?.totalRevenue || 0;
+      const totalCost = aiCost?.totalCostUsd || 0;
+      const netProfit = totalRev - totalCost;
+      const margin = totalRev > 0 ? ((netProfit / totalRev) * 100).toFixed(1) : '0.0';
+
+      document.getElementById('statRevenue').textContent = '$' + totalRev.toFixed(2);
+      document.getElementById('statCostSummary').textContent = '$' + totalCost.toFixed(4);
+      document.getElementById('statNetProfit').textContent = '$' + netProfit.toFixed(2);
+      document.getElementById('statNetProfit').style.color = netProfit >= 0 ? '#4CAF50' : '#f44336';
+      document.getElementById('statMargin').textContent = margin + '%';
+      document.getElementById('statMargin').style.color = netProfit >= 0 ? '#4CAF50' : '#f44336';
+
+      // Revenue by tier
+      const tierTbody = document.querySelector('#revenueTierTable tbody');
+      const tiers = Object.entries(revenue?.byTier || {}).sort((a, b) => b[1].revenue - a[1].revenue);
+      if (tiers.length === 0) {
+        tierTbody.innerHTML = '<tr><td colspan="3" style="color:rgba(44,44,52,0.35)">No sales yet</td></tr>';
+      } else {
+        tierTbody.innerHTML = tiers.map(([tier, d]) =>
+          `<tr><td style="text-transform:capitalize">${tier}</td><td>${d.count}</td><td style="color:#4CAF50">$${d.revenue.toFixed(2)}</td></tr>`
+        ).join('');
+      }
+
+      // Daily revenue vs cost chart
+      const chart = document.getElementById('profitChart');
+      const profitData = revenue?.profitByDay || [];
+      if (profitData.length === 0) {
+        chart.innerHTML = '<div style="color:rgba(44,44,52,0.35);padding:20px">No financial data yet</div>';
+        return;
+      }
+      const maxVal = Math.max(...profitData.map(d => Math.max(d.revenue, d.cost)), 0.01);
+      chart.innerHTML = profitData.map(d => {
+        const revPct = (d.revenue / maxVal) * 100;
+        const costPct = (d.cost / maxVal) * 100;
+        const netColor = d.net >= 0 ? '#4CAF50' : '#f44336';
+        const netSign = d.net >= 0 ? '+' : '';
+        return `<div style="margin-bottom:8px">
+          <div style="color:rgba(44,44,52,0.6);margin-bottom:2px">${d.day.slice(5)}</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+            <span style="width:50px;color:#4CAF50;font-size:11px">Rev</span>
+            <div style="height:14px;width:${revPct}%;background:#4CAF50;border-radius:3px;min-width:2px"></div>
+            <span style="font-size:11px">$${d.revenue.toFixed(2)}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+            <span style="width:50px;color:#f44336;font-size:11px">Cost</span>
+            <div style="height:14px;width:${costPct}%;background:#f44336;border-radius:3px;min-width:2px"></div>
+            <span style="font-size:11px">$${d.cost.toFixed(4)}</span>
+          </div>
+          <div style="font-size:11px;color:${netColor};padding-left:56px">${netSign}$${d.net.toFixed(2)} net</div>
+        </div>`;
+      }).join('');
     }
 
     function renderAiCost(aiCost) {
