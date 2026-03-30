@@ -185,6 +185,41 @@
           </div>
         </div>
 
+        <!-- SCREEN TIME & UPSELL -->
+        <div class="section">
+          <h2>Screen Time & Conversions</h2>
+          <div class="chart-grid">
+            <div class="chart-card">
+              <h3>Average Time per Screen (seconds)</h3>
+              <div id="screenTimeChart"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Premium Upsell Conversion</h3>
+              <div id="upsellStats"></div>
+              <div class="insight" id="upsellInsight"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MANUAL ENTRIES & PLANS -->
+        <div class="section">
+          <h2>User Actions</h2>
+          <div class="stat-row">
+            <div class="stat-card"><div class="label">Manual Entries</div><div class="value peach" id="statManual">--</div></div>
+            <div class="stat-card"><div class="label">Reminders Created</div><div class="value blue" id="statReminders">--</div></div>
+            <div class="stat-card"><div class="label">Notes Created</div><div class="value" id="statNotes">--</div></div>
+          </div>
+        </div>
+
+        <!-- TOP PROMPTS -->
+        <div class="section">
+          <h2>Top Chat Prompts <span class="tag">User Behavior</span></h2>
+          <div class="chart-card">
+            <h3>Most common messages sent to Remi</h3>
+            <table class="data-table" id="promptTable"><thead><tr><th>Prompt</th><th>Count</th></tr></thead><tbody></tbody></table>
+          </div>
+        </div>
+
         <!-- DAILY ACTIVITY -->
         <div class="section">
           <h2>Daily Activity</h2>
@@ -298,6 +333,20 @@
 
       // Feature adoption
       renderFeatureChart(data.featureUsage);
+
+      // Screen time
+      renderScreenTime(data.screenTimeAvg, data.screenTimeSessions);
+
+      // Upsell conversion
+      renderUpsellStats(data.upsellViews, data.upsellPurchases);
+
+      // User actions
+      document.getElementById('statManual').textContent = (data.manualEntries ?? 0).toLocaleString();
+      document.getElementById('statReminders').textContent = (data.remindersCreated ?? 0).toLocaleString();
+      document.getElementById('statNotes').textContent = (data.notesCreated ?? 0).toLocaleString();
+
+      // Top prompts
+      renderPrompts(data.topPrompts);
 
       // Daily events
       renderBarChart('dailyChart', data.byDay, '#7A9DB0');
@@ -461,6 +510,79 @@
       tbody.innerHTML = sorted.map(([name, count]) => {
         const pct = (count / maxVal) * 80;
         return `<tr><td>${name}</td><td><span class="count-bar" style="width:${pct}px"></span>${count.toLocaleString()}</td></tr>`;
+      }).join('');
+    }
+
+    function renderScreenTime(avgData, sessionData) {
+      const container = document.getElementById('screenTimeChart');
+      if (!avgData || Object.keys(avgData).length === 0) {
+        container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px">No screen time data yet. Data appears after users navigate between tabs.</p>';
+        return;
+      }
+      const sorted = Object.entries(avgData).sort((a, b) => b[1] - a[1]);
+      const maxVal = Math.max(...sorted.map(s => s[1]), 1);
+      const colors = ['#D4956A', '#7A9DB0', '#4CAF50', '#8B7EC8', '#e74c3c'];
+      container.innerHTML = sorted.map(([screen, avg], i) => {
+        const pct = Math.max((avg / maxVal) * 100, 3);
+        const sessions = sessionData?.[screen] || 0;
+        const color = colors[i % colors.length];
+        const mins = avg >= 60 ? `${Math.floor(avg/60)}m ${avg%60}s` : `${avg}s`;
+        return `<div class="h-bar-row">
+          <div class="h-bar-label">${screen}</div>
+          <div class="h-bar-track">
+            <div class="h-bar-fill" style="width:${pct}%; background:${color}">
+              <span>${mins} avg (${sessions} visits)</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderUpsellStats(views, purchases) {
+      const container = document.getElementById('upsellStats');
+      const insight = document.getElementById('upsellInsight');
+      const convRate = views > 0 ? ((purchases / views) * 100).toFixed(1) : '0.0';
+
+      container.innerHTML = `
+        <div style="display:flex; gap:24px; margin-bottom:12px">
+          <div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Upsell Views</div>
+            <div style="font-size:28px; font-weight:700; color:#7A9DB0">${views}</div>
+          </div>
+          <div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Purchases</div>
+            <div style="font-size:28px; font-weight:700; color:#4CAF50">${purchases}</div>
+          </div>
+          <div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Conversion</div>
+            <div style="font-size:28px; font-weight:700; color:#D4956A">${convRate}%</div>
+          </div>
+        </div>
+        <div style="height:8px; background:#f0eeea; border-radius:4px; overflow:hidden">
+          <div style="height:100%; width:${Math.min(parseFloat(convRate), 100)}%; background:#D4956A; border-radius:4px"></div>
+        </div>`;
+
+      if (views === 0) {
+        insight.innerHTML = 'No upsell views yet.';
+      } else if (parseFloat(convRate) < 2) {
+        insight.innerHTML = `<strong>${convRate}% conversion</strong> is low. Consider adjusting pricing, adding a free trial, or making the value proposition clearer.`;
+      } else if (parseFloat(convRate) < 5) {
+        insight.innerHTML = `<strong>${convRate}% conversion</strong> is typical for mobile subscriptions. The referral alternative may be reducing direct purchases (which is fine if it drives growth).`;
+      } else {
+        insight.innerHTML = `<strong>${convRate}% conversion</strong> is strong. Your pricing and value prop are working well.`;
+      }
+    }
+
+    function renderPrompts(prompts) {
+      const tbody = document.querySelector('#promptTable tbody');
+      if (!prompts || prompts.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="2" style="color:rgba(44,44,52,0.35)">No chat data yet</td></tr>';
+        return;
+      }
+      const maxVal = Math.max(...prompts.map(p => p.count), 1);
+      tbody.innerHTML = prompts.map(({ prompt, count }) => {
+        const pct = (count / maxVal) * 80;
+        return `<tr><td style="max-width:400px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${prompt}</td><td><span class="count-bar" style="width:${pct}px"></span>${count}</td></tr>`;
       }).join('');
     }
   </script>
