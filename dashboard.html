@@ -211,6 +211,28 @@
           </div>
         </div>
 
+        <!-- REFERRAL ANALYTICS -->
+        <div class="section">
+          <h2>Referral Program <span class="tag">Growth</span></h2>
+          <div class="stat-grid">
+            <div class="stat-card"><div class="label">Total Referrals</div><div class="value" id="statRefTotal">--</div></div>
+            <div class="stat-card"><div class="label">Users Who Referred</div><div class="value" id="statRefReferrers">--</div></div>
+            <div class="stat-card"><div class="label">Avg Referrals/User</div><div class="value" id="statRefAvg">--</div></div>
+            <div class="stat-card"><div class="label">Earned Free Premium</div><div class="value" id="statRefPremium" style="color:#4CAF50">--</div></div>
+          </div>
+          <div class="chart-grid">
+            <div class="chart-card">
+              <h3>Referral Distribution</h3>
+              <div id="referralDistChart"></div>
+              <div class="insight" id="referralInsight"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Referrals Over Time</h3>
+              <div class="bar-chart" id="referralDayChart"></div>
+            </div>
+          </div>
+        </div>
+
         <!-- AI QUALITY & SESSION DEPTH -->
         <div class="section">
           <h2>AI Quality & Session Depth <span class="tag">Fix Issues</span></h2>
@@ -411,6 +433,9 @@
       document.getElementById('statManual').textContent = (data.manualEntries ?? 0).toLocaleString();
       document.getElementById('statReminders').textContent = (data.remindersCreated ?? 0).toLocaleString();
       document.getElementById('statNotes').textContent = (data.notesCreated ?? 0).toLocaleString();
+
+      // Referral analytics
+      renderReferrals(data.referralStats);
 
       // Frustration & session depth
       renderFrustration(data.frustrationCount, data.topFrustrations);
@@ -711,6 +736,48 @@
       } else {
         insight.innerHTML = '<strong>High engagement.</strong> Users are having real conversations with Remi, not just logging.';
       }
+    }
+
+    function renderReferrals(stats) {
+      if (!stats) return;
+      document.getElementById('statRefTotal').textContent = (stats.totalReferrals || 0).toLocaleString();
+      document.getElementById('statRefReferrers').textContent = (stats.totalReferrers || 0).toLocaleString();
+      document.getElementById('statRefAvg').textContent = stats.avgPerReferrer || '0';
+      document.getElementById('statRefPremium').textContent = (stats.earnedPremium || 0).toLocaleString();
+
+      // Distribution chart
+      const distChart = document.getElementById('referralDistChart');
+      const dist = stats.distribution || {};
+      const distEntries = Object.entries(dist);
+      const maxDist = Math.max(...distEntries.map(([_, v]) => v), 1);
+      distChart.innerHTML = distEntries.map(([label, count]) => {
+        const pct = (count / maxDist) * 100;
+        const color = label.includes('3+') ? '#4CAF50' : '#7A9DB0';
+        return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="width:100px;font-size:13px">${label}</span>
+          <div style="height:20px;width:${pct}%;background:${color};border-radius:4px;min-width:4px"></div>
+          <span style="font-size:13px;font-weight:600">${count}</span>
+        </div>`;
+      }).join('');
+
+      // Insight
+      const insight = document.getElementById('referralInsight');
+      const convRate = stats.totalReferrers > 0
+        ? ((stats.earnedPremium / stats.totalReferrers) * 100).toFixed(0)
+        : 0;
+      insight.textContent = `${convRate}% of referrers reached 3 referrals and earned free premium.`;
+
+      // Referrals over time
+      const dayChart = document.getElementById('referralDayChart');
+      if (!stats.byDay || stats.byDay.length === 0) {
+        dayChart.innerHTML = '<div style="color:rgba(44,44,52,0.35);padding:20px">No referral data yet</div>';
+        return;
+      }
+      const maxDay = Math.max(...stats.byDay.map(([_, v]) => v), 1);
+      dayChart.innerHTML = stats.byDay.map(([day, count]) => {
+        const pct = (count / maxDay) * 100;
+        return `<div class="bar-row"><span class="bar-label">${day.slice(5)}</span><div class="bar" style="width:${pct}%;background:#D4956A"></div><span class="bar-value">${count}</span></div>`;
+      }).join('');
     }
 
     function renderRevenue(revenue, aiCost) {
