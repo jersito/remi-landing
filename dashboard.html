@@ -10,25 +10,13 @@
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF9F7; color: #2C2C34; }
 
     /* Login gate */
-    .login-gate {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 100vh; padding: 24px;
-    }
-    .login-card {
-      background: #fff; border-radius: 16px; padding: 40px;
-      box-shadow: 0 4px 24px rgba(44,44,52,0.08); max-width: 380px; width: 100%; text-align: center;
-    }
+    .login-gate { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+    .login-card { background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 24px rgba(44,44,52,0.08); max-width: 380px; width: 100%; text-align: center; }
     .login-card h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
     .login-card p { font-size: 14px; color: rgba(44,44,52,0.55); margin-bottom: 24px; }
-    .login-card input {
-      width: 100%; padding: 12px 16px; border: 1px solid #e8e6e0; border-radius: 10px;
-      font-size: 15px; margin-bottom: 16px; outline: none;
-    }
+    .login-card input { width: 100%; padding: 12px 16px; border: 1px solid #e8e6e0; border-radius: 10px; font-size: 15px; margin-bottom: 16px; outline: none; }
     .login-card input:focus { border-color: #7A9DB0; }
-    .login-card button {
-      width: 100%; padding: 12px; border: none; border-radius: 10px;
-      background: #D4956A; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer;
-    }
+    .login-card button { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #D4956A; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; }
     .login-card button:hover { opacity: 0.9; }
     .login-error { color: #e74c3c; font-size: 13px; margin-top: 8px; display: none; }
 
@@ -37,96 +25,85 @@
     .dashboard.visible { display: block; }
     .login-gate.hidden { display: none; }
 
-    .dash-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
-    }
+    .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
     .dash-header h1 { font-size: 24px; font-weight: 700; }
     .dash-controls { display: flex; gap: 8px; align-items: center; }
-    .dash-controls select, .dash-controls button {
-      padding: 8px 16px; border-radius: 8px; border: 1px solid #e8e6e0;
-      background: #fff; font-size: 13px; cursor: pointer;
-    }
+    .dash-controls select, .dash-controls button { padding: 8px 16px; border-radius: 8px; border: 1px solid #e8e6e0; background: #fff; font-size: 13px; cursor: pointer; }
     .dash-controls button { background: #7A9DB0; color: #fff; border: none; font-weight: 600; }
 
     /* Stat cards */
-    .stat-row {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px; margin-bottom: 32px;
-    }
-    .stat-card {
-      background: #fff; border-radius: 12px; padding: 20px;
-      box-shadow: 0 1px 8px rgba(44,44,52,0.05);
-    }
-    .stat-card .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: rgba(44,44,52,0.45); margin-bottom: 6px; }
-    .stat-card .value { font-size: 28px; font-weight: 700; color: #2C2C34; }
+    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 28px; }
+    .stat-card { background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 1px 8px rgba(44,44,52,0.05); }
+    .stat-card .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: rgba(44,44,52,0.45); margin-bottom: 4px; }
+    .stat-card .value { font-size: 26px; font-weight: 700; color: #2C2C34; }
     .stat-card .value.peach { color: #D4956A; }
     .stat-card .value.blue { color: #7A9DB0; }
+    .stat-card .value.green { color: #4CAF50; }
+    .stat-card .value.red { color: #e74c3c; }
 
-    /* Chart sections */
-    .section { margin-bottom: 32px; }
-    .section h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+    /* Section */
+    .section { margin-bottom: 28px; }
+    .section h2 { font-size: 16px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .section h2 .tag { font-size: 10px; font-weight: 600; background: #D4956A; color: #fff; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
 
-    .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media (max-width: 768px) { .chart-grid { grid-template-columns: 1fr; } }
+    .chart-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    @media (max-width: 900px) { .chart-grid-3 { grid-template-columns: 1fr; } }
 
-    .chart-card {
-      background: #fff; border-radius: 12px; padding: 20px;
-      box-shadow: 0 1px 8px rgba(44,44,52,0.05);
-    }
-    .chart-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: rgba(44,44,52,0.7); }
+    .chart-card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 8px rgba(44,44,52,0.05); }
+    .chart-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 10px; color: rgba(44,44,52,0.6); }
+    .chart-card .insight { font-size: 12px; color: rgba(44,44,52,0.5); margin-top: 10px; line-height: 17px; border-top: 1px solid #f0eeea; padding-top: 10px; }
+    .chart-card .insight strong { color: #2C2C34; }
 
     /* Bar chart */
-    .bar-chart { display: flex; align-items: flex-end; gap: 3px; height: 160px; padding-top: 8px; }
+    .bar-chart { display: flex; align-items: flex-end; gap: 3px; height: 140px; padding-top: 8px; }
     .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
-    .bar {
-      width: 100%; min-width: 4px; border-radius: 4px 4px 0 0; background: #7A9DB0;
-      transition: height 0.3s ease; position: relative;
-    }
+    .bar { width: 100%; min-width: 4px; border-radius: 4px 4px 0 0; background: #7A9DB0; transition: height 0.3s ease; position: relative; cursor: pointer; }
+    .bar.peach { background: #D4956A; }
     .bar:hover { opacity: 0.8; }
-    .bar-label { font-size: 9px; color: rgba(44,44,52,0.4); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32px; }
-    .bar-tooltip {
-      display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
-      background: #2C2C34; color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 4px;
-      white-space: nowrap; margin-bottom: 4px;
-    }
+    .bar-label { font-size: 9px; color: rgba(44,44,52,0.4); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 36px; }
+    .bar-tooltip { display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #2C2C34; color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 4px; white-space: nowrap; margin-bottom: 4px; z-index: 10; }
     .bar:hover .bar-tooltip { display: block; }
+
+    /* Horizontal bar */
+    .h-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .h-bar-label { font-size: 13px; width: 100px; text-align: right; color: rgba(44,44,52,0.7); flex-shrink: 0; }
+    .h-bar-track { flex: 1; height: 20px; background: #f0eeea; border-radius: 6px; overflow: hidden; }
+    .h-bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; transition: width 0.3s ease; }
+    .h-bar-fill span { font-size: 11px; font-weight: 600; color: #fff; white-space: nowrap; }
+
+    /* Funnel */
+    .funnel-step { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0eeea; }
+    .funnel-step:last-child { border-bottom: none; }
+    .funnel-num { font-size: 22px; font-weight: 700; width: 60px; text-align: right; }
+    .funnel-info { flex: 1; }
+    .funnel-name { font-size: 14px; font-weight: 600; color: #2C2C34; }
+    .funnel-pct { font-size: 12px; color: rgba(44,44,52,0.45); }
+    .funnel-bar { width: 100%; height: 4px; background: #f0eeea; border-radius: 2px; margin-top: 4px; }
+    .funnel-bar-fill { height: 100%; border-radius: 2px; background: #D4956A; }
 
     /* Table */
     .data-table { width: 100%; border-collapse: collapse; }
-    .data-table th {
-      text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.5px; color: rgba(44,44,52,0.45); padding: 8px 12px; border-bottom: 1px solid #e8e6e0;
-    }
-    .data-table td { padding: 10px 12px; font-size: 14px; border-bottom: 1px solid #f0eeea; }
+    .data-table th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(44,44,52,0.45); padding: 8px 12px; border-bottom: 1px solid #e8e6e0; }
+    .data-table td { padding: 8px 12px; font-size: 13px; border-bottom: 1px solid #f0eeea; }
     .data-table tr:hover td { background: #FAF9F7; }
-    .count-bar {
-      display: inline-block; height: 6px; border-radius: 3px; background: #D4956A; margin-right: 8px; vertical-align: middle;
-    }
-
-    /* GoatCounter embed */
-    .gc-frame {
-      width: 100%; border: none; border-radius: 12px; min-height: 600px;
-      background: #fff; box-shadow: 0 1px 8px rgba(44,44,52,0.05);
-    }
-
-    /* Loading */
-    .loading { text-align: center; padding: 60px; color: rgba(44,44,52,0.45); font-size: 15px; }
-    .spinner {
-      width: 32px; height: 32px; border: 3px solid #e8e6e0; border-top-color: #D4956A;
-      border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .count-bar { display: inline-block; height: 6px; border-radius: 3px; background: #D4956A; margin-right: 8px; vertical-align: middle; }
 
     /* Tabs */
     .tab-row { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid #e8e6e0; }
-    .tab-btn {
-      padding: 10px 20px; font-size: 14px; font-weight: 500; border: none; background: none;
-      cursor: pointer; color: rgba(44,44,52,0.45); border-bottom: 2px solid transparent; margin-bottom: -1px;
-    }
+    .tab-btn { padding: 10px 20px; font-size: 14px; font-weight: 500; border: none; background: none; cursor: pointer; color: rgba(44,44,52,0.45); border-bottom: 2px solid transparent; margin-bottom: -1px; }
     .tab-btn.active { color: #2C2C34; border-bottom-color: #D4956A; font-weight: 600; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
+
+    /* Loading */
+    .loading { text-align: center; padding: 60px; color: rgba(44,44,52,0.45); font-size: 15px; }
+    .spinner { width: 32px; height: 32px; border: 3px solid #e8e6e0; border-top-color: #D4956A; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* GoatCounter embed */
+    .gc-frame { width: 100%; border: none; border-radius: 12px; min-height: 600px; background: #fff; box-shadow: 0 1px 8px rgba(44,44,52,0.05); }
   </style>
 </head>
 <body>
@@ -156,57 +133,73 @@
       </div>
     </div>
 
-    <!-- Tabs -->
     <div class="tab-row">
       <button class="tab-btn active" onclick="switchTab('app')">App Analytics</button>
-      <button class="tab-btn" onclick="switchTab('website')">Website (GoatCounter)</button>
+      <button class="tab-btn" onclick="switchTab('website')">Website</button>
     </div>
 
     <!-- App analytics tab -->
     <div class="tab-content active" id="tab-app">
-      <div id="appLoading" class="loading">
-        <div class="spinner"></div>
-        Loading analytics...
-      </div>
+      <div id="appLoading" class="loading"><div class="spinner"></div>Loading analytics...</div>
 
       <div id="appContent" style="display:none">
-        <!-- Stat cards -->
+        <!-- KPI cards -->
         <div class="stat-row">
-          <div class="stat-card">
-            <div class="label">Total Events</div>
-            <div class="value" id="statEvents">--</div>
-          </div>
-          <div class="stat-card">
-            <div class="label">Households</div>
-            <div class="value blue" id="statHouseholds">--</div>
-          </div>
-          <div class="stat-card">
-            <div class="label">Babies</div>
-            <div class="value peach" id="statBabies">--</div>
-          </div>
-          <div class="stat-card">
-            <div class="label">Premium</div>
-            <div class="value blue" id="statPremium">--</div>
-          </div>
-          <div class="stat-card">
-            <div class="label">Referrals</div>
-            <div class="value peach" id="statReferrals">--</div>
+          <div class="stat-card"><div class="label">Households</div><div class="value blue" id="statHouseholds">--</div></div>
+          <div class="stat-card"><div class="label">Babies</div><div class="value peach" id="statBabies">--</div></div>
+          <div class="stat-card"><div class="label">Premium</div><div class="value green" id="statPremium">--</div></div>
+          <div class="stat-card"><div class="label">Referrals</div><div class="value blue" id="statReferrals">--</div></div>
+          <div class="stat-card"><div class="label">Events</div><div class="value" id="statEvents">--</div></div>
+        </div>
+
+        <!-- RETENTION & CHURN -->
+        <div class="section">
+          <h2>Retention & Churn <span class="tag">Key Insight</span></h2>
+          <div class="chart-grid">
+            <div class="chart-card">
+              <h3>Retention Curve (app opens by days since signup)</h3>
+              <div class="bar-chart" id="retentionChart"></div>
+              <div class="insight" id="retentionInsight"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Time Between Sessions</h3>
+              <div id="churnChart"></div>
+              <div class="insight" id="churnInsight"></div>
+            </div>
           </div>
         </div>
 
-        <!-- Daily activity chart -->
+        <!-- ONBOARDING FUNNEL -->
         <div class="section">
+          <h2>Onboarding Funnel <span class="tag">Drop-off</span></h2>
+          <div class="chart-grid">
+            <div class="chart-card">
+              <h3>Where users drop off</h3>
+              <div id="funnelChart"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Feature Adoption</h3>
+              <div id="featureChart"></div>
+              <div class="insight" id="featureInsight"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAILY ACTIVITY -->
+        <div class="section">
+          <h2>Daily Activity</h2>
           <div class="chart-card">
-            <h3>Daily Events</h3>
+            <h3>Events per Day</h3>
             <div class="bar-chart" id="dailyChart"></div>
           </div>
         </div>
 
-        <!-- Breakdown charts -->
+        <!-- BREAKDOWN TABLES -->
         <div class="section">
+          <h2>Breakdowns</h2>
           <div class="chart-grid">
             <div class="chart-card">
-              <h3>Events by Type</h3>
+              <h3>All Events</h3>
               <table class="data-table" id="eventTable"><thead><tr><th>Event</th><th>Count</th></tr></thead><tbody></tbody></table>
             </div>
             <div class="chart-card">
@@ -226,20 +219,14 @@
       </div>
     </div>
 
-    <!-- GoatCounter tab -->
+    <!-- Website tab -->
     <div class="tab-content" id="tab-website">
-      <div class="chart-card" style="padding: 0; overflow: hidden;">
-        <iframe
-          class="gc-frame"
-          id="gcFrame"
-          src=""
-          loading="lazy"
-          title="GoatCounter Analytics"
-        ></iframe>
+      <div class="chart-card" style="text-align:center; padding: 40px;">
+        <h3>GoatCounter Website Analytics</h3>
+        <p style="color:rgba(44,44,52,0.55); margin: 16px 0;">GoatCounter does not support iframe embedding. Open the dashboard directly:</p>
+        <a href="https://remibabyapp.goatcounter.com" target="_blank" style="display:inline-block; background:#7A9DB0; color:#fff; padding:12px 24px; border-radius:10px; text-decoration:none; font-weight:600;">Open GoatCounter Dashboard</a>
+        <p style="color:rgba(44,44,52,0.35); margin-top: 16px; font-size: 12px;">If the link does not work, log into GoatCounter at goatcounter.com with your account credentials.</p>
       </div>
-      <p style="margin-top: 12px; font-size: 13px; color: rgba(44,44,52,0.45);">
-        Website analytics powered by GoatCounter. <a href="https://remibabyapp.goatcounter.com" target="_blank" style="color: #7A9DB0;">Open full dashboard</a>
-      </p>
     </div>
   </div>
 
@@ -247,7 +234,6 @@
     const API_BASE = 'https://wxpddgplzocqxfpxdnpp.supabase.co/functions/v1/analytics-dashboard';
     let storedPassword = '';
 
-    // Login
     document.getElementById('passwordInput').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') handleLogin();
     });
@@ -258,22 +244,13 @@
       loadData();
     }
 
-    // Tabs
     function switchTab(tab) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('active');
       document.getElementById('tab-' + tab).classList.add('active');
-
-      if (tab === 'website') {
-        const frame = document.getElementById('gcFrame');
-        if (!frame.src || frame.src === window.location.href) {
-          frame.src = 'https://remibabyapp.goatcounter.com';
-        }
-      }
     }
 
-    // Load data
     async function loadData() {
       const days = parseInt(document.getElementById('dayRange').value);
       document.getElementById('appLoading').style.display = 'block';
@@ -285,7 +262,6 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ password: storedPassword, days }),
         });
-
         const data = await res.json();
 
         if (res.status === 401) {
@@ -293,30 +269,38 @@
           document.getElementById('appLoading').style.display = 'none';
           return;
         }
-
         if (data.error) throw new Error(data.error);
 
-        // Authenticated -- show dashboard
         document.getElementById('loginGate').classList.add('hidden');
         document.getElementById('dashboard').classList.add('visible');
-
         renderData(data);
       } catch (err) {
-        document.getElementById('appLoading').innerHTML =
-          '<p style="color:#e74c3c">Failed to load: ' + err.message + '</p>';
+        document.getElementById('appLoading').innerHTML = '<p style="color:#e74c3c">Failed to load: ' + err.message + '</p>';
       }
     }
 
     function renderData(data) {
-      // Stats
+      // KPIs
       document.getElementById('statEvents').textContent = data.totalEvents.toLocaleString();
       document.getElementById('statHouseholds').textContent = (data.totalHouseholds ?? 0).toLocaleString();
       document.getElementById('statBabies').textContent = (data.totalBabies ?? 0).toLocaleString();
       document.getElementById('statPremium').textContent = (data.totalSubscriptions ?? 0).toLocaleString();
       document.getElementById('statReferrals').textContent = (data.totalReferrals ?? 0).toLocaleString();
 
-      // Daily chart
-      renderBarChart('dailyChart', data.byDay);
+      // Retention curve
+      renderRetentionChart(data.retentionCurve);
+
+      // Churn buckets
+      renderChurnChart(data.churnBuckets);
+
+      // Funnel
+      renderFunnel(data.funnelCounts);
+
+      // Feature adoption
+      renderFeatureChart(data.featureUsage);
+
+      // Daily events
+      renderBarChart('dailyChart', data.byDay, '#7A9DB0');
 
       // Tables
       renderTable('eventTable', data.byName);
@@ -328,7 +312,126 @@
       document.getElementById('appContent').style.display = 'block';
     }
 
-    function renderBarChart(containerId, dayData) {
+    function renderRetentionChart(curve) {
+      const container = document.getElementById('retentionChart');
+      const insight = document.getElementById('retentionInsight');
+      if (!curve || curve.length === 0) {
+        container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px;margin:auto">No retention data yet. Data appears after users open the app multiple times.</p>';
+        insight.innerHTML = '';
+        return;
+      }
+      const maxVal = Math.max(...curve.map(c => c.opens), 1);
+      container.innerHTML = curve.map(c => {
+        const pct = Math.max((c.opens / maxVal) * 100, 2);
+        return `<div class="bar-col">
+          <div class="bar peach" style="height:${pct}%">
+            <div class="bar-tooltip">Day ${c.day}: ${c.opens} opens</div>
+          </div>
+          <div class="bar-label">D${c.day}</div>
+        </div>`;
+      }).join('');
+
+      // Calculate insight
+      const day0 = curve.find(c => c.day === 0)?.opens || 0;
+      const day7 = curve.find(c => c.day === 7)?.opens || 0;
+      const day30 = curve.find(c => c.day === 30)?.opens || 0;
+      if (day0 > 0) {
+        const d7pct = Math.round((day7 / day0) * 100);
+        const d30pct = Math.round((day30 / day0) * 100);
+        insight.innerHTML = `<strong>Day 7 retention:</strong> ${d7pct}% of Day 0 users came back. <strong>Day 30:</strong> ${d30pct}%. ${d7pct < 20 ? 'This is low -- focus on the first-week experience.' : d7pct < 40 ? 'Room for improvement in the first week.' : 'Solid early retention.'}`;
+      } else {
+        insight.innerHTML = 'Not enough data for retention insights yet.';
+      }
+    }
+
+    function renderChurnChart(buckets) {
+      const container = document.getElementById('churnChart');
+      const insight = document.getElementById('churnInsight');
+      if (!buckets || Object.values(buckets).every(v => v === 0)) {
+        container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px">No session gap data yet.</p>';
+        insight.innerHTML = '';
+        return;
+      }
+      const maxVal = Math.max(...Object.values(buckets), 1);
+      const colors = { 'Same day': '#4CAF50', '1 day': '#7A9DB0', '2-3 days': '#7A9DB0', '4-7 days': '#D4956A', '8-14 days': '#e74c3c', '15-30 days': '#e74c3c', '30+ days': '#c0392b' };
+      container.innerHTML = Object.entries(buckets).map(([label, count]) => {
+        const pct = Math.max((count / maxVal) * 100, 2);
+        const color = colors[label] || '#7A9DB0';
+        return `<div class="h-bar-row">
+          <div class="h-bar-label">${label}</div>
+          <div class="h-bar-track">
+            <div class="h-bar-fill" style="width:${pct}%; background:${color}">
+              <span>${count}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+      const total = Object.values(buckets).reduce((a, b) => a + b, 0);
+      const churny = (buckets['8-14 days'] || 0) + (buckets['15-30 days'] || 0) + (buckets['30+ days'] || 0);
+      const churnyPct = total > 0 ? Math.round((churny / total) * 100) : 0;
+      insight.innerHTML = `<strong>${churnyPct}%</strong> of sessions happen after 8+ days of inactivity. ${churnyPct > 30 ? 'High churn risk -- consider push notifications or email re-engagement.' : churnyPct > 15 ? 'Some users are lapsing. Check if notifications are working.' : 'Most users return frequently. Good engagement.'}`;
+    }
+
+    function renderFunnel(funnel) {
+      const container = document.getElementById('funnelChart');
+      if (!funnel) { container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px">No funnel data yet.</p>'; return; }
+
+      const steps = [
+        { name: 'Signed Up', count: funnel.sign_up, color: '#7A9DB0' },
+        { name: 'Completed Onboarding', count: funnel.onboarding_completed, color: '#D4956A' },
+        { name: 'Sent First Chat', count: funnel.first_chat_message, color: '#4CAF50' },
+        { name: 'Returned (2+ sessions)', count: funnel.app_opened_returning, color: '#8B7EC8' },
+      ];
+      const maxCount = Math.max(...steps.map(s => s.count), 1);
+
+      container.innerHTML = steps.map((step, i) => {
+        const pct = Math.round((step.count / maxCount) * 100);
+        const dropoff = i > 0 && steps[i - 1].count > 0
+          ? Math.round(((steps[i - 1].count - step.count) / steps[i - 1].count) * 100)
+          : 0;
+        return `<div class="funnel-step">
+          <div class="funnel-num" style="color:${step.color}">${step.count}</div>
+          <div class="funnel-info">
+            <div class="funnel-name">${step.name}</div>
+            <div class="funnel-pct">${i > 0 ? (dropoff > 0 ? dropoff + '% drop-off from previous step' : 'No drop-off') : '100% baseline'}</div>
+            <div class="funnel-bar"><div class="funnel-bar-fill" style="width:${pct}%; background:${step.color}"></div></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function renderFeatureChart(usage) {
+      const container = document.getElementById('featureChart');
+      const insight = document.getElementById('featureInsight');
+      if (!usage || Object.keys(usage).length === 0) {
+        container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px">No feature data yet.</p>';
+        insight.innerHTML = '';
+        return;
+      }
+      const sorted = Object.entries(usage).sort((a, b) => b[1] - a[1]);
+      const maxVal = Math.max(...sorted.map(s => s[1]), 1);
+      const colors = ['#D4956A', '#7A9DB0', '#4CAF50', '#8B7EC8', '#e74c3c', '#2C2C34'];
+
+      container.innerHTML = sorted.map(([name, count], i) => {
+        const pct = Math.max((count / maxVal) * 100, 3);
+        const color = colors[i % colors.length];
+        return `<div class="h-bar-row">
+          <div class="h-bar-label">${name}</div>
+          <div class="h-bar-track">
+            <div class="h-bar-fill" style="width:${pct}%; background:${color}">
+              <span>${count.toLocaleString()}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+      const least = sorted[sorted.length - 1];
+      const most = sorted[0];
+      insight.innerHTML = `<strong>${most[0]}</strong> is the most used feature. <strong>${least[0]}</strong> has the least usage -- consider making it more discoverable or rethinking its value.`;
+    }
+
+    function renderBarChart(containerId, dayData, color) {
       const container = document.getElementById(containerId);
       if (!dayData || dayData.length === 0) {
         container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px;margin:auto">No data yet</p>';
@@ -337,9 +440,9 @@
       const maxVal = Math.max(...dayData.map(d => d[1]), 1);
       container.innerHTML = dayData.map(([day, count]) => {
         const pct = Math.max((count / maxVal) * 100, 2);
-        const shortDay = day.slice(5); // MM-DD
+        const shortDay = day.slice(5);
         return `<div class="bar-col">
-          <div class="bar" style="height:${pct}%">
+          <div class="bar" style="height:${pct}%; background:${color || '#7A9DB0'}">
             <div class="bar-tooltip">${day}: ${count}</div>
           </div>
           <div class="bar-label">${shortDay}</div>
@@ -357,10 +460,7 @@
       const maxVal = Math.max(...sorted.map(s => s[1]), 1);
       tbody.innerHTML = sorted.map(([name, count]) => {
         const pct = (count / maxVal) * 80;
-        return `<tr>
-          <td>${name}</td>
-          <td><span class="count-bar" style="width:${pct}px"></span>${count.toLocaleString()}</td>
-        </tr>`;
+        return `<tr><td>${name}</td><td><span class="count-bar" style="width:${pct}px"></span>${count.toLocaleString()}</td></tr>`;
       }).join('');
     }
   </script>
