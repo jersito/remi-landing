@@ -232,6 +232,28 @@
           </div>
         </div>
 
+        <!-- AI COST TRACKING -->
+        <div class="section">
+          <h2>AI Cost Tracking <span class="tag">OpenAI Usage</span></h2>
+          <div class="stat-grid">
+            <div class="stat-card"><div class="label">Total Cost</div><div class="value" id="statTotalCost">--</div></div>
+            <div class="stat-card"><div class="label">Total Requests</div><div class="value" id="statTotalRequests">--</div></div>
+            <div class="stat-card"><div class="label">Avg Cost/Request</div><div class="value" id="statAvgCost">--</div></div>
+            <div class="stat-card"><div class="label">Prompt Tokens</div><div class="value" id="statPromptTokens">--</div></div>
+            <div class="stat-card"><div class="label">Completion Tokens</div><div class="value" id="statCompletionTokens">--</div></div>
+          </div>
+          <div class="chart-grid">
+            <div class="chart-card">
+              <h3>Cost by Model</h3>
+              <table class="data-table" id="costModelTable"><thead><tr><th>Model</th><th>Requests</th><th>Tokens</th><th>Cost</th></tr></thead><tbody></tbody></table>
+            </div>
+            <div class="chart-card">
+              <h3>Daily Cost</h3>
+              <div class="bar-chart" id="dailyCostChart"></div>
+            </div>
+          </div>
+        </div>
+
         <!-- TOP PROMPTS -->
         <div class="section">
           <h2>Top Chat Prompts <span class="tag">User Behavior</span></h2>
@@ -372,6 +394,9 @@
       // Frustration & session depth
       renderFrustration(data.frustrationCount, data.topFrustrations);
       renderSessionDepth(data.avgMsgsPerSession, data.maxSessionDepth);
+
+      // AI cost tracking
+      renderAiCost(data.aiCost);
 
       // Top prompts
       renderPrompts(data.topPrompts);
@@ -662,6 +687,41 @@
       } else {
         insight.innerHTML = '<strong>High engagement.</strong> Users are having real conversations with Remi, not just logging.';
       }
+    }
+
+    function renderAiCost(aiCost) {
+      if (!aiCost) {
+        document.getElementById('statTotalCost').textContent = 'No data';
+        return;
+      }
+      document.getElementById('statTotalCost').textContent = '$' + aiCost.totalCostUsd.toFixed(4);
+      document.getElementById('statTotalRequests').textContent = aiCost.totalRequests.toLocaleString();
+      document.getElementById('statAvgCost').textContent = '$' + aiCost.avgCostPerRequest.toFixed(6);
+      document.getElementById('statPromptTokens').textContent = aiCost.totalPromptTokens.toLocaleString();
+      document.getElementById('statCompletionTokens').textContent = aiCost.totalCompletionTokens.toLocaleString();
+
+      // Cost by model table
+      const tbody = document.querySelector('#costModelTable tbody');
+      const models = Object.entries(aiCost.byModel || {}).sort((a, b) => b[1].cost - a[1].cost);
+      if (models.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="color:rgba(44,44,52,0.35)">No usage yet</td></tr>';
+      } else {
+        tbody.innerHTML = models.map(([model, d]) =>
+          `<tr><td>${model}</td><td>${d.requests.toLocaleString()}</td><td>${d.tokens.toLocaleString()}</td><td>$${d.cost.toFixed(4)}</td></tr>`
+        ).join('');
+      }
+
+      // Daily cost chart (reuse bar chart pattern)
+      const chart = document.getElementById('dailyCostChart');
+      if (!aiCost.byDay || aiCost.byDay.length === 0) {
+        chart.innerHTML = '<div style="color:rgba(44,44,52,0.35);padding:20px">No cost data yet</div>';
+        return;
+      }
+      const maxCost = Math.max(...aiCost.byDay.map(([_, v]) => v), 0.0001);
+      chart.innerHTML = aiCost.byDay.map(([day, cost]) => {
+        const pct = (cost / maxCost) * 100;
+        return `<div class="bar-row"><span class="bar-label">${day.slice(5)}</span><div class="bar" style="width:${pct}%;background:#D4956A" title="$${cost.toFixed(4)}"></div><span class="bar-value">$${cost.toFixed(4)}</span></div>`;
+      }).join('');
     }
 
     function renderPrompts(prompts) {
