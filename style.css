@@ -8,12 +8,12 @@
   --peach: #F2C4A4;
   --peach-soft: #FEF0E6;
   --rose: #D4B5C0;
-  --navy: #2C3E50;
-  --cream: #FEFAF7;
-  --beige: #FEF6EE;
-  --text: #2C3E50;
-  --text-muted: #5a6978;
-  --text-light: #8a9baa;
+  --navy: #2C2C34;
+  --cream: #FAF9F7;
+  --beige: #FAF9F7;
+  --text: #2C2C34;
+  --text-muted: rgba(44,44,52,0.55);
+  --text-light: rgba(44,44,52,0.35);
   --white: #ffffff;
   --primary: #7A9DB0;
   --radius: 24px;
@@ -160,46 +160,48 @@ ul { list-style: none; }
 /* ========== Phone Mockup ========== */
 .hero-visual { position: relative; display: flex; justify-content: center; }
 .phone-frame {
-  width: 270px; border-radius: 36px; background: #3A5565;
+  width: 270px; border-radius: 36px; background: #2C2C34;
   padding: 8px; position: relative; z-index: 2;
-  box-shadow: 0 30px 80px rgba(147,181,198,0.25), 0 0 0 1px rgba(255,255,255,0.1);
+  box-shadow: 0 30px 80px rgba(44,44,52,0.2), 0 0 0 1px rgba(255,255,255,0.06);
 }
 .phone-notch {
-  width: 100px; height: 22px; background: #3A5565; border-radius: 0 0 16px 16px;
+  width: 100px; height: 22px; background: #2C2C34; border-radius: 0 0 16px 16px;
   margin: 0 auto; position: relative; z-index: 3;
 }
 .phone-screen {
-  background: #3A5565; border-radius: 28px; overflow: hidden;
+  background: #2C2C34; border-radius: 28px; overflow: hidden;
   display: flex; flex-direction: column; min-height: 460px;
   margin-top: -12px;
 }
 .phone-header {
-  background: #3A5565; padding: 20px 12px 12px; display: flex; gap: 6px; align-items: center;
+  background: #FAF9F7; padding: 16px 12px 10px; display: flex; gap: 6px; align-items: center;
+  border-radius: 28px 28px 0 0;
 }
 .phone-pill {
-  background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.45);
+  background: #FAF9F7; color: rgba(44,44,52,0.35);
   padding: 5px 14px; border-radius: 20px; font-size: 0.72rem; font-weight: 600;
+  border: 1px solid rgba(44,44,52,0.08);
 }
-.phone-pill.active { background: rgba(255,255,255,0.2); color: #fff; }
+.phone-pill.active { background: #D4956A; color: #fff; border-color: transparent; }
 .phone-pill.add {
   width: 26px; height: 26px; padding: 0; display: flex; align-items: center;
-  justify-content: center; border-radius: 50%; font-size: 0.85rem; color: rgba(255,255,255,0.4);
+  justify-content: center; border-radius: 50%; font-size: 0.85rem; color: rgba(44,44,52,0.3);
+  border: 1px solid rgba(44,44,52,0.08); background: #FAF9F7;
 }
 .phone-content {
   flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 8px;
-  border-top-left-radius: 16px; border-top-right-radius: 16px;
-  background: var(--beige);
+  background: #FAF9F7;
 }
 .chat-bubble {
   padding: 10px 13px; border-radius: 16px; font-size: 0.72rem; line-height: 1.5;
   max-width: 85%;
 }
 .chat-bubble.assistant {
-  background: var(--white); color: var(--text); align-self: flex-start;
-  border-bottom-left-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  background: var(--white); color: #2C2C34; align-self: flex-start;
+  border-bottom-left-radius: 4px; box-shadow: 0 1px 6px rgba(44,44,52,0.04);
 }
 .chat-bubble.user {
-  background: var(--blue); color: var(--white); align-self: flex-end;
+  background: #7A9DB0; color: var(--white); align-self: flex-end;
   border-bottom-right-radius: 4px; min-width: 40px; min-height: 30px;
 }
 .chat-bubble.response { opacity: 0; transition: opacity 0.4s 0.2s; }
@@ -210,36 +212,38 @@ ul { list-style: none; }
 .log-card { display: flex; align-items: center; gap: 8px; }
 .log-card .log-icon { font-size: 1rem; }
 .log-card div { display: flex; flex-direction: column; flex: 1; }
-.log-card strong { font-size: 0.72rem; font-weight: 700; color: var(--text); }
-.log-card span { font-size: 0.62rem; color: var(--text-muted); }
-.log-check { color: var(--blue-dark); font-size: 0.8rem; font-weight: 800; }
+.log-card strong { font-size: 0.72rem; font-weight: 700; color: #2C2C34; }
+.log-card span { font-size: 0.62rem; color: rgba(44,44,52,0.45); }
+.log-check { color: #D4956A; font-size: 0.8rem; font-weight: 800; }
 
 .quick-chips {
   display: flex; gap: 4px; padding: 5px 8px; overflow: hidden;
-  border-top: 1px solid #eee; background: var(--white);
+  background: #FAF9F7;
 }
 .chip {
-  flex-shrink: 0; padding: 3px 8px; border-radius: 10px;
-  background: var(--blue-soft); color: var(--blue-dark);
+  flex-shrink: 0; padding: 4px 10px; border-radius: 20px;
+  background: #FFFFFF; color: #2C2C34;
   font-size: 0.52rem; font-weight: 600; white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(44,44,52,0.06);
 }
 
 .phone-input-bar {
   display: flex; align-items: center; gap: 5px; padding: 7px 8px;
-  background: var(--white); border-top: 1px solid #eee;
+  background: #FAF9F7;
 }
 .mic-btn {
-  width: 28px; height: 28px; border-radius: 50%; background: var(--blue-soft);
+  width: 28px; height: 28px; border-radius: 50%; background: #F0EEEA;
   display: flex; align-items: center; justify-content: center; font-size: 0.7rem;
 }
 .input-placeholder {
-  flex: 1; background: var(--beige); border-radius: 14px; padding: 5px 10px;
-  font-size: 0.6rem; color: var(--text-light);
+  flex: 1; background: var(--white); border-radius: 14px; padding: 6px 10px;
+  font-size: 0.6rem; color: rgba(44,44,52,0.35);
+  box-shadow: 0 1px 4px rgba(44,44,52,0.04);
 }
 .send-btn {
-  width: 28px; height: 28px; border-radius: 50%; background: var(--blue);
+  width: 28px; height: 28px; border-radius: 50%; background: #D4956A;
   color: #fff; display: flex; align-items: center; justify-content: center;
-  font-size: 0.65rem;
+  font-size: 0.65rem; box-shadow: 0 2px 6px rgba(212,149,106,0.3);
 }
 
 /* Floating decorations */

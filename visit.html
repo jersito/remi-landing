@@ -117,7 +117,7 @@
   /* Cards (glassmorphism) */
   .card {
     background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 16px;
     padding: 20px 22px;
     margin-bottom: 16px;
@@ -148,7 +148,7 @@
   .stat-pill.accent-purple { background: rgba(155,142,196,0.12); border-color: rgba(155,142,196,0.2); }
   .stat-pill.accent-peach { background: rgba(242,196,164,0.12); border-color: rgba(242,196,164,0.2); }
   .stat-pill.accent-sky { background: rgba(93,166,230,0.12); border-color: rgba(93,166,230,0.2); }
-  .stat-value { font-size: 28px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.5px; }
+  .stat-value { font-size: 28px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.5px; }
   .stat-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 3px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 
   /* Breakdown bar */
@@ -160,7 +160,7 @@
   .breakdown-fill-bottle { height: 100%; background: linear-gradient(90deg, #F2C4A4, #E8B08E); border-radius: 0 5px 5px 0; }
 
   /* Charts */
-  .chart-label { font-size: 10px; color: rgba(255,255,255,0.55); margin-bottom: 8px; margin-top: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .chart-label { font-size: 11px; color: rgba(255,255,255,0.55); margin-bottom: 8px; margin-top: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
   svg { display: block; margin-bottom: 4px; }
   .bar-group { transition: filter 0.15s; }
   .bar-group rect:first-child { transition: fill 0.15s; }
@@ -172,21 +172,21 @@
   /* Notable entries */
   .notable-entries {
     margin-top: 8px; padding: 10px 14px; border-radius: 12px;
-    background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.12);
+    background: rgba(122,157,176,0.08); border: 1px solid rgba(122,157,176,0.15);
     font-size: 12px;
   }
-  .notable-entries-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(251,191,36,0.7); margin-bottom: 6px; }
+  .notable-entries-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(122,157,176,0.8); margin-bottom: 6px; }
   .notable-entry { display: flex; gap: 8px; padding: 4px 0; color: rgba(255,255,255,0.6); }
   .notable-entry-date { color: rgba(255,255,255,0.4); font-size: 11px; flex-shrink: 0; min-width: 50px; }
   .notable-entry-text { font-size: 12px; }
 
   /* Warnings */
-  .warning-card { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.18); }
-  .warning-header-icon { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 11px; background: rgba(251,191,36,0.15); font-size: 18px; }
-  .warning-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; padding: 10px 12px; background: rgba(251,191,36,0.06); border-radius: 10px; border: 1px solid rgba(251,191,36,0.08); }
-  .warning-bullet { color: #FBBF24; font-size: 10px; line-height: 22px; flex-shrink: 0; }
-  .warning-text { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 20px; }
-  .warning-disclaimer { font-size: 10px; color: rgba(251,191,36,0.5); font-style: italic; margin-top: 6px; }
+  .warning-card { background: rgba(200,100,100,0.12); border: 1px solid rgba(200,100,100,0.35); }
+  .warning-header-icon { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 11px; background: rgba(255,85,85,0.15); font-size: 18px; }
+  .warning-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; padding: 10px 12px; background: rgba(200,100,100,0.08); border-radius: 10px; border: 1px solid rgba(200,100,100,0.12); }
+  .warning-bullet { color: #FF5555; font-size: 10px; line-height: 22px; flex-shrink: 0; }
+  .warning-text { font-size: 17px; color: #E8E8F0; line-height: 24px; font-weight: 500; }
+  .warning-disclaimer { font-size: 10px; color: rgba(255,85,85,0.5); font-style: italic; margin-top: 6px; }
 
   .empty { color: rgba(255,255,255,0.25); font-style: italic; font-size: 13px; padding: 8px 0; }
 
@@ -251,12 +251,12 @@
     .footer { border-top-color: #E2E8F0; }
     .footer-brand { color: #94A3B8; -webkit-text-fill-color: #94A3B8; }
     .breakdown-track { background: #F1F5F9; }
-    .warning-card { background: #FFFBEB; border-color: #FDE68A; }
-    .warning-header-icon { background: rgba(245,158,11,0.12); }
-    .warning-row { background: rgba(255,255,255,0.5); border-color: #FDE68A; }
-    .warning-bullet { color: #D97706; }
-    .warning-text { color: #92400E; }
-    .warning-disclaimer { color: #B45309; }
+    .warning-card { background: #FEF2F2; border-color: #FECACA; }
+    .warning-header-icon { background: rgba(220,38,38,0.10); }
+    .warning-row { background: rgba(255,255,255,0.5); border-color: #FECACA; }
+    .warning-bullet { color: #DC2626; }
+    .warning-text { color: #7F1D1D; font-size: 14px; font-weight: 500; }
+    .warning-disclaimer { color: #991B1B; }
     .card-title { color: #0F172A; }
     .range-selector { display: none; }
   }
@@ -438,17 +438,17 @@ function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels, c
   var plotW = W - pad.left - pad.right;
   var plotH = H - pad.top - pad.bottom;
   var slotW = plotW / data.length;
-  var barW = Math.max(3, slotW - 3);
+  var barW = Math.max(3, slotW - 1);
 
   var svg = '';
   [0.25, 0.5, 0.75, 1].forEach(function(frac) {
     var y = pad.top + plotH - plotH * frac;
     var val = Math.round(maxVal * frac * 10) / 10;
-    svg += '<line x1="' + pad.left + '" y1="' + y + '" x2="' + (W - pad.right) + '" y2="' + y + '" stroke="rgba(255,255,255,0.10)" stroke-width="0.5" stroke-dasharray="3,3"/>';
-    svg += '<text x="' + (pad.left - 6) + '" y="' + (y + 3) + '" fill="rgba(255,255,255,0.55)" font-size="8" font-family="sans-serif" text-anchor="end">' + (val % 1 === 0 ? val : val.toFixed(1)) + '</text>';
+    svg += '<line x1="' + pad.left + '" y1="' + y + '" x2="' + (W - pad.right) + '" y2="' + y + '" stroke="rgba(255,255,255,0.15)" stroke-width="0.75" stroke-dasharray="3,3"/>';
+    svg += '<text x="' + (pad.left - 6) + '" y="' + (y + 3) + '" fill="rgba(255,255,255,0.65)" font-size="10" font-family="sans-serif" text-anchor="end">' + (val % 1 === 0 ? val : val.toFixed(1)) + '</text>';
   });
 
-  svg += '<line x1="' + pad.left + '" y1="' + (pad.top + plotH) + '" x2="' + (W - pad.right) + '" y2="' + (pad.top + plotH) + '" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>';
+  svg += '<line x1="' + pad.left + '" y1="' + (pad.top + plotH) + '" x2="' + (W - pad.right) + '" y2="' + (pad.top + plotH) + '" stroke="rgba(255,255,255,0.12)" stroke-width="0.75"/>';
 
   data.forEach(function(val, i) {
     var x = pad.left + i * slotW + (slotW - barW) / 2;
@@ -489,7 +489,7 @@ function buildBarSVG(data, color, secondaryData, secondaryColor, legendLabels, c
       labelDate.setDate(labelDate.getDate() + i);
       labelText = formatShortDate(labelDate);
     }
-    svg += '<text x="' + x + '" y="' + (H - 2) + '" fill="rgba(255,255,255,0.25)" font-size="8" font-family="sans-serif" text-anchor="middle">' + labelText + '</text>';
+    svg += '<text x="' + x + '" y="' + (H - 2) + '" fill="rgba(255,255,255,0.40)" font-size="10" font-family="sans-serif" text-anchor="middle">' + labelText + '</text>';
   });
 
   var legend = '';
@@ -698,7 +698,7 @@ function renderSummary(data) {
 
   var breakdownBar = (breastPct > 0 || bottlePct > 0) ? '<div class="breakdown-container"><div class="breakdown-label-row"><span class="breakdown-label" style="color:#7A9DB0;">Breast ' + breastPct + '%</span><span class="breakdown-label" style="color:#F2C4A4;">Bottle ' + bottlePct + '%</span></div><div class="breakdown-track"><div class="breakdown-fill-breast" style="width:' + breastPct + '%;"></div><div class="breakdown-fill-bottle" style="width:' + bottlePct + '%;"></div></div></div>' : '';
 
-  var warningsSection = warnings.length === 0 ? '' : '<div class="card warning-card"><div class="card-header"><span class="warning-header-icon">&#x26A0;</span><span class="card-title" style="color:#FBBF24;">Concerns</span></div>' + warnings.map(function(w) { return '<div class="warning-row"><span class="warning-bullet">&#x25CF;</span><span class="warning-text">' + esc(w) + '</span></div>'; }).join('') + '<p class="warning-disclaimer">Based on AAP/AASM guidelines. Not medical advice.</p></div>';
+  var warningsSection = warnings.length === 0 ? '' : '<div class="card warning-card"><div class="card-header"><span class="warning-header-icon">&#x26A0;</span><span class="card-title" style="color:#FF5555;">Concerns</span></div>' + warnings.map(function(w) { return '<div class="warning-row"><span class="warning-bullet">&#x25CF;</span><span class="warning-text">' + esc(w) + '</span></div>'; }).join('') + '<p class="warning-disclaimer">Based on AAP/AASM guidelines. Not medical advice.</p></div>';
 
   var healthSection = healthEvents.length > 0 ? '<div class="card"><div class="card-header"><span class="card-icon">&#x1FA7A;</span><span class="card-title">Health Events</span><span class="count">' + healthEvents.length + '</span></div><div class="health-timeline">' + healthEvents.map(function(ev) { return '<div class="health-row"><div class="health-date">' + esc(ev.date) + '</div><div class="health-type">' + (ev.type === 'health' ? 'Health' : 'Note') + '</div>' + (ev.notes ? '<div class="health-notes">' + esc(ev.notes) + '</div>' : '') + '</div>'; }).join('') + '</div></div>' : '';
 
