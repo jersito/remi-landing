@@ -196,6 +196,7 @@
             <div class="chart-card">
               <h3>Premium Upsell Conversion</h3>
               <div id="upsellStats"></div>
+              <div id="upsellSourceChart" style="margin-top: 16px;"></div>
               <div class="insight" id="upsellInsight"></div>
             </div>
           </div>
@@ -285,6 +286,17 @@
             <div class="stat-card"><div class="label">Prompt Tokens</div><div class="value" id="statPromptTokens">--</div></div>
             <div class="stat-card"><div class="label">Completion Tokens</div><div class="value" id="statCompletionTokens">--</div></div>
           </div>
+
+          <!-- Free vs Premium Split -->
+          <div class="stat-grid" style="margin-top:16px">
+            <div class="stat-card" style="border-left:3px solid #A8B8C2"><div class="label">Free Tier Cost</div><div class="value" id="statFreeCost">--</div></div>
+            <div class="stat-card" style="border-left:3px solid #A8B8C2"><div class="label">Free Tier Requests</div><div class="value" id="statFreeRequests">--</div></div>
+            <div class="stat-card" style="border-left:3px solid #D4956A"><div class="label">Premium Cost</div><div class="value" id="statPremiumCost">--</div></div>
+            <div class="stat-card" style="border-left:3px solid #D4956A"><div class="label">Premium Requests</div><div class="value" id="statPremiumRequests">--</div></div>
+            <div class="stat-card"><div class="label">Avg Cost/Free User</div><div class="value" id="statAvgFreeUserCost">--</div></div>
+            <div class="stat-card"><div class="label">Avg Cost/Premium User</div><div class="value" id="statAvgPremiumUserCost">--</div></div>
+          </div>
+
           <div class="chart-grid">
             <div class="chart-card">
               <h3>Cost by Model</h3>
@@ -294,6 +306,22 @@
               <h3>Daily Cost</h3>
               <div class="bar-chart" id="dailyCostChart"></div>
             </div>
+          </div>
+
+          <!-- Top AI Cost Users -->
+          <div class="chart-card" style="margin-top:16px">
+            <h3>Top AI Cost Users (Anonymous)</h3>
+            <table class="data-table" id="topAiUsersTable"><thead><tr><th>Anon ID</th><th>Tier</th><th>Requests</th><th>Cost</th></tr></thead><tbody></tbody></table>
+          </div>
+        </div>
+
+        <!-- USER STATS -->
+        <div class="section">
+          <h2>User Breakdown <span class="tag">Anonymous</span></h2>
+          <div class="stat-grid">
+            <div class="stat-card"><div class="label">Total Users (tracked)</div><div class="value" id="statTotalAnonUsers">--</div></div>
+            <div class="stat-card"><div class="label">Free Users</div><div class="value" id="statFreeUsers">--</div></div>
+            <div class="stat-card"><div class="label">Premium Users</div><div class="value" id="statPremiumUsers">--</div></div>
           </div>
         </div>
 
@@ -427,7 +455,7 @@
       renderScreenTime(data.screenTimeAvg, data.screenTimeSessions);
 
       // Upsell conversion
-      renderUpsellStats(data.upsellViews, data.upsellPurchases);
+      renderUpsellStats(data.upsellViews, data.upsellPurchases, data.trialStarted, data.subscriptionConverted, data.trialConversionRate, data.upsellViewsBySource, data.upsellPurchasesBySource);
 
       // User actions
       document.getElementById('statManual').textContent = (data.manualEntries ?? 0).toLocaleString();
@@ -446,6 +474,9 @@
 
       // AI cost tracking
       renderAiCost(data.aiCost);
+
+      // User stats
+      renderUserStats(data.userStats);
 
       // Top prompts
       renderPrompts(data.topPrompts);
@@ -640,38 +671,80 @@
       }).join('');
     }
 
-    function renderUpsellStats(views, purchases) {
+    function renderUpsellStats(views, purchases, trialStarts, converted, trialConvRate, viewsBySource, purchasesBySource) {
       const container = document.getElementById('upsellStats');
+      const sourceContainer = document.getElementById('upsellSourceChart');
       const insight = document.getElementById('upsellInsight');
-      const convRate = views > 0 ? ((purchases / views) * 100).toFixed(1) : '0.0';
+      const directRate = views > 0 ? ((purchases / views) * 100).toFixed(1) : '0.0';
+      const tRate = (trialConvRate * 100).toFixed(1);
 
       container.innerHTML = `
-        <div style="display:flex; gap:24px; margin-bottom:12px">
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; margin-bottom:16px">
           <div>
             <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Upsell Views</div>
-            <div style="font-size:28px; font-weight:700; color:#7A9DB0">${views}</div>
+            <div style="font-size:24px; font-weight:700; color:#7A9DB0">${views}</div>
           </div>
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Purchases</div>
-            <div style="font-size:28px; font-weight:700; color:#4CAF50">${purchases}</div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Direct Subs</div>
+            <div style="font-size:24px; font-weight:700; color:#4CAF50">${purchases}</div>
           </div>
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Conversion</div>
-            <div style="font-size:28px; font-weight:700; color:#D4956A">${convRate}%</div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Direct Conv</div>
+            <div style="font-size:24px; font-weight:700; color:#D4956A">${directRate}%</div>
+          </div>
+          <div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Trial Starts</div>
+            <div style="font-size:24px; font-weight:700; color:#8B7EC8">${trialStarts}</div>
+          </div>
+          <div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Trial Converted</div>
+            <div style="font-size:24px; font-weight:700; color:#5CB85C">${converted}</div>
+          </div>
+          <div>
+            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Trial Conv Rate</div>
+            <div style="font-size:24px; font-weight:700; color:#D4956A">${tRate}%</div>
           </div>
         </div>
         <div style="height:8px; background:#f0eeea; border-radius:4px; overflow:hidden">
-          <div style="height:100%; width:${Math.min(parseFloat(convRate), 100)}%; background:#D4956A; border-radius:4px"></div>
+          <div style="height:100%; width:${Math.min(parseFloat(tRate), 100)}%; background:#D4956A; border-radius:4px"></div>
         </div>`;
 
-      if (views === 0) {
-        insight.innerHTML = 'No upsell views yet.';
-      } else if (parseFloat(convRate) < 2) {
-        insight.innerHTML = `<strong>${convRate}% conversion</strong> is low. Consider adjusting pricing, adding a free trial, or making the value proposition clearer.`;
-      } else if (parseFloat(convRate) < 5) {
-        insight.innerHTML = `<strong>${convRate}% conversion</strong> is typical for mobile subscriptions. The referral alternative may be reducing direct purchases (which is fine if it drives growth).`;
+      // Render source breakdown
+      if (viewsBySource && Object.keys(viewsBySource).length > 0) {
+        const sortedSources = Object.keys(viewsBySource).sort((a, b) => viewsBySource[b] - viewsBySource[a]);
+        sourceContainer.innerHTML = `
+          <h4 style="font-size:12px; margin-bottom:8px; color:rgba(44,44,52,0.6); margin-top: 16px;">Conversion by Source</h4>
+          <table class="data-table">
+            <thead>
+              <tr><th>Source</th><th>Views</th><th>Subs</th><th>Rate</th></tr>
+            </thead>
+            <tbody>
+              ${sortedSources.map(src => {
+                const v = viewsBySource[src] || 0;
+                const p = purchasesBySource?.[src] || 0;
+                const r = v > 0 ? ((p / v) * 100).toFixed(1) : '0.0';
+                return `<tr>
+                  <td>${src}</td>
+                  <td>${v}</td>
+                  <td>${p}</td>
+                  <td style="font-weight:600; color:#D4956A">${r}%</td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        `;
       } else {
-        insight.innerHTML = `<strong>${convRate}% conversion</strong> is strong. Your pricing and value prop are working well.`;
+        sourceContainer.innerHTML = '';
+      }
+
+      if (views === 0 && trialStarts === 0) {
+        insight.innerHTML = 'No subscription activity yet.';
+      } else if (parseFloat(tRate) < 15 && trialStarts > 5) {
+        insight.innerHTML = `<strong>${tRate}% trial conversion</strong> is low. Consider adding more "lock-in" value during the 7-day trial period.`;
+      } else if (parseFloat(tRate) > 30) {
+        insight.innerHTML = `<strong>${tRate}% trial conversion</strong> is excellent! Your trial-to-paid funnel is working very well.`;
+      } else {
+        insight.innerHTML = `<strong>${tRate}% trial conversion</strong> is healthy. Keep monitoring for any drops after marketing changes.`;
       }
     }
 
@@ -845,6 +918,18 @@
       document.getElementById('statPromptTokens').textContent = aiCost.totalPromptTokens.toLocaleString();
       document.getElementById('statCompletionTokens').textContent = aiCost.totalCompletionTokens.toLocaleString();
 
+      // Free vs Premium split
+      if (aiCost.freeTier) {
+        document.getElementById('statFreeCost').textContent = '$' + aiCost.freeTier.cost.toFixed(4);
+        document.getElementById('statFreeRequests').textContent = aiCost.freeTier.requests.toLocaleString();
+      }
+      if (aiCost.premiumTier) {
+        document.getElementById('statPremiumCost').textContent = '$' + aiCost.premiumTier.cost.toFixed(4);
+        document.getElementById('statPremiumRequests').textContent = aiCost.premiumTier.requests.toLocaleString();
+      }
+      document.getElementById('statAvgFreeUserCost').textContent = '$' + (aiCost.avgCostPerFreeUser || 0).toFixed(6);
+      document.getElementById('statAvgPremiumUserCost').textContent = '$' + (aiCost.avgCostPerPremiumUser || 0).toFixed(6);
+
       // Cost by model table
       const tbody = document.querySelector('#costModelTable tbody');
       const models = Object.entries(aiCost.byModel || {}).sort((a, b) => b[1].cost - a[1].cost);
@@ -854,6 +939,16 @@
         tbody.innerHTML = models.map(([model, d]) =>
           `<tr><td>${model}</td><td>${d.requests.toLocaleString()}</td><td>${d.tokens.toLocaleString()}</td><td>$${d.cost.toFixed(4)}</td></tr>`
         ).join('');
+      }
+
+      // Top AI cost users table
+      const userTbody = document.querySelector('#topAiUsersTable tbody');
+      if (aiCost.topUsers && aiCost.topUsers.length > 0) {
+        userTbody.innerHTML = aiCost.topUsers.map(u =>
+          `<tr><td style="font-family:monospace;font-size:12px">${u.anonId}</td><td><span style="padding:2px 8px;border-radius:8px;font-size:11px;font-weight:600;background:${u.isPremium ? '#FEF0E6' : '#E4EEF3'};color:${u.isPremium ? '#D4956A' : '#7A9DB0'}">${u.isPremium ? 'Premium' : 'Free'}</span></td><td>${u.requests.toLocaleString()}</td><td>$${u.cost.toFixed(4)}</td></tr>`
+        ).join('');
+      } else {
+        userTbody.innerHTML = '<tr><td colspan="4" style="color:rgba(44,44,52,0.35)">No per-user data yet</td></tr>';
       }
 
       // Daily cost chart (reuse bar chart pattern)
@@ -867,6 +962,13 @@
         const pct = (cost / maxCost) * 100;
         return `<div class="bar-row"><span class="bar-label">${day.slice(5)}</span><div class="bar" style="width:${pct}%;background:#D4956A" title="$${cost.toFixed(4)}"></div><span class="bar-value">$${cost.toFixed(4)}</span></div>`;
       }).join('');
+    }
+
+    function renderUserStats(userStats) {
+      if (!userStats) return;
+      document.getElementById('statTotalAnonUsers').textContent = (userStats.totalAnonymousUsers ?? 0).toLocaleString();
+      document.getElementById('statFreeUsers').textContent = (userStats.freeUsers ?? 0).toLocaleString();
+      document.getElementById('statPremiumUsers').textContent = (userStats.premiumUsers ?? 0).toLocaleString();
     }
 
     function renderPrompts(prompts) {

@@ -603,3 +603,116 @@ ul { list-style: none; }
 .footer-links a { font-size: 0.85rem; transition: color 0.2s; }
 .footer-links a:hover { color: var(--white); }
 .footer-copy { font-size: 0.78rem; opacity: 0.35; }
+
+/* ========== Blog Preview Section ========== */
+.blog-preview-section {
+  padding: clamp(3rem, 6vw, 6rem) 0;
+  background: var(--cream);
+}
+.blog-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.blog-preview-card {
+  display: block;
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-decoration: none;
+  border: 1px solid rgba(122,157,176,0.12);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.blog-preview-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.blog-preview-cat {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+}
+.blog-preview-cat.sleep { background: #dbeafe; color: #1e40af; }
+.blog-preview-cat.feeding { background: #fce7f3; color: #9d174d; }
+.blog-preview-cat.milestones { background: #dcfce7; color: #166534; }
+.blog-preview-cat.tips { background: #fef9c3; color: #854d0e; }
+.blog-preview-card h3 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+.blog-preview-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.blog-preview-all {
+  display: inline-block;
+  color: var(--blue-dark);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 2px;
+  transition: opacity 0.15s;
+}
+.blog-preview-all:hover { opacity: 0.7; }
+@media (max-width: 900px) {
+  .blog-preview-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .blog-preview-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== What Remi Tracks Section ========== */
+.tracks-section {
+  padding: clamp(3rem, 6vw, 6rem) 0;
+  background: var(--blue-soft, #E4EEF3);
+}
+.tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.track-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem 1.5rem 1.75rem;
+  border: 1px solid rgba(122,157,176,0.12);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.track-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+.track-card h3 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--navy, #2C3E50);
+  margin-bottom: 0.5rem;
+}
+.track-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted, #5a6978);
+  line-height: 1.6;
+}
+@media (max-width: 900px) {
+  .tracks-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .tracks-grid { grid-template-columns: 1fr; }
+}
