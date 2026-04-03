@@ -606,43 +606,44 @@ ul { list-style: none; }
 
 /* ========== Blog Preview Section ========== */
 .blog-preview-section {
-  padding: clamp(3rem, 6vw, 6rem) 0;
-  background: var(--cream);
+  padding: clamp(4rem, 7vw, 7rem) 0;
+  background: #fff;
 }
 .blog-preview-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
+  gap: 1.5rem;
   margin-top: 2.5rem;
 }
 .blog-preview-card {
-  display: block;
-  background: #fff;
-  border-radius: 16px;
-  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream, #FAF9F7);
+  border-radius: 20px;
+  padding: 1.75rem 1.5rem;
   text-decoration: none;
-  border: 1px solid rgba(122,157,176,0.12);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  border: 1px solid rgba(44,62,80,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .blog-preview-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(44,62,80,0.1);
 }
 .blog-preview-cat {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.25rem 0.65rem;
-  border-radius: 20px;
-  margin-bottom: 0.75rem;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  margin-bottom: 0.85rem;
+  width: fit-content;
 }
-.blog-preview-cat.sleep { background: #dbeafe; color: #1e40af; }
-.blog-preview-cat.feeding { background: #fce7f3; color: #9d174d; }
-.blog-preview-cat.milestones { background: #dcfce7; color: #166534; }
-.blog-preview-cat.tips { background: #fef9c3; color: #854d0e; }
+.blog-preview-cat.sleep { background: rgba(122,157,176,0.12); color: #4a7a94; }
+.blog-preview-cat.feeding { background: rgba(212,149,106,0.12); color: #a06a3a; }
+.blog-preview-cat.milestones { background: rgba(92,184,92,0.12); color: #2d7a2d; }
+.blog-preview-cat.tips { background: rgba(139,126,200,0.12); color: #5a4f8a; }
 .blog-preview-card h3 {
   font-family: 'Nunito', sans-serif;
   font-size: 1.05rem;
@@ -652,21 +653,25 @@ ul { list-style: none; }
   line-height: 1.35;
 }
 .blog-preview-card p {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.6;
+  flex: 1;
 }
 .blog-preview-all {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   color: var(--blue-dark);
   font-weight: 700;
   font-size: 0.95rem;
   text-decoration: none;
-  border-bottom: 2px solid currentColor;
-  padding-bottom: 2px;
-  transition: opacity 0.15s;
+  padding: 0.7rem 1.5rem;
+  border-radius: 12px;
+  border: 2px solid var(--blue-dark);
+  transition: background 0.15s, color 0.15s;
 }
-.blog-preview-all:hover { opacity: 0.7; }
+.blog-preview-all:hover { background: var(--blue-dark); color: #fff; }
 @media (max-width: 900px) {
   .blog-preview-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -676,8 +681,8 @@ ul { list-style: none; }
 
 /* ========== What Remi Tracks Section ========== */
 .tracks-section {
-  padding: clamp(3rem, 6vw, 6rem) 0;
-  background: var(--blue-soft, #E4EEF3);
+  padding: clamp(4rem, 7vw, 7rem) 0;
+  background: linear-gradient(170deg, #f0f5f8 0%, #faf6f2 100%);
 }
 .tracks-grid {
   display: grid;
@@ -687,23 +692,34 @@ ul { list-style: none; }
 }
 .track-card {
   background: #fff;
-  border-radius: 16px;
-  padding: 1.5rem 1.5rem 1.75rem;
-  border: 1px solid rgba(122,157,176,0.12);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  border-radius: 20px;
+  padding: 2rem 1.75rem 2rem;
+  border: 1px solid rgba(122,157,176,0.08);
+  box-shadow: 0 4px 20px rgba(44,62,80,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.track-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(44,62,80,0.1);
 }
 .track-icon {
-  font-size: 2rem;
-  display: block;
-  margin-bottom: 0.75rem;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  margin-bottom: 1rem;
   line-height: 1;
+  background: linear-gradient(135deg, rgba(122,157,176,0.1) 0%, rgba(212,149,106,0.1) 100%);
 }
 .track-card h3 {
   font-family: 'Nunito', sans-serif;
   font-size: 1.05rem;
   font-weight: 800;
   color: var(--navy, #2C3E50);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 .track-card p {
   font-size: 0.88rem;
