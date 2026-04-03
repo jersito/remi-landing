@@ -321,7 +321,21 @@
           <div class="stat-grid">
             <div class="stat-card"><div class="label">Total Users (tracked)</div><div class="value" id="statTotalAnonUsers">--</div></div>
             <div class="stat-card"><div class="label">Free Users</div><div class="value" id="statFreeUsers">--</div></div>
-            <div class="stat-card"><div class="label">Premium Users</div><div class="value" id="statPremiumUsers">--</div></div>
+            <div class="stat-card"><div class="label">Premium Users</div><div class="value peach" id="statPremiumUsers">--</div></div>
+          </div>
+        </div>
+
+        <!-- ACTIVE VS INACTIVE -->
+        <div class="section">
+          <h2>User Activity <span class="tag">Engagement</span></h2>
+          <div class="stat-row">
+            <div class="stat-card"><div class="label">Active (last 7 days)</div><div class="value green" id="statActiveWeekly">--</div></div>
+            <div class="stat-card"><div class="label">Active (last 30 days)</div><div class="value blue" id="statActiveMonthly">--</div></div>
+            <div class="stat-card"><div class="label">Dormant (30+ days)</div><div class="value" id="statDormant">--</div></div>
+            <div class="stat-card"><div class="label">Downloaded but never used</div><div class="value red" id="statDownloadedOnly">--</div></div>
+          </div>
+          <div class="chart-card" style="margin-top:14px; background:#fff; border-radius:12px; padding:18px; box-shadow:0 1px 8px rgba(44,44,52,0.05);">
+            <div id="activityChart"></div>
           </div>
         </div>
 
@@ -969,6 +983,32 @@
       document.getElementById('statTotalAnonUsers').textContent = (userStats.totalAnonymousUsers ?? 0).toLocaleString();
       document.getElementById('statFreeUsers').textContent = (userStats.freeUsers ?? 0).toLocaleString();
       document.getElementById('statPremiumUsers').textContent = (userStats.premiumUsers ?? 0).toLocaleString();
+      document.getElementById('statActiveWeekly').textContent = (userStats.activeWeekly ?? 0).toLocaleString();
+      document.getElementById('statActiveMonthly').textContent = (userStats.activeMonthly ?? 0).toLocaleString();
+      document.getElementById('statDormant').textContent = (userStats.dormant ?? 0).toLocaleString();
+      document.getElementById('statDownloadedOnly').textContent = (userStats.downloadedOnly ?? 0).toLocaleString();
+
+      // Activity breakdown horizontal bars
+      const actContainer = document.getElementById('activityChart');
+      if (actContainer) {
+        const total = (userStats.totalAnonymousUsers || 1);
+        const segments = [
+          { label: 'Active (7 days)', value: userStats.activeWeekly ?? 0, color: '#4CAF50' },
+          { label: 'Active (30 days)', value: userStats.activeMonthly ?? 0, color: '#7A9DB0' },
+          { label: 'Dormant (30+ days)', value: userStats.dormant ?? 0, color: '#bbb' },
+          { label: 'Downloaded, never used', value: userStats.downloadedOnly ?? 0, color: '#e74c3c' },
+        ];
+        actContainer.innerHTML = segments.map(s => {
+          const pct = Math.round((s.value / total) * 100);
+          return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <span style="width:180px;font-size:13px;color:rgba(44,44,52,0.7)">${s.label}</span>
+            <div style="flex:1;background:#f0eeea;border-radius:6px;height:22px;overflow:hidden">
+              <div style="width:${pct}%;background:${s.color};height:100%;border-radius:6px;min-width:${s.value > 0 ? '2px' : '0'}"></div>
+            </div>
+            <span style="width:60px;text-align:right;font-size:13px;font-weight:600">${s.value} (${pct}%)</span>
+          </div>`;
+        }).join('');
+      }
     }
 
     function renderPrompts(prompts) {
