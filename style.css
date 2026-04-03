@@ -97,9 +97,9 @@ ul { list-style: none; }
 }
 /* Hero logo */
 .hero-logo {
-  height: 72px; width: auto; margin-bottom: 28px; display: block;
+  height: 120px; width: auto; margin-bottom: 28px; display: block;
   background: rgba(255,255,255,0.12); backdrop-filter: blur(10px);
-  padding: 10px 20px; border-radius: 16px;
+  padding: 14px 24px; border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -593,7 +593,7 @@ ul { list-style: none; }
 .footer-inner {
   display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center;
 }
-.footer-logo { height: 48px; width: auto; display: block; margin: 0 auto; }
+.footer-logo { height: 64px; width: auto; display: block; margin: 0 auto; }
 .footer-brand p { font-size: 0.85rem; margin-top: 4px; color: rgba(255,255,255,0.4); }
 .footer-trust {
   display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
