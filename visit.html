@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Visit Summary - Remi</title>
-<meta name="description" content="View your baby's visit summary - feeding, sleep, diaper stats and health events tracked with Remi." />
+<title>Visit Summary - Pippy</title>
+<meta name="description" content="View your baby's visit summary - feeding, sleep, diaper stats and health events tracked with Pippy." />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Baby Visit Summary - Remi" />
-<meta property="og:description" content="View feeding, sleep, and diaper stats tracked with the Remi baby tracker app." />
-<meta property="og:image" content="https://remibabyapp.com/og-image.png" />
-<meta property="og:site_name" content="Remi" />
+<meta property="og:title" content="Baby Visit Summary - Pippy" />
+<meta property="og:description" content="View feeding, sleep, and diaper stats tracked with the Pippy baby tracker app." />
+<meta property="og:image" content="https://remibabyapp.com/remi-logo.png" />
+<meta property="og:site_name" content="Pippy" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Baby Visit Summary - Remi" />
-<meta name="twitter:description" content="View feeding, sleep, and diaper stats tracked with the Remi baby tracker app." />
+<meta name="twitter:title" content="Baby Visit Summary - Pippy" />
+<meta name="twitter:description" content="View feeding, sleep, and diaper stats tracked with the Pippy baby tracker app." />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -715,20 +715,20 @@ function renderSummary(data) {
       '</div>';
   }
 
-  return '<div class="header"><div class="brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" class="brand-logo" alt="Remi"/></div><h1>' + esc(babyName) + '</h1><p class="age">' + esc(ageLabel) + '</p>' + (dobLabel ? '<p class="dob">' + esc(dobLabel) + '</p>' : '') + '<p class="period">' + start + ' to ' + end + '</p></div>' +
+  return '<div class="header"><div class="brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" class="brand-logo" alt="Pippy"/></div><h1>' + esc(babyName) + '</h1><p class="age">' + esc(ageLabel) + '</p>' + (dobLabel ? '<p class="dob">' + esc(dobLabel) + '</p>' : '') + '<p class="period">' + start + ' to ' + end + '</p></div>' +
     rangeSelector +
     '<div class="card"><div class="card-header"><span class="card-icon">&#x1F37C;</span><span class="card-title">Feeding</span></div>' + (feeding.totalFeedings > 0 ? '<div class="stats-row"><div class="stat-pill accent-blue"><div class="stat-value">' + feeding.avgFeedingsPerDay + '</div><div class="stat-label">Avg Feeds / Day</div></div>' + (feeding.avgAmountMl !== null ? '<div class="stat-pill accent-peach"><div class="stat-value">' + feeding.avgAmountMl + ' mL</div><div class="stat-label">Avg per Bottle</div></div>' : '') + (feeding.avgDurationMin !== null ? '<div class="stat-pill accent-blue" style="background:rgba(122,157,176,0.08);"><div class="stat-value">' + feeding.avgDurationMin + ' min</div><div class="stat-label">Avg per Breast</div></div>' : '') + '</div>' + breakdownBar + '<p class="chart-label">Daily feed counts</p>' + feedChart + feedNotable + '<div class="day-detail" id="detail-feeding"></div>' : '<p class="empty">No feeding data recorded</p>') + '</div>' +
     '<div class="card"><div class="card-header"><span class="card-icon">&#x1F4A7;</span><span class="card-title">Diapers</span></div>' + (diaper.avgTotalPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-sky"><div class="stat-value">' + diaper.avgWetPerDay + '</div><div class="stat-label">Avg Wet / Day</div></div><div class="stat-pill accent-peach"><div class="stat-value">' + diaper.avgDirtyPerDay + '</div><div class="stat-label">Avg Dirty / Day</div></div></div><p class="chart-label">Daily diaper counts</p>' + diaperChart + diaperNotable + '<div class="day-detail" id="detail-diaper"></div>' : '<p class="empty">No diaper data recorded</p>') + '</div>' +
     '<div class="card"><div class="card-header"><span class="card-icon">&#x1F634;</span><span class="card-title">Sleep</span></div>' + (sleep.avgHoursPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-purple"><div class="stat-value">' + sleep.avgHoursPerDay + 'h</div><div class="stat-label">Avg Total / Day</div></div><div class="stat-pill accent-blue"><div class="stat-value">' + avgNaps + '</div><div class="stat-label">Avg Naps / Day</div></div></div><p class="chart-label">Daily sleep hours</p>' + sleepChart + sleepNotable + '<div class="day-detail" id="detail-sleep"></div>' : '<p class="empty">No sleep data recorded</p>') + '</div>' +
     warningsSection +
     healthSection +
-    '<div class="footer"><div class="footer-brand">Shared via <a href="' + LANDING_URL + '" target="_blank" rel="noopener" class="footer-link">Remi</a> &middot; ' + formatDate(new Date()) + '</div></div>';
+    '<div class="footer"><div class="footer-brand">Shared via <a href="' + LANDING_URL + '" target="_blank" rel="noopener" class="footer-link">Pippy</a> &middot; ' + formatDate(new Date()) + '</div></div>';
 }
 
 function showError(message) {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('error').style.display = 'block';
-  document.getElementById('error').innerHTML = '<div class="error-wrap"><div class="error-brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" alt="Remi"/></div><div class="error-card"><div class="error-icon">&#x26A0;</div><h2>Something went wrong</h2><p>' + esc(message) + '</p></div><div class="error-footer">Remi Baby Tracker</div></div>';
+  document.getElementById('error').innerHTML = '<div class="error-wrap"><div class="error-brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" alt="Pippy"/></div><div class="error-card"><div class="error-icon">&#x26A0;</div><h2>Something went wrong</h2><p>' + esc(message) + '</p></div><div class="error-footer">Pippy Baby Tracker</div></div>';
 }
 
 function generateDemoData(numDays) {

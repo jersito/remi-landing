@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
-  <title>Remi Analytics Dashboard</title>
+  <title>Pippy Analytics Dashboard</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF9F7; color: #2C2C34; }
@@ -111,7 +111,7 @@
   <!-- Login gate -->
   <div class="login-gate" id="loginGate">
     <div class="login-card">
-      <h1>Remi Analytics</h1>
+      <h1>Pippy Analytics</h1>
       <p>Enter the dashboard password to continue.</p>
       <input type="password" id="passwordInput" placeholder="Password" autofocus />
       <button onclick="handleLogin()">Sign In</button>
@@ -122,7 +122,7 @@
   <!-- Dashboard -->
   <div class="dashboard" id="dashboard">
     <div class="dash-header">
-      <h1>Remi Analytics</h1>
+      <h1>Pippy Analytics</h1>
       <div class="dash-controls">
         <select id="dayRange" onchange="loadData()">
           <option value="7">Last 7 days</option>
@@ -343,7 +343,7 @@
         <div class="section">
           <h2>Top Chat Prompts <span class="tag">User Behavior</span></h2>
           <div class="chart-card">
-            <h3>Most common messages sent to Remi</h3>
+            <h3>Most common messages sent to Pippy</h3>
             <table class="data-table" id="promptTable"><thead><tr><th>Prompt</th><th>Count</th></tr></thead><tbody></tbody></table>
           </div>
         </div>
@@ -821,7 +821,7 @@
       } else if (avg <= 4) {
         insight.innerHTML = 'Users are having short conversations. They may be logging multiple events or asking follow-up questions.';
       } else {
-        insight.innerHTML = '<strong>High engagement.</strong> Users are having real conversations with Remi, not just logging.';
+        insight.innerHTML = '<strong>High engagement.</strong> Users are having real conversations with Pippy, not just logging.';
       }
     }
 

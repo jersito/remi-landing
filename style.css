@@ -676,7 +676,7 @@ ul { list-style: none; }
   .blog-preview-grid { grid-template-columns: 1fr; }
 }
 
-/* ========== What Remi Tracks Section ========== */
+/* ========== What Pippy Tracks Section ========== */
 .tracks-section {
   padding: clamp(4rem, 7vw, 7rem) 0;
   background: linear-gradient(170deg, #f0f5f8 0%, #faf6f2 100%);
