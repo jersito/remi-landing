@@ -81,6 +81,24 @@
   <!-- Post Grid -->
   <div class="blog-grid" id="posts">
 
+    <a href="/blog/newborn-umbilical-cord-care.html" class="post-card">
+      <div class="post-card-body">
+        <span class="post-card-cat diapers">Diapers &amp; Health</span>
+        <h2 class="post-card-title">Newborn Umbilical Cord Care: What to Know and When to Call Your Doctor</h2>
+        <p class="post-card-excerpt">Learn how to care for your newborn's umbilical cord stump, what's normal during healing, and when it's time to reach out to your pediatrician.</p>
+        <span class="post-card-meta">April 5, 2026</span>
+      </div>
+    </a>
+
+    <a href="/blog/when-do-babies-pull-to-stand.html" class="post-card">
+      <div class="post-card-body">
+        <span class="post-card-cat milestones">Milestones</span>
+        <h2 class="post-card-title">When Do Babies Pull to Stand? What to Expect</h2>
+        <p class="post-card-excerpt">Most babies pull to stand between 8 and 10 months. Learn what to expect, how to help your baby practice safely, and when to check in with your pediatrician.</p>
+        <span class="post-card-meta">April 4, 2026</span>
+      </div>
+    </a>
+
     <a href="/blog/how-to-soothe-colicky-baby.html" class="post-card">
       <div class="post-card-body">
         <span class="post-card-cat diapers">Diapers &amp; Health</span>
@@ -820,27 +838,4 @@
         <a href="https://remibabyapp.com">Home</a>
         <a href="/blog/">Blog</a>
         <a href="https://remibabyapp.com/privacy.html">Privacy Policy</a>
-        <a href="https://remibabyapp.com/terms.html">Terms of Service</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    document.querySelectorAll('.cat-pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const cat = btn.dataset.cat;
-        document.querySelectorAll('.post-card').forEach(card => {
-          if (cat === 'all') { card.style.display = ''; return; }
-          const cardCat = card.querySelector('.post-card-cat');
-          card.style.display = cardCat && cardCat.classList.contains(cat) ? '' : 'none';
-        });
-      });
-    });
-  </script>
-
-  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-
-</body>
-</html>
+        <a href="h

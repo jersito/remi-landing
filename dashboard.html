@@ -313,6 +313,14 @@
             <h3>Top AI Cost Users (Anonymous)</h3>
             <table class="data-table" id="topAiUsersTable"><thead><tr><th>Anon ID</th><th>Tier</th><th>Requests</th><th>Cost</th></tr></thead><tbody></tbody></table>
           </div>
+
+          <!-- Response Time -->
+          <div class="chart-card" style="margin-top:16px">
+            <h3>AI Response Time Distribution</h3>
+            <div id="responseTimePercentiles" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px"></div>
+            <div class="bar-chart" id="responseTimeChart" style="height:160px"></div>
+            <div class="insight" id="responseTimeInsight"></div>
+          </div>
         </div>
 
         <!-- USER STATS -->
@@ -488,6 +496,7 @@
 
       // AI cost tracking
       renderAiCost(data.aiCost);
+      renderResponseTime(data.aiCost?.responseTimeHistogram, data.aiCost?.responseTimePercentiles);
 
       // User stats
       renderUserStats(data.userStats);
@@ -976,6 +985,60 @@
         const pct = (cost / maxCost) * 100;
         return `<div class="bar-row"><span class="bar-label">${day.slice(5)}</span><div class="bar" style="width:${pct}%;background:#D4956A" title="$${cost.toFixed(4)}"></div><span class="bar-value">$${cost.toFixed(4)}</span></div>`;
       }).join('');
+    }
+
+    function renderResponseTime(histogram, percentiles) {
+      const chartEl = document.getElementById('responseTimeChart');
+      const percEl = document.getElementById('responseTimePercentiles');
+      const insightEl = document.getElementById('responseTimeInsight');
+
+      if (!histogram || !percentiles || percentiles.count === 0) {
+        chartEl.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px;margin:auto;align-self:center">No response time data yet — appears after the next deploy.</p>';
+        percEl.innerHTML = '';
+        insightEl.innerHTML = '';
+        return;
+      }
+
+      // Percentile stat pills
+      const fmt = ms => ms >= 1000 ? (ms / 1000).toFixed(1) + 's' : ms + 'ms';
+      const pills = [
+        { label: 'p50', value: percentiles.p50, color: '#4CAF50' },
+        { label: 'p75', value: percentiles.p75, color: '#7A9DB0' },
+        { label: 'p90', value: percentiles.p90, color: '#D4956A' },
+        { label: 'p95', value: percentiles.p95, color: '#e97a3a' },
+        { label: 'p99', value: percentiles.p99, color: '#e74c3c' },
+        { label: 'max', value: percentiles.max, color: '#888' },
+      ];
+      percEl.innerHTML = pills.map(p =>
+        `<div style="background:#f5f4f0;border-radius:8px;padding:8px 14px;text-align:center;min-width:72px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:${p.color};margin-bottom:2px">${p.label}</div>
+          <div style="font-size:18px;font-weight:700;color:#2C2C34">${fmt(p.value)}</div>
+        </div>`
+      ).join('');
+
+      // Histogram bars
+      const maxCount = Math.max(...histogram.map(b => b.count), 1);
+      chartEl.innerHTML = histogram.map(b => {
+        const pct = Math.max((b.count / maxCount) * 100, b.count > 0 ? 3 : 0);
+        const isGood = ['<1s', '1-2s'].includes(b.label);
+        const isBad = ['8-12s', '12s+'].includes(b.label);
+        const barColor = isGood ? '#4CAF50' : isBad ? '#e74c3c' : '#7A9DB0';
+        return `<div class="bar-col">
+          <div class="bar" style="height:${pct}%;background:${barColor}">
+            <div class="bar-tooltip">${b.label}: ${b.count.toLocaleString()} req${b.count !== 1 ? 's' : ''}</div>
+          </div>
+          <div class="bar-label">${b.label}</div>
+        </div>`;
+      }).join('');
+
+      // Insight
+      const fastCount = (histogram.find(b => b.label === '<1s')?.count || 0) + (histogram.find(b => b.label === '1-2s')?.count || 0);
+      const fastPct = Math.round((fastCount / percentiles.count) * 100);
+      const slowCount = (histogram.find(b => b.label === '8-12s')?.count || 0) + (histogram.find(b => b.label === '12s+')?.count || 0);
+      const slowPct = Math.round((slowCount / percentiles.count) * 100);
+      insightEl.innerHTML = `<strong>${fastPct}%</strong> of responses complete under 2s. ` +
+        `<strong>Half</strong> are done in ${fmt(percentiles.p50)} or less. ` +
+        (slowPct > 0 ? `<strong>${slowPct}%</strong> take longer than 8s — likely complex multi-step or image requests.` : 'No significant slow outliers.');
     }
 
     function renderUserStats(userStats) {
