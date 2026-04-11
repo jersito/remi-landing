@@ -5,112 +5,279 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Pippy Analytics Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF9F7; color: #2C2C34; }
+    /* ===== CSS Variables ===== */
+    :root {
+      --bg: #F5F4F0;
+      --bg-card: rgba(255,255,255,0.82);
+      --bg-card-solid: #FFFFFF;
+      --bg-card-hover: rgba(255,255,255,0.95);
+      --bg-sidebar: rgba(255,255,255,0.88);
+      --bg-header: rgba(245,244,240,0.85);
+      --bg-login: linear-gradient(135deg, #FBF5EF 0%, #EDE8F5 50%, #E4EEF3 100%);
+      --bg-input: #FFFFFF;
+      --text: #1A1A2E;
+      --text-2: rgba(26,26,46,0.6);
+      --text-3: rgba(26,26,46,0.4);
+      --border: rgba(26,26,46,0.08);
+      --border-2: rgba(26,26,46,0.05);
+      --shadow-xs: 0 1px 2px rgba(26,26,46,0.03);
+      --shadow-sm: 0 1px 4px rgba(26,26,46,0.05);
+      --shadow-md: 0 4px 20px rgba(26,26,46,0.07);
+      --shadow-lg: 0 12px 40px rgba(26,26,46,0.1);
+      --peach: #D4956A;
+      --blue: #7A9DB0;
+      --green: #4CAF50;
+      --red: #E74C3C;
+      --purple: #8B7EC8;
+      --grad-peach: linear-gradient(135deg, #D4956A, #E8B08A);
+      --grad-blue: linear-gradient(135deg, #7A9DB0, #9BB8C8);
+      --grad-green: linear-gradient(135deg, #4CAF50, #6BC96F);
+      --grad-red: linear-gradient(135deg, #E74C3C, #F09488);
+      --grad-purple: linear-gradient(135deg, #8B7EC8, #A99BDB);
+      --track: #EEECEA;
+      --stripe: rgba(26,26,46,0.018);
+      --row-hover: rgba(26,26,46,0.03);
+      --sb-w: 240px;
+    }
+    [data-theme="dark"] {
+      --bg: #0E0E16;
+      --bg-card: rgba(28,28,44,0.75);
+      --bg-card-solid: #1C1C2C;
+      --bg-card-hover: rgba(38,38,58,0.88);
+      --bg-sidebar: rgba(18,18,28,0.94);
+      --bg-header: rgba(14,14,22,0.88);
+      --bg-login: linear-gradient(135deg, #18131E 0%, #121220 50%, #0E1518 100%);
+      --bg-input: #1C1C2C;
+      --text: #E8E6E0;
+      --text-2: rgba(232,230,224,0.55);
+      --text-3: rgba(232,230,224,0.3);
+      --border: rgba(232,230,224,0.07);
+      --border-2: rgba(232,230,224,0.04);
+      --shadow-xs: 0 1px 2px rgba(0,0,0,0.15);
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.25);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.35);
+      --track: rgba(232,230,224,0.06);
+      --stripe: rgba(255,255,255,0.02);
+      --row-hover: rgba(255,255,255,0.04);
+    }
 
-    /* Login gate */
-    .login-gate { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
-    .login-card { background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 4px 24px rgba(44,44,52,0.08); max-width: 380px; width: 100%; text-align: center; }
-    .login-card h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
-    .login-card p { font-size: 14px; color: rgba(44,44,52,0.55); margin-bottom: 24px; }
-    .login-card input { width: 100%; padding: 12px 16px; border: 1px solid #e8e6e0; border-radius: 10px; font-size: 15px; margin-bottom: 16px; outline: none; }
-    .login-card input:focus { border-color: #7A9DB0; }
-    .login-card button { width: 100%; padding: 12px; border: none; border-radius: 10px; background: #D4956A; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; }
-    .login-card button:hover { opacity: 0.9; }
-    .login-error { color: #e74c3c; font-size: 13px; margin-top: 8px; display: none; }
+    /* ===== Reset ===== */
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden;transition:background .3s,color .3s;}
+    ::-webkit-scrollbar{width:5px;height:5px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 
-    /* Dashboard */
-    .dashboard { display: none; max-width: 1200px; margin: 0 auto; padding: 24px; }
-    .dashboard.visible { display: block; }
-    .login-gate.hidden { display: none; }
+    /* ===== Animations ===== */
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+    @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+    .anim-in{opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}
+    .anim-in.visible{opacity:1;transform:translateY(0)}
 
-    .dash-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
-    .dash-header h1 { font-size: 24px; font-weight: 700; }
-    .dash-controls { display: flex; gap: 8px; align-items: center; }
-    .dash-controls select, .dash-controls button { padding: 8px 16px; border-radius: 8px; border: 1px solid #e8e6e0; background: #fff; font-size: 13px; cursor: pointer; }
-    .dash-controls button { background: #7A9DB0; color: #fff; border: none; font-weight: 600; }
+    /* ===== Login ===== */
+    .login-gate{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px;background:var(--bg-login);animation:scaleIn .5s ease}
+    .login-card{background:var(--bg-card);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.25);border-radius:28px;padding:52px 44px;box-shadow:var(--shadow-lg);max-width:400px;width:100%;text-align:center;animation:scaleIn .45s ease .15s both}
+    .login-logo{width:68px;height:68px;border-radius:16px;margin:0 auto 20px;display:block;box-shadow:var(--shadow-md)}
+    .login-card h1{font-size:26px;font-weight:800;margin-bottom:6px;background:linear-gradient(135deg,var(--peach),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .login-card p{font-size:14px;color:var(--text-2);margin-bottom:28px}
+    .login-card input{width:100%;padding:14px 18px;border:1px solid var(--border);border-radius:12px;font-size:15px;font-family:inherit;margin-bottom:16px;outline:none;background:var(--bg-input);color:var(--text);transition:border-color .2s,box-shadow .2s}
+    .login-card input:focus{border-color:var(--peach);box-shadow:0 0 0 3px rgba(212,149,106,.12)}
+    .login-card button{width:100%;padding:14px;border:none;border-radius:12px;background:var(--grad-peach);color:#fff;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;transition:transform .15s,box-shadow .2s}
+    .login-card button:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(212,149,106,.3)}
+    .login-card button:active{transform:translateY(0)}
+    .login-error{color:var(--red);font-size:13px;margin-top:12px;display:none;font-weight:500}
+    .login-gate.hidden{display:none}
 
-    /* Stat cards */
-    .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 28px; }
-    .stat-card { background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 1px 8px rgba(44,44,52,0.05); }
-    .stat-card .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: rgba(44,44,52,0.45); margin-bottom: 4px; }
-    .stat-card .value { font-size: 26px; font-weight: 700; color: #2C2C34; }
-    .stat-card .value.peach { color: #D4956A; }
-    .stat-card .value.blue { color: #7A9DB0; }
-    .stat-card .value.green { color: #4CAF50; }
-    .stat-card .value.red { color: #e74c3c; }
+    /* ===== Sidebar ===== */
+    .sidebar{position:fixed;top:0;left:0;width:var(--sb-w);height:100vh;background:var(--bg-sidebar);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-right:1px solid var(--border);z-index:100;display:none;flex-direction:column;overflow-y:auto;transition:transform .3s}
+    .sidebar.visible{display:flex}
+    .sb-brand{display:flex;align-items:center;gap:12px;padding:22px 20px 18px;border-bottom:1px solid var(--border);margin-bottom:6px}
+    .sb-brand img{width:34px;height:34px;border-radius:10px}
+    .sb-brand span{font-size:17px;font-weight:800;background:linear-gradient(135deg,var(--peach),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .sb-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-3);padding:16px 22px 6px}
+    .sb-nav{flex:1;padding:0 10px}
+    .sb-link{display:flex;align-items:center;gap:11px;padding:9px 14px;border-radius:10px;font-size:13px;font-weight:500;color:var(--text-2);text-decoration:none;cursor:pointer;transition:all .2s;margin-bottom:1px;user-select:none}
+    .sb-link:hover{background:var(--border);color:var(--text)}
+    .sb-link.active{background:rgba(212,149,106,.1);color:var(--peach);font-weight:600}
+    .sb-link .ico{width:20px;text-align:center;font-size:14px;flex-shrink:0;filter:grayscale(.3)}
+    .sb-link.active .ico{filter:none}
 
-    /* Section */
-    .section { margin-bottom: 28px; }
-    .section h2 { font-size: 16px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-    .section h2 .tag { font-size: 10px; font-weight: 600; background: #D4956A; color: #fff; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    /* Mobile */
+    .mobile-btn{display:none;position:fixed;top:14px;left:14px;z-index:200;width:40px;height:40px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);cursor:pointer;align-items:center;justify-content:center;font-size:18px;color:var(--text)}
+    .sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:90}
+    .sb-overlay.visible{display:block}
 
-    .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    @media (max-width: 768px) { .chart-grid { grid-template-columns: 1fr; } }
-    .chart-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-    @media (max-width: 900px) { .chart-grid-3 { grid-template-columns: 1fr; } }
+    /* ===== Main Content ===== */
+    .dashboard{display:none;margin-left:var(--sb-w);min-height:100vh;transition:margin-left .3s}
+    .dashboard.visible{display:block}
 
-    .chart-card { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 8px rgba(44,44,52,0.05); }
-    .chart-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 10px; color: rgba(44,44,52,0.6); }
-    .chart-card .insight { font-size: 12px; color: rgba(44,44,52,0.5); margin-top: 10px; line-height: 17px; border-top: 1px solid #f0eeea; padding-top: 10px; }
-    .chart-card .insight strong { color: #2C2C34; }
+    /* Sticky header */
+    .dash-header{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:var(--bg-header);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px}
+    .dash-header h1{font-size:20px;font-weight:800;letter-spacing:-.3px}
+    .dash-controls{display:flex;gap:8px;align-items:center}
+    .dash-controls select,.dash-controls button{padding:8px 16px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card-solid);color:var(--text);font-size:13px;font-family:inherit;cursor:pointer;transition:all .2s}
+    .dash-controls button.primary{background:var(--grad-blue);color:#fff;border:none;font-weight:600}
+    .dash-controls button.primary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(122,157,176,.3)}
+    .theme-toggle{width:36px!important;height:36px;padding:0!important;display:flex!important;align-items:center;justify-content:center;font-size:16px;border-radius:10px!important}
 
-    /* Bar chart */
-    .bar-chart { display: flex; align-items: flex-end; gap: 3px; height: 140px; padding-top: 8px; }
-    .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
-    .bar { width: 100%; min-width: 4px; border-radius: 4px 4px 0 0; background: #7A9DB0; transition: height 0.3s ease; position: relative; cursor: pointer; }
-    .bar.peach { background: #D4956A; }
-    .bar:hover { opacity: 0.8; }
-    .bar-label { font-size: 9px; color: rgba(44,44,52,0.4); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 36px; }
-    .bar-tooltip { display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #2C2C34; color: #fff; font-size: 11px; padding: 3px 8px; border-radius: 4px; white-space: nowrap; margin-bottom: 4px; z-index: 10; }
-    .bar:hover .bar-tooltip { display: block; }
+    /* ===== Page Panels (sidebar-driven) ===== */
+    .page-panel{display:none;padding:28px 32px;max-width:1100px;animation:fadeUp .35s ease}
+    .page-panel.active{display:block}
 
-    /* Horizontal bar */
-    .h-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .h-bar-label { font-size: 13px; width: 100px; text-align: right; color: rgba(44,44,52,0.7); flex-shrink: 0; }
-    .h-bar-track { flex: 1; height: 20px; background: #f0eeea; border-radius: 6px; overflow: hidden; }
-    .h-bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; transition: width 0.3s ease; }
-    .h-bar-fill span { font-size: 11px; font-weight: 600; color: #fff; white-space: nowrap; }
+    /* ===== Stat Cards ===== */
+    .stat-row,.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:24px}
+    .stat-card{background:var(--bg-card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border-2);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow-xs);transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+    .stat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:var(--grad-peach);opacity:0;transition:opacity .25s}
+    .stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+    .stat-card:hover::after{opacity:1}
+    .stat-card .label{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;color:var(--text-3);margin-bottom:5px}
+    .stat-card .value{font-size:26px;font-weight:800;letter-spacing:-.5px;color:var(--text)}
+    .stat-card .value.peach{color:var(--peach)}
+    .stat-card .value.blue{color:var(--blue)}
+    .stat-card .value.green{color:var(--green)}
+    .stat-card .value.red{color:var(--red)}
 
-    /* Funnel */
-    .funnel-step { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0eeea; }
-    .funnel-step:last-child { border-bottom: none; }
-    .funnel-num { font-size: 22px; font-weight: 700; width: 60px; text-align: right; }
-    .funnel-info { flex: 1; }
-    .funnel-name { font-size: 14px; font-weight: 600; color: #2C2C34; }
-    .funnel-pct { font-size: 12px; color: rgba(44,44,52,0.45); }
-    .funnel-bar { width: 100%; height: 4px; background: #f0eeea; border-radius: 2px; margin-top: 4px; }
-    .funnel-bar-fill { height: 100%; border-radius: 2px; background: #D4956A; }
+    /* ===== Section ===== */
+    .section{margin-bottom:32px}
+    .section h2{font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;letter-spacing:-.15px}
+    .section h2 .tag{font-size:9.5px;font-weight:600;background:var(--grad-peach);color:#fff;padding:2.5px 9px;border-radius:7px;text-transform:uppercase;letter-spacing:.5px}
 
-    /* Table */
-    .data-table { width: 100%; border-collapse: collapse; }
-    .data-table th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: rgba(44,44,52,0.45); padding: 8px 12px; border-bottom: 1px solid #e8e6e0; }
-    .data-table td { padding: 8px 12px; font-size: 13px; border-bottom: 1px solid #f0eeea; }
-    .data-table tr:hover td { background: #FAF9F7; }
-    .count-bar { display: inline-block; height: 6px; border-radius: 3px; background: #D4956A; margin-right: 8px; vertical-align: middle; }
+    /* ===== Chart Grid ===== */
+    .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media(max-width:900px){.chart-grid{grid-template-columns:1fr}}
+    .chart-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+    @media(max-width:900px){.chart-grid-3{grid-template-columns:1fr}}
 
-    /* Tabs */
-    .tab-row { display: flex; gap: 4px; margin-bottom: 24px; border-bottom: 1px solid #e8e6e0; }
-    .tab-btn { padding: 10px 20px; font-size: 14px; font-weight: 500; border: none; background: none; cursor: pointer; color: rgba(44,44,52,0.45); border-bottom: 2px solid transparent; margin-bottom: -1px; }
-    .tab-btn.active { color: #2C2C34; border-bottom-color: #D4956A; font-weight: 600; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    /* ===== Chart Card ===== */
+    .chart-card{background:var(--bg-card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border-2);border-radius:14px;padding:20px;box-shadow:var(--shadow-xs);transition:transform .25s,box-shadow .25s}
+    .chart-card:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+    .chart-card h3{font-size:12.5px;font-weight:600;margin-bottom:12px;color:var(--text-2)}
+    .chart-card .insight{font-size:12px;color:var(--text-2);margin-top:12px;line-height:17px;border-top:1px solid var(--border);padding-top:10px}
+    .chart-card .insight strong{color:var(--text)}
 
-    /* Loading */
-    .loading { text-align: center; padding: 60px; color: rgba(44,44,52,0.45); font-size: 15px; }
-    .spinner { width: 32px; height: 32px; border: 3px solid #e8e6e0; border-top-color: #D4956A; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    /* ===== Bar Chart ===== */
+    .bar-chart{display:flex;align-items:flex-end;gap:3px;height:140px;padding-top:8px;position:relative}
+    .bar-chart::before{content:'';position:absolute;inset:8px 0 20px 0;background:repeating-linear-gradient(to bottom,var(--border-2) 0px,var(--border-2) 1px,transparent 1px,transparent 25%);pointer-events:none;z-index:0}
+    .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative;z-index:1}
+    .bar{width:100%;min-width:4px;border-radius:5px 5px 0 0;background:var(--blue);transition:height .4s cubic-bezier(.4,0,.2,1),box-shadow .2s;position:relative;cursor:pointer}
+    .bar.peach{background:var(--peach)}
+    .bar:hover{box-shadow:0 0 10px rgba(122,157,176,.25)}
+    .bar.peach:hover{box-shadow:0 0 10px rgba(212,149,106,.25)}
+    .bar-label{font-size:9px;color:var(--text-3);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:36px}
+    .bar-tooltip{display:none;position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);font-size:11px;font-weight:500;padding:5px 10px;border-radius:7px;white-space:nowrap;margin-bottom:5px;z-index:10;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .bar:hover .bar-tooltip{display:block}
 
-    /* GoatCounter embed */
-    .gc-frame { width: 100%; border: none; border-radius: 12px; min-height: 600px; background: #fff; box-shadow: 0 1px 8px rgba(44,44,52,0.05); }
+    /* ===== Horizontal Bar ===== */
+    .h-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+    .h-bar-label{font-size:12.5px;width:100px;text-align:right;color:var(--text-2);flex-shrink:0;font-weight:500}
+    .h-bar-track{flex:1;height:22px;background:var(--track);border-radius:7px;overflow:hidden}
+    .h-bar-fill{height:100%;border-radius:7px;display:flex;align-items:center;padding-left:10px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+    .h-bar-fill span{font-size:11px;font-weight:600;color:#fff;white-space:nowrap}
+
+    /* ===== Funnel ===== */
+    .funnel-step{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--border-2)}
+    .funnel-step:last-child{border-bottom:none}
+    .funnel-num{font-size:22px;font-weight:800;width:60px;text-align:right;letter-spacing:-.5px}
+    .funnel-info{flex:1}
+    .funnel-name{font-size:14px;font-weight:600;color:var(--text)}
+    .funnel-pct{font-size:12px;color:var(--text-3)}
+    .funnel-bar{width:100%;height:4px;background:var(--track);border-radius:2px;margin-top:5px}
+    .funnel-bar-fill{height:100%;border-radius:2px;background:var(--peach);transition:width .5s ease}
+
+    /* ===== Tables ===== */
+    .data-table{width:100%;border-collapse:separate;border-spacing:0}
+    .data-table th{text-align:left;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-3);padding:9px 14px;border-bottom:1px solid var(--border)}
+    .data-table td{padding:9px 14px;font-size:13px;border-bottom:1px solid var(--border-2)}
+    .data-table tbody tr:nth-child(even) td{background:var(--stripe)}
+    .data-table tbody tr:hover td{background:var(--row-hover)}
+    .data-table tbody tr:first-child td:first-child{border-top-left-radius:8px}
+    .data-table tbody tr:first-child td:last-child{border-top-right-radius:8px}
+    .data-table tbody tr:last-child td:first-child{border-bottom-left-radius:8px}
+    .data-table tbody tr:last-child td:last-child{border-bottom-right-radius:8px}
+    .count-bar{display:inline-block;height:5px;border-radius:3px;background:var(--peach);margin-right:8px;vertical-align:middle}
+
+    /* ===== Loading ===== */
+    .loading{text-align:center;padding:40px 24px;color:var(--text-3);font-size:14px;font-weight:500}
+    .spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--peach);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}
+    .skeleton-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:24px}
+    .skeleton-card{background:var(--bg-card);border-radius:14px;padding:18px 20px;border:1px solid var(--border-2)}
+    .skeleton-line{height:12px;border-radius:6px;background:linear-gradient(90deg,var(--track) 25%,var(--bg) 50%,var(--track) 75%);background-size:200% 100%;animation:shimmer 1.5s ease infinite;margin-bottom:10px}
+    .skeleton-line.short{width:55%}
+    .skeleton-line.tall{height:26px;width:45%;margin-bottom:0}
+    .skeleton-chart{background:var(--bg-card);border-radius:14px;padding:20px;border:1px solid var(--border-2);height:180px;display:flex;align-items:flex-end;gap:6px;padding-top:36px}
+    .skeleton-bar{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(90deg,var(--track) 25%,var(--bg) 50%,var(--track) 75%);background-size:200% 100%;animation:shimmer 1.5s ease infinite}
+
+    /* Page title */
+    .page-title{font-size:18px;font-weight:800;margin-bottom:20px;letter-spacing:-.2px;display:flex;align-items:center;gap:10px}
+    .page-title .ico{font-size:20px}
+    .page-subtitle{font-size:13px;color:var(--text-2);margin:-14px 0 22px;font-weight:400}
+
+    /* ===== Responsive ===== */
+    @media(max-width:768px){
+      .sidebar{transform:translateX(-100%)}
+      .sidebar.mobile-open{transform:translateX(0)}
+      .mobile-btn{display:flex}
+      .dashboard{margin-left:0}
+      .dash-header{padding:14px 16px 14px 60px}
+      .page-panel{padding:24px 16px}
+      .stat-row,.stat-grid{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+      .chart-grid{grid-template-columns:1fr}
+    }
+    @media(min-width:769px){.sb-overlay{display:none!important}}
   </style>
 </head>
 <body>
 
-  <!-- Login gate -->
+  <button class="mobile-btn" id="mobileBtn" aria-label="Menu">&#9776;</button>
+  <div class="sb-overlay" id="sbOverlay"></div>
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <img src="/pippy-logo-v3.png" alt="Pippy">
+      <span>Pippy</span>
+    </div>
+    <div class="sb-nav">
+      <div class="sb-section-label">Dashboard</div>
+      <a class="sb-link active" data-page="overview">
+        <span class="ico">&#x1F3E0;</span> Overview
+      </a>
+
+      <div class="sb-section-label">Analytics</div>
+      <a class="sb-link" data-page="growth">
+        <span class="ico">&#x1F4C8;</span> Growth
+      </a>
+      <a class="sb-link" data-page="engagement">
+        <span class="ico">&#x1F3AF;</span> Engagement
+      </a>
+      <a class="sb-link" data-page="revenue">
+        <span class="ico">&#x1F4B0;</span> Revenue
+      </a>
+
+      <div class="sb-section-label">Operations</div>
+      <a class="sb-link" data-page="ai">
+        <span class="ico">&#x26A1;</span> AI & Costs
+      </a>
+      <a class="sb-link" data-page="breakdowns">
+        <span class="ico">&#x1F50D;</span> Breakdowns
+      </a>
+      <a class="sb-link" data-page="website">
+        <span class="ico">&#x1F310;</span> Website
+      </a>
+    </div>
+  </nav>
+
+  <!-- Login -->
   <div class="login-gate" id="loginGate">
     <div class="login-card">
+      <img src="/pippy-logo-v3.png" alt="Pippy" class="login-logo">
       <h1>Pippy Analytics</h1>
       <p>Enter the dashboard password to continue.</p>
       <input type="password" id="passwordInput" placeholder="Password" autofocus />
@@ -122,28 +289,44 @@
   <!-- Dashboard -->
   <div class="dashboard" id="dashboard">
     <div class="dash-header">
-      <h1>Pippy Analytics</h1>
+      <h1 id="pageHeaderTitle">Overview</h1>
       <div class="dash-controls">
         <select id="dayRange" onchange="loadData()">
           <option value="7">Last 7 days</option>
           <option value="30" selected>Last 30 days</option>
           <option value="90">Last 90 days</option>
         </select>
-        <button onclick="loadData()">Refresh</button>
+        <button class="primary" onclick="loadData()">Refresh</button>
+        <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">&#9788;</button>
       </div>
     </div>
 
-    <div class="tab-row">
-      <button class="tab-btn active" onclick="switchTab('app')">App Analytics</button>
-      <button class="tab-btn" onclick="switchTab('website')">Website</button>
+    <!-- Loading -->
+    <div id="appLoading" class="loading" style="padding:60px 32px">
+      <div class="spinner"></div>
+      <div>Loading analytics...</div>
+      <div class="skeleton-grid" style="margin-top:24px">
+        <div class="skeleton-card"><div class="skeleton-line short"></div><div class="skeleton-line tall"></div></div>
+        <div class="skeleton-card"><div class="skeleton-line short"></div><div class="skeleton-line tall"></div></div>
+        <div class="skeleton-card"><div class="skeleton-line short"></div><div class="skeleton-line tall"></div></div>
+        <div class="skeleton-card"><div class="skeleton-line short"></div><div class="skeleton-line tall"></div></div>
+        <div class="skeleton-card"><div class="skeleton-line short"></div><div class="skeleton-line tall"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:1100px">
+        <div class="skeleton-chart">
+          <div class="skeleton-bar" style="height:40%"></div><div class="skeleton-bar" style="height:70%"></div><div class="skeleton-bar" style="height:55%"></div><div class="skeleton-bar" style="height:85%"></div><div class="skeleton-bar" style="height:30%"></div><div class="skeleton-bar" style="height:60%"></div>
+        </div>
+        <div class="skeleton-chart">
+          <div class="skeleton-bar" style="height:60%"></div><div class="skeleton-bar" style="height:45%"></div><div class="skeleton-bar" style="height:80%"></div><div class="skeleton-bar" style="height:35%"></div><div class="skeleton-bar" style="height:50%"></div><div class="skeleton-bar" style="height:70%"></div>
+        </div>
+      </div>
     </div>
 
-    <!-- App analytics tab -->
-    <div class="tab-content active" id="tab-app">
-      <div id="appLoading" class="loading"><div class="spinner"></div>Loading analytics...</div>
+    <div id="appContent" style="display:none">
 
-      <div id="appContent" style="display:none">
-        <!-- KPI cards -->
+      <!-- ===================== OVERVIEW PAGE ===================== -->
+      <div class="page-panel active" id="page-overview">
+        <!-- KPI Cards -->
         <div class="stat-row">
           <div class="stat-card"><div class="label">Households</div><div class="value blue" id="statHouseholds">--</div></div>
           <div class="stat-card"><div class="label">Babies</div><div class="value peach" id="statBabies">--</div></div>
@@ -152,8 +335,47 @@
           <div class="stat-card"><div class="label">Events</div><div class="value" id="statEvents">--</div></div>
         </div>
 
-        <!-- RETENTION & CHURN -->
-        <div class="section">
+        <!-- User Activity -->
+        <div class="section" id="section-activity">
+          <h2>User Activity <span class="tag">Engagement</span></h2>
+          <div class="stat-row">
+            <div class="stat-card"><div class="label">Active (7 days)</div><div class="value green" id="statActiveWeekly">--</div></div>
+            <div class="stat-card"><div class="label">Active (30 days)</div><div class="value blue" id="statActiveMonthly">--</div></div>
+            <div class="stat-card"><div class="label">Dormant (30+)</div><div class="value" id="statDormant">--</div></div>
+            <div class="stat-card"><div class="label">Downloaded only</div><div class="value red" id="statDownloadedOnly">--</div></div>
+          </div>
+          <div class="chart-card" style="margin-bottom:14px">
+            <div id="activityChart"></div>
+          </div>
+        </div>
+
+        <!-- Daily Activity -->
+        <div class="section" id="section-daily">
+          <h2>Daily Activity</h2>
+          <div class="chart-card">
+            <h3>Events per Day</h3>
+            <div class="bar-chart" id="dailyChart"></div>
+          </div>
+        </div>
+
+        <!-- User Breakdown -->
+        <div class="section" id="section-users">
+          <h2>User Breakdown <span class="tag">Anonymous</span></h2>
+          <div class="stat-grid">
+            <div class="stat-card"><div class="label">Total Users (tracked)</div><div class="value" id="statTotalAnonUsers">--</div></div>
+            <div class="stat-card"><div class="label">Free Users</div><div class="value" id="statFreeUsers">--</div></div>
+            <div class="stat-card"><div class="label">Premium Users</div><div class="value peach" id="statPremiumUsers">--</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== GROWTH PAGE ===================== -->
+      <div class="page-panel" id="page-growth">
+        <div class="page-title"><span class="ico">&#x1F4C8;</span> Growth</div>
+        <div class="page-subtitle">Retention, onboarding funnel, and referral program</div>
+
+        <!-- Retention -->
+        <div class="section" id="section-retention">
           <h2>Retention & Churn <span class="tag">Key Insight</span></h2>
           <div class="chart-grid">
             <div class="chart-card">
@@ -169,12 +391,12 @@
           </div>
         </div>
 
-        <!-- ONBOARDING FUNNEL -->
-        <div class="section">
-          <h2>Onboarding Funnel <span class="tag">Drop-off</span></h2>
+        <!-- Funnel -->
+        <div class="section" id="section-funnel">
+          <h2>Event Counts <span class="tag">Raw Totals</span></h2>
           <div class="chart-grid">
             <div class="chart-card">
-              <h3>Where users drop off</h3>
+              <h3>Total times each event fired (not unique users -- counts can overlap)</h3>
               <div id="funnelChart"></div>
             </div>
             <div class="chart-card">
@@ -185,35 +407,8 @@
           </div>
         </div>
 
-        <!-- SCREEN TIME & UPSELL -->
-        <div class="section">
-          <h2>Screen Time & Conversions</h2>
-          <div class="chart-grid">
-            <div class="chart-card">
-              <h3>Average Time per Screen (seconds)</h3>
-              <div id="screenTimeChart"></div>
-            </div>
-            <div class="chart-card">
-              <h3>Premium Upsell Conversion</h3>
-              <div id="upsellStats"></div>
-              <div id="upsellSourceChart" style="margin-top: 16px;"></div>
-              <div class="insight" id="upsellInsight"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- MANUAL ENTRIES & PLANS -->
-        <div class="section">
-          <h2>User Actions</h2>
-          <div class="stat-row">
-            <div class="stat-card"><div class="label">Manual Entries</div><div class="value peach" id="statManual">--</div></div>
-            <div class="stat-card"><div class="label">Reminders Created</div><div class="value blue" id="statReminders">--</div></div>
-            <div class="stat-card"><div class="label">Notes Created</div><div class="value" id="statNotes">--</div></div>
-          </div>
-        </div>
-
-        <!-- REFERRAL ANALYTICS -->
-        <div class="section">
+        <!-- Referrals -->
+        <div class="section" id="section-referrals">
           <h2>Referral Program <span class="tag">Growth</span></h2>
           <div class="stat-grid">
             <div class="stat-card"><div class="label">Total Referrals</div><div class="value" id="statRefTotal">--</div></div>
@@ -233,9 +428,42 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- AI QUALITY & SESSION DEPTH -->
-        <div class="section">
+      <!-- ===================== ENGAGEMENT PAGE ===================== -->
+      <div class="page-panel" id="page-engagement">
+        <div class="page-title"><span class="ico">&#x1F3AF;</span> Engagement</div>
+        <div class="page-subtitle">Screen time, user actions, session depth, and top prompts</div>
+
+        <!-- Screen Time & Upsell -->
+        <div class="section" id="section-screentime">
+          <h2>Screen Time & Conversions</h2>
+          <div class="chart-grid">
+            <div class="chart-card">
+              <h3>Average Time per Screen (seconds)</h3>
+              <div id="screenTimeChart"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Premium Upsell Conversion</h3>
+              <div id="upsellStats"></div>
+              <div id="upsellSourceChart" style="margin-top:16px"></div>
+              <div class="insight" id="upsellInsight"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Actions -->
+        <div class="section" id="section-actions">
+          <h2>User Actions</h2>
+          <div class="stat-row">
+            <div class="stat-card"><div class="label">Manual Entries</div><div class="value peach" id="statManual">--</div></div>
+            <div class="stat-card"><div class="label">Reminders Created</div><div class="value blue" id="statReminders">--</div></div>
+            <div class="stat-card"><div class="label">Notes Created</div><div class="value" id="statNotes">--</div></div>
+          </div>
+        </div>
+
+        <!-- AI Quality & Session Depth -->
+        <div class="section" id="section-quality">
           <h2>AI Quality & Session Depth <span class="tag">Fix Issues</span></h2>
           <div class="chart-grid">
             <div class="chart-card">
@@ -255,8 +483,22 @@
           </div>
         </div>
 
-        <!-- REVENUE & PROFIT -->
-        <div class="section">
+        <!-- Top Prompts -->
+        <div class="section" id="section-prompts">
+          <h2>Top Chat Prompts <span class="tag">User Behavior</span></h2>
+          <div class="chart-card">
+            <h3>Most common messages sent to Pippy</h3>
+            <table class="data-table" id="promptTable"><thead><tr><th>Prompt</th><th>Count</th></tr></thead><tbody></tbody></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================== REVENUE PAGE ===================== -->
+      <div class="page-panel" id="page-revenue">
+        <div class="page-title"><span class="ico">&#x1F4B0;</span> Revenue</div>
+        <div class="page-subtitle">Revenue, costs, and profit margins</div>
+
+        <div class="section" id="section-revenue">
           <h2>Revenue & Profit <span class="tag">Financials</span></h2>
           <div class="stat-grid">
             <div class="stat-card"><div class="label">Total Revenue</div><div class="value" id="statRevenue" style="color:#4CAF50">--</div></div>
@@ -275,9 +517,14 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- AI COST TRACKING -->
-        <div class="section">
+      <!-- ===================== AI & COSTS PAGE ===================== -->
+      <div class="page-panel" id="page-ai">
+        <div class="page-title"><span class="ico">&#x26A1;</span> AI & Costs</div>
+        <div class="page-subtitle">OpenAI usage, cost tracking, and response times</div>
+
+        <div class="section" id="section-aicost">
           <h2>AI Cost Tracking <span class="tag">OpenAI Usage</span></h2>
           <div class="stat-grid">
             <div class="stat-card"><div class="label">Total Cost</div><div class="value" id="statTotalCost">--</div></div>
@@ -287,17 +534,17 @@
             <div class="stat-card"><div class="label">Completion Tokens</div><div class="value" id="statCompletionTokens">--</div></div>
           </div>
 
-          <!-- Free vs Premium Split -->
-          <div class="stat-grid" style="margin-top:16px">
-            <div class="stat-card" style="border-left:3px solid #A8B8C2"><div class="label">Free Tier Cost</div><div class="value" id="statFreeCost">--</div></div>
-            <div class="stat-card" style="border-left:3px solid #A8B8C2"><div class="label">Free Tier Requests</div><div class="value" id="statFreeRequests">--</div></div>
-            <div class="stat-card" style="border-left:3px solid #D4956A"><div class="label">Premium Cost</div><div class="value" id="statPremiumCost">--</div></div>
-            <div class="stat-card" style="border-left:3px solid #D4956A"><div class="label">Premium Requests</div><div class="value" id="statPremiumRequests">--</div></div>
+          <!-- Free vs Premium -->
+          <div class="stat-grid" style="margin-top:4px">
+            <div class="stat-card" style="border-left:3px solid var(--blue)"><div class="label">Free Tier Cost</div><div class="value" id="statFreeCost">--</div></div>
+            <div class="stat-card" style="border-left:3px solid var(--blue)"><div class="label">Free Tier Requests</div><div class="value" id="statFreeRequests">--</div></div>
+            <div class="stat-card" style="border-left:3px solid var(--peach)"><div class="label">Premium Cost</div><div class="value" id="statPremiumCost">--</div></div>
+            <div class="stat-card" style="border-left:3px solid var(--peach)"><div class="label">Premium Requests</div><div class="value" id="statPremiumRequests">--</div></div>
             <div class="stat-card"><div class="label">Avg Cost/Free User</div><div class="value" id="statAvgFreeUserCost">--</div></div>
             <div class="stat-card"><div class="label">Avg Cost/Premium User</div><div class="value" id="statAvgPremiumUserCost">--</div></div>
           </div>
 
-          <div class="chart-grid">
+          <div class="chart-grid" style="margin-top:14px">
             <div class="chart-card">
               <h3>Cost by Model</h3>
               <table class="data-table" id="costModelTable"><thead><tr><th>Model</th><th>Requests</th><th>Tokens</th><th>Cost</th></tr></thead><tbody></tbody></table>
@@ -308,66 +555,28 @@
             </div>
           </div>
 
-          <!-- Top AI Cost Users -->
-          <div class="chart-card" style="margin-top:16px">
+          <!-- Top Users -->
+          <div class="chart-card" style="margin-top:14px">
             <h3>Top AI Cost Users (Anonymous)</h3>
             <table class="data-table" id="topAiUsersTable"><thead><tr><th>Anon ID</th><th>Tier</th><th>Requests</th><th>Cost</th></tr></thead><tbody></tbody></table>
           </div>
 
           <!-- Response Time -->
-          <div class="chart-card" style="margin-top:16px">
+          <div class="chart-card" style="margin-top:14px">
             <h3>AI Response Time Distribution</h3>
-            <div id="responseTimePercentiles" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px"></div>
+            <div id="responseTimePercentiles" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px"></div>
             <div class="bar-chart" id="responseTimeChart" style="height:160px"></div>
             <div class="insight" id="responseTimeInsight"></div>
           </div>
         </div>
+      </div>
 
-        <!-- USER STATS -->
-        <div class="section">
-          <h2>User Breakdown <span class="tag">Anonymous</span></h2>
-          <div class="stat-grid">
-            <div class="stat-card"><div class="label">Total Users (tracked)</div><div class="value" id="statTotalAnonUsers">--</div></div>
-            <div class="stat-card"><div class="label">Free Users</div><div class="value" id="statFreeUsers">--</div></div>
-            <div class="stat-card"><div class="label">Premium Users</div><div class="value peach" id="statPremiumUsers">--</div></div>
-          </div>
-        </div>
+      <!-- ===================== BREAKDOWNS PAGE ===================== -->
+      <div class="page-panel" id="page-breakdowns">
+        <div class="page-title"><span class="ico">&#x1F50D;</span> Breakdowns</div>
+        <div class="page-subtitle">Detailed event, platform, screen, and entry type breakdowns</div>
 
-        <!-- ACTIVE VS INACTIVE -->
-        <div class="section">
-          <h2>User Activity <span class="tag">Engagement</span></h2>
-          <div class="stat-row">
-            <div class="stat-card"><div class="label">Active (last 7 days)</div><div class="value green" id="statActiveWeekly">--</div></div>
-            <div class="stat-card"><div class="label">Active (last 30 days)</div><div class="value blue" id="statActiveMonthly">--</div></div>
-            <div class="stat-card"><div class="label">Dormant (30+ days)</div><div class="value" id="statDormant">--</div></div>
-            <div class="stat-card"><div class="label">Downloaded but never used</div><div class="value red" id="statDownloadedOnly">--</div></div>
-          </div>
-          <div class="chart-card" style="margin-top:14px; background:#fff; border-radius:12px; padding:18px; box-shadow:0 1px 8px rgba(44,44,52,0.05);">
-            <div id="activityChart"></div>
-          </div>
-        </div>
-
-        <!-- TOP PROMPTS -->
-        <div class="section">
-          <h2>Top Chat Prompts <span class="tag">User Behavior</span></h2>
-          <div class="chart-card">
-            <h3>Most common messages sent to Pippy</h3>
-            <table class="data-table" id="promptTable"><thead><tr><th>Prompt</th><th>Count</th></tr></thead><tbody></tbody></table>
-          </div>
-        </div>
-
-        <!-- DAILY ACTIVITY -->
-        <div class="section">
-          <h2>Daily Activity</h2>
-          <div class="chart-card">
-            <h3>Events per Day</h3>
-            <div class="bar-chart" id="dailyChart"></div>
-          </div>
-        </div>
-
-        <!-- BREAKDOWN TABLES -->
-        <div class="section">
-          <h2>Breakdowns</h2>
+        <div class="section" id="section-breakdowns">
           <div class="chart-grid">
             <div class="chart-card">
               <h3>All Events</h3>
@@ -388,18 +597,22 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Website tab -->
-    <div class="tab-content" id="tab-website">
-      <div class="chart-card" style="text-align:center; padding: 40px;">
-        <h3>GoatCounter Website Analytics</h3>
-        <p style="color:rgba(44,44,52,0.55); margin: 16px 0;">GoatCounter does not support iframe embedding. Open the dashboard directly:</p>
-        <a href="https://remibabyapp.goatcounter.com" target="_blank" style="display:inline-block; background:#7A9DB0; color:#fff; padding:12px 24px; border-radius:10px; text-decoration:none; font-weight:600;">Open GoatCounter Dashboard</a>
-        <p style="color:rgba(44,44,52,0.35); margin-top: 16px; font-size: 12px;">If the link does not work, log into GoatCounter at goatcounter.com with your account credentials.</p>
+      <!-- ===================== WEBSITE PAGE ===================== -->
+      <div class="page-panel" id="page-website">
+        <div class="page-title"><span class="ico">&#x1F310;</span> Website</div>
+        <div class="page-subtitle">GoatCounter website analytics</div>
+
+        <div class="chart-card" style="text-align:center;padding:48px">
+          <h3 style="font-size:16px;color:var(--text);margin-bottom:8px">GoatCounter Website Analytics</h3>
+          <p style="color:var(--text-2);margin:12px 0 24px;font-size:14px">GoatCounter does not support iframe embedding. Open the dashboard directly:</p>
+          <a href="https://remibabyapp.goatcounter.com" target="_blank" style="display:inline-block;background:var(--grad-blue);color:#fff;padding:14px 32px;border-radius:12px;text-decoration:none;font-weight:600;transition:transform .15s,box-shadow .2s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(122,157,176,.3)'" onmouseout="this.style.transform='';this.style.boxShadow=''">Open GoatCounter Dashboard</a>
+          <p style="color:var(--text-3);margin-top:16px;font-size:12px">If the link does not work, log into GoatCounter at goatcounter.com with your account credentials.</p>
+        </div>
       </div>
-    </div>
-  </div>
+
+    </div><!-- /appContent -->
+  </div><!-- /dashboard -->
 
   <script>
     const API_BASE = 'https://wxpddgplzocqxfpxdnpp.supabase.co/functions/v1/analytics-dashboard';
@@ -416,12 +629,52 @@
       loadData();
     }
 
-    function switchTab(tab) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-      document.querySelector(`[onclick="switchTab('${tab}')"]`).classList.add('active');
-      document.getElementById('tab-' + tab).classList.add('active');
+    // ===== PAGE NAVIGATION =====
+    function switchPage(pageName) {
+      // Update panels
+      document.querySelectorAll('.page-panel').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById('page-' + pageName);
+      if (target) target.classList.add('active');
+
+      // Update sidebar links
+      document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.sb-link[data-page="${pageName}"]`);
+      if (link) link.classList.add('active');
+
+      // Update header title
+      const titles = {
+        overview: 'Overview',
+        growth: 'Growth',
+        engagement: 'Engagement',
+        revenue: 'Revenue',
+        ai: 'AI & Costs',
+        breakdowns: 'Breakdowns',
+        website: 'Website'
+      };
+      document.getElementById('pageHeaderTitle').textContent = titles[pageName] || 'Overview';
+
+      // Re-trigger animations
+      initAnimations();
+
+      // Scroll to top
+      window.scrollTo({ top: 0 });
+
+      // Close mobile sidebar
+      document.getElementById('sidebar').classList.remove('mobile-open');
+      document.getElementById('sbOverlay').classList.remove('visible');
     }
+
+    // Sidebar click handlers
+    document.querySelectorAll('.sb-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const page = this.getAttribute('data-page');
+        if (page) switchPage(page);
+      });
+    });
+
+    // (Legacy tab function kept for compatibility but unused)
+    function switchTab(tab) {}
 
     async function loadData() {
       const days = parseInt(document.getElementById('dayRange').value);
@@ -445,9 +698,10 @@
 
         document.getElementById('loginGate').classList.add('hidden');
         document.getElementById('dashboard').classList.add('visible');
+        document.getElementById('sidebar').classList.add('visible');
         renderData(data);
       } catch (err) {
-        document.getElementById('appLoading').innerHTML = '<p style="color:#e74c3c">Failed to load: ' + err.message + '</p>';
+        document.getElementById('appLoading').innerHTML = '<p style="color:var(--red)">Failed to load: ' + err.message + '</p>';
       }
     }
 
@@ -515,13 +769,16 @@
 
       document.getElementById('appLoading').style.display = 'none';
       document.getElementById('appContent').style.display = 'block';
+
+      // Start animations
+      initAnimations();
     }
 
     function renderRetentionChart(curve) {
       const container = document.getElementById('retentionChart');
       const insight = document.getElementById('retentionInsight');
       if (!curve || curve.length === 0) {
-        container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px;margin:auto">No retention data yet. Data appears after users open the app multiple times.</p>';
+        container.innerHTML = '<p style="color:var(--text-3);font-size:13px;margin:auto">No retention data yet. Data appears after users open the app multiple times.</p>';
         insight.innerHTML = '';
         return;
       }
@@ -536,7 +793,6 @@
         </div>`;
       }).join('');
 
-      // Calculate insight
       const day0 = curve.find(c => c.day === 0)?.opens || 0;
       const day7 = curve.find(c => c.day === 7)?.opens || 0;
       const day30 = curve.find(c => c.day === 30)?.opens || 0;
@@ -553,7 +809,7 @@
       const container = document.getElementById('churnChart');
       const insight = document.getElementById('churnInsight');
       if (!buckets || Object.values(buckets).every(v => v === 0)) {
-        container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px">No session gap data yet.</p>';
+        container.innerHTML = '<p style="color:var(--text-3);font-size:13px">No session gap data yet.</p>';
         insight.innerHTML = '';
         return;
       }
@@ -580,27 +836,27 @@
 
     function renderFunnel(funnel) {
       const container = document.getElementById('funnelChart');
-      if (!funnel) { container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px">No funnel data yet.</p>'; return; }
+      if (!funnel) { container.innerHTML = '<p style="color:var(--text-3);font-size:13px">No milestone data yet.</p>'; return; }
 
       const steps = [
-        { name: 'Signed Up', count: funnel.sign_up, color: '#7A9DB0' },
-        { name: 'Completed Onboarding', count: funnel.onboarding_completed, color: '#D4956A' },
-        { name: 'Sent First Chat', count: funnel.first_chat_message, color: '#4CAF50' },
-        { name: 'Returned (2+ sessions)', count: funnel.app_opened_returning, color: '#8B7EC8' },
+        { name: 'Sign-ups', count: funnel.sign_up, color: '#7A9DB0', desc: 'Times a new account was created' },
+        { name: 'Onboarding Done', count: funnel.onboarding_completed, color: '#D4956A', desc: 'Times baby setup was completed' },
+        { name: 'First Chat (per session)', count: funnel.first_chat_message, color: '#4CAF50', desc: 'First message sent each session' },
+        { name: 'Return Visits', count: funnel.app_opened_returning, color: '#8B7EC8', desc: 'App opens by returning users' },
       ];
       const maxCount = Math.max(...steps.map(s => s.count), 1);
 
-      container.innerHTML = steps.map((step, i) => {
-        const pct = Math.round((step.count / maxCount) * 100);
-        const dropoff = i > 0 && steps[i - 1].count > 0
-          ? Math.round(((steps[i - 1].count - step.count) / steps[i - 1].count) * 100)
-          : 0;
-        return `<div class="funnel-step">
-          <div class="funnel-num" style="color:${step.color}">${step.count}</div>
-          <div class="funnel-info">
-            <div class="funnel-name">${step.name}</div>
-            <div class="funnel-pct">${i > 0 ? (dropoff > 0 ? dropoff + '% drop-off from previous step' : 'No drop-off') : '100% baseline'}</div>
-            <div class="funnel-bar"><div class="funnel-bar-fill" style="width:${pct}%; background:${step.color}"></div></div>
+      container.innerHTML = steps.map(step => {
+        const pct = Math.max(Math.round((step.count / maxCount) * 100), 2);
+        return `<div class="h-bar-row" style="margin-bottom:12px">
+          <div style="width:160px;text-align:right;flex-shrink:0">
+            <div style="font-size:13px;font-weight:600;color:var(--text)">${step.name}</div>
+            <div style="font-size:11px;color:var(--text-3)">${step.desc}</div>
+          </div>
+          <div class="h-bar-track">
+            <div class="h-bar-fill" style="width:${pct}%;background:${step.color}">
+              <span>${step.count}</span>
+            </div>
           </div>
         </div>`;
       }).join('');
@@ -610,7 +866,7 @@
       const container = document.getElementById('featureChart');
       const insight = document.getElementById('featureInsight');
       if (!usage || Object.keys(usage).length === 0) {
-        container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px">No feature data yet.</p>';
+        container.innerHTML = '<p style="color:var(--text-3);font-size:13px">No feature data yet.</p>';
         insight.innerHTML = '';
         return;
       }
@@ -639,7 +895,7 @@
     function renderBarChart(containerId, dayData, color) {
       const container = document.getElementById(containerId);
       if (!dayData || dayData.length === 0) {
-        container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px;margin:auto">No data yet</p>';
+        container.innerHTML = '<p style="color:var(--text-3);font-size:13px;margin:auto">No data yet</p>';
         return;
       }
       const maxVal = Math.max(...dayData.map(d => d[1]), 1);
@@ -658,7 +914,7 @@
     function renderTable(tableId, obj) {
       const tbody = document.querySelector('#' + tableId + ' tbody');
       if (!obj || Object.keys(obj).length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2" style="color:rgba(44,44,52,0.35)">No data yet</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="2" style="color:var(--text-3)">No data yet</td></tr>';
         return;
       }
       const sorted = Object.entries(obj).sort((a, b) => b[1] - a[1]);
@@ -672,7 +928,7 @@
     function renderScreenTime(avgData, sessionData) {
       const container = document.getElementById('screenTimeChart');
       if (!avgData || Object.keys(avgData).length === 0) {
-        container.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px">No screen time data yet. Data appears after users navigate between tabs.</p>';
+        container.innerHTML = '<p style="color:var(--text-3);font-size:13px">No screen time data yet.</p>';
         return;
       }
       const sorted = Object.entries(avgData).sort((a, b) => b[1] - a[1]);
@@ -702,41 +958,40 @@
       const tRate = (trialConvRate * 100).toFixed(1);
 
       container.innerHTML = `
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; margin-bottom:16px">
+        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; margin-bottom:14px">
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Upsell Views</div>
-            <div style="font-size:24px; font-weight:700; color:#7A9DB0">${views}</div>
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-3)">Upsell Views</div>
+            <div style="font-size:22px; font-weight:800; color:var(--blue)">${views}</div>
           </div>
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Direct Subs</div>
-            <div style="font-size:24px; font-weight:700; color:#4CAF50">${purchases}</div>
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-3)">Direct Subs</div>
+            <div style="font-size:22px; font-weight:800; color:#4CAF50">${purchases}</div>
           </div>
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Direct Conv</div>
-            <div style="font-size:24px; font-weight:700; color:#D4956A">${directRate}%</div>
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-3)">Direct Conv</div>
+            <div style="font-size:22px; font-weight:800; color:var(--peach)">${directRate}%</div>
           </div>
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Trial Starts</div>
-            <div style="font-size:24px; font-weight:700; color:#8B7EC8">${trialStarts}</div>
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-3)">Trial Starts</div>
+            <div style="font-size:22px; font-weight:800; color:var(--purple)">${trialStarts}</div>
           </div>
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Trial Converted</div>
-            <div style="font-size:24px; font-weight:700; color:#5CB85C">${converted}</div>
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-3)">Trial Converted</div>
+            <div style="font-size:22px; font-weight:800; color:#5CB85C">${converted}</div>
           </div>
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Trial Conv Rate</div>
-            <div style="font-size:24px; font-weight:700; color:#D4956A">${tRate}%</div>
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-3)">Trial Conv Rate</div>
+            <div style="font-size:22px; font-weight:800; color:var(--peach)">${tRate}%</div>
           </div>
         </div>
-        <div style="height:8px; background:#f0eeea; border-radius:4px; overflow:hidden">
-          <div style="height:100%; width:${Math.min(parseFloat(tRate), 100)}%; background:#D4956A; border-radius:4px"></div>
+        <div style="height:6px; background:var(--track); border-radius:3px; overflow:hidden">
+          <div style="height:100%; width:${Math.min(parseFloat(tRate), 100)}%; background:var(--peach); border-radius:3px"></div>
         </div>`;
 
-      // Render source breakdown
       if (viewsBySource && Object.keys(viewsBySource).length > 0) {
         const sortedSources = Object.keys(viewsBySource).sort((a, b) => viewsBySource[b] - viewsBySource[a]);
         sourceContainer.innerHTML = `
-          <h4 style="font-size:12px; margin-bottom:8px; color:rgba(44,44,52,0.6); margin-top: 16px;">Conversion by Source</h4>
+          <h4 style="font-size:12px; margin-bottom:8px; color:var(--text-2); margin-top: 16px;">Conversion by Source</h4>
           <table class="data-table">
             <thead>
               <tr><th>Source</th><th>Views</th><th>Subs</th><th>Rate</th></tr>
@@ -750,7 +1005,7 @@
                   <td>${src}</td>
                   <td>${v}</td>
                   <td>${p}</td>
-                  <td style="font-weight:600; color:#D4956A">${r}%</td>
+                  <td style="font-weight:600; color:var(--peach)">${r}%</td>
                 </tr>`;
               }).join('')}
             </tbody>
@@ -781,17 +1036,17 @@
       container.innerHTML = `
         <div style="display:flex; gap:24px; margin-bottom:8px">
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Corrections</div>
-            <div style="font-size:28px; font-weight:700; color:#e74c3c">${count}</div>
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-3)">Corrections</div>
+            <div style="font-size:26px; font-weight:800; color:var(--red)">${count}</div>
           </div>
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">% of Messages</div>
-            <div style="font-size:28px; font-weight:700; color:${parseFloat(pct) > 10 ? '#e74c3c' : '#4CAF50'}">${pct}%</div>
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-3)">% of Messages</div>
+            <div style="font-size:26px; font-weight:800; color:${parseFloat(pct) > 10 ? 'var(--red)' : 'var(--green)'}">${pct}%</div>
           </div>
         </div>`;
 
       if (!topList || topList.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2" style="color:rgba(44,44,52,0.35)">No corrections detected yet</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="2" style="color:var(--text-3)">No corrections detected yet</td></tr>';
       } else {
         const maxVal = Math.max(...topList.map(t => t.count), 1);
         tbody.innerHTML = topList.map(({ hint, count: c }) => {
@@ -816,12 +1071,12 @@
       container.innerHTML = `
         <div style="display:flex; gap:24px; margin-bottom:12px">
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Avg Messages / Session</div>
-            <div style="font-size:28px; font-weight:700; color:#7A9DB0">${avg}</div>
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-3)">Avg Messages / Session</div>
+            <div style="font-size:26px; font-weight:800; color:var(--blue)">${avg}</div>
           </div>
           <div>
-            <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:rgba(44,44,52,0.45)">Max in One Session</div>
-            <div style="font-size:28px; font-weight:700; color:#D4956A">${max}</div>
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-3)">Max in One Session</div>
+            <div style="font-size:26px; font-weight:800; color:var(--peach)">${max}</div>
           </div>
         </div>`;
 
@@ -841,7 +1096,6 @@
       document.getElementById('statRefAvg').textContent = stats.avgPerReferrer || '0';
       document.getElementById('statRefPremium').textContent = (stats.earnedPremium || 0).toLocaleString();
 
-      // Distribution chart
       const distChart = document.getElementById('referralDistChart');
       const dist = stats.distribution || {};
       const distEntries = Object.entries(dist);
@@ -856,23 +1110,26 @@
         </div>`;
       }).join('');
 
-      // Insight
       const insight = document.getElementById('referralInsight');
       const convRate = stats.totalReferrers > 0
         ? ((stats.earnedPremium / stats.totalReferrers) * 100).toFixed(0)
         : 0;
       insight.textContent = `${convRate}% of referrers reached 3 referrals and earned free premium.`;
 
-      // Referrals over time
       const dayChart = document.getElementById('referralDayChart');
       if (!stats.byDay || stats.byDay.length === 0) {
-        dayChart.innerHTML = '<div style="color:rgba(44,44,52,0.35);padding:20px">No referral data yet</div>';
+        dayChart.innerHTML = '<div style="color:var(--text-3);padding:20px">No referral data yet</div>';
         return;
       }
       const maxDay = Math.max(...stats.byDay.map(([_, v]) => v), 1);
       dayChart.innerHTML = stats.byDay.map(([day, count]) => {
-        const pct = (count / maxDay) * 100;
-        return `<div class="bar-row"><span class="bar-label">${day.slice(5)}</span><div class="bar" style="width:${pct}%;background:#D4956A"></div><span class="bar-value">${count}</span></div>`;
+        const pct = Math.max((count / maxDay) * 100, 2);
+        return `<div class="bar-col">
+          <div class="bar peach" style="height:${pct}%">
+            <div class="bar-tooltip">${day}: ${count}</div>
+          </div>
+          <div class="bar-label">${day.slice(5)}</div>
+        </div>`;
       }).join('');
     }
 
@@ -889,22 +1146,20 @@
       document.getElementById('statMargin').textContent = margin + '%';
       document.getElementById('statMargin').style.color = netProfit >= 0 ? '#4CAF50' : '#f44336';
 
-      // Revenue by tier
       const tierTbody = document.querySelector('#revenueTierTable tbody');
       const tiers = Object.entries(revenue?.byTier || {}).sort((a, b) => b[1].revenue - a[1].revenue);
       if (tiers.length === 0) {
-        tierTbody.innerHTML = '<tr><td colspan="3" style="color:rgba(44,44,52,0.35)">No sales yet</td></tr>';
+        tierTbody.innerHTML = '<tr><td colspan="3" style="color:var(--text-3)">No sales yet</td></tr>';
       } else {
         tierTbody.innerHTML = tiers.map(([tier, d]) =>
           `<tr><td style="text-transform:capitalize">${tier}</td><td>${d.count}</td><td style="color:#4CAF50">$${d.revenue.toFixed(2)}</td></tr>`
         ).join('');
       }
 
-      // Daily revenue vs cost chart
       const chart = document.getElementById('profitChart');
       const profitData = revenue?.profitByDay || [];
       if (profitData.length === 0) {
-        chart.innerHTML = '<div style="color:rgba(44,44,52,0.35);padding:20px">No financial data yet</div>';
+        chart.innerHTML = '<div style="color:var(--text-3);padding:20px">No financial data yet</div>';
         return;
       }
       const maxVal = Math.max(...profitData.map(d => Math.max(d.revenue, d.cost)), 0.01);
@@ -914,7 +1169,7 @@
         const netColor = d.net >= 0 ? '#4CAF50' : '#f44336';
         const netSign = d.net >= 0 ? '+' : '';
         return `<div style="margin-bottom:8px">
-          <div style="color:rgba(44,44,52,0.6);margin-bottom:2px">${d.day.slice(5)}</div>
+          <div style="color:var(--text-2);margin-bottom:2px">${d.day.slice(5)}</div>
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
             <span style="width:50px;color:#4CAF50;font-size:11px">Rev</span>
             <div style="height:14px;width:${revPct}%;background:#4CAF50;border-radius:3px;min-width:2px"></div>
@@ -941,7 +1196,6 @@
       document.getElementById('statPromptTokens').textContent = aiCost.totalPromptTokens.toLocaleString();
       document.getElementById('statCompletionTokens').textContent = aiCost.totalCompletionTokens.toLocaleString();
 
-      // Free vs Premium split
       if (aiCost.freeTier) {
         document.getElementById('statFreeCost').textContent = '$' + aiCost.freeTier.cost.toFixed(4);
         document.getElementById('statFreeRequests').textContent = aiCost.freeTier.requests.toLocaleString();
@@ -953,37 +1207,39 @@
       document.getElementById('statAvgFreeUserCost').textContent = '$' + (aiCost.avgCostPerFreeUser || 0).toFixed(6);
       document.getElementById('statAvgPremiumUserCost').textContent = '$' + (aiCost.avgCostPerPremiumUser || 0).toFixed(6);
 
-      // Cost by model table
       const tbody = document.querySelector('#costModelTable tbody');
       const models = Object.entries(aiCost.byModel || {}).sort((a, b) => b[1].cost - a[1].cost);
       if (models.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="4" style="color:rgba(44,44,52,0.35)">No usage yet</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4" style="color:var(--text-3)">No usage yet</td></tr>';
       } else {
         tbody.innerHTML = models.map(([model, d]) =>
           `<tr><td>${model}</td><td>${d.requests.toLocaleString()}</td><td>${d.tokens.toLocaleString()}</td><td>$${d.cost.toFixed(4)}</td></tr>`
         ).join('');
       }
 
-      // Top AI cost users table
       const userTbody = document.querySelector('#topAiUsersTable tbody');
       if (aiCost.topUsers && aiCost.topUsers.length > 0) {
         userTbody.innerHTML = aiCost.topUsers.map(u =>
-          `<tr><td style="font-family:monospace;font-size:12px">${u.anonId}</td><td><span style="padding:2px 8px;border-radius:8px;font-size:11px;font-weight:600;background:${u.isPremium ? '#FEF0E6' : '#E4EEF3'};color:${u.isPremium ? '#D4956A' : '#7A9DB0'}">${u.isPremium ? 'Premium' : 'Free'}</span></td><td>${u.requests.toLocaleString()}</td><td>$${u.cost.toFixed(4)}</td></tr>`
+          `<tr><td style="font-family:monospace;font-size:12px">${u.anonId}</td><td><span style="padding:2px 8px;border-radius:8px;font-size:11px;font-weight:600;background:${u.isPremium ? 'rgba(212,149,106,.12)' : 'rgba(122,157,176,.12)'};color:${u.isPremium ? 'var(--peach)' : 'var(--blue)'}">${u.isPremium ? 'Premium' : 'Free'}</span></td><td>${u.requests.toLocaleString()}</td><td>$${u.cost.toFixed(4)}</td></tr>`
         ).join('');
       } else {
-        userTbody.innerHTML = '<tr><td colspan="4" style="color:rgba(44,44,52,0.35)">No per-user data yet</td></tr>';
+        userTbody.innerHTML = '<tr><td colspan="4" style="color:var(--text-3)">No per-user data yet</td></tr>';
       }
 
-      // Daily cost chart (reuse bar chart pattern)
       const chart = document.getElementById('dailyCostChart');
       if (!aiCost.byDay || aiCost.byDay.length === 0) {
-        chart.innerHTML = '<div style="color:rgba(44,44,52,0.35);padding:20px">No cost data yet</div>';
+        chart.innerHTML = '<div style="color:var(--text-3);padding:20px">No cost data yet</div>';
         return;
       }
       const maxCost = Math.max(...aiCost.byDay.map(([_, v]) => v), 0.0001);
       chart.innerHTML = aiCost.byDay.map(([day, cost]) => {
-        const pct = (cost / maxCost) * 100;
-        return `<div class="bar-row"><span class="bar-label">${day.slice(5)}</span><div class="bar" style="width:${pct}%;background:#D4956A" title="$${cost.toFixed(4)}"></div><span class="bar-value">$${cost.toFixed(4)}</span></div>`;
+        const pct = Math.max((cost / maxCost) * 100, 2);
+        return `<div class="bar-col">
+          <div class="bar peach" style="height:${pct}%">
+            <div class="bar-tooltip">${day}: $${cost.toFixed(4)}</div>
+          </div>
+          <div class="bar-label">${day.slice(5)}</div>
+        </div>`;
       }).join('');
     }
 
@@ -993,13 +1249,12 @@
       const insightEl = document.getElementById('responseTimeInsight');
 
       if (!histogram || !percentiles || percentiles.count === 0) {
-        chartEl.innerHTML = '<p style="color:rgba(44,44,52,0.35);font-size:13px;margin:auto;align-self:center">No response time data yet — appears after the next deploy.</p>';
+        chartEl.innerHTML = '<p style="color:var(--text-3);font-size:13px;margin:auto">No response time data yet.</p>';
         percEl.innerHTML = '';
         insightEl.innerHTML = '';
         return;
       }
 
-      // Percentile stat pills
       const fmt = ms => ms >= 1000 ? (ms / 1000).toFixed(1) + 's' : ms + 'ms';
       const pills = [
         { label: 'p50', value: percentiles.p50, color: '#4CAF50' },
@@ -1010,13 +1265,12 @@
         { label: 'max', value: percentiles.max, color: '#888' },
       ];
       percEl.innerHTML = pills.map(p =>
-        `<div style="background:#f5f4f0;border-radius:8px;padding:8px 14px;text-align:center;min-width:72px">
-          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:${p.color};margin-bottom:2px">${p.label}</div>
-          <div style="font-size:18px;font-weight:700;color:#2C2C34">${fmt(p.value)}</div>
+        `<div style="background:var(--track);border-radius:8px;padding:8px 14px;text-align:center;min-width:68px">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:${p.color};margin-bottom:2px">${p.label}</div>
+          <div style="font-size:17px;font-weight:800;color:var(--text)">${fmt(p.value)}</div>
         </div>`
       ).join('');
 
-      // Histogram bars
       const maxCount = Math.max(...histogram.map(b => b.count), 1);
       chartEl.innerHTML = histogram.map(b => {
         const pct = Math.max((b.count / maxCount) * 100, b.count > 0 ? 3 : 0);
@@ -1031,14 +1285,13 @@
         </div>`;
       }).join('');
 
-      // Insight
       const fastCount = (histogram.find(b => b.label === '<1s')?.count || 0) + (histogram.find(b => b.label === '1-2s')?.count || 0);
       const fastPct = Math.round((fastCount / percentiles.count) * 100);
       const slowCount = (histogram.find(b => b.label === '8-12s')?.count || 0) + (histogram.find(b => b.label === '12s+')?.count || 0);
       const slowPct = Math.round((slowCount / percentiles.count) * 100);
       insightEl.innerHTML = `<strong>${fastPct}%</strong> of responses complete under 2s. ` +
         `<strong>Half</strong> are done in ${fmt(percentiles.p50)} or less. ` +
-        (slowPct > 0 ? `<strong>${slowPct}%</strong> take longer than 8s — likely complex multi-step or image requests.` : 'No significant slow outliers.');
+        (slowPct > 0 ? `<strong>${slowPct}%</strong> take longer than 8s -- likely complex multi-step or image requests.` : 'No significant slow outliers.');
     }
 
     function renderUserStats(userStats) {
@@ -1051,7 +1304,6 @@
       document.getElementById('statDormant').textContent = (userStats.dormant ?? 0).toLocaleString();
       document.getElementById('statDownloadedOnly').textContent = (userStats.downloadedOnly ?? 0).toLocaleString();
 
-      // Activity breakdown horizontal bars
       const actContainer = document.getElementById('activityChart');
       if (actContainer) {
         const total = (userStats.totalAnonymousUsers || 1);
@@ -1064,11 +1316,11 @@
         actContainer.innerHTML = segments.map(s => {
           const pct = Math.round((s.value / total) * 100);
           return `<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-            <span style="width:180px;font-size:13px;color:rgba(44,44,52,0.7)">${s.label}</span>
-            <div style="flex:1;background:#f0eeea;border-radius:6px;height:22px;overflow:hidden">
+            <span style="width:180px;font-size:13px;color:var(--text-2)">${s.label}</span>
+            <div style="flex:1;background:var(--track);border-radius:6px;height:22px;overflow:hidden">
               <div style="width:${pct}%;background:${s.color};height:100%;border-radius:6px;min-width:${s.value > 0 ? '2px' : '0'}"></div>
             </div>
-            <span style="width:60px;text-align:right;font-size:13px;font-weight:600">${s.value} (${pct}%)</span>
+            <span style="width:70px;text-align:right;font-size:13px;font-weight:600">${s.value} (${pct}%)</span>
           </div>`;
         }).join('');
       }
@@ -1077,7 +1329,7 @@
     function renderPrompts(prompts) {
       const tbody = document.querySelector('#promptTable tbody');
       if (!prompts || prompts.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="2" style="color:rgba(44,44,52,0.35)">No chat data yet</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="2" style="color:var(--text-3)">No chat data yet</td></tr>';
         return;
       }
       const maxVal = Math.max(...prompts.map(p => p.count), 1);
@@ -1085,6 +1337,64 @@
         const pct = (count / maxVal) * 80;
         return `<tr><td style="max-width:400px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${prompt}</td><td><span class="count-bar" style="width:${pct}px"></span>${count}</td></tr>`;
       }).join('');
+    }
+
+    // ===== THEME TOGGLE =====
+    function initTheme() {
+      const saved = localStorage.getItem('pippy-dash-theme');
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        updateThemeIcon(true);
+      }
+    }
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('pippy-dash-theme', 'light');
+        updateThemeIcon(false);
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('pippy-dash-theme', 'dark');
+        updateThemeIcon(true);
+      }
+    }
+    function updateThemeIcon(isDark) {
+      const btn = document.getElementById('themeToggle');
+      if (btn) btn.innerHTML = isDark ? '&#9790;' : '&#9788;';
+    }
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    initTheme();
+
+    // ===== MOBILE SIDEBAR =====
+    document.getElementById('mobileBtn').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('mobile-open');
+      document.getElementById('sbOverlay').classList.toggle('visible');
+    });
+    document.getElementById('sbOverlay').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.remove('mobile-open');
+      this.classList.remove('visible');
+    });
+
+    // ===== VIEWPORT ANIMATIONS =====
+    function initAnimations() {
+      const cards = document.querySelectorAll('.page-panel.active .stat-card, .page-panel.active .chart-card');
+      cards.forEach((card, i) => {
+        card.classList.remove('visible');
+        card.classList.add('anim-in');
+        card.style.transitionDelay = `${Math.min(i * 0.04, 0.5)}s`;
+      });
+      requestAnimationFrame(() => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+        cards.forEach(card => observer.observe(card));
+      });
     }
   </script>
 
