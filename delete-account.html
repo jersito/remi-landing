@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delete Your Account | Pippy</title>
+  <meta name="description" content="Request deletion of your Pippy account and all associated data. Required by Google Play and provided for users who cannot access the app." />
+  <link rel="canonical" href="https://meetpippy.com/delete-account.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://meetpippy.com/delete-account.html" />
+  <meta property="og:title" content="Delete Your Account | Pippy" />
+  <meta property="og:description" content="Request deletion of your Pippy account and all associated data." />
+  <meta property="og:image" content="https://meetpippy.com/pippy-logo.png" />
+  <meta property="og:site_name" content="Pippy" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .delete-hero {
+      background: linear-gradient(135deg, #7A9DB0 0%, #93B5C6 50%, #A8C5D6 100%);
+      padding: 100px 0 60px;
+      text-align: center;
+      color: #fff;
+    }
+    .delete-hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .delete-hero p {
+      color: rgba(255,255,255,0.85);
+      font-size: 1.05rem;
+    }
+    .delete-content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+    .delete-content h2 {
+      font-size: 1.45rem;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      color: var(--navy);
+    }
+    .delete-content p,
+    .delete-content li {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .delete-content ul { list-style: disc; padding-left: 24px; margin-bottom: 18px; }
+    .delete-content ul li { margin-bottom: 8px; }
+    .delete-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--blue-dark);
+      text-decoration: none;
+    }
+    .delete-back:hover { color: var(--navy); }
+    .delete-form {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      padding: 28px;
+      margin: 24px 0 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .delete-form label {
+      display: block;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+    .delete-form input,
+    .delete-form textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      background: #fafafa;
+    }
+    .delete-form textarea { min-height: 100px; resize: vertical; }
+    .delete-form input:focus,
+    .delete-form textarea:focus {
+      outline: none;
+      border-color: #7A9DB0;
+      background: #fff;
+    }
+    .delete-form .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .delete-form .checkbox-row input { width: auto; margin: 3px 0 0; }
+    .delete-form .checkbox-row label { font-weight: 400; font-size: 0.92rem; color: var(--text-muted); }
+    .delete-form button {
+      background: #c75b5b;
+      color: #fff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      font-family: inherit;
+    }
+    .delete-form button:hover { background: #b04949; }
+    .delete-form button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .note-box {
+      background: #fff8ed;
+      border-left: 4px solid #D4956A;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .note-box strong { color: var(--navy); }
+    .alt-method {
+      background: var(--blue-soft);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .alt-method h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      color: var(--navy);
+    }
+    .effective-date {
+      display: inline-block;
+      background: var(--peach-soft);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 32px;
+    }
+    .status-msg {
+      padding: 14px 18px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      display: none;
+    }
+    .status-msg.success { background: #e9f7ef; color: #1e7a3c; border: 1px solid #b8e0c6; display: block; }
+    .status-msg.error { background: #fde8e8; color: #a3292f; border: 1px solid #f5c2c2; display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="delete-hero">
+    <div class="container">
+      <h1>Delete Your Account</h1>
+      <p>Remove your Pippy account and all associated data</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <div class="delete-content">
+    <a href="/" class="delete-back">&larr; Back to Pippy</a>
+
+    <div class="effective-date">Last updated: April 12, 2026</div>
+
+    <p>This page lets you request deletion of your Pippy account and all of its data. You do not need to have the app installed to use this page. Deletion is permanent and cannot be undone.</p>
+
+    <h2>Option 1: Delete From Inside the App (Fastest)</h2>
+    <p>The quickest way to delete your account is from inside Pippy:</p>
+    <ul>
+      <li>Open Pippy on your phone</li>
+      <li>Go to <strong>Settings</strong></li>
+      <li>Scroll to <strong>Privacy &amp; Data</strong></li>
+      <li>Tap <strong>Delete my data</strong> (removes only your data) or <strong>Delete household data</strong> (removes everything for your household &mdash; owner only)</li>
+      <li>Confirm when prompted</li>
+    </ul>
+    <p>Your data is removed from our servers immediately.</p>
+
+    <h2>Option 2: Request Deletion by Email</h2>
+    <p>If you cannot access the app, you can request account and data deletion by emailing us:</p>
+
+    <div class="alt-method">
+      <h3>Email: <a href="mailto:support@meetpippy.com?subject=Account%20Deletion%20Request">support@meetpippy.com</a></h3>
+      <p style="margin: 0;">Please include: your account email, approximate date you created the account, and the phrase "I am requesting deletion of my Pippy account and all associated data." We process these requests within 30 days.</p>
+    </div>
+
+    <h2>Option 3: Submit the Form Below</h2>
+    <div class="delete-form">
+      <div id="status" class="status-msg"></div>
+
+      <label for="email">Account email <span style="color:#c75b5b">*</span></label>
+      <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+
+      <label for="reason">Reason (optional)</label>
+      <textarea id="reason" name="reason" placeholder="Feedback is welcome but not required."></textarea>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="confirm1" required />
+        <label for="confirm1">I understand that deleting my account is permanent and all my data &mdash; including feeding, sleep, diaper, growth, photos, and milestone entries &mdash; will be removed and cannot be recovered.</label>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="confirm2" required />
+        <label for="confirm2">I understand that if I have an active subscription I should cancel it separately via Google Play or the App Store to stop future charges.</label>
+      </div>
+
+      <button type="button" id="submitBtn" onclick="submitRequest()">Submit Deletion Request</button>
+    </div>
+
+    <h2>What Gets Deleted</h2>
+    <p>When your account is deleted, we permanently remove:</p>
+    <ul>
+      <li>Your account profile and email</li>
+      <li>All baby tracking entries (feeding, sleep, diaper, pumping, growth, health notes, milestones, general notes)</li>
+      <li>Photos you uploaded, including AI-analyzed photos</li>
+      <li>Chat history with the Pippy assistant</li>
+      <li>Achievements, insights, reminders, and visit summaries</li>
+      <li>Referral codes and linked household invites</li>
+      <li>Push notification tokens</li>
+    </ul>
+
+    <h2>What May Be Retained</h2>
+    <p>A small amount of data may be retained for a limited time for legitimate reasons:</p>
+    <ul>
+      <li><strong>Anonymous, aggregated analytics</strong> &mdash; these contain no personal identifiers and are not tied to your account.</li>
+      <li><strong>Subscription / payment records</strong> &mdash; held only as required by tax, accounting, or fraud-prevention laws. These are not linked to your personal profile after deletion.</li>
+      <li><strong>Security and abuse-prevention logs</strong> &mdash; retained briefly as needed to protect the service.</li>
+    </ul>
+
+    <div class="note-box">
+      <p><strong>Subscriptions:</strong> Deleting your account does not automatically cancel an active subscription. To stop future charges, cancel via <a href="https://play.google.com/store/account/subscriptions" target="_blank" rel="noopener">Google Play Subscriptions</a> (Android) or <a href="https://apps.apple.com/account/subscriptions" target="_blank" rel="noopener">App Store Subscriptions</a> (iOS).</p>
+    </div>
+
+    <h2>Timeline</h2>
+    <p>Requests submitted through the app are processed immediately. Email and form requests are processed within 30 days. You will receive a confirmation email when deletion is complete.</p>
+
+    <h2>Questions</h2>
+    <p>If you have any questions about account deletion or your data, contact us at <a href="mailto:support@meetpippy.com">support@meetpippy.com</a>.</p>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="pippy-logo.png" alt="Pippy" class="footer-logo" />
+        <p>Made with love (and very little sleep) &#128155;</p>
+      </div>
+      <div class="footer-trust">
+        <span>&#128274; Encrypted</span>
+        <span>&#128737;&#65039; GDPR compliant</span>
+        <span>&#128581; No ads, no data selling</span>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/delete-account.html">Delete Account</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    function submitRequest() {
+      const email = document.getElementById('email').value.trim();
+      const reason = document.getElementById('reason').value.trim();
+      const c1 = document.getElementById('confirm1').checked;
+      const c2 = document.getElementById('confirm2').checked;
+      const status = document.getElementById('status');
+
+      status.className = 'status-msg';
+      status.textContent = '';
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.className = 'status-msg error';
+        status.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      if (!c1 || !c2) {
+        status.className = 'status-msg error';
+        status.textContent = 'Please check both confirmation boxes before submitting.';
+        return;
+      }
+
+      // Open a pre-filled email to our support inbox. This guarantees delivery
+      // even without a backend endpoint configured.
+      const subject = encodeURIComponent('Account Deletion Request');
+      const body = encodeURIComponent(
+        'I am requesting deletion of my Pippy account and all associated data.\n\n' +
+        'Account email: ' + email + '\n' +
+        (reason ? ('Reason: ' + reason + '\n') : '') +
+        '\nI confirm that I understand this action is permanent.\n'
+      );
+      window.location.href = 'mailto:support@meetpippy.com?subject=' + subject + '&body=' + body;
+
+      status.className = 'status-msg success';
+      status.textContent = 'Opening your email app. If nothing happens, email support@meetpippy.com directly.';
+    }
+  </script>
+
+  <script data-goatcounter="https://meetpippy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
