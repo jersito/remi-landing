@@ -184,10 +184,14 @@
 
     <div class="effective-date">Last updated: April 12, 2026</div>
 
-    <p>This page lets you request deletion of your Pippy account and all of its data. You do not need to have the app installed to use this page. Deletion is permanent and cannot be undone.</p>
+    <p>Pippy uses anonymous accounts. We do not collect your name, email, or phone number. Deletion is permanent and cannot be undone.</p>
 
-    <h2>Option 1: Delete From Inside the App (Fastest)</h2>
-    <p>The quickest way to delete your account is from inside Pippy:</p>
+    <div class="note-box">
+      <p><strong>How Pippy identifies you:</strong> when you first open the app, we generate a random ID on your device and use it to store your baby logs. There is no email, username, or password. The only place your account exists is on the device where you installed it.</p>
+    </div>
+
+    <h2>Best way: delete from inside the app</h2>
+    <p>If you still have Pippy installed, this is the only reliable way to delete your data:</p>
     <ul>
       <li>Open Pippy on your phone</li>
       <li>Go to <strong>Settings</strong></li>
@@ -197,66 +201,45 @@
     </ul>
     <p>Your data is removed from our servers immediately.</p>
 
-    <h2>Option 2: Request Deletion by Email</h2>
-    <p>If you cannot access the app, you can request account and data deletion by emailing us:</p>
+    <h2>If you no longer have the app</h2>
+    <p>Because accounts are anonymous, we cannot look up your data from an email address or phone number &mdash; that information is never attached to it in the first place. If you've already uninstalled Pippy without deleting your data first, please email us anyway:</p>
 
     <div class="alt-method">
       <h3>Email: <a href="mailto:support@meetpippy.com?subject=Account%20Deletion%20Request">support@meetpippy.com</a></h3>
-      <p style="margin: 0;">Please include: your account email, approximate date you created the account, and the phrase "I am requesting deletion of my Pippy account and all associated data." We process these requests within 30 days.</p>
+      <p style="margin: 0;">Include any details you remember (approximate date you created the account, your baby's name, the device you used). We'll do our best to locate and remove the data, and we'll write back either way within 30 days.</p>
     </div>
 
-    <h2>Option 3: Submit the Form Below</h2>
-    <div class="delete-form">
-      <div id="status" class="status-msg"></div>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">Practically, an anonymous account with no linked device has very little data left to find &mdash; there are no contact details or photos of you on file &mdash; but we will make a good-faith effort.</p>
 
-      <label for="email">Account email <span style="color:#c75b5b">*</span></label>
-      <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
-
-      <label for="reason">Reason (optional)</label>
-      <textarea id="reason" name="reason" placeholder="Feedback is welcome but not required."></textarea>
-
-      <div class="checkbox-row">
-        <input type="checkbox" id="confirm1" required />
-        <label for="confirm1">I understand that deleting my account is permanent and all my data &mdash; including feeding, sleep, diaper, growth, photos, and milestone entries &mdash; will be removed and cannot be recovered.</label>
-      </div>
-
-      <div class="checkbox-row">
-        <input type="checkbox" id="confirm2" required />
-        <label for="confirm2">I understand that if I have an active subscription I should cancel it separately via Google Play or the App Store to stop future charges.</label>
-      </div>
-
-      <button type="button" id="submitBtn" onclick="submitRequest()">Submit Deletion Request</button>
-    </div>
-
-    <h2>What Gets Deleted</h2>
+    <h2>What gets deleted</h2>
     <p>When your account is deleted, we permanently remove:</p>
     <ul>
-      <li>Your account profile and email</li>
       <li>All baby tracking entries (feeding, sleep, diaper, pumping, growth, health notes, milestones, general notes)</li>
-      <li>Photos you uploaded, including AI-analyzed photos</li>
+      <li>Photos you attached to log entries</li>
       <li>Chat history with the Pippy assistant</li>
       <li>Achievements, insights, reminders, and visit summaries</li>
-      <li>Referral codes and linked household invites</li>
+      <li>Household membership and referral codes</li>
       <li>Push notification tokens</li>
+      <li>Your anonymous account row</li>
     </ul>
 
-    <h2>What May Be Retained</h2>
+    <h2>What may be retained</h2>
     <p>A small amount of data may be retained for a limited time for legitimate reasons:</p>
     <ul>
-      <li><strong>Anonymous, aggregated analytics</strong> &mdash; these contain no personal identifiers and are not tied to your account.</li>
-      <li><strong>Subscription / payment records</strong> &mdash; held only as required by tax, accounting, or fraud-prevention laws. These are not linked to your personal profile after deletion.</li>
+      <li><strong>Anonymous, aggregated analytics</strong> &mdash; contains no identifiers that could tie events back to you.</li>
+      <li><strong>Subscription / payment records</strong> &mdash; held only as required by tax, accounting, or fraud-prevention laws. Payment information itself never reaches Pippy; it is handled by Google Play or the App Store.</li>
       <li><strong>Security and abuse-prevention logs</strong> &mdash; retained briefly as needed to protect the service.</li>
     </ul>
 
     <div class="note-box">
-      <p><strong>Subscriptions:</strong> Deleting your account does not automatically cancel an active subscription. To stop future charges, cancel via <a href="https://play.google.com/store/account/subscriptions" target="_blank" rel="noopener">Google Play Subscriptions</a> (Android) or <a href="https://apps.apple.com/account/subscriptions" target="_blank" rel="noopener">App Store Subscriptions</a> (iOS).</p>
+      <p><strong>Subscriptions:</strong> Deleting your data does not automatically cancel an active subscription. To stop future charges, cancel via <a href="https://play.google.com/store/account/subscriptions" target="_blank" rel="noopener">Google Play Subscriptions</a> (Android) or <a href="https://apps.apple.com/account/subscriptions" target="_blank" rel="noopener">App Store Subscriptions</a> (iOS).</p>
     </div>
 
     <h2>Timeline</h2>
-    <p>Requests submitted through the app are processed immediately. Email and form requests are processed within 30 days. You will receive a confirmation email when deletion is complete.</p>
+    <p>In-app deletion is immediate. Email requests are processed within 30 days.</p>
 
     <h2>Questions</h2>
-    <p>If you have any questions about account deletion or your data, contact us at <a href="mailto:support@meetpippy.com">support@meetpippy.com</a>.</p>
+    <p>Contact us at <a href="mailto:support@meetpippy.com">support@meetpippy.com</a>.</p>
   </div>
 
   <!-- Footer -->
@@ -280,44 +263,6 @@
       <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
     </div>
   </footer>
-
-  <script>
-    function submitRequest() {
-      const email = document.getElementById('email').value.trim();
-      const reason = document.getElementById('reason').value.trim();
-      const c1 = document.getElementById('confirm1').checked;
-      const c2 = document.getElementById('confirm2').checked;
-      const status = document.getElementById('status');
-
-      status.className = 'status-msg';
-      status.textContent = '';
-
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        status.className = 'status-msg error';
-        status.textContent = 'Please enter a valid email address.';
-        return;
-      }
-      if (!c1 || !c2) {
-        status.className = 'status-msg error';
-        status.textContent = 'Please check both confirmation boxes before submitting.';
-        return;
-      }
-
-      // Open a pre-filled email to our support inbox. This guarantees delivery
-      // even without a backend endpoint configured.
-      const subject = encodeURIComponent('Account Deletion Request');
-      const body = encodeURIComponent(
-        'I am requesting deletion of my Pippy account and all associated data.\n\n' +
-        'Account email: ' + email + '\n' +
-        (reason ? ('Reason: ' + reason + '\n') : '') +
-        '\nI confirm that I understand this action is permanent.\n'
-      );
-      window.location.href = 'mailto:support@meetpippy.com?subject=' + subject + '&body=' + body;
-
-      status.className = 'status-msg success';
-      status.textContent = 'Opening your email app. If nothing happens, email support@meetpippy.com directly.';
-    }
-  </script>
 
   <script data-goatcounter="https://meetpippy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
