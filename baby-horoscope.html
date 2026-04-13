@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baby Horoscope by Zodiac Sign: Weekly Readings and Traits | Pippy</title>
+  <meta name="description" content="Your baby's weekly horoscope, personalized to their zodiac sign and your actual logs. Traits, quirks, and a three-day forecast for every sign." />
+  <meta name="keywords" content="baby horoscope, baby zodiac, baby astrology, zodiac baby traits, newborn horoscope, baby sign reading" />
+  <link rel="canonical" href="https://remibabyapp.com/baby-horoscope.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://remibabyapp.com/baby-horoscope.html" />
+  <meta property="og:title" content="Baby Horoscope by Zodiac Sign" />
+  <meta property="og:description" content="Weekly baby horoscope personalized to your little one's sign. Traits and three-day forecast." />
+  <meta property="og:image" content="https://remibabyapp.com/pippy-og-image.png" />
+  <meta property="og:site_name" content="Pippy" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Baby Horoscope by Zodiac Sign",
+    "description": "Weekly baby horoscope readings and zodiac traits for every sign.",
+    "url": "https://remibabyapp.com/baby-horoscope.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Pippy",
+      "url": "https://remibabyapp.com",
+      "logo": { "@type": "ImageObject", "url": "https://remibabyapp.com/remi-logo.png" }
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .zd-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+    .zd-nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .zd-nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+    .zd-nav-brand img { height: 32px; border-radius: 8px; }
+    .zd-hero { background: linear-gradient(165deg, #1a1a2e 0%, #2d2d44 50%, #4a3b6e 100%); color: #fff; padding: 80px 0 64px; text-align: center; position: relative; overflow: hidden; }
+    .zd-hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.12) 1px, transparent 1px), radial-gradient(circle at 70% 60%, rgba(255,255,255,0.08) 1px, transparent 1px), radial-gradient(circle at 40% 80%, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px, 90px 90px, 70px 70px; opacity: 0.7; }
+    .zd-hero > .container { position: relative; }
+    .zd-hero h1 { font-size: clamp(1.9rem, 4.6vw, 2.9rem); margin-bottom: 16px; line-height: 1.15; color: #fff; }
+    .zd-hero p { font-size: 1.08rem; max-width: 620px; margin: 0 auto 28px; line-height: 1.6; color: rgba(255,255,255,0.8); }
+    .zd-hero .section-tag { background: rgba(255,255,255,0.14); color: #fff; }
+    .zd-section { padding: 64px 0; }
+    .zd-section.alt { background: var(--beige); }
+    .zd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 32px; }
+    .zd-card { border-radius: var(--radius-sm); padding: 22px; text-decoration: none; color: #fff; transition: transform 0.2s, box-shadow 0.2s; display: block; position: relative; overflow: hidden; min-height: 150px; }
+    .zd-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .zd-card .emoji { font-size: 36px; margin-bottom: 8px; display: block; }
+    .zd-card h3 { font-size: 1.05rem; margin-bottom: 4px; color: #fff; }
+    .zd-card .range { font-size: 0.78rem; color: rgba(255,255,255,0.75); margin: 0; letter-spacing: 0.5px; }
+    .zd-cta { padding: 72px 0; background: linear-gradient(165deg, #f0f7fb 0%, #fef0e6 100%); text-align: center; }
+    .zd-cta h2 { margin-bottom: 14px; }
+    .zd-cta p { max-width: 520px; margin: 0 auto 24px; font-size: 1.02rem; color: var(--text-muted); }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: var(--blue-dark); color: var(--white); text-decoration: none; transition: transform 0.2s; }
+    .btn-primary:hover { transform: scale(1.04); }
+    .zd-about { max-width: 760px; margin: 0 auto; }
+    .zd-about p { font-size: 1.02rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+
+  <nav class="zd-nav">
+    <div class="container zd-nav-inner">
+      <a href="/" class="zd-nav-brand">
+        <img src="/RemiIcon.png" alt="Pippy" />
+        Pippy
+      </a>
+      <a href="/" class="btn btn-nav">Back to Pippy</a>
+    </div>
+  </nav>
+
+  <section class="zd-hero">
+    <div class="container">
+      <span class="section-tag">Baby Horoscope</span>
+      <h1>Your baby's weekly horoscope, written just for them.</h1>
+      <p>A gentle, lightly mystical weekly reading for every little one. Personalized to their zodiac sign and the patterns of your week, with a three-day forecast and a lucky hour.</p>
+      <a href="#signs" class="btn-primary">Find your baby's sign</a>
+    </div>
+  </section>
+
+  <section class="zd-section" id="signs">
+    <div class="container">
+      <div class="section-header" style="text-align:center;">
+        <h2>All 12 zodiac signs</h2>
+        <p style="max-width: 620px; margin: 10px auto 0; color: var(--text-muted);">Tap a sign to read that zodiac's baby traits, quirks, and parenting pairings.</p>
+      </div>
+      <div class="zd-grid">
+        <a href="/baby-horoscope/capricorn.html" class="zd-card" style="background: linear-gradient(165deg, #2d2d44, #6d6d8a);"><span class="emoji">🐐</span><h3>Capricorn</h3><p class="range">Dec 22 to Jan 19</p></a>
+        <a href="/baby-horoscope/aquarius.html" class="zd-card" style="background: linear-gradient(165deg, #1e3a5f, #6ec5e9);"><span class="emoji">🌊</span><h3>Aquarius</h3><p class="range">Jan 20 to Feb 18</p></a>
+        <a href="/baby-horoscope/pisces.html" class="zd-card" style="background: linear-gradient(165deg, #3a6073, #88d3ce);"><span class="emoji">🐟</span><h3>Pisces</h3><p class="range">Feb 19 to Mar 20</p></a>
+        <a href="/baby-horoscope/aries.html" class="zd-card" style="background: linear-gradient(165deg, #8b1a1a, #ff7a45);"><span class="emoji">🔥</span><h3>Aries</h3><p class="range">Mar 21 to Apr 19</p></a>
+        <a href="/baby-horoscope/taurus.html" class="zd-card" style="background: linear-gradient(165deg, #4a6d3a, #b5c689);"><span class="emoji">🌷</span><h3>Taurus</h3><p class="range">Apr 20 to May 20</p></a>
+        <a href="/baby-horoscope/gemini.html" class="zd-card" style="background: linear-gradient(165deg, #7a5a9e, #ffd166);"><span class="emoji">🦋</span><h3>Gemini</h3><p class="range">May 21 to Jun 20</p></a>
+        <a href="/baby-horoscope/cancer.html" class="zd-card" style="background: linear-gradient(165deg, #4a5d9e, #c9d6ea);"><span class="emoji">🌙</span><h3>Cancer</h3><p class="range">Jun 21 to Jul 22</p></a>
+        <a href="/baby-horoscope/leo.html" class="zd-card" style="background: linear-gradient(165deg, #c97d2e, #ffd700);"><span class="emoji">🦁</span><h3>Leo</h3><p class="range">Jul 23 to Aug 22</p></a>
+        <a href="/baby-horoscope/virgo.html" class="zd-card" style="background: linear-gradient(165deg, #4e6c50, #a8c5a0);"><span class="emoji">🌾</span><h3>Virgo</h3><p class="range">Aug 23 to Sep 22</p></a>
+        <a href="/baby-horoscope/libra.html" class="zd-card" style="background: linear-gradient(165deg, #b15b9a, #ffd3e2);"><span class="emoji">⚖️</span><h3>Libra</h3><p class="range">Sep 23 to Oct 22</p></a>
+        <a href="/baby-horoscope/scorpio.html" class="zd-card" style="background: linear-gradient(165deg, #4a1942, #a64ac9);"><span class="emoji">🦂</span><h3>Scorpio</h3><p class="range">Oct 23 to Nov 21</p></a>
+        <a href="/baby-horoscope/sagittarius.html" class="zd-card" style="background: linear-gradient(165deg, #6a4e3a, #f4a261);"><span class="emoji">🏹</span><h3>Sagittarius</h3><p class="range">Nov 22 to Dec 21</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="zd-section alt">
+    <div class="container">
+      <div class="section-header" style="text-align:center;">
+        <h2>How Pippy writes a weekly baby horoscope</h2>
+      </div>
+      <div class="zd-about">
+        <p>We start with the traditional traits of your baby's zodiac sign, then layer in the quiet rhythms of your week. The busiest day, the longest stretch of sleep, the hour you and baby seem to orbit. All anonymously pulled from your logs, never shared.</p>
+        <p>The result is a short, warm weekly reading with a three-day forecast and a lucky hour. Light enough to be fun. Specific enough to feel like it was written for your baby.</p>
+        <p>Readings refresh every Monday. Day-by-day predictions roll forward so the card never feels stale mid-week.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="zd-cta">
+    <div class="container">
+      <h2>Read your baby's horoscope each week</h2>
+      <p>Free in the Pippy app. Find it in the Fun tab after a few days of logging.</p>
+      <a href="/" class="btn-primary">Get Pippy</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="/remi-logo.png" alt="Pippy" class="footer-logo" />
+        <p>An AI-powered baby tracker built for new parents.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/faq.html">FAQ</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
+    </div>
+  </footer>
+  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
