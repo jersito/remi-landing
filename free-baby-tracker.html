@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Baby Tracker App | AI Chat Logging Free | Pippy</title>
+  <meta name="description" content="A genuinely free baby tracker app with AI chat logging. Log feeds, sleep, diapers, and pumping by talking. Family sharing and nap predictions free. iOS and Android." />
+  <meta name="keywords" content="free baby tracker app, free baby tracker, best free baby app, free newborn tracker, free feeding tracker, free baby log app, free diaper tracker" />
+  <link rel="canonical" href="https://meetpippy.com/free-baby-tracker.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://meetpippy.com/free-baby-tracker.html" />
+  <meta property="og:title" content="Free Baby Tracker App" />
+  <meta property="og:description" content="A genuinely free baby tracker with AI chat logging. Family sharing, nap predictions, pediatrician reports, all free." />
+  <meta property="og:image" content="https://meetpippy.com/pippy-og-image.png" />
+  <meta property="og:site_name" content="Pippy" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Is Pippy really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Core tracking, AI chat logging, family sharing, nap predictions, and pediatrician-ready reports are in the free tier. Pippy Premium at $49.99 per year adds image attachments, AI pattern insights, multiple babies, and unlimited log history."}},
+      {"@type": "Question", "name": "What do I get with Pippy Premium?", "acceptedAnswer": {"@type": "Answer", "text": "Pippy Premium at $49.99 per year unlocks image attachments, AI pattern insights, multi-baby tracking, smarter AI responses, and unlimited log history."}},
+      {"@type": "Question", "name": "How does Pippy compare on free features vs Huckleberry?", "acceptedAnswer": {"@type": "Answer", "text": "Pippy's free tier includes AI chat logging and nap predictions, both of which require Huckleberry Plus at $58.99 per year. Huckleberry's free tier includes multi-baby tracking and a longer log history, both of which require Pippy Premium."}}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .lp-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+    .lp-nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .lp-nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+    .lp-nav-brand img { height: 32px; border-radius: 8px; }
+    .lp-hero { background: linear-gradient(165deg, #f0f7fb 0%, #fefaf7 50%, #fef0e6 100%); padding: 80px 0 40px; position: relative; overflow: hidden; }
+    .lp-hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+    @media (max-width: 900px) { .lp-hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+    .lp-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 16px; line-height: 1.1; }
+    .lp-hero .highlight { background: linear-gradient(120deg, transparent 0%, transparent 60%, #ffd77a 60%, #ffd77a 95%, transparent 95%); padding: 0 4px; }
+    .lp-hero p.sub { font-size: 1.12rem; max-width: 540px; line-height: 1.6; color: var(--text-muted); margin-bottom: 28px; }
+    .lp-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .lp-trust { display: flex; align-items: center; gap: 14px; font-size: 0.88rem; color: var(--text-muted); flex-wrap: wrap; }
+    .lp-trust .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); opacity: 0.5; }
+    .lp-hero svg.wave { position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; display: block; }
+    .chat-demo { background: #fff; border-radius: 28px; padding: 20px 18px; box-shadow: 0 30px 80px -20px rgba(47,71,110,0.25), 0 0 0 1px rgba(0,0,0,0.03); max-width: 420px; margin: 0 auto; position: relative; }
+    .chat-head { display: flex; align-items: center; gap: 10px; padding: 6px 6px 14px; border-bottom: 1px solid rgba(0,0,0,0.05); margin-bottom: 14px; }
+    .chat-head img { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f0f7fb, #fef0e6); padding: 4px; }
+    .chat-head-name { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); }
+    .chat-head-status { font-size: 0.74rem; color: #2d8a5a; display: flex; align-items: center; gap: 5px; }
+    .chat-head-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #2d8a5a; }
+    .chat-body { display: flex; flex-direction: column; gap: 8px; padding: 4px 4px 8px; }
+    .msg { padding: 10px 14px; border-radius: 18px; font-size: 0.94rem; line-height: 1.45; max-width: 85%; word-wrap: break-word; animation: slideIn 0.5s ease backwards; }
+    .msg.user { background: var(--blue-dark, #7A9DB0); color: #fff; margin-left: auto; border-bottom-right-radius: 6px; }
+    .msg.pippy { background: #f3f5f8; color: var(--text); margin-right: auto; border-bottom-left-radius: 6px; }
+    .msg:nth-child(1){animation-delay:0.2s} .msg:nth-child(2){animation-delay:0.8s} .msg:nth-child(3){animation-delay:1.6s} .msg:nth-child(4){animation-delay:2.2s} .msg:nth-child(5){animation-delay:3s}
+    @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .chat-input-fake { margin-top: 14px; padding: 12px 16px; border-radius: 28px; background: #f3f5f8; display: flex; align-items: center; justify-content: space-between; color: var(--text-muted); font-size: 0.88rem; }
+    .mic-btn { width: 32px; height: 32px; border-radius: 50%; background: var(--blue-dark, #7A9DB0); display: inline-flex; align-items: center; justify-content: center; font-size: 14px; }
+    .lp-section { padding: 80px 0; position: relative; }
+    .lp-section.alt { background: var(--beige, #faf4ee); }
+    .lp-section-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+    .lp-section-head .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.12); color: var(--blue-dark, #7A9DB0); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
+    .lp-section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 14px; line-height: 1.2; }
+    .lp-section-head p { font-size: 1.02rem; color: var(--text-muted); line-height: 1.6; }
+    .free-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 820px) { .free-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .free-grid { grid-template-columns: 1fr; } }
+    .free-card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); border: 1px solid rgba(0,0,0,0.04); position: relative; }
+    .free-card .check { width: 32px; height: 32px; border-radius: 50%; background: #d5efdc; color: #2d8a5a; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 12px; }
+    .free-card h3 { font-size: 1.02rem; margin-bottom: 6px; color: var(--text); }
+    .free-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+    .ct-wrap { background: #fff; border-radius: 20px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
+    .ct-wrap table { width: 100%; border-collapse: collapse; }
+    .ct-wrap th, .ct-wrap td { padding: 16px 20px; text-align: left; font-size: 0.94rem; }
+    .ct-wrap th { background: linear-gradient(135deg, #f0f7fb 0%, #fef0e6 100%); font-weight: 800; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text); }
+    .ct-wrap th.pippy-col { color: var(--blue-dark, #7A9DB0); }
+    .ct-wrap tbody tr:nth-child(even) { background: rgba(122,157,176,0.04); }
+    .ct-wrap tbody tr:not(:last-child) td { border-bottom: 1px solid rgba(0,0,0,0.04); }
+    .ct-wrap .feat { font-weight: 700; }
+    .ct-wrap .yes { color: #2d8a5a; font-weight: 700; }
+    .ct-wrap .yes::before { content: "✓ "; font-weight: 900; }
+    .ct-wrap .no { color: #9ca3af; }
+    .ct-wrap .no::before { content: "✗ "; }
+    .ct-wrap .note { color: var(--text-muted); font-size: 0.88rem; }
+    .honest-box { max-width: 820px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 36px 40px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); border-left: 4px solid var(--blue-dark, #7A9DB0); }
+    .honest-box h3 { font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .honest-box h3 img { width: 36px; height: 36px; }
+    .honest-box p { font-size: 1rem; line-height: 1.7; color: var(--text); margin: 0 0 14px; }
+    .honest-box p:last-child { margin-bottom: 0; }
+    .honest-box strong { color: var(--blue-dark, #7A9DB0); }
+    .faq-grid { max-width: 780px; margin: 0 auto; }
+    .faq-item { background: #fff; border-radius: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(47,71,110,0.04); border: 1px solid rgba(0,0,0,0.04); overflow: hidden; }
+    .faq-item summary { padding: 20px 24px; cursor: pointer; font-weight: 700; font-size: 1.02rem; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "+"; font-size: 1.4rem; font-weight: 300; color: var(--text-muted); transition: transform 0.2s; }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item .faq-body { padding: 0 24px 22px; font-size: 0.96rem; line-height: 1.65; color: var(--text-muted); }
+    .lp-cta { padding: 88px 0; background: linear-gradient(165deg, #f0f7fb 0%, #fef0e6 100%); text-align: center; position: relative; overflow: hidden; }
+    .lp-cta::before { content: ""; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,215,122,0.3) 0%, transparent 70%); }
+    .lp-cta::after { content: ""; position: absolute; bottom: -60px; left: -60px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(122,157,176,0.15) 0%, transparent 70%); }
+    .lp-cta-inner { position: relative; z-index: 1; }
+    .lp-cta img.mascot { height: 96px; margin-bottom: 18px; }
+    .lp-cta h2 { margin-bottom: 14px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+    .lp-cta p { max-width: 520px; margin: 0 auto 28px; font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: var(--blue-dark, #7A9DB0); color: #fff; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(122,157,176,0.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(122,157,176,0.5); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: #fff; color: var(--text); text-decoration: none; border: 1.5px solid rgba(0,0,0,0.1); transition: transform 0.2s; }
+    .btn-secondary:hover { transform: translateY(-2px); }
+    .fade-up { opacity: 1 !important; transform: none !important; transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.in { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <nav class="lp-nav">
+    <div class="container lp-nav-inner">
+      <a href="/" class="lp-nav-brand"><img src="/RemiIcon.png" alt="Pippy" /> Pippy</a>
+      <a href="/" class="btn-secondary" style="padding: 10px 20px; font-size: 0.92rem;">Back to Pippy</a>
+    </div>
+  </nav>
+
+  <section class="lp-hero">
+    <div class="container">
+      <div class="lp-hero-grid">
+        <div class="fade-up in">
+          <span style="display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.12); color: var(--blue-dark, #7A9DB0); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 16px;">Free Baby Tracker</span>
+          <h1>A baby tracker you <span class="highlight">actually use for free.</span></h1>
+          <p class="sub">Some baby apps put the good stuff behind $60 to $120 a year. Pippy keeps the core free. AI chat logging, nap predictions, family sharing, and pediatrician-ready reports work on the free tier.</p>
+          <div class="lp-cta-row">
+            <a href="/" class="btn-primary">Get Pippy Free →</a>
+            <a href="#whats-free" class="btn-secondary">What's in the free tier</a>
+          </div>
+          <div class="lp-trust">
+            <span>No credit card</span>
+            <span class="dot"></span>
+            <span>No trial clock</span>
+            <span class="dot"></span>
+            <span>iOS &amp; Android</span>
+          </div>
+        </div>
+        <div class="fade-up in">
+          <div class="chat-demo">
+            <div class="chat-head">
+              <img src="/mascot/mascot-happy.png" alt="Pippy mascot" />
+              <div>
+                <div class="chat-head-name">Pippy</div>
+                <div class="chat-head-status">Free tier</div>
+              </div>
+            </div>
+            <div class="chat-body">
+              <div class="msg user">She had a 20 min nap</div>
+              <div class="msg pippy">Nap logged 🌙 Next window around 1:40pm.</div>
+              <div class="msg user">Share her day with our pediatrician</div>
+              <div class="msg pippy">Report ready. Feeds, diapers, naps for the last 7 days. 📋</div>
+            </div>
+            <div class="chat-input-fake">
+              <span>All of this in the free tier</span>
+              <span class="mic-btn">🎤</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C320,80 560,0 880,50 C1100,80 1300,20 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/></svg>
+  </section>
+
+  <section class="lp-section" id="whats-free">
+    <div class="container">
+      <div class="lp-section-head fade-up">
+        <span class="tag">Free Tier</span>
+        <h2>What you actually get for free</h2>
+        <p>Not a trial. Not a teaser. Real features, real free.</p>
+      </div>
+      <div class="free-grid fade-up">
+        <div class="free-card">
+          <span class="check">✓</span>
+          <h3>AI chat logging</h3>
+          <p>Say "he had 3oz" or "she just woke up." Pippy logs it in seconds.</p>
+        </div>
+        <div class="free-card">
+          <span class="check">✓</span>
+          <h3>Feeds, sleep, diapers, pumping</h3>
+          <p>All the core baby tracker features, no tier gating.</p>
+        </div>
+        <div class="free-card">
+          <span class="check">✓</span>
+          <h3>Nap predictions</h3>
+          <p>See the next nap window before the meltdown.</p>
+        </div>
+        <div class="free-card">
+          <span class="check">✓</span>
+          <h3>Family sharing</h3>
+          <p>Partner, nanny, grandparents on the same timeline.</p>
+        </div>
+        <div class="free-card">
+          <span class="check">✓</span>
+          <h3>Pediatrician-ready reports</h3>
+          <p>Share a clean summary with your doctor.</p>
+        </div>
+        <div class="free-card">
+          <span class="check">✓</span>
+          <h3>30 days of log history</h3>
+          <p>Keep the last month rolling. Upgrade if you need more.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section alt">
+    <div class="container">
+      <div class="lp-section-head fade-up">
+        <span class="tag">Compared</span>
+        <h2>Free tier vs Huckleberry free tier</h2>
+        <p>An honest look at what each free plan actually gives you.</p>
+      </div>
+      <div class="ct-wrap fade-up">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="pippy-col">Pippy Free</th>
+              <th>Huckleberry Free</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="feat">AI chat / voice logging</td><td class="yes">Yes</td><td class="no">Plus required</td></tr>
+            <tr><td class="feat">Feeding, sleep, diaper tracking</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+            <tr><td class="feat">Pumping log</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+            <tr><td class="feat">Family sharing</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+            <tr><td class="feat">Pediatrician-ready reports</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+            <tr><td class="feat">Nap predictions</td><td class="yes">Yes</td><td class="no">Plus required</td></tr>
+            <tr><td class="feat">Multiple babies</td><td class="no">Premium required</td><td class="yes">Yes</td></tr>
+            <tr><td class="feat">Log history</td><td class="note">Last 30 days</td><td class="note">Extended</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top: 16px; font-size: 0.84rem; color: var(--text-muted); text-align: center;">Features and pricing reflect our best understanding at publication and can change.</p>
+    </div>
+  </section>
+
+  <section class="lp-section">
+    <div class="container">
+      <div class="lp-section-head fade-up">
+        <span class="tag">The Honest Version</span>
+        <h2>How we stay free</h2>
+      </div>
+      <div class="honest-box fade-up">
+        <h3><img src="/mascot/mascot-thinking.png" alt="" /> The honest version</h3>
+        <p>We're not going to pretend Pippy will be free forever with zero monetization. That's not sustainable and we don't want to lie.</p>
+        <p>Core tracking stays free. <strong>AI chat logging, family sharing, nap predictions, and pediatrician reports are in the free tier and we intend to keep them there.</strong> Those are basic tools, not premium features.</p>
+        <p>For parents who want more, <strong>Pippy Premium at $49.99 per year</strong> unlocks image attachments, AI pattern insights (AI-generated summaries of trends in your baby's data), multiple babies on one account, smarter AI responses, and unlimited log history.</p>
+        <p>We'd rather a lot of parents use Pippy free than a small group pay for what should have been free.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section alt">
+    <div class="container">
+      <div class="lp-section-head fade-up">
+        <span class="tag">FAQ</span>
+        <h2>Common questions</h2>
+      </div>
+      <div class="faq-grid fade-up">
+        <details class="faq-item"><summary>Is Pippy really free?</summary><div class="faq-body">Yes. Core tracking, AI chat logging, family sharing, nap predictions, and pediatrician-ready reports are in the free tier. No credit card required to get started.</div></details>
+        <details class="faq-item"><summary>What do I get with Pippy Premium?</summary><div class="faq-body">Pippy Premium ($49.99 per year) unlocks image attachments, AI pattern insights, multi-baby tracking, smarter AI responses, and unlimited log history.</div></details>
+        <details class="faq-item"><summary>Is the 30-day history limit a dealbreaker?</summary><div class="faq-body">For most parents it's fine. Most use cases (pediatrician checkups, sharing with partner, spotting weekly patterns) fit inside 30 days. If you want full history, that's what Premium is for.</div></details>
+        <details class="faq-item"><summary>How does the free tier compare to Huckleberry's free tier?</summary><div class="faq-body">Pippy's free tier includes AI chat logging and nap predictions, both of which require Huckleberry Plus ($58.99 per year). Huckleberry's free tier includes multi-baby tracking and a longer log history, both of which require Pippy Premium.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-cta">
+    <div class="container lp-cta-inner">
+      <img src="/mascot/mascot-wave.png" alt="Pippy waving" class="mascot" />
+      <h2>Get Pippy free</h2>
+      <p>All the baby tracker features you actually need, free from day one.</p>
+      <a href="/" class="btn-primary">Get Pippy →</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="/remi-logo.png" alt="Pippy" class="footer-logo" />
+        <p>An AI-powered baby tracker built for new parents.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/faq.html">FAQ</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }); }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  </script>
+  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

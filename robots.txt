@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://remibabyapp.com/sitemap.xml
+Sitemap: https://meetpippy.com/sitemap.xml

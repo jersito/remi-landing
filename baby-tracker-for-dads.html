@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Best Baby Tracker App for Dads | Pippy</title>
+  <meta name="description" content="A baby tracker built for dads too. Log feeds, diapers, and sleep just by talking. Share the timeline with your partner in real time. Free for iOS and Android." />
+  <meta name="keywords" content="baby tracker for dads, baby tracker dad, best baby app for fathers, dad baby app, newborn tracker for dads, baby log app for fathers" />
+  <link rel="canonical" href="https://meetpippy.com/baby-tracker-for-dads.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://meetpippy.com/baby-tracker-for-dads.html" />
+  <meta property="og:title" content="The Best Baby Tracker App for Dads" />
+  <meta property="og:description" content="A baby tracker built for dads too. Log by talking, share with your partner, free." />
+  <meta property="og:image" content="https://meetpippy.com/pippy-og-image.png" />
+  <meta property="og:site_name" content="Pippy" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question", "name": "Is Pippy good for dads?", "acceptedAnswer": {"@type": "Answer", "text": "Pippy is built to be gender-neutral. Logs, feed types, and the shared timeline don't assume one primary caregiver. Dads, partners, nannies, and grandparents all use the same interface."}},
+      {"@type": "Question", "name": "Can I share Pippy with my partner for free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Family sharing is in the free tier. Everyone you invite sees and logs to the same timeline in real time."}},
+      {"@type": "Question", "name": "Does Pippy work at 3AM with one hand?", "acceptedAnswer": {"@type": "Answer", "text": "That's the main design goal. You say 'he had 4oz' or 'changed a wet diaper' and Pippy logs it. No menus, no fumbling."}}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .lp-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+    .lp-nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .lp-nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+    .lp-nav-brand img { height: 32px; border-radius: 8px; }
+    .lp-hero { background: linear-gradient(165deg, #f0f7fb 0%, #fefaf7 50%, #fef0e6 100%); padding: 80px 0 40px; position: relative; overflow: hidden; }
+    .lp-hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+    @media (max-width: 900px) { .lp-hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+    .lp-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 16px; line-height: 1.1; }
+    .lp-hero .highlight { background: linear-gradient(120deg, transparent 0%, transparent 60%, #ffd77a 60%, #ffd77a 95%, transparent 95%); padding: 0 4px; }
+    .lp-hero p.sub { font-size: 1.12rem; max-width: 540px; line-height: 1.6; color: var(--text-muted); margin-bottom: 28px; }
+    .lp-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+    .lp-trust { display: flex; align-items: center; gap: 14px; font-size: 0.88rem; color: var(--text-muted); flex-wrap: wrap; }
+    .lp-trust .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); opacity: 0.5; }
+    .lp-hero svg.wave { position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; display: block; }
+    .chat-demo { background: #fff; border-radius: 28px; padding: 20px 18px; box-shadow: 0 30px 80px -20px rgba(47,71,110,0.25), 0 0 0 1px rgba(0,0,0,0.03); max-width: 420px; margin: 0 auto; position: relative; }
+    .chat-head { display: flex; align-items: center; gap: 10px; padding: 6px 6px 14px; border-bottom: 1px solid rgba(0,0,0,0.05); margin-bottom: 14px; }
+    .chat-head img { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f0f7fb, #fef0e6); padding: 4px; }
+    .chat-head-name { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); }
+    .chat-head-status { font-size: 0.74rem; color: #2d8a5a; display: flex; align-items: center; gap: 5px; }
+    .chat-head-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #2d8a5a; }
+    .chat-body { display: flex; flex-direction: column; gap: 8px; padding: 4px 4px 8px; }
+    .msg { padding: 10px 14px; border-radius: 18px; font-size: 0.94rem; line-height: 1.45; max-width: 85%; word-wrap: break-word; animation: slideIn 0.5s ease backwards; }
+    .msg.user { background: var(--blue-dark, #7A9DB0); color: #fff; margin-left: auto; border-bottom-right-radius: 6px; }
+    .msg.pippy { background: #f3f5f8; color: var(--text); margin-right: auto; border-bottom-left-radius: 6px; }
+    .msg:nth-child(1){animation-delay:0.2s} .msg:nth-child(2){animation-delay:0.8s} .msg:nth-child(3){animation-delay:1.6s} .msg:nth-child(4){animation-delay:2.2s} .msg:nth-child(5){animation-delay:3s}
+    @keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .chat-input-fake { margin-top: 14px; padding: 12px 16px; border-radius: 28px; background: #f3f5f8; display: flex; align-items: center; justify-content: space-between; color: var(--text-muted); font-size: 0.88rem; }
+    .mic-btn { width: 32px; height: 32px; border-radius: 50%; background: var(--blue-dark, #7A9DB0); display: inline-flex; align-items: center; justify-content: center; font-size: 14px; }
+    .lp-section { padding: 80px 0; position: relative; }
+    .lp-section.alt { background: var(--beige, #faf4ee); }
+    .lp-section-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
+    .lp-section-head .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.12); color: var(--blue-dark, #7A9DB0); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
+    .lp-section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 14px; line-height: 1.2; }
+    .lp-section-head p { font-size: 1.02rem; color: var(--text-muted); line-height: 1.6; }
+    .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+    .bento .card { background: #fff; border-radius: 20px; padding: 28px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); border: 1px solid rgba(0,0,0,0.04); position: relative; overflow: hidden; }
+    .bento .card.wide { grid-column: span 4; }
+    .bento .card.half { grid-column: span 3; }
+    .bento .card.third { grid-column: span 2; }
+    .bento .card h3 { font-size: 1.15rem; margin-bottom: 8px; line-height: 1.3; }
+    .bento .card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+    .bento .card .icon { font-size: 28px; margin-bottom: 12px; display: block; }
+    .bento .card .mascot-small { position: absolute; bottom: -20px; right: -20px; width: 130px; opacity: 0.85; pointer-events: none; }
+    .bento .card.feature { background: linear-gradient(135deg, #f0f7fb 0%, #fef0e6 100%); }
+    @media (max-width: 820px) { .bento { grid-template-columns: repeat(2, 1fr); } .bento .card.wide, .bento .card.half, .bento .card.third { grid-column: span 2; } }
+    .split-section { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; max-width: 1000px; margin: 0 auto; }
+    @media (max-width: 820px) { .split-section { grid-template-columns: 1fr; } }
+    .split-section h2 { font-size: clamp(1.5rem, 3.6vw, 2.2rem); margin-bottom: 16px; line-height: 1.2; }
+    .split-section p { font-size: 1.02rem; line-height: 1.7; color: var(--text); margin-bottom: 14px; }
+    .faq-grid { max-width: 780px; margin: 0 auto; }
+    .faq-item { background: #fff; border-radius: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(47,71,110,0.04); border: 1px solid rgba(0,0,0,0.04); overflow: hidden; }
+    .faq-item summary { padding: 20px 24px; cursor: pointer; font-weight: 700; font-size: 1.02rem; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "+"; font-size: 1.4rem; font-weight: 300; color: var(--text-muted); transition: transform 0.2s; }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item .faq-body { padding: 0 24px 22px; font-size: 0.96rem; line-height: 1.65; color: var(--text-muted); }
+    .lp-cta { padding: 88px 0; background: linear-gradient(165deg, #f0f7fb 0%, #fef0e6 100%); text-align: center; position: relative; overflow: hidden; }
+    .lp-cta::before { content: ""; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,215,122,0.3) 0%, transparent 70%); }
+    .lp-cta::after { content: ""; position: absolute; bottom: -60px; left: -60px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(122,157,176,0.15) 0%, transparent 70%); }
+    .lp-cta-inner { position: relative; z-index: 1; }
+    .lp-cta img.mascot { height: 96px; margin-bottom: 18px; }
+    .lp-cta h2 { margin-bottom: 14px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+    .lp-cta p { max-width: 520px; margin: 0 auto 28px; font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: var(--blue-dark, #7A9DB0); color: #fff; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(122,157,176,0.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(122,157,176,0.5); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: #fff; color: var(--text); text-decoration: none; border: 1.5px solid rgba(0,0,0,0.1); transition: transform 0.2s; }
+    .btn-secondary:hover { transform: translateY(-2px); }
+    .fade-up { opacity: 1 !important; transform: none !important; transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.in { opacity: 1; transform: translateY(0); }
+    .side-mascot { width: 100%; max-width: 360px; margin: 0 auto; display: block; }
+  </style>
+</head>
+<body>
+
+  <nav class="lp-nav">
+    <div class="container lp-nav-inner">
+      <a href="/" class="lp-nav-brand"><img src="/RemiIcon.png" alt="Pippy" /> Pippy</a>
+      <a href="/" class="btn-secondary" style="padding: 10px 20px; font-size: 0.92rem;">Back to Pippy</a>
+    </div>
+  </nav>
+
+  <section class="lp-hero">
+    <div class="container">
+      <div class="lp-hero-grid">
+        <div class="fade-up in">
+          <span style="display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.12); color: var(--blue-dark, #7A9DB0); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 16px;">Baby Tracker for Dads</span>
+          <h1>A baby tracker <span class="highlight">built for dads too.</span></h1>
+          <p class="sub">Most baby apps feel like they were designed for mom, then handed to you. Pippy defaults to neutral. Feed type is whatever you're feeding. Logs are shared with whoever's caring for baby. You talk, it logs. Even at 3AM with one hand.</p>
+          <div class="lp-cta-row">
+            <a href="/" class="btn-primary">Try Pippy Free →</a>
+            <a href="#how" class="btn-secondary">How it works for dads</a>
+          </div>
+          <div class="lp-trust">
+            <span>Free forever tier</span>
+            <span class="dot"></span>
+            <span>Shared with your partner</span>
+            <span class="dot"></span>
+            <span>iOS &amp; Android</span>
+          </div>
+        </div>
+        <div class="fade-up in">
+          <div class="chat-demo">
+            <div class="chat-head">
+              <img src="/mascot/mascot-neutral.png" alt="Pippy mascot" />
+              <div>
+                <div class="chat-head-name">Pippy</div>
+                <div class="chat-head-status">Logged in as Dad</div>
+              </div>
+            </div>
+            <div class="chat-body">
+              <div class="msg user">He just had 4oz</div>
+              <div class="msg pippy">Logged 4oz bottle at 3:14am 🍼 Last feed was 11:40pm.</div>
+              <div class="msg user">Changed a wet diaper</div>
+              <div class="msg pippy">Diaper logged. Mom will see this when she wakes up 🌙</div>
+            </div>
+            <div class="chat-input-fake">
+              <span>Type or tap the mic...</span>
+              <span class="mic-btn">🎤</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C320,80 560,0 880,50 C1100,80 1300,20 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/></svg>
+  </section>
+
+  <section class="lp-section">
+    <div class="container">
+      <div class="split-section">
+        <div class="fade-up">
+          <h2>Why most baby apps feel "mom-coded"</h2>
+          <p>Open any popular baby app and you'll notice the same patterns. Soft pink palettes. Breastfeeding as the default feed type. "Mama" in the copy. The assumption that one primary caregiver (usually mom) is the one opening the app.</p>
+          <p>Dads use these apps too. You log the 2AM bottle. You change the diaper while she gets 20 more minutes of sleep. You take baby to the pediatrician. The app just never seems to notice you're there.</p>
+          <p>Pippy doesn't try to be trendy about it. It just defaults to neutral. Feed type is whatever you're feeding. The timeline is shared between whoever is caring for baby. You log in your voice.</p>
+        </div>
+        <div class="fade-up" style="text-align: center;">
+          <img src="/mascot/mascot-thinking.png" alt="Pippy thinking" class="side-mascot" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section alt" id="how">
+    <div class="container">
+      <div class="lp-section-head fade-up">
+        <span class="tag">How It Helps</span>
+        <h2>Where Pippy actually helps dads</h2>
+        <p>The real parenting moments where dads show up, and how Pippy makes them easier.</p>
+      </div>
+
+      <div class="bento fade-up">
+        <div class="card wide feature">
+          <span class="icon">🌙</span>
+          <h3>The night shift</h3>
+          <p>You're handling the 3AM bottle. Holding a baby in one arm, phone in the other, trying not to wake your partner. You say "he just had 4oz" and it's logged. No tapping through menus in the dark.</p>
+          <img src="/mascot/mascot-listening.png" alt="" class="mascot-small" />
+        </div>
+        <div class="card third">
+          <span class="icon">🤝</span>
+          <h3>Handoffs that work</h3>
+          <p>Your partner wakes up, opens the app, sees every feed and diaper since midnight. No "did you feed her yet?" text.</p>
+        </div>
+        <div class="card third">
+          <span class="icon">🩺</span>
+          <h3>Pediatrician visits</h3>
+          <p>Taking baby to the checkup? Share the pediatrician-ready report from your phone.</p>
+        </div>
+        <div class="card third">
+          <span class="icon">🌞</span>
+          <h3>Nap predictions</h3>
+          <p>Pippy watches the pattern and shows the next nap window, so you can plan around it.</p>
+        </div>
+        <div class="card half">
+          <span class="icon">👨‍👧</span>
+          <h3>Solo parenting days</h3>
+          <p>When it's just you and baby for the day, Pippy is faster than any other tracker with a fussy baby on your lap. No menus. Just talk.</p>
+        </div>
+        <div class="card half">
+          <span class="icon">🎒</span>
+          <h3>Daycare &amp; grandparent handoffs</h3>
+          <p>Drop baby off with the data. Whoever's caring for baby can log too. When you pick up, the full day is already in your phone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section">
+    <div class="container">
+      <div class="split-section">
+        <div class="fade-up" style="text-align: center;">
+          <img src="/mascot/mascot-happy.png" alt="Pippy happy" class="side-mascot" />
+        </div>
+        <div class="fade-up">
+          <h2>Built for both parents, not just one</h2>
+          <p>Family sharing isn't a premium add-on in Pippy. It's in the free tier. You invite your partner, your nanny, any grandparents who help. Everyone logs into the same timeline. Everyone sees what happened today without having to ask.</p>
+          <p>If you're the dad who wants to be more than a backup, Pippy makes it easy to actually know what's going on. You stop being the parent who asks "when did she last eat?" You become the parent who already knows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section alt">
+    <div class="container">
+      <div class="lp-section-head fade-up">
+        <span class="tag">FAQ</span>
+        <h2>Questions dads ask us</h2>
+      </div>
+      <div class="faq-grid fade-up">
+        <details class="faq-item"><summary>Is Pippy good for dads specifically?</summary><div class="faq-body">Pippy is designed to be gender-neutral from the ground up. No "mama" copy, no defaults that assume breastfeeding, shared timelines as the default. Dads, partners, nannies, and grandparents all use the same interface.</div></details>
+        <details class="faq-item"><summary>Can I share with my partner for free?</summary><div class="faq-body">Yes. Family sharing is in the free tier. Everyone you invite sees and logs to the same timeline in real time.</div></details>
+        <details class="faq-item"><summary>Does it work at 3AM with one hand?</summary><div class="faq-body">That's the main design goal. You say "he had 4oz" or "changed a wet diaper" and Pippy logs it. No tapping through menus while holding a baby.</div></details>
+        <details class="faq-item"><summary>What about breastfeeding vs bottle?</summary><div class="faq-body">Pippy handles both. Say "she nursed for 15 minutes on the left" or "he had 3oz from a bottle" and it logs accurately. No forced default.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-cta">
+    <div class="container lp-cta-inner">
+      <img src="/mascot/mascot-wave.png" alt="Pippy waving" class="mascot" />
+      <h2>Get Pippy free</h2>
+      <p>Built for every parent caring for a baby. Just talk. Pippy logs it.</p>
+      <a href="/" class="btn-primary">Get Pippy →</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="/remi-logo.png" alt="Pippy" class="footer-logo" />
+        <p>An AI-powered baby tracker built for new parents.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/faq.html">FAQ</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }); }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  </script>
+  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
