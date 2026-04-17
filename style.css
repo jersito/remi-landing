@@ -119,49 +119,31 @@ ul { list-style: none; }
 }
 .hero-wave path { fill: var(--cream); }
 
-/* ========== Email Signup Form ========== */
-.signup-form {
-  display: flex; gap: 0; max-width: 460px;
-  background: rgba(255,255,255,0.92);
-  border-radius: 60px; padding: 5px 5px 5px 24px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.3);
-  align-items: center;
+/* ========== Store Badges ========== */
+.store-badges {
+  display: flex; gap: 14px; align-items: center; flex-wrap: wrap; justify-content: center;
 }
-.signup-input {
-  flex: 1; padding: 12px 4px; border-radius: 0; border: none;
-  background: transparent; color: var(--text);
-  font-size: 0.95rem; font-family: inherit; font-weight: 500;
-  outline: none; min-width: 0;
+.appstore-badge {
+  display: inline-block;
+  transition: transform 0.2s, opacity 0.2s;
 }
-.signup-input::placeholder { color: var(--text-light); }
-.signup-btn {
-  padding: 12px 24px; border-radius: 60px; border: none;
-  background: var(--blue-dark); color: #fff;
-  font-size: 0.88rem; font-weight: 700; font-family: inherit;
-  cursor: pointer; white-space: nowrap; flex-shrink: 0;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-  box-shadow: 0 2px 8px rgba(122,157,176,0.3);
+.appstore-badge:hover { transform: scale(1.05); opacity: 0.9; }
+.appstore-badge img { height: 54px; display: block; }
+.android-coming-soon {
+  position: relative; display: inline-block; opacity: 0.5;
+  cursor: default;
 }
-.signup-btn:hover { transform: scale(1.03); box-shadow: 0 4px 16px rgba(122,157,176,0.4); }
-.signup-btn:disabled { opacity: 0.7; cursor: default; transform: none; }
-.signup-btn.signup-success { background: #38a169; }
+.android-coming-soon img { height: 54px; display: block; filter: grayscale(1); }
+.coming-soon-label {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.7); color: #fff; font-size: 0.7rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
 .signup-note {
   font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-top: 12px; font-weight: 500;
 }
-
-/* CTA signup form variant */
-.signup-form-cta { max-width: 460px; margin: 0 auto; }
-.signup-form-cta .signup-input { color: var(--text); }
 .cta-signup-note { color: rgba(255,255,255,0.6); }
-
-@media (max-width: 480px) {
-  .signup-form {
-    flex-direction: column; border-radius: 20px; padding: 6px;
-    gap: 4px;
-  }
-  .signup-input { padding: 12px 16px; text-align: center; }
-  .signup-btn { width: 100%; text-align: center; border-radius: 16px; }
-}
 
 /* ========== Phone Mockup ========== */
 .hero-visual { position: relative; display: flex; justify-content: center; }
