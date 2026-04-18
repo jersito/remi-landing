@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Diaper Tracker Online | Wet & Dirty Diaper Counter | Pippy</title>
+  <meta name="description" content="Free online diaper tracker. Tap to log wet and dirty diapers, see daily counts, compare to what's normal for your baby's age, and print a PDF log for your pediatrician. No signup, works in your browser." />
+  <meta name="keywords" content="free diaper tracker, diaper tracker online, wet diaper counter, diaper log online, baby diaper tracker, newborn diaper counter, wet and dirty diaper log, diaper tracking chart, diaper printable, free diaper log" />
+  <link rel="canonical" href="https://meetpippy.com/free-diaper-tracker.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://meetpippy.com/free-diaper-tracker.html" />
+  <meta property="og:title" content="Free Diaper Tracker Online" />
+  <meta property="og:description" content="Tap to log wet and dirty diapers. See daily counts, normal ranges by age, and print a clean PDF log for your pediatrician. No signup." />
+  <meta property="og:image" content="https://meetpippy.com/pippy-og-image.png" />
+  <meta property="og:site_name" content="Pippy" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Diaper Tracker Online" />
+  <meta name="twitter:description" content="Tap to log wet and dirty diapers. See daily counts and print a clean PDF log for your pediatrician." />
+  <meta name="twitter:image" content="https://meetpippy.com/pippy-og-image.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Pippy Diaper Tracker",
+    "url": "https://meetpippy.com/free-diaper-tracker.html",
+    "description": "Free online diaper tracker for babies. Log wet and dirty diapers with one tap, see daily counts, compare to normal ranges by age, and print a PDF log for your pediatrician.",
+    "applicationCategory": "HealthApplication",
+    "applicationSubCategory": "Baby Tracker",
+    "operatingSystem": "Web",
+    "browserRequirements": "Requires JavaScript. Works in any modern browser.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "Pippy", "url": "https://meetpippy.com", "logo": { "@type": "ImageObject", "url": "https://meetpippy.com/Pippy-Logo.png" } },
+    "isAccessibleForFree": true,
+    "inLanguage": "en-US"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to track diapers and know what's normal",
+    "description": "Use a diaper tracker to watch for hydration, feeding, and health signs in the first weeks.",
+    "totalTime": "PT1M",
+    "tool": [{ "@type": "HowToTool", "name": "Pippy Diaper Tracker" }],
+    "step": [
+      { "@type": "HowToStep", "name": "Pick your baby's age stage", "text": "Choose newborn, 1 week, 1 month, or older so the tracker knows what normal looks like for your baby." },
+      { "@type": "HowToStep", "name": "Tap Wet or Dirty at every change", "text": "One tap logs a diaper with the current time. Tap Both if the diaper had both." },
+      { "@type": "HowToStep", "name": "Check the daily summary", "text": "The tracker shows wet count, dirty count, and time since the last change, compared to the normal range for your baby's age." },
+      { "@type": "HowToStep", "name": "Review the last 7 days", "text": "Switch to the week view to see counts per day. Fewer wets than expected for two days in a row is a reason to call your pediatrician." },
+      { "@type": "HowToStep", "name": "Download or print a PDF log", "text": "Tap Download PDF to print a clean log you can bring to the pediatrician or share with another caregiver." }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Pippy", "item": "https://meetpippy.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://meetpippy.com/#free-tools" },
+      { "@type": "ListItem", "position": 3, "name": "Diaper Tracker", "item": "https://meetpippy.com/free-diaper-tracker.html" }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .lp-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+    .lp-nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .lp-nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+    .lp-nav-brand img { height: 32px; border-radius: 8px; }
+    .lp-hero { background: linear-gradient(165deg, #eaf1f6 0%, #fefaf7 55%, #f5e6d8 100%); padding: 72px 0 40px; position: relative; overflow: hidden; }
+    .lp-hero-inner { text-align: center; max-width: 780px; margin: 0 auto; }
+    .lp-hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 14px; line-height: 1.12; }
+    .lp-hero h1 .highlight { background: linear-gradient(120deg, transparent 0%, transparent 60%, #ffd77a 60%, #ffd77a 95%, transparent 95%); padding: 0 4px; }
+    .lp-hero p.sub { font-size: 1.1rem; max-width: 600px; margin: 0 auto 8px; color: var(--text-muted); line-height: 1.6; }
+    .lp-hero .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.15); color: var(--blue-dark, #7A9DB0); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
+    .lp-hero svg.wave { position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; display: block; }
+
+    /* Tracker */
+    .tracker-card { max-width: 720px; margin: 32px auto 0; background: #fff; border-radius: 28px; padding: 28px 28px 24px; box-shadow: 0 24px 60px -20px rgba(47,71,110,0.22), 0 0 0 1px rgba(0,0,0,0.04); text-align: left; }
+    .tracker-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+    .tracker-top .age-pick { display: flex; align-items: center; gap: 10px; }
+    .tracker-top label { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.92rem; color: var(--text); }
+    .tracker-top select { padding: 10px 14px; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.1); font-size: 0.96rem; font-family: inherit; font-weight: 600; background: #fff; }
+    .tracker-top select:focus { outline: none; border-color: var(--blue-dark, #7A9DB0); }
+    .tracker-date { font-size: 0.86rem; color: var(--text-muted); font-weight: 600; }
+
+    .tap-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    @media (max-width: 520px) { .tap-row { grid-template-columns: 1fr; } }
+    .tap-btn { border: none; border-radius: 20px; padding: 22px 14px; font-family: inherit; font-size: 1.05rem; font-weight: 800; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 0 6px 18px rgba(47,71,110,0.08); }
+    .tap-btn:active { transform: scale(0.97); }
+    .tap-btn .emoji { font-size: 28px; line-height: 1; }
+    .tap-btn.wet { background: linear-gradient(135deg, #eaf1f6 0%, #cfe0ea 100%); color: #2f4c6b; }
+    .tap-btn.dirty { background: linear-gradient(135deg, #f5e6d8 0%, #e8c7a4 100%); color: #6b4a2f; }
+    .tap-btn.both { background: linear-gradient(135deg, #ffd77a 0%, #f2c4a4 100%); color: #5b3f2a; }
+    .tap-btn:hover { box-shadow: 0 10px 24px rgba(47,71,110,0.14); }
+
+    .summary-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px; }
+    @media (max-width: 520px) { .summary-strip { grid-template-columns: 1fr; } }
+    .sum-cell { background: linear-gradient(135deg, #fefaf7 0%, #f5e6d8 100%); border-radius: 16px; padding: 16px; text-align: center; }
+    .sum-cell .k { font-size: 0.74rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
+    .sum-cell .v { font-family: 'Nunito', sans-serif; font-size: 1.7rem; font-weight: 900; color: var(--text); line-height: 1; }
+    .sum-cell .u { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+
+    .normal-banner { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); border-radius: 16px; padding: 14px 18px; font-size: 0.95rem; color: var(--text); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .normal-banner .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .normal-banner .dot.ok { background: #5fa37a; }
+    .normal-banner .dot.low { background: #d08a4a; }
+    .normal-banner strong { font-weight: 800; font-family: 'Nunito', sans-serif; }
+
+    .view-tabs { display: flex; gap: 6px; background: #f3edea; border-radius: 12px; padding: 4px; margin-bottom: 14px; width: fit-content; }
+    .view-tabs button { border: none; background: transparent; padding: 8px 14px; border-radius: 9px; font-family: inherit; font-weight: 700; font-size: 0.88rem; color: var(--text-muted); cursor: pointer; }
+    .view-tabs button.active { background: #fff; color: var(--text); box-shadow: 0 2px 6px rgba(47,71,110,0.08); }
+
+    .entry-list { border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; overflow: hidden; background: #fff; }
+    .entry-row { display: grid; grid-template-columns: 70px 80px 1fr auto; gap: 12px; padding: 12px 14px; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 0.95rem; }
+    .entry-row:last-child { border-bottom: none; }
+    .entry-row .time { font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--blue-dark, #7A9DB0); }
+    .entry-row .type { font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
+    .entry-row .note { color: var(--text-muted); font-size: 0.88rem; }
+    .entry-row .note input { width: 100%; border: 1px dashed rgba(0,0,0,0.15); border-radius: 8px; padding: 6px 8px; font-family: inherit; font-size: 0.86rem; background: transparent; }
+    .entry-row .note input:focus { outline: none; border-color: var(--blue-dark, #7A9DB0); background: #fff; }
+    .entry-row .actions { display: flex; gap: 6px; }
+    .entry-row .actions button { border: none; background: transparent; cursor: pointer; font-size: 0.82rem; color: var(--text-muted); padding: 4px 6px; border-radius: 6px; }
+    .entry-row .actions button:hover { background: rgba(0,0,0,0.04); color: var(--text); }
+    .entry-row input[type=time] { padding: 6px 8px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.1); font-size: 0.86rem; font-family: inherit; font-weight: 700; }
+    .empty-state { padding: 28px 20px; text-align: center; color: var(--text-muted); font-size: 0.94rem; }
+
+    .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    @media (max-width: 520px) { .week-grid { grid-template-columns: repeat(3, 1fr); } }
+    .week-cell { background: #fff; border: 1px solid rgba(0,0,0,0.05); border-radius: 12px; padding: 12px 8px; text-align: center; }
+    .week-cell .d { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 6px; }
+    .week-cell .w { color: #2f4c6b; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.96rem; }
+    .week-cell .p { color: #6b4a2f; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.96rem; }
+
+    .tracker-actions { display: flex; gap: 10px; justify-content: space-between; margin-top: 16px; flex-wrap: wrap; }
+    .tracker-actions button, .tracker-actions a { border: none; padding: 11px 20px; border-radius: 60px; font-family: inherit; font-weight: 700; font-size: 0.92rem; cursor: pointer; text-decoration: none; }
+    .btn-print { background: var(--blue-dark, #7A9DB0); color: #fff; }
+    .btn-print:hover { background: #6b8ca0; }
+    .btn-clear { background: #fff; color: var(--text); border: 1.5px solid rgba(0,0,0,0.1) !important; }
+    .btn-clear:hover { background: #f8f4f0; }
+
+    /* Generic sections from template */
+    .lp-section { padding: 72px 0; position: relative; }
+    .lp-section.alt { background: var(--beige, #faf4ee); }
+    .lp-section-head { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+    .lp-section-head .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.15); color: var(--blue-dark, #7A9DB0); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
+    .lp-section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 14px; line-height: 1.2; }
+    .lp-section-head p { font-size: 1.02rem; color: var(--text-muted); line-height: 1.65; }
+
+    .ww-table-wrap { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
+    .ww-table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.96rem; }
+    .ww-table-wrap th, .ww-table-wrap td { padding: 14px 18px; text-align: left; }
+    .ww-table-wrap th { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); font-weight: 800; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text); }
+    .ww-table-wrap tbody tr:nth-child(even) { background: rgba(122,157,176,0.04); }
+    .ww-table-wrap tbody tr:not(:last-child) td { border-bottom: 1px solid rgba(0,0,0,0.04); }
+    .ww-table-wrap .age-cell { font-weight: 700; color: var(--text); }
+    .ww-table-wrap .win { font-weight: 700; color: var(--blue-dark, #7A9DB0); font-family: 'Nunito', sans-serif; }
+
+    .cue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 960px; margin: 0 auto; }
+    @media (max-width: 820px) { .cue-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .cue-grid { grid-template-columns: 1fr; } }
+    .cue-card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); border: 1px solid rgba(0,0,0,0.04); }
+    .cue-card .cue-emoji { font-size: 26px; margin-bottom: 10px; }
+    .cue-card h3 { font-size: 1.02rem; margin-bottom: 6px; color: var(--text); }
+    .cue-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+    .longform { max-width: 760px; margin: 0 auto; }
+    .longform h3 { font-size: 1.2rem; margin: 28px 0 10px; color: var(--text); }
+    .longform p { font-size: 1rem; line-height: 1.7; color: var(--text); margin-bottom: 14px; }
+    .longform ul { padding-left: 20px; margin-bottom: 14px; list-style: disc; color: var(--text); }
+    .longform ul li { margin-bottom: 6px; line-height: 1.6; }
+
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 960px; margin: 0 auto; }
+    @media (max-width: 820px) { .related-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .related-grid { grid-template-columns: 1fr; } }
+    .related-card { background: #fff; border-radius: 16px; padding: 20px 22px; box-shadow: 0 2px 8px rgba(47,71,110,0.05); border: 1px solid rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; display: block; }
+    .related-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(47,71,110,0.1); }
+    .related-card .k { font-size: 0.72rem; font-weight: 700; color: var(--blue-dark, #7A9DB0); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
+    .related-card h4 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); line-height: 1.35; }
+
+    .lp-cta { padding: 80px 0; background: linear-gradient(165deg, #eaf1f6 0%, #f5e6d8 100%); text-align: center; position: relative; overflow: hidden; }
+    .lp-cta::before { content: ""; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,215,122,0.3) 0%, transparent 70%); }
+    .lp-cta::after { content: ""; position: absolute; bottom: -60px; left: -60px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(122,157,176,0.15) 0%, transparent 70%); }
+    .lp-cta-inner { position: relative; z-index: 1; }
+    .lp-cta img.mascot { height: 96px; margin-bottom: 16px; }
+    .lp-cta h2 { margin-bottom: 12px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+    .lp-cta p { max-width: 540px; margin: 0 auto 24px; font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: var(--blue-dark, #7A9DB0); color: #fff; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(122,157,176,0.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(122,157,176,0.5); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: #fff; color: var(--text); text-decoration: none; border: 1.5px solid rgba(0,0,0,0.1); transition: transform 0.2s; }
+    .btn-secondary:hover { transform: translateY(-2px); }
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .fade-up { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
+
+    /* Print stylesheet: clean PDF log */
+    @media print {
+      body { background: #fff !important; }
+      .lp-nav, .lp-hero svg.wave, .lp-hero .tag, .lp-hero h1, .lp-hero p.sub, .lp-section, .lp-cta, .footer, .tap-row, .view-tabs, .tracker-actions, .tracker-top select, .tracker-top .age-pick label, .normal-banner, .entry-row .actions, .entry-row .note input, .entry-row input[type=time] { display: none !important; }
+      .lp-hero { background: #fff !important; padding: 0 !important; }
+      .lp-hero-inner { max-width: 100% !important; }
+      .tracker-card { box-shadow: none !important; border: none !important; padding: 0 !important; max-width: 100% !important; margin: 0 !important; border-radius: 0 !important; text-align: left !important; }
+      .tracker-card::before { content: "Pippy diaper log"; display: block; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.6rem; margin-bottom: 4px; }
+      .tracker-date { font-size: 1rem !important; color: #333 !important; margin-bottom: 18px; display: block; }
+      .summary-strip { grid-template-columns: repeat(3, 1fr) !important; margin-bottom: 22px !important; }
+      .sum-cell { background: #f4f4f4 !important; box-shadow: none !important; }
+      .entry-list { border: 1px solid #ccc !important; }
+      .entry-row { grid-template-columns: 90px 100px 1fr !important; page-break-inside: avoid; }
+      .entry-row .note { color: #333 !important; white-space: pre-wrap; word-break: break-word; }
+      .entry-row .note::after { content: attr(data-note-print); }
+      @page { margin: 18mm; }
+    }
+  </style>
+  <script src="/analytics-consent.js" defer></script>
+</head>
+<body>
+
+  <nav class="lp-nav">
+    <div class="container lp-nav-inner">
+      <a href="/" class="lp-nav-brand"><img src="/Pippy-Icon.png" alt="Pippy" /> Pippy</a>
+      <a href="/" class="btn-secondary" style="padding: 10px 20px; font-size: 0.92rem;">Back to Pippy</a>
+    </div>
+  </nav>
+
+  <section class="lp-hero">
+    <div class="container lp-hero-inner">
+      <span class="tag">Free Diaper Tracker · No Signup</span>
+      <h1>Free diaper tracker <span class="highlight">for wet and dirty diapers</span>.</h1>
+      <p class="sub">Tap to log every change. See today's wet count, dirty count, and how it compares to what's normal for your baby's age. Print a clean PDF log for the pediatrician. No signup, no app required.</p>
+
+      <div class="tracker-card" id="tracker">
+        <div class="tracker-top">
+          <div class="age-pick">
+            <label for="ageStage">Baby's stage</label>
+            <select id="ageStage" aria-label="Baby's age stage">
+              <option value="day1">Day 1 (just born)</option>
+              <option value="day2">Day 2</option>
+              <option value="day3">Day 3</option>
+              <option value="newborn" selected>Newborn (day 4 to 1 month)</option>
+              <option value="1week">1 week old</option>
+              <option value="1month">1 to 6 months</option>
+              <option value="older">6 months and older</option>
+            </select>
+          </div>
+          <div class="tracker-date" id="trackerDate">Today</div>
+        </div>
+
+        <div class="tap-row">
+          <button class="tap-btn wet" data-type="wet" aria-label="Log wet diaper"><span class="emoji">💧</span><span>Wet</span></button>
+          <button class="tap-btn dirty" data-type="dirty" aria-label="Log dirty diaper"><span class="emoji">💩</span><span>Dirty</span></button>
+          <button class="tap-btn both" data-type="both" aria-label="Log wet and dirty diaper"><span class="emoji">💧💩</span><span>Both</span></button>
+        </div>
+
+        <div class="summary-strip">
+          <div class="sum-cell"><div class="k">Wet today</div><div class="v" id="sumWet">0</div><div class="u" id="expWet">expect 6+ per day</div></div>
+          <div class="sum-cell"><div class="k">Dirty today</div><div class="v" id="sumDirty">0</div><div class="u" id="expDirty">expect 3-4 per day</div></div>
+          <div class="sum-cell"><div class="k">Last change</div><div class="v" id="sumLast">···</div><div class="u" id="sumLastSub">no entries yet</div></div>
+        </div>
+
+        <div class="normal-banner" id="normalBanner">
+          <span class="dot ok" id="normalDot"></span>
+          <span id="normalText"><strong>Log your first diaper</strong> to see how today compares to normal for your baby's age.</span>
+        </div>
+
+        <div class="view-tabs" role="tablist">
+          <button class="active" data-view="today" role="tab">Today</button>
+          <button data-view="yesterday" role="tab">Yesterday</button>
+          <button data-view="week" role="tab">Last 7 days</button>
+        </div>
+
+        <div id="viewToday" class="view-pane">
+          <div class="entry-list" id="entryList"><div class="empty-state">No diapers logged yet. Tap Wet, Dirty, or Both above.</div></div>
+        </div>
+        <div id="viewYesterday" class="view-pane" style="display:none;">
+          <div class="entry-list" id="entryListYest"><div class="empty-state">Nothing logged yesterday.</div></div>
+        </div>
+        <div id="viewWeek" class="view-pane" style="display:none;">
+          <div class="week-grid" id="weekGrid"></div>
+        </div>
+
+        <div class="tracker-actions">
+          <button class="btn-clear" id="clearBtn">Clear all</button>
+          <button class="btn-print" id="printBtn">Download PDF</button>
+        </div>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C320,80 560,0 880,50 C1100,80 1300,20 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/></svg>
+  </section>
+
+  <section class="lp-section">
+    <div class="container">
+      <div class="lp-section-head">
+        <span class="tag">Chart</span>
+        <h2>Normal diaper counts by age</h2>
+        <p>What to expect at each stage, from the first hours of life through the first year. Use this as a guide, not a rulebook. Every baby is different and breastfed babies in particular can vary a lot after the first month.</p>
+      </div>
+      <div class="ww-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Age</th><th>Wet diapers per day</th><th>Dirty diapers per day</th><th>What's typical</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="age-cell">Day 1</td><td class="win">1 or more</td><td class="win">1 or more</td><td>First stool is meconium, thick and tar-black.</td></tr>
+            <tr><td class="age-cell">Day 2</td><td class="win">2 or more</td><td class="win">2 or more</td><td>Stool still dark, wets still light. Feeds are establishing.</td></tr>
+            <tr><td class="age-cell">Day 3</td><td class="win">3 or more</td><td class="win">3 or more</td><td>Milk comes in. Stool shifts from black to greenish brown.</td></tr>
+            <tr><td class="age-cell">Day 4</td><td class="win">4 or more</td><td class="win">3 or more</td><td>Stool turns yellow and seedy in breastfed babies.</td></tr>
+            <tr><td class="age-cell">Day 5 to 1 month</td><td class="win">6 or more</td><td class="win">3 to 4 or more</td><td>Six heavy wets is the hydration benchmark. Stools can be with every feed.</td></tr>
+            <tr><td class="age-cell">1 to 6 months</td><td class="win">6 to 8</td><td class="win">1 to several (breastfed can skip days)</td><td>Breastfed babies may go 3 to 7 days without a dirty after 6 weeks. Still normal if stool stays soft when it comes.</td></tr>
+            <tr><td class="age-cell">6 to 12 months</td><td class="win">4 to 6</td><td class="win">1 to 2</td><td>Stools firm up and change color once solids start.</td></tr>
+            <tr><td class="age-cell">12 months and up</td><td class="win">4 to 6</td><td class="win">1 to 2</td><td>Closer to adult pattern. Color and smell shift with food.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="text-align: center; margin-top: 14px; font-size: 0.86rem; color: var(--text-muted);">Ranges from AAP and La Leche League guidance. Not medical advice. If you are worried about your baby's diaper output, call your pediatrician.</p>
+    </div>
+  </section>
+
+  <section class="lp-section alt">
+    <div class="container">
+      <div class="lp-section-head">
+        <span class="tag">Red Flags</span>
+        <h2>When to call the pediatrician</h2>
+        <p>Most diaper questions are normal. These six are worth a same-day call.</p>
+      </div>
+      <div class="cue-grid">
+        <div class="cue-card"><div class="cue-emoji">💧</div><h3>Fewer wets than expected</h3><p>In a newborn: fewer than 6 heavy wets per day after day 5. In older babies: a sudden drop from their normal count. Both can be early signs of dehydration or a feeding problem.</p></div>
+        <div class="cue-card"><div class="cue-emoji">🩸</div><h3>Blood in stool</h3><p>A streak of red or black in the diaper always gets a call. Sometimes it is a small anal fissure from a hard stool. Sometimes it is a milk protein reaction or something that needs a closer look.</p></div>
+        <div class="cue-card"><div class="cue-emoji">💦</div><h3>Persistent watery diarrhea</h3><p>Three or more watery, explosive diapers in a row, especially with a fever or less feeding, can dehydrate a baby fast. Call the same day.</p></div>
+        <div class="cue-card"><div class="cue-emoji">🥤</div><h3>Dehydration signs</h3><p>Dry mouth, no tears when crying, a sunken soft spot, fewer wet diapers, and a sleepy or limp baby together. Do not wait on this one.</p></div>
+        <div class="cue-card"><div class="cue-emoji">⚪</div><h3>White, grey, or chalky stool</h3><p>Pale, putty-colored stool at any age can point to a liver or bile duct issue. Get it checked.</p></div>
+        <div class="cue-card"><div class="cue-emoji">🟢</div><h3>Unusual color plus other symptoms</h3><p>Bright green frothy stools in a fussy baby can mean a foremilk-hindmilk imbalance. Black stool after day 5 (not meconium) or jelly-like red stool always get a call.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section">
+    <div class="container">
+      <div class="longform">
+        <div class="lp-section-head" style="margin-bottom: 24px;">
+          <span class="tag">Guide</span>
+          <h2>How to use a diaper log (and why it matters)</h2>
+        </div>
+        <p>In the first weeks, diaper counts are one of the clearest signals you have that your baby is feeding well. Before weight gain shows up on the scale, and before milestones tell you anything, the diaper tells the truth. That is why every pediatrician asks about wets and dirties at the early visits. A diaper tracker just makes that conversation easy.</p>
+
+        <h3>Why wet diapers matter</h3>
+        <p>Heavy, pale-yellow wet diapers mean your baby is getting enough milk. A rough target is one wet diaper per day of life until day 5, then at least 6 heavy wets per day for the first month. If wets are dropping or look dark and concentrated, your baby may be under-fed or dehydrated. Track them and share the count with your pediatrician if something feels off.</p>
+
+        <h3>Why dirty diapers matter</h3>
+        <p>Stool shows you how your baby is digesting. In the first week, you will see the full color progression: black meconium on day 1 and 2, greenish brown on day 3, yellow and seedy by day 4 to 5 in breastfed babies. Formula-fed babies have tan or yellow-brown stool that is a bit firmer. After 6 weeks, breastfed babies sometimes go days between dirty diapers and that can be completely normal as long as the stool stays soft when it comes.</p>
+
+        <h3>Breastfed vs. formula-fed differences</h3>
+        <ul>
+          <li><strong>Breastfed stool</strong> is yellow, seedy, and loose. Often with every feed in the early weeks, then much less frequent after 6 weeks.</li>
+          <li><strong>Formula-fed stool</strong> is tan to yellow-brown, firmer, and less frequent. Usually 1 to 4 per day.</li>
+          <li><strong>Combination feeding</strong> falls somewhere between. Expect color and texture to shift as the balance shifts.</li>
+          <li><strong>After solids start</strong> (around 6 months), stool firms up, changes color, and starts to smell more adult. Totally normal.</li>
+        </ul>
+
+        <h3>How Pippy's tracker works</h3>
+        <ul>
+          <li>Tap Wet, Dirty, or Both. One tap. The current time is logged.</li>
+          <li>Need to fix a time? Tap the time field on any entry to edit it. Add a note for color or consistency if you want to mention it to your pediatrician.</li>
+          <li>The summary strip compares today's counts to the normal range for your baby's stage. Green dot means on track. Orange means below expected and worth watching.</li>
+          <li>Switch between Today, Yesterday, and Last 7 days to see trends. A one-off low day is usually nothing. Two low days in a row is worth a call.</li>
+          <li>Hit Download PDF to print a clean log. Bring it to the pediatrician, text it to your partner, or save it for your records.</li>
+          <li>Your data stays in your browser. Nothing leaves your device.</li>
+        </ul>
+
+        <h3>When a paper printable isn't enough</h3>
+        <p>Printable diaper charts are fine for the fridge, but they cannot tell you if today's count is normal. They cannot show you a 7-day trend. They cannot print themselves at the pediatrician's office at 3am. An interactive tracker does all three. And when you are ready for a tool that learns your baby's pattern and predicts the next change automatically, Pippy is waiting in the app store.</p>
+
+        <h3>What to bring to the pediatrician</h3>
+        <p>For the first visits, your pediatrician will ask: how many wet diapers per day, how many dirty, what color is the stool, and is your baby feeding every 2 to 3 hours. The PDF from this tracker has all of that on one page. It makes the 10-minute visit much smoother.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section alt">
+    <div class="container">
+      <div class="lp-section-head">
+        <span class="tag">Keep Reading</span>
+        <h2>Related Pippy guides</h2>
+      </div>
+      <div class="related-grid">
+        <a href="/blog/signs-of-dehydration-in-babies.html" class="related-card"><div class="k">Health</div><h4>Signs of dehydration in babies: what to watch for</h4></a>
+        <a href="/blog/how-many-wet-diapers-newborn.html" class="related-card"><div class="k">Newborn</div><h4>How many wet diapers should a newborn have?</h4></a>
+        <a href="/blog/baby-poop-color-guide.html" class="related-card"><div class="k">Health</div><h4>Baby poop color guide: what every color means</h4></a>
+        <a href="/blog/how-often-to-change-diaper.html" class="related-card"><div class="k">Diapers</div><h4>How often should you change a baby's diaper?</h4></a>
+        <a href="/blog/diaper-blowout-tips.html" class="related-card"><div class="k">Diapers</div><h4>Diaper blowouts: why they happen and how to stop them</h4></a>
+        <a href="/blog/diaper-rash-tips.html" class="related-card"><div class="k">Diapers</div><h4>Diaper rash: prevention and fast relief</h4></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-cta">
+    <div class="container lp-cta-inner">
+      <img src="/mascot/mascot-wave.png" alt="Pippy waving" class="mascot" />
+      <h2>Want Pippy to track this for you automatically?</h2>
+      <p>Log a diaper once and Pippy starts learning your baby's pattern. Get alerts when wets are below normal, share the log with your partner, and hand a one-tap report to your pediatrician. Free tier includes diaper tracking, family sharing, and doctor-ready reports.</p>
+      <div class="cta-row">
+        <a href="https://meetpippy.com/app" class="btn-primary">Use the free online tracker →</a>
+        <a href="/" class="btn-secondary">Get the app</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="/Pippy-Logo.png" alt="Pippy" class="footer-logo" />
+        <p>An AI-powered baby tracker built for new parents.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/free-baby-tracker.html">Free baby tracker</a>
+        <a href="/free-wake-window-calculator.html">Wake window calculator</a>
+        <a href="/free-diaper-tracker.html">Diaper tracker</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Pippy Diaper Tracker =====
+    const STORAGE_KEY = "pippy_diapers_v1";
+    const STAGE_KEY = "pippy_diapers_stage_v1";
+
+    // Expected daily counts by stage (min wet, min dirty, label)
+    const STAGE_EXPECT = {
+      day1:    { wet: 1, dirty: 1, wetLabel: "1+ per day", dirtyLabel: "1+ per day (meconium)" },
+      day2:    { wet: 2, dirty: 2, wetLabel: "2+ per day", dirtyLabel: "2+ per day" },
+      day3:    { wet: 3, dirty: 3, wetLabel: "3+ per day", dirtyLabel: "3+ per day" },
+      newborn: { wet: 6, dirty: 3, wetLabel: "6+ per day",  dirtyLabel: "3-4+ per day" },
+      "1week": { wet: 6, dirty: 3, wetLabel: "6+ per day",  dirtyLabel: "3-4+ per day" },
+      "1month":{ wet: 6, dirty: 1, wetLabel: "6-8 per day", dirtyLabel: "1+ (breastfed can skip days)" },
+      older:   { wet: 4, dirty: 1, wetLabel: "4-6 per day", dirtyLabel: "1-2 per day" }
+    };
+
+    const state = {
+      entries: [],    // {id, ts, type: 'wet'|'dirty'|'both', note}
+      stage: "newborn"
+    };
+
+    const load = () => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) state.entries = JSON.parse(raw) || [];
+        const s = localStorage.getItem(STAGE_KEY);
+        if (s && STAGE_EXPECT[s]) state.stage = s;
+      } catch (e) { state.entries = []; }
+    };
+
+    const save = () => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.entries));
+        localStorage.setItem(STAGE_KEY, state.stage);
+      } catch (e) {}
+    };
+
+    const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+    const startOfDay = (d) => { const x = new Date(d); x.setHours(0,0,0,0); return x.getTime(); };
+    const endOfDay   = (d) => { const x = new Date(d); x.setHours(23,59,59,999); return x.getTime(); };
+
+    const entriesFor = (dayOffset = 0) => {
+      const base = new Date(); base.setDate(base.getDate() - dayOffset);
+      const s = startOfDay(base), e = endOfDay(base);
+      return state.entries.filter(x => x.ts >= s && x.ts <= e).sort((a,b) => a.ts - b.ts);
+    };
+
+    const countEntries = (arr) => {
+      let wet = 0, dirty = 0;
+      arr.forEach(x => {
+        if (x.type === "wet")   wet++;
+        if (x.type === "dirty") dirty++;
+        if (x.type === "both")  { wet++; dirty++; }
+      });
+      return { wet, dirty };
+    };
+
+    const fmtTime = (ts) => {
+      const d = new Date(ts);
+      const h = d.getHours() % 12 || 12;
+      const m = d.getMinutes().toString().padStart(2, "0");
+      const s = d.getHours() >= 12 ? "pm" : "am";
+      return h + ":" + m + s;
+    };
+
+    const fmtAgo = (ms) => {
+      if (ms < 60000) return "just now";
+      const mins = Math.floor(ms / 60000);
+      if (mins < 60) return mins + "m ago";
+      const h = Math.floor(mins / 60), m = mins % 60;
+      if (m === 0) return h + "h ago";
+      return h + "h " + m + "m ago";
+    };
+
+    const typeLabel = (t) => t === "wet" ? "💧 Wet" : t === "dirty" ? "💩 Dirty" : "💧💩 Both";
+
+    const addEntry = (type) => {
+      state.entries.push({ id: uid(), ts: Date.now(), type, note: "" });
+      save(); render();
+    };
+
+    const deleteEntry = (id) => {
+      state.entries = state.entries.filter(x => x.id !== id);
+      save(); render();
+    };
+
+    const updateEntry = (id, patch) => {
+      const idx = state.entries.findIndex(x => x.id === id);
+      if (idx >= 0) { state.entries[idx] = Object.assign({}, state.entries[idx], patch); save(); render(); }
+    };
+
+    const renderEntries = (containerId, dayOffset) => {
+      const list = entriesFor(dayOffset);
+      const el = document.getElementById(containerId);
+      if (list.length === 0) {
+        el.innerHTML = '<div class="empty-state">' + (dayOffset === 0 ? "No diapers logged yet. Tap Wet, Dirty, or Both above." : "Nothing logged on this day.") + '</div>';
+        return;
+      }
+      el.innerHTML = list.map(x => {
+        const d = new Date(x.ts);
+        const hh = d.getHours().toString().padStart(2, "0");
+        const mm = d.getMinutes().toString().padStart(2, "0");
+        const timeVal = hh + ":" + mm;
+        const noteDisplay = x.note ? x.note.replace(/"/g, "&quot;") : "";
+        return `<div class="entry-row" data-id="${x.id}">
+          <div class="time">${fmtTime(x.ts)}<input type="time" value="${timeVal}" data-act="time" style="display:none;width:100%;margin-top:4px;" /></div>
+          <div class="type">${typeLabel(x.type)}</div>
+          <div class="note" data-note-print="${noteDisplay}"><input type="text" placeholder="Add note (color, consistency...)" value="${noteDisplay}" data-act="note" /></div>
+          <div class="actions">
+            <button data-act="edit-time" title="Edit time">✎</button>
+            <button data-act="delete" title="Delete">✕</button>
+          </div>
+        </div>`;
+      }).join("");
+
+      el.querySelectorAll(".entry-row").forEach(row => {
+        const id = row.getAttribute("data-id");
+        row.querySelector('[data-act="note"]').addEventListener("change", (e) => updateEntry(id, { note: e.target.value }));
+        row.querySelector('[data-act="delete"]').addEventListener("click", () => { if (confirm("Delete this entry?")) deleteEntry(id); });
+        const timeInput = row.querySelector('[data-act="time"]');
+        row.querySelector('[data-act="edit-time"]').addEventListener("click", () => {
+          timeInput.style.display = timeInput.style.display === "none" ? "block" : "none";
+        });
+        timeInput.addEventListener("change", (e) => {
+          const entry = state.entries.find(x => x.id === id);
+          if (!entry) return;
+          const d = new Date(entry.ts);
+          const [h, m] = e.target.value.split(":").map(Number);
+          d.setHours(h, m, 0, 0);
+          updateEntry(id, { ts: d.getTime() });
+        });
+      });
+    };
+
+    const renderWeek = () => {
+      const grid = document.getElementById("weekGrid");
+      const days = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(); d.setDate(d.getDate() - i);
+        const counts = countEntries(entriesFor(i));
+        days.push({ date: d, counts });
+      }
+      grid.innerHTML = days.map(d => {
+        const label = d.date.toLocaleDateString(undefined, { weekday: "short" });
+        const dnum = d.date.getDate();
+        return `<div class="week-cell">
+          <div class="d">${label} ${dnum}</div>
+          <div class="w">💧 ${d.counts.wet}</div>
+          <div class="p">💩 ${d.counts.dirty}</div>
+        </div>`;
+      }).join("");
+    };
+
+    const renderSummary = () => {
+      const today = entriesFor(0);
+      const counts = countEntries(today);
+      document.getElementById("sumWet").textContent = counts.wet;
+      document.getElementById("sumDirty").textContent = counts.dirty;
+
+      const exp = STAGE_EXPECT[state.stage];
+      document.getElementById("expWet").textContent = "expect " + exp.wetLabel;
+      document.getElementById("expDirty").textContent = "expect " + exp.dirtyLabel;
+
+      if (today.length === 0) {
+        document.getElementById("sumLast").textContent = "···";
+        document.getElementById("sumLastSub").textContent = "no entries yet";
+      } else {
+        const last = today[today.length - 1];
+        document.getElementById("sumLast").textContent = fmtAgo(Date.now() - last.ts);
+        document.getElementById("sumLastSub").textContent = typeLabel(last.type) + " at " + fmtTime(last.ts);
+      }
+
+      const dot = document.getElementById("normalDot");
+      const txt = document.getElementById("normalText");
+      if (today.length === 0) {
+        dot.className = "dot ok";
+        txt.innerHTML = "<strong>Log your first diaper</strong> to see how today compares to normal for your baby's age.";
+      } else {
+        const lowWet = counts.wet < exp.wet;
+        const lowDirty = counts.dirty < exp.dirty;
+        if (lowWet || lowDirty) {
+          dot.className = "dot low";
+          const parts = [];
+          if (lowWet) parts.push("wet count is below " + exp.wetLabel);
+          if (lowDirty) parts.push("dirty count is below " + exp.dirtyLabel);
+          txt.innerHTML = "<strong>Keep an eye on it:</strong> today's " + parts.join(" and ") + ". Normal can vary, but check in with your pediatrician if it keeps up.";
+        } else {
+          dot.className = "dot ok";
+          txt.innerHTML = "<strong>On track:</strong> today's counts are within the normal range for this stage.";
+        }
+      }
+
+      const now = new Date();
+      document.getElementById("trackerDate").textContent = now.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+    };
+
+    const render = () => {
+      renderSummary();
+      renderEntries("entryList", 0);
+      renderEntries("entryListYest", 1);
+      renderWeek();
+    };
+
+    // ----- Wire up -----
+    document.querySelectorAll(".tap-btn").forEach(btn => {
+      btn.addEventListener("click", () => addEntry(btn.getAttribute("data-type")));
+    });
+
+    document.getElementById("ageStage").addEventListener("change", (e) => {
+      state.stage = e.target.value;
+      save(); render();
+    });
+
+    document.querySelectorAll(".view-tabs button").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".view-tabs button").forEach(b => b.classList.remove("active"));
+        tab.classList.add("active");
+        const v = tab.getAttribute("data-view");
+        document.getElementById("viewToday").style.display     = v === "today"     ? "block" : "none";
+        document.getElementById("viewYesterday").style.display = v === "yesterday" ? "block" : "none";
+        document.getElementById("viewWeek").style.display      = v === "week"      ? "block" : "none";
+      });
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      if (confirm("Clear all diaper entries? This cannot be undone.")) {
+        state.entries = []; save(); render();
+      }
+    });
+
+    document.getElementById("printBtn").addEventListener("click", () => {
+      window.print();
+    });
+
+    // Init
+    load();
+    document.getElementById("ageStage").value = state.stage;
+    render();
+
+    // Refresh "ago" once a minute so the last-change time stays current
+    setInterval(renderSummary, 60000);
+  </script>
+  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

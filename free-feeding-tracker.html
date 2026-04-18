@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Feeding Tracker Online | Breastfeeding & Bottle Tracker No App | Pippy</title>
+  <meta name="description" content="Free online baby feeding tracker. Log breastfeeding, bottles, formula, and pumped milk right in your browser. No signup, no app download. Print or save your feeding log as a PDF." />
+  <meta name="keywords" content="free feeding tracker, online bottle tracker, breastfeeding tracker no app, baby feeding log, newborn feeding tracker, nursing session tracker, feeding schedule tracker, baby bottle tracker online, free breastfeeding log, print feeding chart" />
+  <link rel="canonical" href="https://meetpippy.com/free-feeding-tracker.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://meetpippy.com/free-feeding-tracker.html" />
+  <meta property="og:title" content="Free Feeding Tracker Online, No App Required" />
+  <meta property="og:description" content="Log breast, bottle, formula and pumped feeds in your browser. Instant today summary, print to PDF, no signup." />
+  <meta property="og:image" content="https://meetpippy.com/pippy-og-image.png" />
+  <meta property="og:site_name" content="Pippy" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Feeding Tracker Online" />
+  <meta name="twitter:description" content="A working breastfeeding and bottle tracker that runs in your browser. No signup. Save your log as a PDF." />
+  <meta name="twitter:image" content="https://meetpippy.com/pippy-og-image.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Pippy Feeding Tracker",
+    "url": "https://meetpippy.com/free-feeding-tracker.html",
+    "description": "Free online baby feeding tracker for breastfeeding, bottles, formula and pumped milk. Logs feeds in the browser with a today summary, per-entry notes, and a print-to-PDF option. No signup, no app install.",
+    "applicationCategory": "HealthApplication",
+    "applicationSubCategory": "Baby Feeding Tracker",
+    "operatingSystem": "Web",
+    "browserRequirements": "Requires JavaScript. Works in any modern browser.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "Pippy", "url": "https://meetpippy.com", "logo": { "@type": "ImageObject", "url": "https://meetpippy.com/Pippy-Logo.png" } },
+    "isAccessibleForFree": true,
+    "inLanguage": "en-US"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to track your baby's feeds",
+    "description": "Log every breastfeed, bottle, and pumping session so you can see patterns, spot cluster feeding, and answer your pediatrician's questions with real numbers.",
+    "totalTime": "PT1M",
+    "tool": [{ "@type": "HowToTool", "name": "Pippy Feeding Tracker" }],
+    "step": [
+      { "@type": "HowToStep", "name": "Tap Add feeding", "text": "Open the tracker and tap the Add feeding button the moment you start or finish a feed." },
+      { "@type": "HowToStep", "name": "Pick the feed type", "text": "Choose breast left, breast right, both breasts, bottle, formula, or pumped milk." },
+      { "@type": "HowToStep", "name": "Enter amount or duration", "text": "For bottles, log the oz or ml taken. For breastfeeding, log the minutes on each side." },
+      { "@type": "HowToStep", "name": "Check the time and add a note", "text": "The time defaults to now. Adjust if you are logging after the fact. Add a short note for things like fussiness or a new side." },
+      { "@type": "HowToStep", "name": "Save and review today", "text": "Save the entry. The today strip updates with total feeds, last feed time, and total ounces or minutes so you always know where you stand." }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Pippy", "item": "https://meetpippy.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://meetpippy.com/#free-tools" },
+      { "@type": "ListItem", "position": 3, "name": "Feeding Tracker", "item": "https://meetpippy.com/free-feeding-tracker.html" }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .lp-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+    .lp-nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .lp-nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+    .lp-nav-brand img { height: 32px; border-radius: 8px; }
+    .lp-hero { background: linear-gradient(165deg, #eaf1f6 0%, #fefaf7 55%, #f5e6d8 100%); padding: 72px 0 40px; position: relative; overflow: hidden; }
+    .lp-hero-inner { text-align: center; max-width: 720px; margin: 0 auto; }
+    .lp-hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 14px; line-height: 1.12; }
+    .lp-hero h1 .highlight { background: linear-gradient(120deg, transparent 0%, transparent 60%, #ffd77a 60%, #ffd77a 95%, transparent 95%); padding: 0 4px; }
+    .lp-hero p.sub { font-size: 1.1rem; max-width: 560px; margin: 0 auto 8px; color: var(--text-muted); line-height: 1.6; }
+    .lp-hero .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.15); color: var(--blue-dark, #7A9DB0); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
+    .lp-hero svg.wave { position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; display: block; }
+
+    /* Tracker card + summary strip */
+    .tracker-card { max-width: 720px; margin: 32px auto 0; background: #fff; border-radius: 28px; padding: 24px 24px 20px; box-shadow: 0 24px 60px -20px rgba(47,71,110,0.22), 0 0 0 1px rgba(0,0,0,0.04); text-align: left; }
+    .tracker-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tracker-head h2 { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.15rem; color: var(--text); margin: 0; }
+    .tracker-head .today-date { font-size: 0.82rem; color: var(--text-muted); font-weight: 700; }
+
+    .summary-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+    @media (max-width: 560px) { .summary-strip { grid-template-columns: 1fr 1fr; } .summary-strip .cell-wide { grid-column: span 2; } }
+    .summary-cell { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); border-radius: 16px; padding: 14px 16px; text-align: center; }
+    .summary-cell .k { font-size: 0.72rem; font-weight: 700; color: var(--blue-dark, #7A9DB0); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+    .summary-cell .v { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.3rem; color: var(--text); line-height: 1.1; }
+    .summary-cell .sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+
+    .add-btn { width: 100%; padding: 16px 18px; border-radius: 16px; border: none; background: var(--blue-dark, #7A9DB0); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.05rem; cursor: pointer; transition: transform 0.15s, box-shadow 0.2s; box-shadow: 0 6px 16px rgba(122,157,176,0.3); display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .add-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(122,157,176,0.4); }
+    .add-btn .plus { width: 24px; height: 24px; border-radius: 50%; background: #fff; color: var(--blue-dark, #7A9DB0); font-weight: 900; font-size: 1.1rem; display: inline-flex; align-items: center; justify-content: center; }
+
+    /* Add-feed form */
+    .feed-form { margin-top: 14px; background: #faf4ee; border-radius: 16px; padding: 16px; display: none; }
+    .feed-form.open { display: block; }
+    .feed-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    @media (max-width: 520px) { .feed-form .row { grid-template-columns: 1fr; } }
+    .feed-form label { display: block; font-size: 0.76rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+    .feed-form select, .feed-form input[type=number], .feed-form input[type=time], .feed-form input[type=text] { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1.5px solid rgba(0,0,0,0.1); font-size: 0.96rem; font-family: inherit; font-weight: 600; background: #fff; box-sizing: border-box; }
+    .feed-form select:focus, .feed-form input:focus { outline: none; border-color: var(--blue-dark, #7A9DB0); }
+    .feed-form .amount-row { display: grid; grid-template-columns: 1fr 90px; gap: 8px; align-items: end; }
+    .feed-form .form-actions { display: flex; gap: 10px; margin-top: 6px; }
+    .feed-form .form-actions button { flex: 1; padding: 12px 16px; border-radius: 12px; font-family: inherit; font-weight: 800; font-size: 0.96rem; cursor: pointer; border: none; }
+    .feed-form .btn-save { background: var(--blue-dark, #7A9DB0); color: #fff; }
+    .feed-form .btn-cancel { background: #fff; color: var(--text); border: 1.5px solid rgba(0,0,0,0.1); }
+
+    /* Feed list */
+    .feed-list { margin-top: 16px; }
+    .feed-list h3 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.86rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin: 0 0 8px; }
+    .feed-entry { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #fff; border: 1px solid rgba(0,0,0,0.05); border-radius: 14px; margin-bottom: 8px; transition: background 0.15s; }
+    .feed-entry:hover { background: #faf4ee; }
+    .feed-entry .icon { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #eaf1f6, #f5e6d8); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .feed-entry .body { flex: 1; min-width: 0; }
+    .feed-entry .title { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.98rem; color: var(--text); }
+    .feed-entry .meta { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
+    .feed-entry .meta .note { font-style: italic; }
+    .feed-entry .del { background: transparent; border: none; color: var(--text-muted); font-size: 1rem; cursor: pointer; padding: 6px 8px; border-radius: 8px; transition: background 0.15s, color 0.15s; }
+    .feed-entry .del:hover { background: #ffe1d6; color: #c04a22; }
+    .feed-empty { text-align: center; padding: 28px 16px; color: var(--text-muted); font-size: 0.94rem; background: #faf4ee; border-radius: 14px; }
+
+    .tracker-footer { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .tracker-footer button { flex: 1; min-width: 140px; padding: 11px 14px; border-radius: 12px; background: #fff; color: var(--text); border: 1.5px solid rgba(0,0,0,0.1); font-family: inherit; font-weight: 700; font-size: 0.92rem; cursor: pointer; transition: background 0.15s; }
+    .tracker-footer button:hover { background: #faf4ee; }
+    .tracker-footer .btn-danger { color: #c04a22; }
+    .tracker-footer .btn-danger:hover { background: #ffe1d6; }
+
+    .lp-section { padding: 72px 0; position: relative; }
+    .lp-section.alt { background: var(--beige, #faf4ee); }
+    .lp-section-head { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+    .lp-section-head .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.15); color: var(--blue-dark, #7A9DB0); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
+    .lp-section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 14px; line-height: 1.2; }
+    .lp-section-head p { font-size: 1.02rem; color: var(--text-muted); line-height: 1.65; }
+
+    .ww-table-wrap { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
+    .ww-table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.96rem; }
+    .ww-table-wrap th, .ww-table-wrap td { padding: 14px 18px; text-align: left; }
+    .ww-table-wrap th { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); font-weight: 800; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text); }
+    .ww-table-wrap tbody tr:nth-child(even) { background: rgba(122,157,176,0.04); }
+    .ww-table-wrap tbody tr:not(:last-child) td { border-bottom: 1px solid rgba(0,0,0,0.04); }
+    .ww-table-wrap .age-cell { font-weight: 700; color: var(--text); }
+    .ww-table-wrap .win { font-weight: 700; color: var(--blue-dark, #7A9DB0); font-family: 'Nunito', sans-serif; }
+
+    .cue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 920px; margin: 0 auto; }
+    @media (max-width: 820px) { .cue-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .cue-grid { grid-template-columns: 1fr; } }
+    .cue-card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); border: 1px solid rgba(0,0,0,0.04); }
+    .cue-card .cue-emoji { font-size: 26px; margin-bottom: 10px; }
+    .cue-card h3 { font-size: 1.02rem; margin-bottom: 6px; color: var(--text); }
+    .cue-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+    .longform { max-width: 760px; margin: 0 auto; }
+    .longform h3 { font-size: 1.2rem; margin: 28px 0 10px; color: var(--text); }
+    .longform p { font-size: 1rem; line-height: 1.7; color: var(--text); margin-bottom: 14px; }
+    .longform ul { padding-left: 20px; margin-bottom: 14px; list-style: disc; color: var(--text); }
+    .longform ul li { margin-bottom: 6px; line-height: 1.6; }
+
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 960px; margin: 0 auto; }
+    @media (max-width: 820px) { .related-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .related-grid { grid-template-columns: 1fr; } }
+    .related-card { background: #fff; border-radius: 16px; padding: 20px 22px; box-shadow: 0 2px 8px rgba(47,71,110,0.05); border: 1px solid rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; display: block; }
+    .related-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(47,71,110,0.1); }
+    .related-card .k { font-size: 0.72rem; font-weight: 700; color: var(--blue-dark, #7A9DB0); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
+    .related-card h4 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); line-height: 1.35; }
+
+    .lp-cta { padding: 80px 0; background: linear-gradient(165deg, #eaf1f6 0%, #f5e6d8 100%); text-align: center; position: relative; overflow: hidden; }
+    .lp-cta::before { content: ""; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,215,122,0.3) 0%, transparent 70%); }
+    .lp-cta::after { content: ""; position: absolute; bottom: -60px; left: -60px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(122,157,176,0.15) 0%, transparent 70%); }
+    .lp-cta-inner { position: relative; z-index: 1; }
+    .lp-cta img.mascot { height: 96px; margin-bottom: 16px; }
+    .lp-cta h2 { margin-bottom: 12px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+    .lp-cta p { max-width: 540px; margin: 0 auto 24px; font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: var(--blue-dark, #7A9DB0); color: #fff; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(122,157,176,0.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(122,157,176,0.5); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: #fff; color: var(--text); text-decoration: none; border: 1.5px solid rgba(0,0,0,0.1); transition: transform 0.2s; }
+    .btn-secondary:hover { transform: translateY(-2px); }
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .fade-up { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
+
+    /* Print styles: clean feeding log for fridge or doctor visit */
+    @media print {
+      body { background: #fff; color: #000; }
+      .lp-nav, .lp-hero svg.wave, .lp-hero .tag, .lp-hero p.sub,
+      .lp-section, .lp-cta, .footer,
+      .tracker-footer, .feed-form, .add-btn,
+      .feed-entry .del { display: none !important; }
+      .lp-hero { padding: 0; background: #fff; }
+      .lp-hero h1 { font-size: 1.4rem; text-align: left; margin: 0 0 6px; }
+      .lp-hero h1 .highlight { background: none; padding: 0; }
+      .lp-hero-inner { max-width: 100%; text-align: left; }
+      .tracker-card { max-width: 100%; margin: 0; padding: 0; box-shadow: none; border-radius: 0; }
+      .tracker-head h2 { font-size: 1rem; }
+      .summary-strip { grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
+      .summary-cell { background: #f2f2f2 !important; padding: 8px; border-radius: 6px; }
+      .feed-entry { border: 1px solid #ccc; background: #fff !important; padding: 8px 10px; border-radius: 4px; margin-bottom: 4px; page-break-inside: avoid; }
+      .feed-entry .icon { background: #eee !important; }
+      .feed-list h3 { margin-top: 12px; }
+      .print-header { display: block !important; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 2px solid #000; }
+      .print-header h1 { font-size: 1.3rem; margin: 0 0 4px; }
+      .print-header .print-date { font-size: 0.9rem; color: #333; }
+    }
+    .print-header { display: none; }
+  </style>
+  <script src="/analytics-consent.js" defer></script>
+</head>
+<body>
+
+  <nav class="lp-nav">
+    <div class="container lp-nav-inner">
+      <a href="/" class="lp-nav-brand"><img src="/Pippy-Icon.png" alt="Pippy" /> Pippy</a>
+      <a href="/" class="btn-secondary" style="padding: 10px 20px; font-size: 0.92rem;">Back to Pippy</a>
+    </div>
+  </nav>
+
+  <section class="lp-hero">
+    <div class="container lp-hero-inner">
+      <div class="print-header">
+        <h1>Pippy feeding log</h1>
+        <div class="print-date" id="printDate"></div>
+      </div>
+      <span class="tag">Free Feeding Tracker · No App · No Signup</span>
+      <h1>Online <span class="highlight">breastfeeding and bottle tracker</span>, no app required.</h1>
+      <p class="sub">A working baby feeding log that runs in your browser. Log breast, bottle, formula, and pumped feeds, see today at a glance, and print a clean feeding chart when you need one.</p>
+
+      <div class="tracker-card" id="tracker" aria-label="Baby feeding tracker">
+        <div class="tracker-head">
+          <h2>Today's feeds</h2>
+          <div class="today-date" id="todayDate"></div>
+        </div>
+
+        <div class="summary-strip" aria-live="polite">
+          <div class="summary-cell"><div class="k">Feeds today</div><div class="v" id="sumCount">0</div></div>
+          <div class="summary-cell"><div class="k">Last feed</div><div class="v" id="sumLast">...</div><div class="sub" id="sumLastSub"></div></div>
+          <div class="summary-cell cell-wide"><div class="k">Total today</div><div class="v" id="sumTotal">...</div><div class="sub">Oz + minutes combined</div></div>
+        </div>
+
+        <button class="add-btn" id="addBtn" type="button" aria-expanded="false" aria-controls="feedForm">
+          <span class="plus">+</span> Add feeding
+        </button>
+
+        <div class="feed-form" id="feedForm" role="form" aria-label="Add a new feeding entry">
+          <div class="row">
+            <div>
+              <label for="ftype">Feed type</label>
+              <select id="ftype">
+                <option value="breast_left">Breast (left)</option>
+                <option value="breast_right">Breast (right)</option>
+                <option value="breast_both">Breast (both sides)</option>
+                <option value="bottle">Bottle (breast milk)</option>
+                <option value="formula">Formula</option>
+                <option value="pumped">Pumped milk</option>
+              </select>
+            </div>
+            <div>
+              <label for="ftime">Time</label>
+              <input type="time" id="ftime" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label id="famountLabel" for="famount">Amount</label>
+              <div class="amount-row">
+                <input type="number" id="famount" min="0" step="0.1" placeholder="0" />
+                <select id="funit">
+                  <option value="oz">oz</option>
+                  <option value="ml">ml</option>
+                  <option value="min">min</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="fnote">Note (optional)</label>
+              <input type="text" id="fnote" maxlength="80" placeholder="Fussy, spit up, etc." />
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+            <button type="button" class="btn-save" id="saveBtn">Save feeding</button>
+          </div>
+        </div>
+
+        <div class="feed-list" id="feedList">
+          <h3>Today's log</h3>
+          <div id="feedEntries"></div>
+        </div>
+
+        <div class="tracker-footer">
+          <button type="button" id="printBtn">Download PDF / Print</button>
+          <button type="button" class="btn-danger" id="clearBtn">Clear all</button>
+        </div>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C320,80 560,0 880,50 C1100,80 1300,20 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/></svg>
+  </section>
+
+  <section class="lp-section">
+    <div class="container">
+      <div class="lp-section-head">
+        <span class="tag">Feeding amounts</span>
+        <h2>Typical baby feeding amounts by age</h2>
+        <p>How much milk a baby drinks changes fast. Use this as a starting point for bottle size and feed frequency. Your baby's real needs depend on weight, growth, and appetite.</p>
+      </div>
+      <div class="ww-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Age</th><th>Per feed</th><th>Feeds / day</th><th>Total / 24h</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="age-cell">0 to 1 week</td><td class="win">0.5 to 2 oz (15 to 60 ml)</td><td>8 to 12</td><td>14 to 20 oz</td></tr>
+            <tr><td class="age-cell">1 to 4 weeks</td><td class="win">2 to 3 oz (60 to 90 ml)</td><td>8 to 10</td><td>16 to 24 oz</td></tr>
+            <tr><td class="age-cell">1 to 2 months</td><td class="win">3 to 4 oz (90 to 120 ml)</td><td>7 to 9</td><td>24 to 32 oz</td></tr>
+            <tr><td class="age-cell">2 to 4 months</td><td class="win">4 to 5 oz (120 to 150 ml)</td><td>6 to 8</td><td>27 to 32 oz</td></tr>
+            <tr><td class="age-cell">4 to 6 months</td><td class="win">4 to 6 oz (120 to 180 ml)</td><td>5 to 6</td><td>28 to 32 oz</td></tr>
+            <tr><td class="age-cell">6 to 9 months</td><td class="win">6 to 8 oz (180 to 240 ml)</td><td>4 to 5</td><td>24 to 32 oz + solids</td></tr>
+            <tr><td class="age-cell">9 to 12 months</td><td class="win">7 to 8 oz (210 to 240 ml)</td><td>3 to 4</td><td>20 to 28 oz + solids</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="text-align: center; margin-top: 14px; font-size: 0.86rem; color: var(--text-muted);">Averages from common pediatric guidance. Breastfed babies often self-regulate and may vary. This is not medical advice. If you are worried about intake, call your pediatrician.</p>
+    </div>
+  </section>
+
+  <section class="lp-section alt">
+    <div class="container">
+      <div class="lp-section-head">
+        <span class="tag">Reassurance</span>
+        <h2>Signs your baby is getting enough</h2>
+        <p>The tracker shows the numbers. Your baby shows you the truth. If most of these are lining up, intake is almost always fine.</p>
+      </div>
+      <div class="cue-grid">
+        <div class="cue-card"><div class="cue-emoji">💧</div><h3>Wet diapers</h3><p>After day 5, aim for 6 or more heavy wet diapers in 24 hours. Pale yellow urine is what you want to see.</p></div>
+        <div class="cue-card"><div class="cue-emoji">💩</div><h3>Regular poops</h3><p>At least 3 to 4 stools a day in the first weeks. After 6 weeks, breastfed babies can skip days and still be healthy.</p></div>
+        <div class="cue-card"><div class="cue-emoji">📈</div><h3>Weight gain</h3><p>Most babies regain birth weight by two weeks, then gain about 5 to 7 oz per week in the early months.</p></div>
+        <div class="cue-card"><div class="cue-emoji">😌</div><h3>Content after feeds</h3><p>Hands relax, body softens, and baby comes off the breast or bottle on their own. Not every feed looks like this, but most should.</p></div>
+        <div class="cue-card"><div class="cue-emoji">👂</div><h3>Swallowing you can hear</h3><p>On the breast, you hear small gulps and see a jaw-drop pattern. On the bottle, you see steady swallows, not frantic gulping.</p></div>
+        <div class="cue-card"><div class="cue-emoji">🌱</div><h3>Steady growth</h3><p>Growth curves trending in their own lane at checkups. Big babies stay big, small babies stay small. Both are fine.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section">
+    <div class="container">
+      <div class="longform">
+        <div class="lp-section-head" style="margin-bottom: 24px;">
+          <span class="tag">Guide</span>
+          <h2>How to use this feeding tracker</h2>
+        </div>
+        <p>A feeding log is one of the most useful tools in the newborn months. It tells you when the last feed happened when your brain is too tired to remember, spots cluster feeding nights before they feel random, and gives your pediatrician real numbers instead of guesses. This tracker stores every entry in your browser, so it works offline after the page loads and nothing leaves your device.</p>
+
+        <h3>What to log for breastfeeding</h3>
+        <p>For a nursing session tracker, the two most useful data points are the time you started and the minutes on each side. Use the "breast left", "breast right", or "both sides" options and enter the total minutes. A typical newborn feed is 20 to 45 minutes. As your baby gets older and more efficient, feeds often shrink to 10 to 20 minutes and that is totally normal.</p>
+
+        <h3>What to log for bottle feeds</h3>
+        <p>For an online bottle tracker, log the oz or ml offered and how much was actually taken. Use the note field for leftovers, spit-up, or a bottle refusal. If you are mixing breast milk and formula, pick "bottle" for breast milk in a bottle and "formula" for formula. Pumped milk feeds can be logged separately if you want to see your pumping output versus your baby's intake.</p>
+
+        <h3>Breast vs bottle: should you track differently?</h3>
+        <p>Breastfed babies do not need ounce-level accuracy. Watching diapers, weight gain, and general mood matters more. But logging timing helps you see if cluster feeding is normal for your baby, when the longest stretch usually falls, and whether one side is consistently empty faster than the other. Bottle-fed babies are easier to track by volume, so the ounce total becomes your daily anchor number.</p>
+
+        <h3>Cluster feeding, explained</h3>
+        <p>Cluster feeding is when your baby wants to eat back-to-back for several hours, usually in the evening, often before a longer night stretch. It is most intense around 2 to 3 weeks, 6 weeks, and 3 months, and lines up with growth spurts. If you are logging every 30 to 60 minutes for 3 or 4 hours and then seeing a longer stretch of sleep, that is a classic cluster pattern. It is exhausting but normal.</p>
+
+        <h3>When to contact your pediatrician</h3>
+        <ul>
+          <li>Fewer than 6 wet diapers in 24 hours after the first week.</li>
+          <li>Baby has not regained birth weight by two weeks old.</li>
+          <li>You cannot wake your baby for a feed, or baby is sleeping through every feed for more than 4 to 5 hours in a row in the first month.</li>
+          <li>Signs of dehydration: sunken soft spot, no tears when crying, very dark urine, dry mouth.</li>
+          <li>A sudden, lasting drop in feed volume or duration that is not explained by a growth spurt or teething.</li>
+          <li>You are worried. You know your baby. Call.</li>
+        </ul>
+
+        <h3>Privacy</h3>
+        <p>Your feeds are saved in your browser's localStorage under the key pippy_feeds_v1. They never touch a server and we cannot see them. Clearing your browser data or using private mode will wipe the log, so use the Download PDF button before switching devices or clearing history.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section alt">
+    <div class="container">
+      <div class="lp-section-head">
+        <span class="tag">Keep Reading</span>
+        <h2>Related Pippy guides</h2>
+      </div>
+      <div class="related-grid">
+        <a href="/blog/baby-feeding-schedule-by-age.html" class="related-card"><div class="k">Feeding</div><h4>Baby feeding schedule by age, month by month</h4></a>
+        <a href="/blog/how-much-should-newborn-eat.html" class="related-card"><div class="k">Newborn</div><h4>How much should a newborn eat? A real-world guide</h4></a>
+        <a href="/blog/exclusive-pumping-schedule.html" class="related-card"><div class="k">Pumping</div><h4>Exclusive pumping schedule that actually works</h4></a>
+        <a href="/blog/cluster-feeding.html" class="related-card"><div class="k">Feeding</div><h4>Cluster feeding: why it happens and how to survive it</h4></a>
+        <a href="/blog/how-to-tell-if-baby-is-hungry.html" class="related-card"><div class="k">Cues</div><h4>How to tell if your baby is hungry (before they cry)</h4></a>
+        <a href="/blog/how-to-increase-milk-supply.html" class="related-card"><div class="k">Breastfeeding</div><h4>How to increase your milk supply naturally</h4></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-cta">
+    <div class="container lp-cta-inner">
+      <img src="/mascot/mascot-wave.png" alt="Pippy mascot waving" class="mascot" />
+      <h2>Want Pippy to remember every feed for you?</h2>
+      <p>Pippy's free tracker logs breastfeeding, bottles, pumping, diapers, and sleep in one place, predicts the next feed, and sends doctor-ready reports. Works on any phone, no install required.</p>
+      <div class="cta-row">
+        <a href="https://meetpippy.com/app" class="btn-primary">Use the free online tracker →</a>
+        <a href="/" class="btn-secondary">Get the app</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="/Pippy-Logo.png" alt="Pippy" class="footer-logo" />
+        <p>An AI-powered baby tracker built for new parents.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/free-baby-tracker.html">Free baby tracker</a>
+        <a href="/free-wake-window-calculator.html">Wake window calculator</a>
+        <a href="/free-feeding-tracker.html">Feeding tracker</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Pippy Feeding Tracker ---
+    // LocalStorage-backed. Key: pippy_feeds_v1. Entries: {id, type, amount, unit, note, at}
+    const STORAGE_KEY = "pippy_feeds_v1";
+
+    const TYPE_META = {
+      breast_left:  { icon: "🤱", label: "Breast (left)",        defaultUnit: "min" },
+      breast_right: { icon: "🤱", label: "Breast (right)",       defaultUnit: "min" },
+      breast_both:  { icon: "🤱", label: "Breast (both sides)",  defaultUnit: "min" },
+      bottle:       { icon: "🍼", label: "Bottle (breast milk)", defaultUnit: "oz"  },
+      formula:      { icon: "🍼", label: "Formula",              defaultUnit: "oz"  },
+      pumped:       { icon: "🥛", label: "Pumped milk",          defaultUnit: "oz"  },
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    const loadFeeds = () => {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
+      catch { return []; }
+    };
+    const saveFeeds = (feeds) => {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(feeds)); } catch {}
+    };
+
+    const todayKey = (d = new Date()) => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+
+    const isToday = (iso) => {
+      const d = new Date(iso);
+      return todayKey(d) === todayKey(new Date());
+    };
+
+    const fmtClock = (d) => {
+      const h = d.getHours() % 12 || 12;
+      const mm = d.getMinutes().toString().padStart(2, "0");
+      const s = d.getHours() >= 12 ? "pm" : "am";
+      return h + ":" + mm + s;
+    };
+
+    const fmtRelative = (iso) => {
+      const diff = Math.max(0, Date.now() - new Date(iso).getTime());
+      const mins = Math.round(diff / 60000);
+      if (mins < 1) return "just now";
+      if (mins < 60) return mins + "m ago";
+      const hrs = Math.floor(mins / 60);
+      const rem = mins % 60;
+      if (hrs < 24) return hrs + "h " + rem + "m ago";
+      const days = Math.floor(hrs / 24);
+      return days + "d ago";
+    };
+
+    const fmtDateLong = (d = new Date()) => d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+
+    const entryAmountText = (e) => {
+      if (!e.amount) return "";
+      if (e.unit === "min") return e.amount + " min";
+      return e.amount + " " + e.unit;
+    };
+
+    const render = () => {
+      const feeds = loadFeeds().sort((a, b) => new Date(b.at) - new Date(a.at));
+      const today = feeds.filter(f => isToday(f.at));
+
+      // Summary
+      $("sumCount").textContent = today.length;
+
+      if (today.length > 0) {
+        const last = today[0];
+        $("sumLast").textContent = fmtClock(new Date(last.at));
+        $("sumLastSub").textContent = fmtRelative(last.at);
+      } else {
+        $("sumLast").textContent = "...";
+        $("sumLastSub").textContent = "No feeds yet today";
+      }
+
+      // Total: combine oz (converting ml to oz at 29.5735) and minutes separately
+      let totalOz = 0, totalMl = 0, totalMin = 0;
+      today.forEach(f => {
+        const amt = parseFloat(f.amount) || 0;
+        if (f.unit === "oz") totalOz += amt;
+        else if (f.unit === "ml") totalMl += amt;
+        else if (f.unit === "min") totalMin += amt;
+      });
+      const ozCombined = totalOz + (totalMl / 29.5735);
+      const parts = [];
+      if (ozCombined > 0) parts.push(ozCombined.toFixed(1) + " oz");
+      if (totalMin > 0) parts.push(totalMin + " min");
+      $("sumTotal").textContent = parts.length ? parts.join(" · ") : "...";
+
+      // Entry list (today only)
+      const listEl = $("feedEntries");
+      if (today.length === 0) {
+        listEl.innerHTML = '<div class="feed-empty">No feeds logged today yet. Tap <strong>Add feeding</strong> above to start.</div>';
+      } else {
+        listEl.innerHTML = today.map(e => {
+          const meta = TYPE_META[e.type] || { icon: "🍼", label: e.type };
+          const when = new Date(e.at);
+          const amt = entryAmountText(e);
+          const note = e.note ? ' · <span class="note">' + escapeHtml(e.note) + '</span>' : "";
+          return '<div class="feed-entry" data-id="' + e.id + '">' +
+                   '<div class="icon">' + meta.icon + '</div>' +
+                   '<div class="body">' +
+                     '<div class="title">' + meta.label + (amt ? ' · ' + amt : '') + '</div>' +
+                     '<div class="meta">' + fmtClock(when) + ' · ' + fmtRelative(e.at) + note + '</div>' +
+                   '</div>' +
+                   '<button class="del" type="button" aria-label="Delete entry" data-del="' + e.id + '">✕</button>' +
+                 '</div>';
+        }).join("");
+      }
+
+      // Dates
+      $("todayDate").textContent = fmtDateLong();
+      $("printDate").textContent = "Feeding log for " + fmtDateLong();
+    };
+
+    const escapeHtml = (s) => String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+
+    const setDefaultUnit = () => {
+      const type = $("ftype").value;
+      const meta = TYPE_META[type];
+      if (!meta) return;
+      $("funit").value = meta.defaultUnit;
+      $("famountLabel").textContent = meta.defaultUnit === "min" ? "Duration" : "Amount";
+    };
+
+    const setTimeNow = () => {
+      const now = new Date();
+      $("ftime").value = now.getHours().toString().padStart(2, "0") + ":" + now.getMinutes().toString().padStart(2, "0");
+    };
+
+    const resetForm = () => {
+      $("ftype").value = "breast_both";
+      setDefaultUnit();
+      $("famount").value = "";
+      $("fnote").value = "";
+      setTimeNow();
+    };
+
+    const openForm = () => {
+      const form = $("feedForm");
+      form.classList.add("open");
+      $("addBtn").setAttribute("aria-expanded", "true");
+      resetForm();
+      setTimeout(() => $("famount").focus(), 60);
+    };
+    const closeForm = () => {
+      $("feedForm").classList.remove("open");
+      $("addBtn").setAttribute("aria-expanded", "false");
+    };
+
+    const saveEntry = () => {
+      const type = $("ftype").value;
+      const amountRaw = $("famount").value.trim();
+      const amount = amountRaw === "" ? 0 : parseFloat(amountRaw);
+      const unit = $("funit").value;
+      const note = $("fnote").value.trim();
+      const timeStr = $("ftime").value;
+
+      // Build timestamp: today's date + chosen time. If blank, use now.
+      let at;
+      if (timeStr) {
+        const [h, m] = timeStr.split(":").map(Number);
+        const d = new Date();
+        d.setHours(h, m, 0, 0);
+        // If the chosen time is in the future by more than 5 min, assume it belongs to yesterday.
+        if (d.getTime() - Date.now() > 5 * 60000) d.setDate(d.getDate() - 1);
+        at = d.toISOString();
+      } else {
+        at = new Date().toISOString();
+      }
+
+      if (isNaN(amount) || amount < 0) {
+        alert("Please enter a valid amount (0 or more).");
+        return;
+      }
+
+      const feeds = loadFeeds();
+      feeds.push({
+        id: "f_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7),
+        type, amount, unit, note, at
+      });
+      saveFeeds(feeds);
+      closeForm();
+      render();
+    };
+
+    const deleteEntry = (id) => {
+      const feeds = loadFeeds().filter(f => f.id !== id);
+      saveFeeds(feeds);
+      render();
+    };
+
+    const clearAll = () => {
+      if (!confirm("Delete every feeding entry? This cannot be undone.")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      render();
+    };
+
+    // Wire up
+    $("addBtn").addEventListener("click", () => {
+      const isOpen = $("feedForm").classList.contains("open");
+      if (isOpen) closeForm(); else openForm();
+    });
+    $("cancelBtn").addEventListener("click", closeForm);
+    $("saveBtn").addEventListener("click", saveEntry);
+    $("ftype").addEventListener("change", setDefaultUnit);
+    $("clearBtn").addEventListener("click", clearAll);
+    $("printBtn").addEventListener("click", () => window.print());
+
+    // Delegated delete clicks
+    $("feedEntries").addEventListener("click", (ev) => {
+      const btn = ev.target.closest("[data-del]");
+      if (!btn) return;
+      const id = btn.getAttribute("data-del");
+      if (confirm("Delete this feeding entry?")) deleteEntry(id);
+    });
+
+    // Keep the "time ago" numbers fresh once a minute.
+    setInterval(render, 60 * 1000);
+
+    // Initial paint
+    resetForm();
+    render();
+  </script>
+  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

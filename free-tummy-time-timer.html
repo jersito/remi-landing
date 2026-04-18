@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Tummy Time Timer & Tracker | Minutes by Age | Pippy</title>
+  <meta name="description" content="Free tummy time timer and tracker. Pick your baby's age and see the daily goal. Start, pause, log sessions, and print a weekly tummy time chart. No signup, no app required." />
+  <meta name="keywords" content="tummy time timer, free tummy time tracker, tummy time by age, how long tummy time newborn, tummy time minutes per day, baby tummy time goals, tummy time chart, newborn tummy time, tummy time log, online tummy time tracker" />
+  <link rel="canonical" href="https://meetpippy.com/free-tummy-time-timer.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://meetpippy.com/free-tummy-time-timer.html" />
+  <meta property="og:title" content="Free Tummy Time Timer & Tracker by Age" />
+  <meta property="og:description" content="A working tummy time timer with daily goals by age. Log sessions, see your weekly chart, print a clean report. Runs in your browser." />
+  <meta property="og:image" content="https://meetpippy.com/pippy-og-image.png" />
+  <meta property="og:site_name" content="Pippy" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Tummy Time Timer & Tracker" />
+  <meta name="twitter:description" content="Pick your baby's age, hit start, build the habit. Works in your browser, no signup." />
+  <meta name="twitter:image" content="https://meetpippy.com/pippy-og-image.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Pippy Tummy Time Timer",
+    "url": "https://meetpippy.com/free-tummy-time-timer.html",
+    "description": "Free online tummy time timer and session tracker for babies 0 to 12 months. Sets the daily minute goal by age, runs a countdown, logs sessions, and shows a weekly chart with printable PDF report.",
+    "applicationCategory": "HealthApplication",
+    "applicationSubCategory": "Baby Tracker",
+    "operatingSystem": "Web",
+    "browserRequirements": "Requires JavaScript. Works in any modern browser.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "Pippy", "url": "https://meetpippy.com", "logo": { "@type": "ImageObject", "url": "https://meetpippy.com/Pippy-Logo.png" } },
+    "isAccessibleForFree": true,
+    "inLanguage": "en-US"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to do tummy time safely",
+    "description": "Tummy time builds your baby's neck, shoulder, and core strength and lowers the risk of a flat spot on the head. Here is how to start and stay safe.",
+    "totalTime": "PT5M",
+    "tool": [{ "@type": "HowToTool", "name": "Pippy Tummy Time Timer" }],
+    "step": [
+      { "@type": "HowToStep", "name": "Pick the right moment", "text": "Aim for a time when your baby is awake, alert, and calm. Right after a diaper change works well. Skip it right after a feed so you do not trigger spit-up." },
+      { "@type": "HowToStep", "name": "Use a firm, flat surface", "text": "Lay a firm blanket or play mat on the floor. Avoid couches, beds, or soft bedding. Remove loose toys and pillows from the area." },
+      { "@type": "HowToStep", "name": "Get down at eye level", "text": "Lie on the floor in front of your baby, use a mirror, or place a high-contrast toy at face height. Your face is the most motivating target they have." },
+      { "@type": "HowToStep", "name": "Start the timer and stay present", "text": "Tap start. Keep your baby in sight the entire session. Never leave a baby on their tummy unattended, even for a second." },
+      { "@type": "HowToStep", "name": "Keep sessions short and frequent", "text": "Two or three minutes a few times a day beats one long, fussy session. Stop when your baby is clearly done. Crying for more than a minute is a sign to pause and try again later." },
+      { "@type": "HowToStep", "name": "Always put baby to sleep on their back", "text": "Tummy time is for awake play only. When your baby falls asleep, always transfer them onto their back in a bare crib or bassinet, following safe sleep guidelines." }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Pippy", "item": "https://meetpippy.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://meetpippy.com/#free-tools" },
+      { "@type": "ListItem", "position": 3, "name": "Tummy Time Timer", "item": "https://meetpippy.com/free-tummy-time-timer.html" }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .lp-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+    .lp-nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .lp-nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+    .lp-nav-brand img { height: 32px; border-radius: 8px; }
+    .lp-hero { background: linear-gradient(165deg, #eaf1f6 0%, #fefaf7 55%, #f5e6d8 100%); padding: 72px 0 40px; position: relative; overflow: hidden; }
+    .lp-hero-inner { text-align: center; max-width: 780px; margin: 0 auto; }
+    .lp-hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 14px; line-height: 1.12; }
+    .lp-hero h1 .highlight { background: linear-gradient(120deg, transparent 0%, transparent 60%, #ffd77a 60%, #ffd77a 95%, transparent 95%); padding: 0 4px; }
+    .lp-hero p.sub { font-size: 1.1rem; max-width: 580px; margin: 0 auto 8px; color: var(--text-muted); line-height: 1.6; }
+    .lp-hero .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.15); color: var(--blue-dark, #7A9DB0); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
+    .lp-hero svg.wave { position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; display: block; }
+
+    /* Timer card */
+    .timer-card { max-width: 720px; margin: 32px auto 0; background: #fff; border-radius: 28px; padding: 28px 24px 24px; box-shadow: 0 24px 60px -20px rgba(47,71,110,0.22), 0 0 0 1px rgba(0,0,0,0.04); text-align: center; }
+
+    .age-picker { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+    .age-picker label { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.88rem; color: var(--text); }
+    .age-picker select { padding: 10px 14px; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.1); font-size: 0.96rem; font-family: inherit; font-weight: 700; background: #fff; color: var(--text); cursor: pointer; }
+    .age-picker select:focus { outline: none; border-color: var(--blue-dark, #7A9DB0); }
+    .age-goal-pill { display: inline-block; padding: 6px 12px; border-radius: 18px; background: rgba(255,215,122,0.35); color: var(--text); font-size: 0.8rem; font-weight: 800; font-family: 'Nunito', sans-serif; }
+
+    /* Circular timer */
+    .timer-ring-wrap { position: relative; width: 260px; height: 260px; margin: 10px auto 14px; }
+    @media (max-width: 520px) { .timer-ring-wrap { width: 220px; height: 220px; } }
+    .timer-ring-svg { width: 100%; height: 100%; transform: rotate(-90deg); display: block; }
+    .timer-ring-track { fill: none; stroke: #eaf1f6; stroke-width: 14; }
+    .timer-ring-progress { fill: none; stroke: url(#pippyGrad); stroke-width: 14; stroke-linecap: round; transition: stroke-dashoffset 0.25s linear; }
+    .timer-face { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; pointer-events: none; }
+    .timer-face .time { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: clamp(2.6rem, 8vw, 3.4rem); color: var(--text); line-height: 1; letter-spacing: -0.02em; }
+    .timer-face .label { font-size: 0.76rem; font-weight: 700; color: var(--blue-dark, #7A9DB0); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+    .timer-face .session-goal { font-size: 0.82rem; color: var(--text-muted); font-weight: 700; margin-top: 2px; }
+
+    .timer-controls { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+    .tc-btn { padding: 14px 28px; border-radius: 60px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; cursor: pointer; border: none; transition: transform 0.15s, box-shadow 0.2s, background 0.15s; min-width: 130px; }
+    .tc-btn-start { background: var(--blue-dark, #7A9DB0); color: #fff; box-shadow: 0 6px 16px rgba(122,157,176,0.35); }
+    .tc-btn-start:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(122,157,176,0.45); }
+    .tc-btn-start.running { background: #c97a5d; box-shadow: 0 6px 16px rgba(201,122,93,0.35); }
+    .tc-btn-ghost { background: #faf4ee; color: var(--text); border: 1.5px solid rgba(0,0,0,0.06); }
+    .tc-btn-ghost:hover { background: #f3e9dc; }
+    .tc-btn-save { background: #fff; color: var(--blue-dark, #7A9DB0); border: 1.5px solid var(--blue-dark, #7A9DB0); }
+    .tc-btn-save:hover { background: #eaf1f6; }
+
+    /* Today summary */
+    .today-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px; }
+    @media (max-width: 560px) { .today-strip { grid-template-columns: 1fr 1fr; } .today-strip .cell-wide { grid-column: span 2; } }
+    .today-cell { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); border-radius: 16px; padding: 14px 12px; text-align: center; }
+    .today-cell .k { font-size: 0.7rem; font-weight: 700; color: var(--blue-dark, #7A9DB0); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+    .today-cell .v { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.25rem; color: var(--text); line-height: 1.1; }
+    .today-cell .sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+
+    .progress-wrap { margin-top: 14px; }
+    .progress-wrap .p-head { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
+    .progress-wrap .p-head .p-val { color: var(--text); font-family: 'Nunito', sans-serif; font-weight: 800; }
+    .progress-bar { width: 100%; height: 10px; background: #eaf1f6; border-radius: 10px; overflow: hidden; }
+    .progress-bar .fill { height: 100%; background: linear-gradient(90deg, #ffd77a 0%, #c97a5d 100%); border-radius: 10px; transition: width 0.3s ease; }
+    .progress-bar .fill.goal-hit { background: linear-gradient(90deg, #9fc48b 0%, #7A9DB0 100%); }
+
+    /* Session list + note */
+    .note-row { margin-top: 16px; text-align: left; }
+    .note-row label { display: block; font-size: 0.74rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+    .note-row input { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1.5px solid rgba(0,0,0,0.1); font-size: 0.94rem; font-family: inherit; font-weight: 500; background: #fff; box-sizing: border-box; }
+    .note-row input:focus { outline: none; border-color: var(--blue-dark, #7A9DB0); }
+
+    .session-list { margin-top: 18px; text-align: left; }
+    .session-list h3 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.86rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin: 0 0 8px; }
+    .session-entry { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #fff; border: 1px solid rgba(0,0,0,0.05); border-radius: 14px; margin-bottom: 8px; }
+    .session-entry .sicon { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #ffd77a, #f2c4a4); display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+    .session-entry .sbody { flex: 1; min-width: 0; }
+    .session-entry .stitle { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.98rem; color: var(--text); }
+    .session-entry .smeta { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
+    .session-entry .smeta .snote { font-style: italic; }
+    .session-entry .del { background: transparent; border: none; color: var(--text-muted); font-size: 1rem; cursor: pointer; padding: 6px 8px; border-radius: 8px; transition: background 0.15s, color 0.15s; }
+    .session-entry .del:hover { background: #ffe1d6; color: #c04a22; }
+    .session-empty { text-align: center; padding: 22px 16px; color: var(--text-muted); font-size: 0.92rem; background: #faf4ee; border-radius: 14px; }
+
+    /* Week chart */
+    .week-chart { margin-top: 20px; text-align: left; }
+    .week-chart h3 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.86rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin: 0 0 12px; }
+    .week-bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; align-items: end; height: 120px; padding: 0 4px; }
+    .week-bar-col { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 6px; }
+    .week-bar { width: 100%; max-width: 32px; background: linear-gradient(180deg, #ffd77a 0%, #f2c4a4 100%); border-radius: 6px 6px 2px 2px; min-height: 4px; position: relative; transition: height 0.3s ease; }
+    .week-bar.today { background: linear-gradient(180deg, #7A9DB0 0%, #5a7c8f 100%); }
+    .week-bar-val { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 0.68rem; font-weight: 800; color: var(--text); font-family: 'Nunito', sans-serif; white-space: nowrap; }
+    .week-bar-labels { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 6px; padding: 0 4px; }
+    .week-bar-label { text-align: center; font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
+
+    .tracker-footer { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+    .tracker-footer button { flex: 1; min-width: 140px; padding: 11px 14px; border-radius: 12px; background: #fff; color: var(--text); border: 1.5px solid rgba(0,0,0,0.1); font-family: inherit; font-weight: 700; font-size: 0.92rem; cursor: pointer; transition: background 0.15s; }
+    .tracker-footer button:hover { background: #faf4ee; }
+    .tracker-footer .btn-danger { color: #c04a22; }
+    .tracker-footer .btn-danger:hover { background: #ffe1d6; }
+
+    /* Generic sections (match template) */
+    .lp-section { padding: 72px 0; position: relative; }
+    .lp-section.alt { background: var(--beige, #faf4ee); }
+    .lp-section-head { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+    .lp-section-head .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.15); color: var(--blue-dark, #7A9DB0); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
+    .lp-section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 14px; line-height: 1.2; }
+    .lp-section-head p { font-size: 1.02rem; color: var(--text-muted); line-height: 1.65; }
+
+    .ww-table-wrap { max-width: 920px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
+    .ww-table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.96rem; }
+    .ww-table-wrap th, .ww-table-wrap td { padding: 14px 18px; text-align: left; }
+    .ww-table-wrap th { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); font-weight: 800; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text); }
+    .ww-table-wrap tbody tr:nth-child(even) { background: rgba(122,157,176,0.04); }
+    .ww-table-wrap tbody tr:not(:last-child) td { border-bottom: 1px solid rgba(0,0,0,0.04); }
+    .ww-table-wrap .age-cell { font-weight: 700; color: var(--text); }
+    .ww-table-wrap .win { font-weight: 700; color: var(--blue-dark, #7A9DB0); font-family: 'Nunito', sans-serif; }
+
+    .cue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 920px; margin: 0 auto; }
+    @media (max-width: 820px) { .cue-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .cue-grid { grid-template-columns: 1fr; } }
+    .cue-card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); border: 1px solid rgba(0,0,0,0.04); }
+    .cue-card .cue-emoji { font-size: 26px; margin-bottom: 10px; }
+    .cue-card h3 { font-size: 1.02rem; margin-bottom: 6px; color: var(--text); }
+    .cue-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+
+    .longform { max-width: 760px; margin: 0 auto; }
+    .longform h3 { font-size: 1.2rem; margin: 28px 0 10px; color: var(--text); }
+    .longform p { font-size: 1rem; line-height: 1.7; color: var(--text); margin-bottom: 14px; }
+    .longform ul { padding-left: 20px; margin-bottom: 14px; list-style: disc; color: var(--text); }
+    .longform ul li { margin-bottom: 6px; line-height: 1.6; }
+
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 960px; margin: 0 auto; }
+    @media (max-width: 820px) { .related-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .related-grid { grid-template-columns: 1fr; } }
+    .related-card { background: #fff; border-radius: 16px; padding: 20px 22px; box-shadow: 0 2px 8px rgba(47,71,110,0.05); border: 1px solid rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; display: block; }
+    .related-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(47,71,110,0.1); }
+    .related-card .k { font-size: 0.72rem; font-weight: 700; color: var(--blue-dark, #7A9DB0); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
+    .related-card h4 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); line-height: 1.35; }
+
+    .lp-cta { padding: 80px 0; background: linear-gradient(165deg, #eaf1f6 0%, #f5e6d8 100%); text-align: center; position: relative; overflow: hidden; }
+    .lp-cta::before { content: ""; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,215,122,0.3) 0%, transparent 70%); }
+    .lp-cta::after { content: ""; position: absolute; bottom: -60px; left: -60px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(122,157,176,0.15) 0%, transparent 70%); }
+    .lp-cta-inner { position: relative; z-index: 1; }
+    .lp-cta img.mascot { height: 96px; margin-bottom: 16px; }
+    .lp-cta h2 { margin-bottom: 12px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
+    .lp-cta p { max-width: 540px; margin: 0 auto 24px; font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: var(--blue-dark, #7A9DB0); color: #fff; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(122,157,176,0.4); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(122,157,176,0.5); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: #fff; color: var(--text); text-decoration: none; border: 1.5px solid rgba(0,0,0,0.1); transition: transform 0.2s; }
+    .btn-secondary:hover { transform: translateY(-2px); }
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .fade-up { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
+
+    /* Print: clean weekly tummy time log */
+    @media print {
+      body { background: #fff; color: #000; }
+      .lp-nav, .lp-hero svg.wave, .lp-hero .tag, .lp-hero p.sub,
+      .lp-section, .lp-cta, .footer,
+      .tracker-footer, .note-row, .timer-controls, .age-picker,
+      .session-entry .del { display: none !important; }
+      .lp-hero { padding: 0; background: #fff; }
+      .lp-hero h1 { font-size: 1.4rem; text-align: left; margin: 0 0 6px; }
+      .lp-hero h1 .highlight { background: none; padding: 0; }
+      .lp-hero-inner { max-width: 100%; text-align: left; }
+      .timer-card { max-width: 100%; margin: 0; padding: 0; box-shadow: none; border-radius: 0; text-align: left; }
+      .timer-ring-wrap { display: none; }
+      .today-strip { grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
+      .today-cell { background: #f2f2f2 !important; padding: 8px; border-radius: 6px; }
+      .session-entry { border: 1px solid #ccc; background: #fff !important; padding: 8px 10px; border-radius: 4px; margin-bottom: 4px; page-break-inside: avoid; }
+      .session-entry .sicon { background: #eee !important; }
+      .week-bar { background: #777 !important; }
+      .week-bar.today { background: #333 !important; }
+      .print-header { display: block !important; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 2px solid #000; }
+      .print-header h1 { font-size: 1.3rem; margin: 0 0 4px; }
+      .print-header .print-date { font-size: 0.9rem; color: #333; }
+    }
+    .print-header { display: none; }
+  </style>
+  <script src="/analytics-consent.js" defer></script>
+</head>
+<body>
+
+  <nav class="lp-nav">
+    <div class="container lp-nav-inner">
+      <a href="/" class="lp-nav-brand"><img src="/Pippy-Icon.png" alt="Pippy" /> Pippy</a>
+      <a href="/" class="btn-secondary" style="padding: 10px 20px; font-size: 0.92rem;">Back to Pippy</a>
+    </div>
+  </nav>
+
+  <section class="lp-hero">
+    <div class="container lp-hero-inner">
+      <div class="print-header">
+        <h1>Pippy tummy time log</h1>
+        <div class="print-date" id="printDate"></div>
+      </div>
+      <span class="tag">Free Tummy Time Timer · No App · No Signup</span>
+      <h1>Tummy time timer <span class="highlight">with goals by age</span>.</h1>
+      <p class="sub">A working tummy time timer and session log. Pick your baby's age, hit start, and build the habit a few minutes at a time. Runs in your browser, nothing to install.</p>
+
+      <div class="timer-card" id="timerCard" aria-label="Tummy time timer and tracker">
+        <div class="age-picker">
+          <label for="babyAge">Baby's age</label>
+          <select id="babyAge" aria-label="Baby age group">
+            <option value="newborn">Newborn (0 to 4 weeks)</option>
+            <option value="1m">1 month</option>
+            <option value="2m" selected>2 months</option>
+            <option value="3m">3 months</option>
+            <option value="4m">4 months</option>
+            <option value="5_6m">5 to 6 months</option>
+            <option value="7plus">7+ months</option>
+          </select>
+          <span class="age-goal-pill" id="ageGoalPill">Daily goal: 15 to 20 min</span>
+        </div>
+
+        <div class="timer-ring-wrap" aria-live="polite">
+          <svg class="timer-ring-svg" viewBox="0 0 120 120" aria-hidden="true">
+            <defs>
+              <linearGradient id="pippyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffd77a" />
+                <stop offset="100%" stop-color="#c97a5d" />
+              </linearGradient>
+            </defs>
+            <circle class="timer-ring-track" cx="60" cy="60" r="52" />
+            <circle class="timer-ring-progress" id="timerRingProgress" cx="60" cy="60" r="52"
+                    stroke-dasharray="326.726" stroke-dashoffset="0" />
+          </svg>
+          <div class="timer-face">
+            <div class="time" id="timerDisplay">03:00</div>
+            <div class="label" id="timerState">Ready</div>
+            <div class="session-goal" id="sessionGoal">Target: 3 min</div>
+          </div>
+        </div>
+
+        <div class="timer-controls">
+          <button class="tc-btn tc-btn-start" type="button" id="startPauseBtn">Start</button>
+          <button class="tc-btn tc-btn-save" type="button" id="saveSessionBtn">Save session</button>
+          <button class="tc-btn tc-btn-ghost" type="button" id="resetBtn">Reset</button>
+        </div>
+
+        <div class="note-row">
+          <label for="sessionNote">Note for this session (optional)</label>
+          <input type="text" id="sessionNote" maxlength="80" placeholder="Happy, lifted head, got fussy after 2 min" />
+        </div>
+
+        <div class="today-strip" aria-live="polite">
+          <div class="today-cell"><div class="k">Sessions today</div><div class="v" id="sumCount">0</div></div>
+          <div class="today-cell"><div class="k">Minutes today</div><div class="v" id="sumMin">0</div><div class="sub" id="sumOfGoal">of 15 min goal</div></div>
+          <div class="today-cell"><div class="k">Last session</div><div class="v" id="sumLast">...</div><div class="sub" id="sumLastSub"></div></div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="p-head"><span>Daily goal progress</span><span class="p-val" id="progressVal">0%</span></div>
+          <div class="progress-bar"><div class="fill" id="progressFill" style="width: 0%;"></div></div>
+        </div>
+
+        <div class="session-list">
+          <h3>Today's sessions</h3>
+          <div id="sessionEntries"></div>
+        </div>
+
+        <div class="week-chart">
+          <h3>This week</h3>
+          <div class="week-bars" id="weekBars"></div>
+          <div class="week-bar-labels" id="weekLabels"></div>
+        </div>
+
+        <div class="tracker-footer">
+          <button type="button" id="printBtn">Download PDF / Print</button>
+          <button type="button" class="btn-danger" id="clearBtn">Clear all</button>
+        </div>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C320,80 560,0 880,50 C1100,80 1300,20 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/></svg>
+  </section>
+
+  <section class="lp-section">
+    <div class="container">
+      <div class="lp-section-head">
+        <span class="tag">Tummy time by age</span>
+        <h2>Tummy time goals, month by month</h2>
+        <p>The AAP recommends working up to 15 to 30 minutes a day by 7 weeks and about 60 minutes a day by 4 months. Spread it across several short sessions. Short and happy beats long and crying every single time.</p>
+      </div>
+      <div class="ww-table-wrap">
+        <table>
+          <thead>
+            <tr><th>Age</th><th>Daily total</th><th>Typical session</th><th>Milestones to watch</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="age-cell">Newborn (0 to 2 wk)</td><td class="win">3 to 5 min / day</td><td>1 min, a few times</td><td>Briefly turns head to one side</td></tr>
+            <tr><td class="age-cell">2 to 4 weeks</td><td class="win">10 to 15 min / day</td><td>2 to 3 min</td><td>Lifts head for a second</td></tr>
+            <tr><td class="age-cell">1 month</td><td class="win">15 min / day</td><td>3 min</td><td>Head lifts 45 degrees briefly</td></tr>
+            <tr><td class="age-cell">2 months</td><td class="win">15 to 20 min / day</td><td>3 to 5 min</td><td>Holds head up, looks around</td></tr>
+            <tr><td class="age-cell">3 months</td><td class="win">~30 min / day</td><td>5 to 10 min</td><td>Props on forearms, chest lifts</td></tr>
+            <tr><td class="age-cell">4 months</td><td class="win">40 to 60 min / day</td><td>10 to 15 min</td><td>Pushes up on hands, reaches for toys</td></tr>
+            <tr><td class="age-cell">5 to 6 months</td><td class="win">60+ min / day</td><td>As long as happy</td><td>Rolls belly to back, pivots in circles</td></tr>
+            <tr><td class="age-cell">7+ months</td><td class="win">Mostly self-directed</td><td>Whenever on the floor</td><td>Rocks on hands and knees, scoots, crawls</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="text-align: center; margin-top: 14px; font-size: 0.86rem; color: var(--text-muted);">Guidance based on the American Academy of Pediatrics and common pediatric PT targets. Every baby is on their own timeline. Not medical advice. If your baby is not meeting these milestones by the expected window, talk to your pediatrician.</p>
+    </div>
+  </section>
+
+  <section class="lp-section alt">
+    <div class="container">
+      <div class="lp-section-head">
+        <span class="tag">Ideas that actually work</span>
+        <h2>Tummy time ideas for babies who hate tummy time</h2>
+        <p>Almost every baby protests at first. It is new, it is hard, and gravity is rude. These small tweaks turn crying sessions into something your baby will actually tolerate.</p>
+      </div>
+      <div class="cue-grid">
+        <div class="cue-card"><div class="cue-emoji">🫂</div><h3>Chest-to-chest</h3><p>Lie back on the couch or bed and lay your baby tummy-down on your chest. You are the view, the warmth, and the anchor. Counts as tummy time from day one.</p></div>
+        <div class="cue-card"><div class="cue-emoji">🧻</div><h3>Rolled towel or nursing pillow</h3><p>Tuck a rolled receiving blanket or a firm pillow under your baby's armpits and chest. The slight lift takes the work down a notch and helps them see more of the world.</p></div>
+        <div class="cue-card"><div class="cue-emoji">🪞</div><h3>Unbreakable baby mirror</h3><p>Prop a baby-safe mirror right at face level. Babies are wired to stare at faces, even their own. Mirror time easily adds 60 to 90 seconds to any session.</p></div>
+        <div class="cue-card"><div class="cue-emoji">🎪</div><h3>Play gym, upside down</h3><p>Flip a play gym sideways or use a low arch so dangling toys sit in front of your baby's face instead of above. Gives them something to track and reach for.</p></div>
+        <div class="cue-card"><div class="cue-emoji">🦵</div><h3>Tummy-down over your lap</h3><p>Sit down, lay baby across your thighs tummy-down, and gently pat their back. Great for a fussy baby who will not tolerate the floor yet. Bonus: helps with gas.</p></div>
+        <div class="cue-card"><div class="cue-emoji">🐶</div><h3>Sibling, pet, or window view</h3><p>Set up tummy time facing a big sibling playing, the family dog, or a sunny window with moving leaves. Novelty keeps their head up longer than any toy.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section">
+    <div class="container">
+      <div class="longform">
+        <div class="lp-section-head" style="margin-bottom: 24px;">
+          <span class="tag">Guide</span>
+          <h2>Why tummy time matters, and how to start</h2>
+        </div>
+        <p>Tummy time is the awake, supervised time your baby spends on their belly. It is one of the simplest, most evidence-backed things you can do for your baby's physical development, and it takes exactly zero equipment. The problem is that most newborns genuinely do not like it at first, so parents quietly give up. That is where a timer and a log help. When you can see that you already got 12 minutes in today across four tiny sessions, the whole thing feels winnable.</p>
+
+        <h3>What tummy time actually does</h3>
+        <p>Three things, mostly. It builds the neck, shoulder, and upper back muscles your baby needs for rolling, sitting, and crawling. It keeps pressure off the back of the skull, which lowers the risk of plagiocephaly, the flat spot that can form when babies spend a lot of time on their backs. And it gives your baby a new view of the world, which is surprisingly important for visual tracking and motor planning. The reason safe-sleep guidelines ask babies to sleep on their backs is that it saves lives, but that also means awake belly time has to do the muscle-building work that used to happen passively.</p>
+
+        <h3>How to start with a newborn</h3>
+        <p>You can start tummy time on day one. In the first weeks, the easiest version is chest-to-chest on you while you are reclined. That counts. Aim for a minute or two, several times a day, working up to about 15 minutes a day by the end of the first month.</p>
+        <ul>
+          <li>Pick a moment when your baby is awake and calm, not hungry and not right after a feed. Right after a diaper change is perfect.</li>
+          <li>Use a firm, flat surface. A play mat or a blanket on the floor is ideal. Never a couch, bed, or any soft bedding.</li>
+          <li>Get your face down at their face level. You are the most motivating toy they have.</li>
+          <li>Start the timer for a realistic goal, not an aspirational one. Two minutes is a win.</li>
+          <li>Stop before the meltdown. You want the association to be "this is okay", not "this is torture".</li>
+        </ul>
+
+        <h3>Fussy baby troubleshooting</h3>
+        <p>If your baby cries within 30 seconds every single time, the setup usually needs a tweak, not more willpower. Try chest-to-chest first for a week. Add a rolled towel under the armpits to take the load off. Put a mirror or a high-contrast black-and-white card right in front of their face. Do it right after a diaper change when they are fresh. And stack little sessions through the day instead of one long one. Three minutes, six times a day, gets you to 18 minutes without a single tear.</p>
+
+        <h3>When to contact your pediatrician</h3>
+        <ul>
+          <li>Your baby cannot lift their head at all by 4 months old.</li>
+          <li>One side of the head looks flatter than the other, or your baby strongly prefers turning their head one direction (a sign of torticollis, which is very treatable).</li>
+          <li>Persistent asymmetry: one arm or leg moves noticeably less than the other.</li>
+          <li>Your baby's head feels heavy and their neck seems to have no strength by 3 months.</li>
+          <li>You are worried. Gut feeling counts. Call.</li>
+        </ul>
+        <p>Plagiocephaly (flat head syndrome) and torticollis (tight neck muscles) are both common and both very fixable when caught early, usually with more tummy time, repositioning tricks, and sometimes a short course of physical therapy. Your pediatrician will know what to do, and you will not be the first parent to ask.</p>
+
+        <h3>Privacy</h3>
+        <p>Your sessions are saved in your browser's localStorage under the key pippy_tummytime_v1. They never touch a server and we cannot see them. Clearing your browser data or using private mode will wipe the log, so use the Download PDF button before switching devices or clearing history.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-section alt">
+    <div class="container">
+      <div class="lp-section-head">
+        <span class="tag">Keep Reading</span>
+        <h2>Related Pippy guides</h2>
+      </div>
+      <div class="related-grid">
+        <a href="/blog/tummy-time-guide.html" class="related-card"><div class="k">Development</div><h4>Tummy time guide: how to build the habit from day one</h4></a>
+        <a href="/blog/when-do-babies-hold-head-up.html" class="related-card"><div class="k">Milestones</div><h4>When do babies hold their head up? A timeline</h4></a>
+        <a href="/blog/when-do-babies-roll-over.html" class="related-card"><div class="k">Milestones</div><h4>When do babies roll over? What to expect</h4></a>
+        <a href="/blog/when-do-babies-start-crawling.html" class="related-card"><div class="k">Milestones</div><h4>When do babies start crawling? Stages and signs</h4></a>
+        <a href="/blog/when-do-babies-sit-up.html" class="related-card"><div class="k">Milestones</div><h4>When do babies sit up on their own?</h4></a>
+        <a href="/blog/baby-milestones-month-by-month.html" class="related-card"><div class="k">Development</div><h4>Baby milestones, month by month</h4></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-cta">
+    <div class="container lp-cta-inner">
+      <img src="/mascot/mascot-happy.png" alt="Pippy mascot smiling" class="mascot" />
+      <h2>Want Pippy to track tummy time with everything else?</h2>
+      <p>Pippy's free tracker logs tummy time, sleep, feeds, and diapers in one place, tracks milestones as they happen, and sends doctor-ready reports. Works on any phone, no install required.</p>
+      <div class="cta-row">
+        <a href="https://meetpippy.com/app" class="btn-primary">Use the free online tracker →</a>
+        <a href="/" class="btn-secondary">Get the app</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="/Pippy-Logo.png" alt="Pippy" class="footer-logo" />
+        <p>An AI-powered baby tracker built for new parents.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/free-baby-tracker.html">Free baby tracker</a>
+        <a href="/free-wake-window-calculator.html">Wake window calculator</a>
+        <a href="/free-feeding-tracker.html">Feeding tracker</a>
+        <a href="/free-tummy-time-timer.html">Tummy time timer</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Pippy Tummy Time Timer ---
+    // LocalStorage key: pippy_tummytime_v1
+    // Shape: { ageKey: "2m", sessions: [{id, seconds, at, note}] }
+    const STORAGE_KEY = "pippy_tummytime_v1";
+
+    // Age config: sessionTargetSec (what the countdown timer defaults to)
+    //             dailyGoalMin    (the daily minute target used for progress bar)
+    //             summaryGoal     (the "of X min goal" sub label)
+    const AGE_CONFIG = {
+      newborn: { label: "Newborn (0 to 4 weeks)", sessionTargetSec: 120,  dailyGoalMin: 10, goalText: "Daily goal: 3 to 10 min", sessionText: "Target: 2 min" },
+      "1m":    { label: "1 month",                sessionTargetSec: 180,  dailyGoalMin: 15, goalText: "Daily goal: 15 min",     sessionText: "Target: 3 min" },
+      "2m":    { label: "2 months",               sessionTargetSec: 300,  dailyGoalMin: 20, goalText: "Daily goal: 15 to 20 min", sessionText: "Target: 5 min" },
+      "3m":    { label: "3 months",               sessionTargetSec: 600,  dailyGoalMin: 30, goalText: "Daily goal: ~30 min",     sessionText: "Target: 10 min" },
+      "4m":    { label: "4 months",               sessionTargetSec: 900,  dailyGoalMin: 50, goalText: "Daily goal: 40 to 60 min", sessionText: "Target: 15 min" },
+      "5_6m":  { label: "5 to 6 months",          sessionTargetSec: 1200, dailyGoalMin: 60, goalText: "Daily goal: 60+ min",     sessionText: "Target: 20 min" },
+      "7plus": { label: "7+ months",              sessionTargetSec: 1200, dailyGoalMin: 60, goalText: "Mostly self-directed",    sessionText: "Target: 20 min" },
+    };
+
+    const RING_CIRC = 2 * Math.PI * 52; // matches r=52 in SVG
+
+    const $ = (id) => document.getElementById(id);
+
+    // ---------- Storage ----------
+    const loadStore = () => {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ageKey: "2m", sessions: [] };
+        const parsed = JSON.parse(raw);
+        if (!parsed.sessions) parsed.sessions = [];
+        if (!parsed.ageKey || !AGE_CONFIG[parsed.ageKey]) parsed.ageKey = "2m";
+        return parsed;
+      } catch { return { ageKey: "2m", sessions: [] }; }
+    };
+    const saveStore = (s) => { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch {} };
+
+    let store = loadStore();
+
+    // ---------- Timer state ----------
+    // Uses Date.now() for the authoritative elapsed calculation so tabbing away is fine.
+    let timer = {
+      running: false,
+      // When running, startEpoch is "now minus already-accumulated-seconds * 1000".
+      // When paused, accumulatedSec holds the elapsed seconds.
+      startEpoch: 0,
+      accumulatedSec: 0,
+      tickHandle: null,
+    };
+
+    const currentTargetSec = () => AGE_CONFIG[store.ageKey].sessionTargetSec;
+
+    const elapsedSec = () => {
+      if (timer.running) {
+        return Math.min(currentTargetSec(), Math.floor((Date.now() - timer.startEpoch) / 1000));
+      }
+      return Math.min(currentTargetSec(), timer.accumulatedSec);
+    };
+
+    const liveElapsedSec = () => {
+      // Unclamped elapsed, used when saving so long sessions don't get capped at target.
+      if (timer.running) return Math.floor((Date.now() - timer.startEpoch) / 1000);
+      return timer.accumulatedSec;
+    };
+
+    // ---------- Formatters ----------
+    const pad2 = (n) => n.toString().padStart(2, "0");
+    const fmtMMSS = (totalSec) => pad2(Math.floor(totalSec / 60)) + ":" + pad2(totalSec % 60);
+
+    const fmtClock = (d) => {
+      const h = d.getHours() % 12 || 12;
+      const mm = pad2(d.getMinutes());
+      const s = d.getHours() >= 12 ? "pm" : "am";
+      return h + ":" + mm + s;
+    };
+
+    const fmtRelative = (iso) => {
+      const diff = Math.max(0, Date.now() - new Date(iso).getTime());
+      const mins = Math.round(diff / 60000);
+      if (mins < 1) return "just now";
+      if (mins < 60) return mins + "m ago";
+      const hrs = Math.floor(mins / 60);
+      const rem = mins % 60;
+      if (hrs < 24) return hrs + "h " + rem + "m ago";
+      const days = Math.floor(hrs / 24);
+      return days + "d ago";
+    };
+
+    const fmtDateLong = (d = new Date()) => d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+    const fmtDayShort = (d) => d.toLocaleDateString(undefined, { weekday: "short" });
+
+    const todayKey = (d = new Date()) => d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate());
+    const isToday = (iso) => todayKey(new Date(iso)) === todayKey(new Date());
+    const sameDay = (a, b) => todayKey(a) === todayKey(b);
+
+    const escapeHtml = (s) => String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+
+    // ---------- Render: timer face + ring ----------
+    const renderTimerFace = () => {
+      const target = currentTargetSec();
+      const elapsed = elapsedSec();
+      const remaining = Math.max(0, target - elapsed);
+      $("timerDisplay").textContent = fmtMMSS(remaining);
+
+      const ratio = target > 0 ? elapsed / target : 0;
+      const offset = RING_CIRC * (1 - Math.min(1, ratio));
+      const ring = $("timerRingProgress");
+      ring.setAttribute("stroke-dasharray", RING_CIRC.toFixed(3));
+      ring.setAttribute("stroke-dashoffset", offset.toFixed(3));
+
+      const state = $("timerState");
+      if (timer.running) state.textContent = "Running";
+      else if (timer.accumulatedSec > 0 && remaining > 0) state.textContent = "Paused";
+      else if (remaining === 0) state.textContent = "Done!";
+      else state.textContent = "Ready";
+
+      $("sessionGoal").textContent = AGE_CONFIG[store.ageKey].sessionText;
+
+      const btn = $("startPauseBtn");
+      if (timer.running) {
+        btn.textContent = "Pause";
+        btn.classList.add("running");
+      } else {
+        btn.textContent = (timer.accumulatedSec > 0 && remaining > 0) ? "Resume" : "Start";
+        btn.classList.remove("running");
+      }
+    };
+
+    // ---------- Render: today + sessions + week ----------
+    const renderTodayAndList = () => {
+      const todays = store.sessions.filter(s => isToday(s.at))
+                                   .sort((a, b) => new Date(b.at) - new Date(a.at));
+
+      $("sumCount").textContent = todays.length;
+
+      const totalSec = todays.reduce((acc, s) => acc + (s.seconds || 0), 0);
+      const totalMin = Math.round(totalSec / 60);
+      $("sumMin").textContent = totalMin;
+
+      const goal = AGE_CONFIG[store.ageKey].dailyGoalMin;
+      $("sumOfGoal").textContent = "of " + goal + " min goal";
+
+      if (todays.length > 0) {
+        $("sumLast").textContent = fmtClock(new Date(todays[0].at));
+        $("sumLastSub").textContent = fmtRelative(todays[0].at);
+      } else {
+        $("sumLast").textContent = "...";
+        $("sumLastSub").textContent = "No sessions yet today";
+      }
+
+      const pct = goal > 0 ? Math.min(100, Math.round((totalMin / goal) * 100)) : 0;
+      $("progressVal").textContent = pct + "%";
+      const fill = $("progressFill");
+      fill.style.width = pct + "%";
+      fill.classList.toggle("goal-hit", pct >= 100);
+
+      const listEl = $("sessionEntries");
+      if (todays.length === 0) {
+        listEl.innerHTML = '<div class="session-empty">No sessions logged today yet. Tap <strong>Start</strong>, then <strong>Save session</strong> when you are done.</div>';
+      } else {
+        listEl.innerHTML = todays.map(s => {
+          const mins = Math.floor((s.seconds || 0) / 60);
+          const secs = (s.seconds || 0) % 60;
+          const when = new Date(s.at);
+          const durText = mins > 0 ? mins + " min" + (secs > 0 ? " " + secs + "s" : "") : secs + "s";
+          const note = s.note ? ' · <span class="snote">' + escapeHtml(s.note) + '</span>' : "";
+          return '<div class="session-entry" data-id="' + s.id + '">' +
+                   '<div class="sicon">⏱</div>' +
+                   '<div class="sbody">' +
+                     '<div class="stitle">' + durText + '</div>' +
+                     '<div class="smeta">' + fmtClock(when) + ' · ' + fmtRelative(s.at) + note + '</div>' +
+                   '</div>' +
+                   '<button class="del" type="button" aria-label="Delete session" data-del="' + s.id + '">✕</button>' +
+                 '</div>';
+        }).join("");
+      }
+
+      renderWeekChart();
+
+      $("printDate").textContent = "Tummy time log for " + fmtDateLong();
+    };
+
+    const renderWeekChart = () => {
+      // Last 7 days ending today
+      const days = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setHours(0, 0, 0, 0);
+        d.setDate(d.getDate() - i);
+        days.push(d);
+      }
+      // Sum minutes per day
+      const totals = days.map(d => {
+        const secs = store.sessions
+          .filter(s => sameDay(new Date(s.at), d))
+          .reduce((acc, s) => acc + (s.seconds || 0), 0);
+        return Math.round(secs / 60);
+      });
+      const maxVal = Math.max(1, ...totals);
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+
+      const barsEl = $("weekBars");
+      barsEl.innerHTML = days.map((d, i) => {
+        const h = Math.max(4, Math.round((totals[i] / maxVal) * 108));
+        const isTodayBar = d.getTime() === today.getTime();
+        const valLabel = totals[i] > 0 ? totals[i] + "m" : "";
+        return '<div class="week-bar-col">' +
+                 '<div class="week-bar' + (isTodayBar ? ' today' : '') + '" style="height: ' + h + 'px;">' +
+                   (valLabel ? '<span class="week-bar-val">' + valLabel + '</span>' : '') +
+                 '</div>' +
+               '</div>';
+      }).join("");
+
+      const labelsEl = $("weekLabels");
+      labelsEl.innerHTML = days.map(d => '<div class="week-bar-label">' + fmtDayShort(d) + '</div>').join("");
+    };
+
+    // ---------- Controls ----------
+    const startTimer = () => {
+      if (timer.running) return;
+      // Resume from accumulated
+      timer.startEpoch = Date.now() - timer.accumulatedSec * 1000;
+      timer.running = true;
+      timer.tickHandle = setInterval(tick, 250);
+      renderTimerFace();
+    };
+
+    const pauseTimer = () => {
+      if (!timer.running) return;
+      timer.accumulatedSec = Math.floor((Date.now() - timer.startEpoch) / 1000);
+      timer.running = false;
+      if (timer.tickHandle) { clearInterval(timer.tickHandle); timer.tickHandle = null; }
+      renderTimerFace();
+    };
+
+    const resetTimer = () => {
+      timer.running = false;
+      timer.accumulatedSec = 0;
+      timer.startEpoch = 0;
+      if (timer.tickHandle) { clearInterval(timer.tickHandle); timer.tickHandle = null; }
+      renderTimerFace();
+    };
+
+    const tick = () => {
+      const target = currentTargetSec();
+      const elapsed = elapsedSec();
+      renderTimerFace();
+      if (elapsed >= target && timer.running) {
+        // Auto-save when countdown hits zero
+        pauseTimer();
+        timer.accumulatedSec = target; // pin at target
+        autoSaveCompleted();
+      }
+    };
+
+    const autoSaveCompleted = () => {
+      const seconds = currentTargetSec();
+      commitSession(seconds);
+      // Soft notify the user. No modal so it does not interrupt a fussy baby moment.
+      const state = $("timerState");
+      state.textContent = "Saved!";
+    };
+
+    const saveSessionManual = () => {
+      const seconds = liveElapsedSec();
+      if (seconds < 5) {
+        alert("This session is under 5 seconds. Start the timer first, then save.");
+        return;
+      }
+      // Stop the timer if running
+      if (timer.running) pauseTimer();
+      commitSession(seconds);
+      resetTimer();
+    };
+
+    const commitSession = (seconds) => {
+      const note = $("sessionNote").value.trim();
+      store.sessions.push({
+        id: "t_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7),
+        seconds,
+        at: new Date().toISOString(),
+        note,
+      });
+      saveStore(store);
+      $("sessionNote").value = "";
+      renderTodayAndList();
+    };
+
+    const deleteSession = (id) => {
+      store.sessions = store.sessions.filter(s => s.id !== id);
+      saveStore(store);
+      renderTodayAndList();
+    };
+
+    const clearAll = () => {
+      if (!confirm("Delete every tummy time session? This cannot be undone.")) return;
+      store.sessions = [];
+      saveStore(store);
+      renderTodayAndList();
+    };
+
+    const handleAgeChange = () => {
+      const newAge = $("babyAge").value;
+      store.ageKey = newAge;
+      saveStore(store);
+      $("ageGoalPill").textContent = AGE_CONFIG[newAge].goalText;
+      // If the timer is idle, reset so the face shows the new target
+      if (!timer.running && timer.accumulatedSec === 0) {
+        renderTimerFace();
+      } else {
+        // Otherwise keep the running session but re-render (display may change if target shrank)
+        renderTimerFace();
+      }
+      renderTodayAndList();
+    };
+
+    // ---------- Wire up ----------
+    $("startPauseBtn").addEventListener("click", () => {
+      if (timer.running) pauseTimer();
+      else {
+        // If done, reset first then start
+        if (elapsedSec() >= currentTargetSec()) resetTimer();
+        startTimer();
+      }
+    });
+    $("saveSessionBtn").addEventListener("click", saveSessionManual);
+    $("resetBtn").addEventListener("click", () => {
+      if (timer.accumulatedSec === 0 && !timer.running) return;
+      resetTimer();
+    });
+    $("babyAge").addEventListener("change", handleAgeChange);
+    $("clearBtn").addEventListener("click", clearAll);
+    $("printBtn").addEventListener("click", () => window.print());
+    $("sessionEntries").addEventListener("click", (ev) => {
+      const btn = ev.target.closest("[data-del]");
+      if (!btn) return;
+      const id = btn.getAttribute("data-del");
+      if (confirm("Delete this session?")) deleteSession(id);
+    });
+
+    // Refresh "time ago" + week chart every minute so the UI stays honest.
+    setInterval(renderTodayAndList, 60 * 1000);
+
+    // Initial paint
+    $("babyAge").value = store.ageKey;
+    $("ageGoalPill").textContent = AGE_CONFIG[store.ageKey].goalText;
+    renderTimerFace();
+    renderTodayAndList();
+  </script>
+  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

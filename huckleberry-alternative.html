@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Huckleberry Alternative: Try Pippy Free | AI Baby Tracker</title>
-  <meta name="description" content="Looking for a Huckleberry alternative? Pippy is a baby tracker where AI chat logging is free, not locked behind a paid tier. Log feeds, sleep, and diapers by just talking." />
-  <meta name="keywords" content="huckleberry alternative, apps like huckleberry, huckleberry vs pippy, free huckleberry alternative, best baby tracker app, huckleberry competitor" />
+  <meta name="description" content="Looking for a free Huckleberry alternative? Pippy is a baby tracker where AI chat logging is free, not locked behind a paid tier. Plus free browser tools for wake windows, feeding, diapers, pumping, and tummy time. No download needed." />
+  <meta name="keywords" content="huckleberry alternative free, apps like huckleberry, huckleberry vs pippy, huckleberry vs free baby tracker, free huckleberry alternative, best free baby tracker, huckleberry competitor, free baby tracker online, free wake window calculator, free feeding tracker" />
   <link rel="canonical" href="https://meetpippy.com/huckleberry-alternative.html" />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://meetpippy.com/huckleberry-alternative.html" />
   <meta property="og:title" content="Huckleberry Alternative: Try Pippy Free" />
-  <meta property="og:description" content="A baby tracker where AI chat logging is free, not locked behind a paid tier." />
+  <meta property="og:description" content="The free Huckleberry alternative. AI chat logging is free, plus a set of free browser tools for wake windows, feeding, diapers, pumping, and tummy time." />
   <meta property="og:image" content="https://meetpippy.com/pippy-og-image.png" />
   <meta property="og:site_name" content="Pippy" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -168,6 +168,18 @@
     .sbs-card li:last-child { border-bottom: none; }
     .sbs-card li::before { content: "→"; position: absolute; left: 0; color: var(--blue-dark, #7A9DB0); font-weight: 800; }
 
+    /* Free tools grid */
+    .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 8px; }
+    @media (max-width: 820px) { .tools-grid { grid-template-columns: 1fr; } }
+    .tool-card { background: #fff; border-radius: 20px; padding: 26px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); border: 1px solid rgba(0,0,0,0.04); display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+    .tool-card:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -15px rgba(122,157,176,0.25); }
+    .tool-card .icon { font-size: 28px; margin-bottom: 12px; display: block; }
+    .tool-card h3 { font-size: 1.1rem; margin-bottom: 8px; line-height: 1.3; color: var(--text); }
+    .tool-card p { font-size: 0.94rem; color: var(--text-muted); line-height: 1.55; margin: 0 0 16px; flex-grow: 1; }
+    .tool-card .tool-link { font-weight: 700; font-size: 0.94rem; color: var(--blue-dark, #7A9DB0); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-top: auto; }
+    .tool-card .tool-link:hover { gap: 8px; }
+    .tool-card .free-tag { position: absolute; top: 14px; right: 14px; background: rgba(45,138,90,0.1); color: #2d8a5a; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase; padding: 3px 9px; border-radius: 12px; }
+
     /* FAQ */
     .faq-grid { max-width: 780px; margin: 0 auto; }
     .faq-item { background: #fff; border-radius: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(47,71,110,0.04); border: 1px solid rgba(0,0,0,0.04); overflow: hidden; }
@@ -217,10 +229,10 @@
         <div class="fade-up in">
           <span class="lp-section-head tag" style="display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.12); color: var(--blue-dark, #7A9DB0); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 16px;">Huckleberry Alternative</span>
           <h1>The Huckleberry alternative where <span class="highlight">AI logging is free.</span></h1>
-          <p class="sub">Pippy works like a chat, not a bunch of menus. Say "she just woke up" or "he had 3oz" and it's logged. In Huckleberry, that costs $58 a year. In Pippy, it's free.</p>
+          <p class="sub">Pippy works like a chat, not a bunch of menus. Say "she just woke up" or "he had 3oz" and it's logged. In Huckleberry, that costs $58 a year. In Pippy, it's free. No download required to try our free web tools below.</p>
           <div class="lp-cta-row">
             <a href="/" class="btn-primary">Try Pippy Free →</a>
-            <a href="#compare" class="btn-secondary">See the comparison</a>
+            <a href="#free-tools" class="btn-secondary">Free web tools</a>
           </div>
           <div class="lp-trust">
             <span>Free forever tier</span>
@@ -326,7 +338,7 @@
       <div class="lp-section-head fade-up">
         <span class="tag">Pricing</span>
         <h2>If you want more than the free tier</h2>
-        <p>Both apps have paid plans. Here's how they stack up.</p>
+        <p>The free tier covers most parents. If you want more, both apps have paid plans. Here's how they stack up.</p>
       </div>
       <div class="price-grid fade-up">
         <div class="price-card featured">
@@ -400,7 +412,61 @@
     </div>
   </section>
 
-  <section class="lp-section">
+  <section class="lp-section" id="free-tools">
+    <div class="container">
+      <div class="lp-section-head fade-up">
+        <span class="tag">Free Web Tools</span>
+        <h2>Don't want to download anything? Try our free web tools</h2>
+        <p>All the core Huckleberry features, plus a set of free browser tools you can use without installing anything. Open in any browser, no account needed.</p>
+      </div>
+      <div class="tools-grid fade-up">
+        <a href="/free-wake-window-calculator.html" class="tool-card">
+          <span class="free-tag">Free</span>
+          <span class="icon">🌙</span>
+          <h3>Wake Window Calculator</h3>
+          <p>Enter your baby's age and last wake time. See the next nap window instantly, with age-appropriate ranges.</p>
+          <span class="tool-link">Use it free →</span>
+        </a>
+        <a href="/free-feeding-tracker.html" class="tool-card">
+          <span class="free-tag">Free</span>
+          <span class="icon">🍼</span>
+          <h3>Feeding Tracker</h3>
+          <p>Log bottles, nursing sessions, and solids in your browser. See daily totals and the time since the last feed.</p>
+          <span class="tool-link">Use it free →</span>
+        </a>
+        <a href="/free-diaper-tracker.html" class="tool-card">
+          <span class="free-tag">Free</span>
+          <span class="icon">👶</span>
+          <h3>Diaper Tracker</h3>
+          <p>Tap to log wet, dirty, or mixed diapers. Handy for the doctor's office or the first few newborn weeks.</p>
+          <span class="tool-link">Use it free →</span>
+        </a>
+        <a href="/free-pumping-log.html" class="tool-card">
+          <span class="free-tag">Free</span>
+          <span class="icon">🥛</span>
+          <h3>Pumping Log</h3>
+          <p>Track pumping sessions, duration, and ounces per side. See your daily output at a glance.</p>
+          <span class="tool-link">Use it free →</span>
+        </a>
+        <a href="/free-tummy-time-timer.html" class="tool-card">
+          <span class="free-tag">Free</span>
+          <span class="icon">⏱️</span>
+          <h3>Tummy Time Timer</h3>
+          <p>Simple timer with daily goal tracking. Start, pause, and log sessions without fumbling through an app store.</p>
+          <span class="tool-link">Use it free →</span>
+        </a>
+        <a href="/" class="tool-card" style="background: linear-gradient(165deg, #f0f7fb 0%, #fef0e6 100%); border: 2px solid rgba(122,157,176,0.35);">
+          <span class="icon">💬</span>
+          <h3>Ready for the full app?</h3>
+          <p>When you're ready for AI chat logging, nap predictions, and family sharing across every log, Pippy does it all for free.</p>
+          <span class="tool-link">Get Pippy free →</span>
+        </a>
+      </div>
+      <p style="margin-top: 24px; font-size: 0.88rem; color: var(--text-muted); text-align: center; max-width: 640px; margin-left: auto; margin-right: auto;">These free tools work great for quick logging, but they don't sync between devices or share with your partner. For that, grab the free Pippy app.</p>
+    </div>
+  </section>
+
+  <section class="lp-section alt">
     <div class="container">
       <div class="lp-section-head fade-up">
         <span class="tag">FAQ</span>
