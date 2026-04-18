@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free Pumping Log Online | Breast Pump Tracker No App | Pippy</title>
-  <meta name="description" content="Free online pumping log and breast pump tracker. Log every pumping session, track oz per side, see daily totals, and print your pumping log as a PDF. No signup, no app download. Includes breast milk storage guidelines." />
+  <meta name="description" content="Free online pumping log and breast pump tracker. Log every session, track oz per side, see daily totals, and print your pumping log as a PDF. No signup, no app download. Includes breast milk storage guidelines." />
   <meta name="keywords" content="free pumping log, breast pump tracker online, pumping session tracker, exclusive pumping log, pumping schedule tracker, breast milk storage calculator, oz per session tracker, print pumping log, pump log app alternative, online pumping chart" />
   <link rel="canonical" href="https://meetpippy.com/free-pumping-log.html" />
 
@@ -46,11 +46,11 @@
     "totalTime": "PT1M",
     "tool": [{ "@type": "HowToTool", "name": "Pippy Pumping Log" }],
     "step": [
-      { "@type": "HowToStep", "name": "Tap Log a pump session", "text": "Open the tracker and tap the Log a pump session button when you finish pumping." },
-      { "@type": "HowToStep", "name": "Pick the side", "text": "Choose left, right, or both. Per-side totals help you catch a slow side before it affects your supply." },
+      { "@type": "HowToStep", "name": "Tap Log a pumping session", "text": "Open the tracker and tap the Log a pumping session button the moment you finish pumping." },
+      { "@type": "HowToStep", "name": "Pick the side", "text": "Choose left, right, or both sides. Per-side totals help you catch a slow side before it affects your supply." },
       { "@type": "HowToStep", "name": "Enter duration and amount", "text": "Log how many minutes you pumped and how many ounces or milliliters you got. Toggle oz or ml to match your bottle." },
-      { "@type": "HowToStep", "name": "Confirm the time", "text": "The time defaults to now. Adjust if you are logging the session after the fact. Add a short note for power pumps or letdowns." },
-      { "@type": "HowToStep", "name": "Save and review today", "text": "Save the entry. The today summary updates with total sessions, last session, total ounces, average per session, and oz per side." }
+      { "@type": "HowToStep", "name": "Save the entry", "text": "Your session is stored in your browser and shows up in the today summary right away." },
+      { "@type": "HowToStep", "name": "Print or share", "text": "Tap Download PDF to get a clean pumping log for your partner, nanny, or lactation consultant." }
     ]
   }
   </script>
@@ -75,250 +75,371 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="manifest" href="/site.webmanifest" />
-  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="theme-color" content="#F5EDE2" />
   <meta name="robots" content="index, follow" />
-  <link rel="stylesheet" href="style.css" />
   <style>
-    .lp-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-    .lp-nav-inner { display: flex; align-items: center; justify-content: space-between; }
-    .lp-nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--text); text-decoration: none; }
-    .lp-nav-brand img { height: 32px; border-radius: 8px; }
-    .lp-hero { background: linear-gradient(165deg, #eaf1f6 0%, #fefaf7 55%, #f5e6d8 100%); padding: 72px 0 40px; position: relative; overflow: hidden; }
-    .lp-hero-inner { text-align: center; max-width: 720px; margin: 0 auto; }
-    .lp-hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 14px; line-height: 1.12; }
-    .lp-hero h1 .highlight { background: linear-gradient(120deg, transparent 0%, transparent 60%, #ffd77a 60%, #ffd77a 95%, transparent 95%); padding: 0 4px; }
-    .lp-hero p.sub { font-size: 1.1rem; max-width: 560px; margin: 0 auto 8px; color: var(--text-muted); line-height: 1.6; }
-    .lp-hero .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.15); color: var(--blue-dark, #7A9DB0); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
-    .lp-hero svg.wave { position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; display: block; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#F7F1E8;
+      --panel:#ffffff;
+      --ink:#2C2C34;
+      --ink-muted:rgba(44,44,52,0.58);
+      --ink-light:rgba(44,44,52,0.36);
+      --brand:#7A9DB0;
+      --brand-dark:#5f8499;
+      --brand-soft:#E4EEF3;
+      --peach:#F2C4A4;
+      --peach-soft:#FEF0E6;
+      --green:#5FA47E;
+      --green-soft:#DDF0E4;
+      --red:#C47070;
+      --line:rgba(44,44,52,0.08);
+      --line-soft:rgba(44,44,52,0.05);
+      --radius:18px;
+    }
+    html,body{height:100%;}
+    body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased;}
+    h1,h2,h3{font-family:'Nunito','Plus Jakarta Sans',sans-serif;line-height:1.2;color:var(--ink);}
+    a{color:inherit;text-decoration:none;}
+    button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+    input,select{font-family:inherit;color:var(--ink);}
+    ul{list-style:none;}
 
-    /* Tracker card + summary strip */
-    .tracker-card { max-width: 720px; margin: 32px auto 0; background: #fff; border-radius: 28px; padding: 24px 24px 20px; box-shadow: 0 24px 60px -20px rgba(47,71,110,0.22), 0 0 0 1px rgba(0,0,0,0.04); text-align: left; }
-    .tracker-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-    .tracker-head h2 { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.15rem; color: var(--text); margin: 0; }
-    .tracker-head .today-date { font-size: 0.82rem; color: var(--text-muted); font-weight: 700; }
+    /* ==== App header (slim, sticky) ==== */
+    .app-header{position:sticky;top:0;z-index:50;background:rgba(247,241,232,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft);}
+    .app-header-inner{max-width:720px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .app-brand{display:flex;align-items:center;gap:10px;}
+    .app-brand img{height:28px;width:28px;border-radius:7px;}
+    .app-brand-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--ink);}
+    .app-brand-sep{width:1px;height:18px;background:var(--line);}
+    .app-tool-name{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;color:var(--ink);}
+    .app-saved{display:flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;color:var(--green);background:var(--green-soft);padding:5px 10px;border-radius:100px;}
+    .app-saved-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(95,164,126,0.25);}
+    @media (max-width:520px){
+      .app-brand-sep,.app-brand-name{display:none;}
+      .app-saved span.saved-long{display:none;}
+    }
 
-    .summary-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 10px; }
-    @media (max-width: 700px) { .summary-strip { grid-template-columns: 1fr 1fr; } }
-    .summary-cell { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); border-radius: 16px; padding: 14px 14px; text-align: center; }
-    .summary-cell .k { font-size: 0.7rem; font-weight: 700; color: var(--blue-dark, #7A9DB0); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
-    .summary-cell .v { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.25rem; color: var(--text); line-height: 1.1; }
-    .summary-cell .sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+    /* ==== Tool area ==== */
+    .tool-main{padding:28px 16px 48px;}
+    .tool-wrap{max-width:560px;margin:0 auto;}
+    .tool-seo-h1{font-size:1rem;font-weight:700;color:var(--ink-muted);text-align:center;margin:0 0 18px;letter-spacing:-0.005em;}
+    .tool-seo-h1 .strong{color:var(--ink);}
 
-    .side-totals { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-    .side-cell { background: #faf4ee; border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    .side-cell .side-label { display: flex; align-items: center; gap: 8px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.92rem; color: var(--text); }
-    .side-cell .side-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--blue-dark, #7A9DB0); display: inline-block; }
-    .side-cell .side-dot.right { background: #d98a5f; }
-    .side-cell .side-val { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1rem; color: var(--text); }
+    .panel{background:var(--panel);border-radius:var(--radius);box-shadow:0 20px 48px -24px rgba(40,50,80,0.18),0 1px 0 rgba(44,44,52,0.04);overflow:hidden;}
 
-    .add-btn { width: 100%; padding: 16px 18px; border-radius: 16px; border: none; background: var(--blue-dark, #7A9DB0); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.05rem; cursor: pointer; transition: transform 0.15s, box-shadow 0.2s; box-shadow: 0 6px 16px rgba(122,157,176,0.3); display: flex; align-items: center; justify-content: center; gap: 10px; }
-    .add-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(122,157,176,0.4); }
-    .add-btn .plus { width: 24px; height: 24px; border-radius: 50%; background: #fff; color: var(--blue-dark, #7A9DB0); font-weight: 900; font-size: 1.1rem; display: inline-flex; align-items: center; justify-content: center; }
+    /* Hero summary */
+    .summary-hero{padding:32px 28px 24px;text-align:center;background:linear-gradient(180deg,#ffffff 0%,#fdf7ef 100%);border-bottom:1px solid var(--line-soft);position:relative;}
+    .summary-hero .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;}
+    .summary-hero .date-label{font-size:0.78rem;font-weight:700;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.8px;}
+    .summary-hero .date-today{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;color:var(--ink);}
+    /* Empty */
+    .summary-empty{padding:10px 0 4px;}
+    .summary-empty .emoji{font-size:40px;margin-bottom:10px;line-height:1;}
+    .summary-empty h2{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.35rem;margin-bottom:6px;}
+    .summary-empty p{font-size:0.95rem;color:var(--ink-muted);max-width:340px;margin:0 auto;}
+    /* Filled */
+    .summary-filled{padding:6px 0 2px;}
+    .metric-lead{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:6px;}
+    .metric-lead-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:3.4rem;line-height:1;color:var(--ink);letter-spacing:-0.02em;}
+    .metric-lead-unit{font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;color:var(--ink-muted);}
+    .metric-sub{font-size:0.92rem;color:var(--ink-muted);margin-bottom:14px;}
+    .metric-sub .dot{opacity:0.4;padding:0 4px;}
+    .metric-sides{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+    .metric-side-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:100px;background:var(--brand-soft);font-size:0.86rem;font-weight:700;color:var(--brand-dark);}
+    .metric-side-pill.right{background:var(--peach-soft);color:#8a5e3c;}
+    .metric-side-pill .label{font-weight:600;color:var(--ink-muted);}
+    .metric-side-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);}
+    .metric-side-pill.right .dot{background:var(--peach);}
 
-    /* Add-session form */
-    .pump-form { margin-top: 14px; background: #faf4ee; border-radius: 16px; padding: 16px; display: none; }
-    .pump-form.open { display: block; }
-    .pump-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-    @media (max-width: 520px) { .pump-form .row { grid-template-columns: 1fr; } }
-    .pump-form label { display: block; font-size: 0.76rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
-    .pump-form select, .pump-form input[type=number], .pump-form input[type=time], .pump-form input[type=text] { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1.5px solid rgba(0,0,0,0.1); font-size: 0.96rem; font-family: inherit; font-weight: 600; background: #fff; box-sizing: border-box; }
-    .pump-form select:focus, .pump-form input:focus { outline: none; border-color: var(--blue-dark, #7A9DB0); }
-    .pump-form .amount-row { display: grid; grid-template-columns: 1fr 90px; gap: 8px; align-items: end; }
-    .pump-form .form-actions { display: flex; gap: 10px; margin-top: 6px; }
-    .pump-form .form-actions button { flex: 1; padding: 12px 16px; border-radius: 12px; font-family: inherit; font-weight: 800; font-size: 0.96rem; cursor: pointer; border: none; }
-    .pump-form .btn-save { background: var(--blue-dark, #7A9DB0); color: #fff; }
-    .pump-form .btn-cancel { background: #fff; color: var(--text); border: 1.5px solid rgba(0,0,0,0.1); }
+    /* Primary action */
+    .add-zone{padding:18px 20px;background:var(--panel);}
+    .btn-add{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px 20px;border-radius:14px;background:var(--brand);color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;letter-spacing:0.01em;box-shadow:0 8px 20px -8px rgba(122,157,176,0.6);transition:transform 0.15s ease,box-shadow 0.15s ease;}
+    .btn-add:hover{transform:translateY(-1px);box-shadow:0 12px 24px -8px rgba(122,157,176,0.7);}
+    .btn-add:active{transform:translateY(0);}
+    .btn-add .plus{font-size:1.2rem;font-weight:900;}
 
-    /* Session list */
-    .pump-list { margin-top: 16px; }
-    .pump-list h3 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.86rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin: 0 0 8px; }
-    .pump-entry { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #fff; border: 1px solid rgba(0,0,0,0.05); border-radius: 14px; margin-bottom: 8px; transition: background 0.15s; }
-    .pump-entry:hover { background: #faf4ee; }
-    .pump-entry .icon { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #eaf1f6, #f5e6d8); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-    .pump-entry .body { flex: 1; min-width: 0; }
-    .pump-entry .title { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.98rem; color: var(--text); }
-    .pump-entry .meta { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
-    .pump-entry .meta .note { font-style: italic; }
-    .pump-entry .del { background: transparent; border: none; color: var(--text-muted); font-size: 1rem; cursor: pointer; padding: 6px 8px; border-radius: 8px; transition: background 0.15s, color 0.15s; }
-    .pump-entry .del:hover { background: #ffe1d6; color: #c04a22; }
-    .pump-empty { text-align: center; padding: 28px 16px; color: var(--text-muted); font-size: 0.94rem; background: #faf4ee; border-radius: 14px; }
+    /* Pump form (collapsed by default) */
+    .feed-form{max-height:0;overflow:hidden;transition:max-height 0.35s ease;background:var(--panel);padding:0 20px;}
+    .feed-form.open{max-height:820px;padding:10px 20px 18px;border-top:1px dashed var(--line);}
+    .feed-form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+    .feed-form .row.full{grid-template-columns:1fr;}
+    .feed-form label{display:block;font-size:0.78rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
+    .feed-form input,.feed-form select{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;font-size:0.95rem;font-weight:500;background:#fff;}
+    .feed-form input:focus,.feed-form select:focus{outline:none;border-color:var(--brand);}
+    .amount-row{display:flex;gap:8px;}
+    .amount-row input{flex:1;}
+    .amount-row select{width:78px;flex:none;}
+    /* Side segmented control */
+    .side-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:4px;background:#faf6ef;border-radius:10px;border:1.5px solid var(--line);}
+    .side-seg input{position:absolute;opacity:0;pointer-events:none;}
+    .side-seg label{display:flex;align-items:center;justify-content:center;gap:6px;padding:8px 6px;border-radius:8px;font-size:0.86rem;font-weight:700;color:var(--ink-muted);text-transform:none;letter-spacing:0;margin:0;cursor:pointer;transition:background 0.15s,color 0.15s;}
+    .side-seg input:checked + label{background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(44,44,52,0.06);}
+    .side-seg-wrap{position:relative;}
+    .form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:4px;}
+    .btn-cancel,.btn-save{padding:10px 18px;border-radius:10px;font-weight:700;font-size:0.92rem;transition:opacity 0.15s,transform 0.15s;}
+    .btn-cancel{background:transparent;color:var(--ink-muted);}
+    .btn-cancel:hover{color:var(--ink);}
+    .btn-save{background:var(--ink);color:#fff;}
+    .btn-save:hover{transform:translateY(-1px);}
 
-    .tracker-footer { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
-    .tracker-footer button { flex: 1; min-width: 140px; padding: 11px 14px; border-radius: 12px; background: #fff; color: var(--text); border: 1.5px solid rgba(0,0,0,0.1); font-family: inherit; font-weight: 700; font-size: 0.92rem; cursor: pointer; transition: background 0.15s; }
-    .tracker-footer button:hover { background: #faf4ee; }
-    .tracker-footer .btn-danger { color: #c04a22; }
-    .tracker-footer .btn-danger:hover { background: #ffe1d6; }
+    /* Week strip */
+    .week-strip{margin:6px 16px 4px;padding:14px;border-radius:14px;background:linear-gradient(180deg,#fbf6ef 0%,#fff 100%);border:1px solid var(--line-soft);}
+    .week-strip-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+    .week-strip-h .t{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.78rem;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.9px;}
+    .week-strip-h .kpi{font-size:0.82rem;color:var(--ink-muted);}
+    .week-strip-h .kpi strong{color:var(--ink);font-weight:800;}
+    .week-bars{display:flex;align-items:flex-end;gap:6px;height:48px;}
+    .week-bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+    .week-bar-col{width:100%;background:var(--brand-soft);border-radius:4px 4px 0 0;min-height:3px;transition:height 0.3s ease;}
+    .week-bar.today .week-bar-col{background:linear-gradient(180deg,var(--brand) 0%,var(--brand-dark) 100%);}
+    .week-bar-day{font-size:0.66rem;font-weight:700;color:var(--ink-light);letter-spacing:0.4px;}
+    .week-bar.today .week-bar-day{color:var(--brand-dark);}
 
-    .lp-section { padding: 72px 0; position: relative; }
-    .lp-section.alt { background: var(--beige, #faf4ee); }
-    .lp-section-head { text-align: center; max-width: 720px; margin: 0 auto 40px; }
-    .lp-section-head .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.15); color: var(--blue-dark, #7A9DB0); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
-    .lp-section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 14px; line-height: 1.2; }
-    .lp-section-head p { font-size: 1.02rem; color: var(--text-muted); line-height: 1.65; }
+    /* Entries list */
+    .feed-list{padding:6px 8px 8px;}
+    .feed-list-h{display:flex;align-items:center;justify-content:space-between;padding:14px 12px 10px;}
+    .feed-list-h h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.9px;}
+    .feed-list-h .count{font-size:0.82rem;font-weight:700;color:var(--ink-light);}
+    .feed-day-group{padding:6px 0;}
+    .feed-day-group + .feed-day-group{border-top:1px solid var(--line-soft);margin-top:6px;padding-top:12px;}
+    .feed-day-h{display:flex;align-items:center;justify-content:space-between;padding:4px 12px 8px;}
+    .feed-day-h .name{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.8rem;color:var(--ink);}
+    .feed-day-h .summary{font-size:0.78rem;color:var(--ink-muted);font-weight:600;}
+    .show-more-btn{display:block;margin:12px auto 4px;padding:8px 18px;border-radius:100px;font-size:0.85rem;font-weight:700;color:var(--ink-muted);background:transparent;border:1px solid var(--line);}
+    .show-more-btn:hover{color:var(--ink);border-color:var(--ink-light);}
+    .feed-empty{padding:22px 16px 28px;text-align:center;color:var(--ink-muted);font-size:0.95rem;}
+    .feed-empty .em{font-size:26px;margin-bottom:8px;line-height:1;}
+    .feed-entry{display:grid;grid-template-columns:42px 1fr auto;gap:12px;align-items:center;padding:12px;border-radius:12px;transition:background 0.12s;}
+    .feed-entry:hover{background:#fbf6ef;}
+    .feed-entry + .feed-entry{border-top:1px solid var(--line-soft);}
+    .feed-entry .icon{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--brand-soft),var(--peach-soft));display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+    .feed-entry .body{min-width:0;}
+    .feed-entry .title{font-weight:700;font-size:0.95rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .feed-entry .meta{font-size:0.82rem;color:var(--ink-muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .feed-entry .meta .note{color:var(--ink-light);font-style:italic;}
+    .feed-entry .del{width:32px;height:32px;border-radius:50%;color:var(--ink-light);font-size:14px;opacity:0.5;transition:opacity 0.15s,background 0.15s,color 0.15s;}
+    .feed-entry .del:hover{opacity:1;background:rgba(196,112,112,0.12);color:var(--red);}
+
+    /* Tool actions row */
+    .tool-actions{padding:14px 20px 20px;border-top:1px solid var(--line-soft);background:var(--panel);display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
+    .tool-actions .left{display:flex;gap:8px;flex-wrap:wrap;}
+    .tool-actions .get-app-link{color:var(--brand-dark);font-weight:700;font-size:0.88rem;display:inline-flex;align-items:center;gap:4px;}
+    .tool-actions .get-app-link:hover{text-decoration:underline;}
+    .btn-ghost{padding:8px 14px;border-radius:10px;font-size:0.86rem;font-weight:700;color:var(--ink-muted);background:#faf6ef;transition:background 0.12s;}
+    .btn-ghost:hover{background:#f3ecde;color:var(--ink);}
+    .btn-danger{padding:8px 14px;border-radius:10px;font-size:0.86rem;font-weight:700;color:var(--red);background:rgba(196,112,112,0.08);}
+    .btn-danger:hover{background:rgba(196,112,112,0.16);}
+
+    /* Trust row below tool */
+    .trust-row{max-width:560px;margin:16px auto 0;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:0.82rem;color:var(--ink-light);}
+    .trust-row .chip{display:inline-flex;align-items:center;gap:6px;}
+    .trust-row svg{width:13px;height:13px;}
+
+    /* ==== Below-the-fold: educational SEO content ==== */
+    .below{background:#ffffff;border-top:1px solid var(--line-soft);margin-top:48px;}
+    .below-inner{max-width:820px;margin:0 auto;padding:56px 20px 24px;}
+    .below-head{text-align:center;margin-bottom:36px;}
+    .below-kicker{display:inline-block;padding:5px 12px;border-radius:100px;background:var(--peach-soft);color:#8a5e3c;font-size:0.72rem;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:12px;}
+    .below-head h2{font-size:clamp(1.5rem,3.5vw,2rem);margin-bottom:10px;}
+    .below-head p{max-width:560px;margin:0 auto;font-size:1rem;color:var(--ink-muted);}
+
+    .below-section{margin-bottom:48px;}
+    .below-section:last-child{margin-bottom:0;}
+    .below-section h3.sec-h{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.15rem;margin-bottom:14px;}
 
     /* Breast milk storage card */
-    .storage-card { max-width: 920px; margin: 0 auto; background: #fff; border-radius: 24px; padding: 28px; box-shadow: 0 8px 24px rgba(47,71,110,0.08); border: 1px solid rgba(0,0,0,0.04); }
-    .storage-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 16px; }
-    @media (max-width: 820px) { .storage-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 480px) { .storage-grid { grid-template-columns: 1fr; } }
-    .storage-item { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); border-radius: 18px; padding: 18px 16px; text-align: center; }
-    .storage-item .emoji { font-size: 28px; margin-bottom: 8px; }
-    .storage-item .loc { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.94rem; color: var(--text); margin-bottom: 4px; }
-    .storage-item .temp { font-size: 0.74rem; color: var(--text-muted); margin-bottom: 10px; }
-    .storage-item .ideal { font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.4rem; color: var(--blue-dark, #7A9DB0); line-height: 1.1; }
-    .storage-item .ideal-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 2px; }
-    .storage-item .max { font-size: 0.8rem; color: var(--text); margin-top: 8px; }
-    .storage-item .max strong { font-weight: 800; }
+    .storage-card{background:#fff;border-radius:16px;border:1px solid var(--line);padding:22px;}
+    .storage-title{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+    .storage-title .em{font-size:22px;}
+    .storage-title h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.08rem;margin:0;}
+    .storage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
+    @media (max-width:720px){.storage-grid{grid-template-columns:1fr 1fr;}}
+    @media (max-width:420px){.storage-grid{grid-template-columns:1fr;}}
+    .storage-item{background:linear-gradient(135deg,var(--brand-soft) 0%,var(--peach-soft) 100%);border-radius:14px;padding:16px 14px;text-align:center;}
+    .storage-item .emoji{font-size:24px;margin-bottom:6px;line-height:1;}
+    .storage-item .loc{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.9rem;color:var(--ink);margin-bottom:2px;}
+    .storage-item .temp{font-size:0.72rem;color:var(--ink-muted);margin-bottom:8px;}
+    .storage-item .ideal{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.3rem;color:var(--brand-dark);line-height:1.1;}
+    .storage-item .ideal-label{font-size:0.68rem;color:var(--ink-light);font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-top:2px;}
+    .storage-item .max{font-size:0.78rem;color:var(--ink);margin-top:8px;}
+    .storage-item .max strong{font-weight:800;}
+    .thawed-note{background:#faf6ef;border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:center;}
+    .thawed-note .icon{width:32px;height:32px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;}
+    .thawed-note .txt{font-size:0.88rem;color:var(--ink);line-height:1.55;}
+    .thawed-note .txt strong{font-family:'Nunito',sans-serif;font-weight:800;}
+    .storage-source{text-align:center;margin-top:12px;font-size:0.78rem;color:var(--ink-light);}
 
-    .thawed-note { background: #faf4ee; border-radius: 16px; padding: 16px 18px; display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: center; }
-    .thawed-note .icon { width: 40px; height: 40px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-    .thawed-note .txt { font-size: 0.94rem; color: var(--text); line-height: 1.55; }
-    .thawed-note .txt strong { font-family: 'Nunito', sans-serif; font-weight: 800; }
+    .amounts-table{background:#fff;border-radius:14px;border:1px solid var(--line);overflow:hidden;}
+    .amounts-table table{width:100%;border-collapse:collapse;font-size:0.92rem;}
+    .amounts-table th,.amounts-table td{padding:12px 16px;text-align:left;}
+    .amounts-table th{background:#faf6ef;font-weight:800;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.6px;color:var(--ink);}
+    .amounts-table tbody tr:not(:last-child) td{border-bottom:1px solid var(--line-soft);}
+    .amounts-table .age{font-weight:700;}
+    .amounts-table .perfeed{font-weight:700;color:var(--brand-dark);font-family:'Nunito',sans-serif;}
+    .amounts-note{text-align:center;margin-top:12px;font-size:0.82rem;color:var(--ink-light);}
 
-    .storage-source { text-align: center; margin-top: 14px; font-size: 0.84rem; color: var(--text-muted); }
+    .cues-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+    @media (max-width:720px){.cues-grid{grid-template-columns:repeat(2,1fr);}}
+    @media (max-width:420px){.cues-grid{grid-template-columns:1fr;}}
+    .cue{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;}
+    .cue .em{font-size:22px;margin-bottom:8px;line-height:1;}
+    .cue h4{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;margin-bottom:4px;}
+    .cue p{font-size:0.88rem;color:var(--ink-muted);line-height:1.55;}
 
-    .ww-table-wrap { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
-    .ww-table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.96rem; }
-    .ww-table-wrap th, .ww-table-wrap td { padding: 14px 18px; text-align: left; }
-    .ww-table-wrap th { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); font-weight: 800; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text); }
-    .ww-table-wrap tbody tr:nth-child(even) { background: rgba(122,157,176,0.04); }
-    .ww-table-wrap tbody tr:not(:last-child) td { border-bottom: 1px solid rgba(0,0,0,0.04); }
-    .ww-table-wrap .age-cell { font-weight: 700; color: var(--text); }
-    .ww-table-wrap .win { font-weight: 700; color: var(--blue-dark, #7A9DB0); font-family: 'Nunito', sans-serif; }
+    .longform h3{font-size:1.08rem;margin:22px 0 8px;}
+    .longform p{font-size:0.98rem;line-height:1.7;color:var(--ink);margin-bottom:12px;}
+    .longform ul{padding-left:20px;margin-bottom:12px;list-style:disc;}
+    .longform ul li{margin-bottom:5px;color:var(--ink);}
 
-    .cue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 920px; margin: 0 auto; }
-    @media (max-width: 820px) { .cue-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 520px) { .cue-grid { grid-template-columns: 1fr; } }
-    .cue-card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); border: 1px solid rgba(0,0,0,0.04); }
-    .cue-card .cue-emoji { font-size: 26px; margin-bottom: 10px; }
-    .cue-card h3 { font-size: 1.02rem; margin-bottom: 6px; color: var(--text); }
-    .cue-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    @media (max-width:720px){.related-grid{grid-template-columns:1fr 1fr;}}
+    @media (max-width:420px){.related-grid{grid-template-columns:1fr;}}
+    .rel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:transform 0.15s ease,border-color 0.15s ease;display:block;}
+    .rel:hover{transform:translateY(-2px);border-color:var(--brand);}
+    .rel .k{font-size:0.68rem;font-weight:800;color:var(--brand-dark);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;}
+    .rel h4{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.92rem;line-height:1.35;}
 
-    .longform { max-width: 760px; margin: 0 auto; }
-    .longform h3 { font-size: 1.2rem; margin: 28px 0 10px; color: var(--text); }
-    .longform p { font-size: 1rem; line-height: 1.7; color: var(--text); margin-bottom: 14px; }
-    .longform ul { padding-left: 20px; margin-bottom: 14px; list-style: disc; color: var(--text); }
-    .longform ul li { margin-bottom: 6px; line-height: 1.6; }
+    /* Bottom CTA band */
+    .band{background:linear-gradient(165deg,var(--peach-soft) 0%,#f5e3cf 100%);padding:48px 20px;text-align:center;margin-top:8px;}
+    .band img.mascot{height:72px;margin-bottom:10px;}
+    .band h2{font-size:clamp(1.35rem,3.2vw,1.8rem);margin-bottom:10px;}
+    .band p{max-width:520px;margin:0 auto 20px;color:var(--ink-muted);font-size:0.98rem;}
+    .band .cta{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;background:var(--ink);color:#fff;font-weight:700;font-size:0.98rem;transition:transform 0.15s;}
+    .band .cta:hover{transform:translateY(-2px);}
+    .band .tiny{display:block;margin-top:10px;font-size:0.82rem;color:var(--ink-light);}
+    .band .tiny a{font-weight:700;color:var(--brand-dark);}
 
-    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 960px; margin: 0 auto; }
-    @media (max-width: 820px) { .related-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 520px) { .related-grid { grid-template-columns: 1fr; } }
-    .related-card { background: #fff; border-radius: 16px; padding: 20px 22px; box-shadow: 0 2px 8px rgba(47,71,110,0.05); border: 1px solid rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; display: block; }
-    .related-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(47,71,110,0.1); }
-    .related-card .k { font-size: 0.72rem; font-weight: 700; color: var(--blue-dark, #7A9DB0); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
-    .related-card h4 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); line-height: 1.35; }
+    /* Footer */
+    .footer{background:#ffffff;border-top:1px solid var(--line-soft);padding:28px 20px;text-align:center;}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:12px;font-size:0.88rem;color:var(--ink-muted);}
+    .footer-links a:hover{color:var(--ink);}
+    .footer-copy{font-size:0.82rem;color:var(--ink-light);}
 
-    .lp-cta { padding: 80px 0; background: linear-gradient(165deg, #eaf1f6 0%, #f5e6d8 100%); text-align: center; position: relative; overflow: hidden; }
-    .lp-cta::before { content: ""; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,215,122,0.3) 0%, transparent 70%); }
-    .lp-cta::after { content: ""; position: absolute; bottom: -60px; left: -60px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(122,157,176,0.15) 0%, transparent 70%); }
-    .lp-cta-inner { position: relative; z-index: 1; }
-    .lp-cta img.mascot { height: 96px; margin-bottom: 16px; }
-    .lp-cta h2 { margin-bottom: 12px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
-    .lp-cta p { max-width: 540px; margin: 0 auto 24px; font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: var(--blue-dark, #7A9DB0); color: #fff; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(122,157,176,0.4); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(122,157,176,0.5); }
-    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: #fff; color: var(--text); text-decoration: none; border: 1.5px solid rgba(0,0,0,0.1); transition: transform 0.2s; }
-    .btn-secondary:hover { transform: translateY(-2px); }
-    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
-    .fade-up { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
-
-    /* Print styles: clean pumping log for fridge or lactation consultant */
-    @media print {
-      body { background: #fff; color: #000; }
-      .lp-nav, .lp-hero svg.wave, .lp-hero .tag, .lp-hero p.sub,
-      .lp-section, .lp-cta, .footer,
-      .tracker-footer, .pump-form, .add-btn,
-      .pump-entry .del { display: none !important; }
-      .lp-hero { padding: 0; background: #fff; }
-      .lp-hero h1 { font-size: 1.4rem; text-align: left; margin: 0 0 6px; }
-      .lp-hero h1 .highlight { background: none; padding: 0; }
-      .lp-hero-inner { max-width: 100%; text-align: left; }
-      .tracker-card { max-width: 100%; margin: 0; padding: 0; box-shadow: none; border-radius: 0; }
-      .tracker-head h2 { font-size: 1rem; }
-      .summary-strip { grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 8px; }
-      .summary-cell { background: #f2f2f2 !important; padding: 8px; border-radius: 6px; }
-      .side-totals { grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
-      .side-cell { background: #f7f7f7 !important; padding: 8px 10px; border-radius: 6px; }
-      .pump-entry { border: 1px solid #ccc; background: #fff !important; padding: 8px 10px; border-radius: 4px; margin-bottom: 4px; page-break-inside: avoid; }
-      .pump-entry .icon { background: #eee !important; }
-      .pump-list h3 { margin-top: 12px; }
-      .print-header { display: block !important; padding-bottom: 10px; margin-bottom: 12px; border-bottom: 2px solid #000; }
-      .print-header h1 { font-size: 1.3rem; margin: 0 0 4px; }
-      .print-header .print-date { font-size: 0.9rem; color: #333; }
+    /* Print */
+    .print-only{display:none;}
+    @media print{
+      body{background:#fff;}
+      .app-header,.tool-seo-h1,.add-zone,.feed-form,.tool-actions,.trust-row,.below,.band,.footer{display:none !important;}
+      .panel{box-shadow:none;border-radius:0;}
+      .summary-hero{padding:0 0 12px;background:#fff;border-bottom:2px solid #000;}
+      .summary-hero .header-row{display:none;}
+      .print-only{display:block;margin-bottom:10px;}
+      .print-only h1{font-size:1.3rem;font-family:'Nunito',sans-serif;font-weight:800;margin-bottom:4px;}
+      .print-only .print-date{font-size:0.92rem;color:#333;}
+      .metric-lead-num{font-size:2rem;}
+      .metric-side-pill{background:#f2f2f2 !important;color:#000 !important;}
+      .feed-list{padding:8px 0;}
+      .feed-entry{grid-template-columns:32px 1fr;padding:8px 0;page-break-inside:avoid;}
+      .feed-entry .del{display:none;}
+      .feed-entry .icon{background:#eee !important;}
     }
-    .print-header { display: none; }
   </style>
   <script src="/analytics-consent.js" defer></script>
 </head>
 <body>
 
-  <nav class="lp-nav">
-    <div class="container lp-nav-inner">
-      <a href="/" class="lp-nav-brand"><img src="/Pippy-Icon.png" alt="Pippy" /> Pippy</a>
-      <a href="/" class="btn-secondary" style="padding: 10px 20px; font-size: 0.92rem;">Back to Pippy</a>
-    </div>
-  </nav>
-
-  <section class="lp-hero">
-    <div class="container lp-hero-inner">
-      <div class="print-header">
-        <h1>Pippy pumping log</h1>
-        <div class="print-date" id="printDate"></div>
+  <!-- Slim app-like header -->
+  <header class="app-header">
+    <div class="app-header-inner">
+      <a class="app-brand" href="/" aria-label="Pippy home">
+        <img src="/Pippy-Icon.png" alt="Pippy" />
+        <span class="app-brand-name">Pippy</span>
+        <span class="app-brand-sep"></span>
+        <span class="app-tool-name">Pumping Log</span>
+      </a>
+      <div class="app-saved" title="Your sessions are saved in this browser and never leave your device">
+        <span class="app-saved-dot"></span>
+        <span><span class="saved-long">Saved in this </span>browser</span>
       </div>
-      <span class="tag">Free Pumping Log · No App · No Signup</span>
-      <h1>Online <span class="highlight">breast pump tracker</span>, no app required.</h1>
-      <p class="sub">A working pumping session tracker that runs in your browser. Log every session, track oz per side, see daily totals, and print a clean pumping log for your lactation consultant.</p>
+    </div>
+  </header>
 
-      <div class="tracker-card" id="tracker" aria-label="Baby pumping log">
-        <div class="tracker-head">
-          <h2>Today's pump sessions</h2>
-          <div class="today-date" id="todayDate"></div>
-        </div>
+  <main class="tool-main">
+    <div class="tool-wrap">
 
-        <div class="summary-strip" aria-live="polite">
-          <div class="summary-cell"><div class="k">Sessions</div><div class="v" id="sumCount">0</div></div>
-          <div class="summary-cell"><div class="k">Last session</div><div class="v" id="sumLast">...</div><div class="sub" id="sumLastSub">No sessions yet</div></div>
-          <div class="summary-cell"><div class="k">Total today</div><div class="v" id="sumTotal">...</div><div class="sub" id="sumTotalSub">oz combined</div></div>
-          <div class="summary-cell"><div class="k">Avg / session</div><div class="v" id="sumAvg">...</div><div class="sub" id="sumAvgSub">oz per pump</div></div>
-        </div>
+      <!-- Small SEO H1, sits above the tool but doesn't dominate -->
+      <h1 class="tool-seo-h1">Free online <span class="strong">pumping log</span>. No app, no signup.</h1>
 
-        <div class="side-totals">
-          <div class="side-cell">
-            <div class="side-label"><span class="side-dot"></span>Left total</div>
-            <div class="side-val" id="leftTotal">0.0 oz</div>
+      <div class="panel">
+
+        <!-- Hero summary: swaps between empty and filled via JS -->
+        <section class="summary-hero">
+          <div class="header-row">
+            <span class="date-label">Today</span>
+            <span class="date-today" id="todayDate"></span>
           </div>
-          <div class="side-cell">
-            <div class="side-label"><span class="side-dot right"></span>Right total</div>
-            <div class="side-val" id="rightTotal">0.0 oz</div>
+          <div class="print-only">
+            <h1>Pippy pumping log</h1>
+            <div class="print-date" id="printDate"></div>
           </div>
+
+          <div class="summary-filled" id="summaryFilled" hidden>
+            <div class="metric-lead">
+              <span class="metric-lead-num" id="sumTotal">0.0</span>
+              <span class="metric-lead-unit" id="sumTotalSub">oz today</span>
+            </div>
+            <div class="metric-sub">
+              <span id="sumCount">0</span> session<span id="sumCountPlural">s</span><span class="dot">·</span>last at <strong id="sumLast">...</strong><span class="dot">·</span><span id="sumLastSub"></span>
+            </div>
+            <div class="metric-sides">
+              <span class="metric-side-pill"><span class="dot"></span><span class="label">Left</span><span id="leftTotal">0.0 oz</span></span>
+              <span class="metric-side-pill right"><span class="dot"></span><span class="label">Right</span><span id="rightTotal">0.0 oz</span></span>
+            </div>
+            <!-- Hidden but preserved for any legacy listeners -->
+            <span id="sumAvg" hidden>0.0</span><span id="sumAvgSub" hidden></span>
+          </div>
+
+          <div class="summary-empty" id="summaryEmpty">
+            <div class="emoji">🥛</div>
+            <h2>Ready when you are</h2>
+            <p>Log a pumping session to track your output. It saves here instantly. No signup. No app.</p>
+          </div>
+        </section>
+
+        <!-- Primary action -->
+        <div class="add-zone">
+          <button class="btn-add" id="addBtn" type="button" aria-expanded="false" aria-controls="pumpForm">
+            <span class="plus">+</span> Log a pumping session
+          </button>
         </div>
 
-        <button class="add-btn" id="addBtn" type="button" aria-expanded="false" aria-controls="pumpForm">
-          <span class="plus">+</span> Log a pump session
-        </button>
-
-        <div class="pump-form" id="pumpForm" role="form" aria-label="Add a new pumping session">
+        <!-- Form (collapsed by default) -->
+        <div class="feed-form" id="pumpForm" role="form" aria-label="Add a new pumping session">
+          <div class="row full">
+            <div>
+              <label>Side</label>
+              <div class="side-seg-wrap">
+                <div class="side-seg" role="radiogroup" aria-label="Pumping side">
+                  <input type="radio" name="pside-seg" id="pside-left" value="left" />
+                  <label for="pside-left">Left</label>
+                  <input type="radio" name="pside-seg" id="pside-right" value="right" />
+                  <label for="pside-right">Right</label>
+                  <input type="radio" name="pside-seg" id="pside-both" value="both" checked />
+                  <label for="pside-both">Both</label>
+                </div>
+                <select id="pside" hidden aria-hidden="true">
+                  <option value="both">Both sides</option>
+                  <option value="left">Left only</option>
+                  <option value="right">Right only</option>
+                </select>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div>
-              <label for="pside">Side</label>
-              <select id="pside">
-                <option value="both">Both sides</option>
-                <option value="left">Left only</option>
-                <option value="right">Right only</option>
-              </select>
+              <label for="pduration">Duration</label>
+              <div class="amount-row">
+                <input type="number" id="pduration" min="0" max="180" step="1" placeholder="20" />
+                <select disabled style="background:#faf6ef;color:var(--ink-muted);"><option>min</option></select>
+              </div>
             </div>
             <div>
               <label for="ptime">Time</label>
               <input type="time" id="ptime" />
             </div>
           </div>
-
           <div class="row">
-            <div>
-              <label for="pduration">Duration (minutes)</label>
-              <input type="number" id="pduration" min="0" max="180" step="1" placeholder="20" />
-            </div>
             <div>
               <label for="pamount">Amount</label>
               <div class="amount-row">
@@ -329,151 +450,162 @@
                 </select>
               </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div style="grid-column: 1 / -1;">
+            <div>
               <label for="pnote">Note (optional)</label>
-              <input type="text" id="pnote" maxlength="80" placeholder="Power pump, strong letdown, tight flange..." />
+              <input type="text" id="pnote" maxlength="80" placeholder="Power pump, letdown..." />
             </div>
           </div>
-
           <div class="form-actions">
             <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
             <button type="button" class="btn-save" id="saveBtn">Save session</button>
           </div>
         </div>
 
-        <div class="pump-list" id="pumpList">
-          <h3>Today's sessions</h3>
+        <!-- 7-day stats strip -->
+        <div class="week-strip" id="weekStrip" hidden>
+          <div class="week-strip-h">
+            <span class="t">Last 7 days</span>
+            <span class="kpi"><strong id="weekTotal">0.0</strong> oz · avg <strong id="weekAvg">0.0</strong> oz/day</span>
+          </div>
+          <div class="week-bars" id="weekBars" aria-label="Total oz per day, last 7 days"></div>
+        </div>
+
+        <!-- Entries, grouped by day -->
+        <div class="feed-list" id="pumpList">
+          <div class="feed-list-h">
+            <h3>Session log</h3>
+            <span class="count" id="listCount"></span>
+          </div>
           <div id="pumpEntries"></div>
+          <button type="button" class="show-more-btn" id="showMoreBtn" hidden>Show all history</button>
         </div>
 
-        <div class="tracker-footer">
-          <button type="button" id="printBtn">Download PDF / Print</button>
-          <button type="button" class="btn-danger" id="clearBtn">Clear all</button>
+        <!-- Tool actions -->
+        <div class="tool-actions">
+          <div class="left">
+            <button type="button" class="btn-ghost" id="printBtn">Download PDF</button>
+            <button type="button" class="btn-danger" id="clearBtn">Clear all</button>
+          </div>
+          <a href="https://meetpippy.com/app" class="get-app-link">Get it on your phone →</a>
         </div>
+
       </div>
+
+      <!-- Trust strip -->
+      <div class="trust-row">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg> No account needed</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Saves to this browser</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Print friendly</span>
+      </div>
+
     </div>
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C320,80 560,0 880,50 C1100,80 1300,20 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/></svg>
-  </section>
+  </main>
 
-  <section class="lp-section">
-    <div class="container">
-      <div class="lp-section-head">
-        <span class="tag">Storage Guide</span>
-        <h2>Breast milk storage, at a glance</h2>
-        <p>How long pumped milk stays safe depends on where you keep it. Use the ideal times when you can. The "max" numbers are for when life happens and you need a little grace.</p>
+  <!-- Educational / SEO content -->
+  <section class="below" id="learn">
+    <div class="below-inner">
+      <div class="below-head">
+        <span class="below-kicker">Learn more</span>
+        <h2>Storage, output, and how to use the pumping log</h2>
+        <p>Quick references and real pumping parent guidance. The tool above handles the logging. This section answers the questions that come up around it.</p>
       </div>
-      <div class="storage-card">
-        <div class="storage-grid">
-          <div class="storage-item">
-            <div class="emoji">🌡️</div>
-            <div class="loc">Room temp</div>
-            <div class="temp">Up to 77°F / 25°C</div>
-            <div class="ideal">4 hrs</div>
-            <div class="ideal-label">Ideal</div>
-            <div class="max">Max <strong>6 to 8 hours</strong> if very clean</div>
+
+      <!-- STORAGE: prominent reference card -->
+      <div class="below-section">
+        <div class="storage-card">
+          <div class="storage-title">
+            <span class="em">🧊</span>
+            <h3>Breast milk storage guidelines (CDC)</h3>
           </div>
-          <div class="storage-item">
-            <div class="emoji">🧊</div>
-            <div class="loc">Refrigerator</div>
-            <div class="temp">40°F / 4°C or colder</div>
-            <div class="ideal">4 days</div>
-            <div class="ideal-label">Ideal</div>
-            <div class="max">Up to <strong>5 days</strong> if conditions are clean</div>
+          <div class="storage-grid">
+            <div class="storage-item">
+              <div class="emoji">🌡️</div>
+              <div class="loc">Room temp</div>
+              <div class="temp">Up to 77°F / 25°C</div>
+              <div class="ideal">4 hrs</div>
+              <div class="ideal-label">Ideal</div>
+              <div class="max">Max <strong>6 to 8 hours</strong> if very clean</div>
+            </div>
+            <div class="storage-item">
+              <div class="emoji">🧊</div>
+              <div class="loc">Refrigerator</div>
+              <div class="temp">40°F / 4°C or colder</div>
+              <div class="ideal">4 days</div>
+              <div class="ideal-label">Ideal</div>
+              <div class="max">Up to <strong>5 days</strong> if conditions are clean</div>
+            </div>
+            <div class="storage-item">
+              <div class="emoji">❄️</div>
+              <div class="loc">Freezer</div>
+              <div class="temp">0°F / -18°C (standard)</div>
+              <div class="ideal">6 months</div>
+              <div class="ideal-label">Ideal</div>
+              <div class="max">Max <strong>12 months</strong></div>
+            </div>
+            <div class="storage-item">
+              <div class="emoji">🥶</div>
+              <div class="loc">Deep freezer</div>
+              <div class="temp">-4°F / -20°C or colder</div>
+              <div class="ideal">12 months</div>
+              <div class="ideal-label">Ideal</div>
+              <div class="max">Label with date, use oldest first</div>
+            </div>
           </div>
-          <div class="storage-item">
-            <div class="emoji">❄️</div>
-            <div class="loc">Freezer</div>
-            <div class="temp">0°F / -18°C (standard)</div>
-            <div class="ideal">6 months</div>
-            <div class="ideal-label">Ideal</div>
-            <div class="max">Max <strong>12 months</strong></div>
+          <div class="thawed-note">
+            <div class="icon">♻️</div>
+            <div class="txt">
+              <strong>Once thawed:</strong> use within <strong>1 to 2 hours</strong> at room temperature, or within <strong>24 hours</strong> in the fridge. Never refreeze previously frozen breast milk. If baby did not finish a bottle, the leftover is safe for up to 2 hours after they started drinking, then discard.
+            </div>
           </div>
-          <div class="storage-item">
-            <div class="emoji">🥶</div>
-            <div class="loc">Deep freezer</div>
-            <div class="temp">-4°F / -20°C or colder</div>
-            <div class="ideal">12 months</div>
-            <div class="ideal-label">Ideal</div>
-            <div class="max">Label with date and use oldest first</div>
-          </div>
+          <p class="storage-source">Guidelines from the CDC proper storage and preparation of breast milk recommendations. Use as a reference, not medical advice. If your milk was exposed to heat, is thawed, or smells off, trust your instincts and ask your pediatrician or a lactation consultant.</p>
         </div>
-        <div class="thawed-note">
-          <div class="icon">♻️</div>
-          <div class="txt">
-            <strong>Once thawed:</strong> use within <strong>1 to 2 hours</strong> at room temperature, or within <strong>24 hours</strong> in the fridge. Never refreeze previously frozen breast milk. If baby did not finish a bottle, the leftover is safe for up to 2 hours after they started drinking, then discard.
-          </div>
+      </div>
+
+      <!-- Output expectations table -->
+      <div class="below-section">
+        <h3 class="sec-h">Typical pumping output by stage</h3>
+        <div class="amounts-table">
+          <table>
+            <thead>
+              <tr><th>Stage</th><th>Per session (combined)</th><th>Sessions / day</th><th>Total / 24h</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="age">First 3 days</td><td class="perfeed">A few drops to 1 tsp (colostrum)</td><td>8 to 12</td><td>Teaspoons total</td></tr>
+              <tr><td class="age">Days 4 to 14</td><td class="perfeed">0.5 to 2 oz (15 to 60 ml)</td><td>8 to 10</td><td>10 to 20 oz</td></tr>
+              <tr><td class="age">2 to 6 weeks</td><td class="perfeed">1 to 3 oz (30 to 90 ml)</td><td>7 to 10</td><td>18 to 28 oz</td></tr>
+              <tr><td class="age">6 to 10 weeks (exclusive)</td><td class="perfeed">3 to 4 oz (90 to 120 ml)</td><td>6 to 8</td><td>24 to 32 oz</td></tr>
+              <tr><td class="age">6 to 10 weeks (combo)</td><td class="perfeed">1 to 3 oz (30 to 90 ml)</td><td>3 to 6</td><td>Depends on nursing share</td></tr>
+              <tr><td class="age">3 to 6 months</td><td class="perfeed">3 to 5 oz (90 to 150 ml)</td><td>5 to 7</td><td>24 to 32 oz</td></tr>
+              <tr><td class="age">Back at work</td><td class="perfeed">2 to 4 oz per session</td><td>3 to 4 at work</td><td>Replaces missed feeds</td></tr>
+            </tbody>
+          </table>
         </div>
-        <p class="storage-source">Guidelines from the CDC proper storage and preparation of breast milk recommendations. Use as a reference, not medical advice. If your milk was exposed to heat, is thawed, or smells off, trust your instincts and ask your pediatrician or a lactation consultant.</p>
+        <p class="amounts-note">Pump output is not the same as your supply. Babies extract milk far more efficiently than any pump. If baby is gaining weight and making 6+ wet diapers a day, supply is probably fine even when the bottle looks small.</p>
       </div>
-    </div>
-  </section>
 
-  <section class="lp-section alt">
-    <div class="container">
-      <div class="lp-section-head">
-        <span class="tag">Output</span>
-        <h2>Typical pumping output expectations</h2>
-        <p>Output varies wildly from parent to parent and session to session. Time of day, stress, flange fit, and even what you ate yesterday can swing the numbers. Use this as a very rough reference, not a benchmark.</p>
-      </div>
-      <div class="ww-table-wrap">
-        <table>
-          <thead>
-            <tr><th>Stage</th><th>Per session (combined sides)</th><th>Sessions / day</th><th>Total / 24h</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="age-cell">First 3 days</td><td class="win">A few drops to 1 tsp (colostrum)</td><td>8 to 12</td><td>Teaspoons total</td></tr>
-            <tr><td class="age-cell">Days 4 to 14</td><td class="win">0.5 to 2 oz (15 to 60 ml)</td><td>8 to 10</td><td>10 to 20 oz</td></tr>
-            <tr><td class="age-cell">2 to 6 weeks</td><td class="win">1 to 3 oz (30 to 90 ml)</td><td>7 to 10</td><td>18 to 28 oz</td></tr>
-            <tr><td class="age-cell">6 to 10 weeks (exclusive pumper)</td><td class="win">3 to 4 oz (90 to 120 ml)</td><td>6 to 8</td><td>24 to 32 oz</td></tr>
-            <tr><td class="age-cell">6 to 10 weeks (combo feeding)</td><td class="win">1 to 3 oz (30 to 90 ml)</td><td>3 to 6</td><td>Depends on nursing share</td></tr>
-            <tr><td class="age-cell">3 to 6 months</td><td class="win">3 to 5 oz (90 to 150 ml)</td><td>5 to 7</td><td>24 to 32 oz</td></tr>
-            <tr><td class="age-cell">Back at work pumping</td><td class="win">2 to 4 oz per session</td><td>3 to 4 at work</td><td>Replaces missed feeds</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="text-align: center; margin-top: 14px; font-size: 0.86rem; color: var(--text-muted); max-width: 720px; margin-left: auto; margin-right: auto;">Pump output is not the same as your supply. Babies extract milk far more efficiently than any pump. If your baby is gaining weight and producing 6+ wet diapers a day, your supply is probably fine even if the bottle looks small. Growth spurts, stress, a period returning, and some medications can all cause short-term dips.</p>
-    </div>
-  </section>
-
-  <section class="lp-section">
-    <div class="container">
-      <div class="lp-section-head">
-        <span class="tag">Boost Output</span>
-        <h2>Tips to increase pumping output</h2>
-        <p>Nothing here is magic. But these are the changes that actually move the needle for most pumping parents.</p>
-      </div>
-      <div class="cue-grid">
-        <div class="cue-card"><div class="cue-emoji">🤱</div><h3>Skin-to-skin before pumping</h3><p>Five to ten minutes of skin contact, a warm compress, or even looking at a photo of your baby can trigger a stronger letdown and bump output.</p></div>
-        <div class="cue-card"><div class="cue-emoji">🔁</div><h3>Double pump, every time</h3><p>Pumping both sides at once takes the same time as one side and usually yields more total milk thanks to higher prolactin levels. Use a good double pump setup.</p></div>
-        <div class="cue-card"><div class="cue-emoji">📐</div><h3>Get your flange size right</h3><p>Most parents are wearing the wrong size out of the box. If your nipple rubs the tunnel or a lot of areola is pulled in, size down. Correct flanges can double output.</p></div>
-        <div class="cue-card"><div class="cue-emoji">💧</div><h3>Hydrate, then hydrate again</h3><p>Breast milk is mostly water. Keep a full bottle within arm's reach at every pump session. Thirst is already dehydration, stay ahead of it.</p></div>
-        <div class="cue-card"><div class="cue-emoji">⚡</div><h3>Try a power pump</h3><p>Once a day for a week, do pump 20 min, rest 10, pump 10, rest 10, pump 10. It mimics cluster feeding and signals your body to make more.</p></div>
-        <div class="cue-card"><div class="cue-emoji">😌</div><h3>Relax your shoulders</h3><p>Stress hormones suppress letdown. Deep breaths, a show you like, a warm drink. A relaxed pump almost always out-yields a tense one.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="lp-section alt">
-    <div class="container">
-      <div class="longform">
-        <div class="lp-section-head" style="margin-bottom: 24px;">
-          <span class="tag">Guide</span>
-          <h2>How to use this pumping log</h2>
+      <!-- Tips grid -->
+      <div class="below-section">
+        <h3 class="sec-h">Tips to increase pumping output</h3>
+        <div class="cues-grid">
+          <div class="cue"><div class="em">🤱</div><h4>Skin-to-skin first</h4><p>Five to ten minutes of contact, a warm compress, or a photo of baby can trigger a stronger letdown.</p></div>
+          <div class="cue"><div class="em">🔁</div><h4>Double pump</h4><p>Both sides at once takes the same time as one and usually yields more thanks to higher prolactin levels.</p></div>
+          <div class="cue"><div class="em">📐</div><h4>Right flange size</h4><p>Most parents need 15 to 21mm, not the 24mm in the box. Correct flanges can double output.</p></div>
+          <div class="cue"><div class="em">💧</div><h4>Hydrate hard</h4><p>Breast milk is mostly water. Keep a full bottle at every pump. Thirst is already dehydration.</p></div>
+          <div class="cue"><div class="em">⚡</div><h4>Power pump once a day</h4><p>Pump 20 min, rest 10, pump 10, rest 10, pump 10. Mimics cluster feeding and signals more milk.</p></div>
+          <div class="cue"><div class="em">😌</div><h4>Relax your shoulders</h4><p>Stress suppresses letdown. Deep breaths, a show you like, a warm drink. Relaxed pumps out-yield tense ones.</p></div>
         </div>
-        <p>A pumping log is one of the most quietly useful tools in the fourth trimester. It tells you when you last pumped when your brain is running on three hours of sleep, shows your real daily output instead of a guess, and gives a lactation consultant something real to work with if things feel off. This tracker stores every session in your browser, so it works offline after the page loads and nothing leaves your device.</p>
+      </div>
 
+      <!-- Long-form guide -->
+      <div class="below-section longform">
+        <h3>How to use this pumping log</h3>
+        <p>A pumping log is one of the quietly most useful tools in the fourth trimester. It tells you when you last pumped when your brain is running on three hours of sleep, shows your real daily output instead of a guess, and gives a lactation consultant something real to work with if things feel off. This tracker stores every session in your browser. Nothing leaves your device.</p>
         <h3>Exclusive pumping versus combo feeding</h3>
-        <p>Exclusive pumpers generally pump 8 times a day in the early weeks, then drop to 6 or 7 once supply is established around 10 to 12 weeks. Total output usually lands somewhere between 24 and 32 oz in 24 hours. Combo feeders nursing and pumping tend to log fewer sessions and smaller per-session amounts, because the baby already drained the breast. Neither is better. Track what you do, not what someone on the internet says you should.</p>
-
+        <p>Exclusive pumpers generally pump 8 times a day in the early weeks, then drop to 6 or 7 once supply is established around 10 to 12 weeks. Total output usually lands somewhere between 24 and 32 oz in 24 hours. Combo feeders nursing and pumping tend to log fewer sessions and smaller per-session amounts, because baby already drained the breast. Neither is better. Track what you do, not what someone on the internet says you should.</p>
         <h3>Pumping at work</h3>
-        <p>Most return-to-work pumping schedules are 3 sessions in an 8-hour shift, roughly every 3 hours. Block the time on your calendar. In the US, federal law protects your right to break time and a private space that is not a bathroom for the first year after birth. Log each session, note any skipped ones, and share a clean weekly log with your partner or childcare provider so bottle feeds at home match your pumped output.</p>
-
-        <h3>Flange sizing</h3>
-        <p>Most pumps come with 24mm and 28mm flanges. The majority of pumping parents need 15 to 21mm. Measure your nipple diameter (not the base of the areola) in millimeters and add 1 to 3mm. Signs you are in the wrong size: pain during pumping, nipple rubbing the tunnel wall, too much areola pulled in, blanching after sessions, output that feels stuck. Correct sizing is one of the single biggest unlocks for output.</p>
-
+        <p>Most return-to-work pumping schedules are 3 sessions in an 8-hour shift, roughly every 3 hours. Block the time on your calendar. In the US, federal law protects your right to break time and a private space that is not a bathroom for the first year after birth. Log each session, note any skipped ones, and share a clean weekly log with your partner or childcare so bottle feeds at home match your pumped output.</p>
+        <h3>Flange sizing, briefly</h3>
+        <p>Most pumps ship with 24mm and 28mm flanges. The majority of pumping parents need 15 to 21mm. Measure your nipple diameter (not the base of the areola) in millimeters and add 1 to 3mm. Signs you are in the wrong size: pain during pumping, nipple rubbing the tunnel wall, too much areola pulled in, blanching after sessions, output that feels stuck.</p>
         <h3>When to call a lactation consultant</h3>
         <ul>
           <li>Output drops suddenly by more than 25% for more than a day or two, with no obvious cause.</li>
@@ -481,61 +613,48 @@
           <li>You suspect clogged ducts or mastitis. Call today, not next week.</li>
           <li>Baby is not gaining weight, has fewer than 6 wet diapers a day after the first week, or fights the bottle.</li>
           <li>You are exclusively pumping and total daily output is stuck under 15 oz past 2 weeks postpartum.</li>
-          <li>You are thinking about stopping and want support whether you continue, combo feed, or move to formula. There is no wrong answer.</li>
+          <li>You are thinking about stopping and want support. There is no wrong answer.</li>
         </ul>
-
         <h3>Privacy</h3>
-        <p>Your sessions are saved in your browser's localStorage under the key pippy_pumping_v1. They never touch a server and we cannot see them. Clearing your browser data or using private mode will wipe the log, so use the Download PDF button before switching devices or clearing history.</p>
+        <p>Your sessions are saved in this browser's localStorage under the key pippy_pumping_v1. They never touch a server. Clearing your browser data or using private mode will wipe the log, so tap Download PDF before switching devices.</p>
       </div>
+
+      <!-- Related posts -->
+      <div class="below-section">
+        <h3 class="sec-h">Keep reading</h3>
+        <div class="related-grid">
+          <a href="/blog/baby-feeding-schedule-by-age.html" class="rel"><div class="k">Feeding</div><h4>Baby feeding schedule by age</h4></a>
+          <a href="/blog/how-much-should-newborn-eat.html" class="rel"><div class="k">Newborn</div><h4>How much should a newborn eat?</h4></a>
+          <a href="/blog/how-to-tell-if-baby-is-hungry.html" class="rel"><div class="k">Cues</div><h4>How to tell if baby is hungry</h4></a>
+          <a href="/blog/baby-gas-relief.html" class="rel"><div class="k">Health</div><h4>Baby gas relief, in the right order</h4></a>
+          <a href="/blog/baby-poop-color-guide.html" class="rel"><div class="k">Diapers</div><h4>Baby poop color guide</h4></a>
+          <a href="/blog/baby-fever-when-to-call-doctor.html" class="rel"><div class="k">Health</div><h4>Baby fever: when to call the doctor</h4></a>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section class="lp-section">
-    <div class="container">
-      <div class="lp-section-head">
-        <span class="tag">Keep Reading</span>
-        <h2>Related Pippy guides</h2>
-      </div>
-      <div class="related-grid">
-        <a href="/blog/exclusive-pumping-schedule.html" class="related-card"><div class="k">Pumping</div><h4>Exclusive pumping schedule that actually works</h4></a>
-        <a href="/blog/how-to-increase-milk-supply.html" class="related-card"><div class="k">Breastfeeding</div><h4>How to increase your milk supply naturally</h4></a>
-        <a href="/blog/pumping-schedule-for-working-moms.html" class="related-card"><div class="k">Pumping</div><h4>Pumping schedule for working moms: the realistic version</h4></a>
-        <a href="/blog/how-to-warm-breast-milk.html" class="related-card"><div class="k">Feeding</div><h4>How to safely warm breast milk</h4></a>
-        <a href="/blog/breastfeeding-vs-formula.html" class="related-card"><div class="k">Feeding</div><h4>Breastfeeding vs formula: an honest comparison</h4></a>
-        <a href="/blog/cluster-feeding.html" class="related-card"><div class="k">Feeding</div><h4>Cluster feeding: why it happens and how to survive it</h4></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="lp-cta">
-    <div class="container lp-cta-inner">
-      <img src="/mascot/mascot-wave.png" alt="Pippy mascot waving" class="mascot" />
-      <h2>Want Pippy to remember every pump for you?</h2>
-      <p>Pippy's free tracker logs pumping, breastfeeding, bottles, diapers, and sleep in one place, shows your weekly output trend, and sends doctor-ready reports. Works on any phone, no install required.</p>
-      <div class="cta-row">
-        <a href="https://meetpippy.com/app" class="btn-primary">Use the free online tracker →</a>
-        <a href="/" class="btn-secondary">Get the app</a>
-      </div>
-    </div>
+  <!-- Bottom CTA -->
+  <section class="band">
+    <img src="/mascot/mascot-wave.png" alt="Pippy mascot" class="mascot" />
+    <h2>Want Pippy to remember every pump for you?</h2>
+    <p>The Pippy app tracks pumping, feeds, diapers, and sleep with a tap (or your voice), charts your weekly output trend, and shares a clean summary with your partner or lactation consultant.</p>
+    <a href="https://meetpippy.com/app" class="cta">Get the free app →</a>
+    <span class="tiny">Already tracking here? Bring your data to the app, <a href="/free-baby-tracker.html">see how</a>.</span>
   </section>
 
   <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="/Pippy-Logo.png" alt="Pippy" class="footer-logo" />
-        <p>An AI-powered baby tracker built for new parents.</p>
-      </div>
-      <div class="footer-links">
-        <a href="/free-baby-tracker.html">Free baby tracker</a>
-        <a href="/free-wake-window-calculator.html">Wake window calculator</a>
-        <a href="/free-feeding-tracker.html">Feeding tracker</a>
-        <a href="/free-pumping-log.html">Pumping log</a>
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Service</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-      <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="/">Pippy home</a>
+      <a href="/free-feeding-tracker.html">Feeding tracker</a>
+      <a href="/free-wake-window-calculator.html">Wake window calculator</a>
+      <a href="/free-diaper-tracker.html">Diaper tracker</a>
+      <a href="/free-tummy-time-timer.html">Tummy time timer</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </div>
+    <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
   </footer>
 
   <script>
@@ -551,7 +670,7 @@
     const SIDE_META = {
       left:  { icon: "◀️", label: "Left only" },
       right: { icon: "▶️", label: "Right only" },
-      both:  { icon: "⏸️", label: "Both sides" },
+      both:  { icon: "🥛", label: "Both sides" },
     };
 
     const $ = (id) => document.getElementById(id);
@@ -586,6 +705,7 @@
       return days + "d ago";
     };
 
+    const fmtDateShort = (d = new Date()) => d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
     const fmtDateLong = (d = new Date()) => d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" });
 
     // Convert an entry amount to oz for summaries.
@@ -612,12 +732,53 @@
       return parts.join(" · ");
     };
 
+    // Day name label (Today / Yesterday / Mon Apr 15)
+    const dayLabel = (d) => {
+      const today = new Date(); today.setHours(0,0,0,0);
+      const ymd = new Date(d); ymd.setHours(0,0,0,0);
+      const diff = Math.round((today - ymd) / (24 * 60 * 60 * 1000));
+      if (diff === 0) return "Today";
+      if (diff === 1) return "Yesterday";
+      return ymd.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+    };
+
+    // Group sessions by day key (sorted newest day first)
+    const groupByDay = (sessions) => {
+      const map = new Map();
+      sessions.forEach(s => {
+        const k = todayKey(new Date(s.at));
+        if (!map.has(k)) map.set(k, []);
+        map.get(k).push(s);
+      });
+      return Array.from(map.entries()).sort((a, b) => b[0].localeCompare(a[0]));
+    };
+
+    // Per-day totals helper (oz combined, total minutes)
+    const sumDay = (arr) => {
+      let oz = 0, min = 0;
+      arr.forEach(s => {
+        oz += toOz(s.amount, s.unit);
+        min += parseFloat(s.duration) || 0;
+      });
+      const parts = [];
+      if (oz > 0) parts.push(oz.toFixed(1) + " oz");
+      if (min > 0) parts.push(min + " min");
+      return { oz, min, text: parts.join(" · ") || "" };
+    };
+
+    let expanded = false;
+
     const render = () => {
       const all = loadSessions().sort((a, b) => new Date(b.at) - new Date(a.at));
       const today = all.filter(s => isToday(s.at));
 
+      // Summary swap (empty vs filled)
+      $("summaryEmpty").hidden = today.length > 0;
+      $("summaryFilled").hidden = today.length === 0;
+
       // Session count
       $("sumCount").textContent = today.length;
+      $("sumCountPlural").textContent = today.length === 1 ? "" : "s";
 
       // Last session
       if (today.length > 0) {
@@ -626,10 +787,10 @@
         $("sumLastSub").textContent = fmtRelative(last.at);
       } else {
         $("sumLast").textContent = "...";
-        $("sumLastSub").textContent = "No sessions yet";
+        $("sumLastSub").textContent = "";
       }
 
-      // Totals
+      // Totals today
       let totalOz = 0, totalMin = 0, leftOz = 0, rightOz = 0;
       today.forEach(e => {
         totalOz += toOz(e.amount, e.unit);
@@ -639,40 +800,101 @@
         rightOz += split.right;
       });
 
-      $("sumTotal").textContent = totalOz > 0 ? totalOz.toFixed(1) + " oz" : "...";
-      $("sumTotalSub").textContent = totalMin > 0 ? totalMin + " min total" : "oz combined";
+      // Big metric lead: TOTAL OZ today
+      $("sumTotal").textContent = totalOz > 0 ? totalOz.toFixed(1) : "0.0";
+      $("sumTotalSub").textContent = "oz today";
 
-      const avg = today.length > 0 ? (totalOz / today.length) : 0;
-      $("sumAvg").textContent = today.length > 0 ? avg.toFixed(1) + " oz" : "...";
-      $("sumAvgSub").textContent = today.length > 0 ? "per pump session" : "oz per pump";
-
+      // Per-side pills
       $("leftTotal").textContent = leftOz.toFixed(1) + " oz";
       $("rightTotal").textContent = rightOz.toFixed(1) + " oz";
 
-      // Entry list
-      const listEl = $("pumpEntries");
-      if (today.length === 0) {
-        listEl.innerHTML = '<div class="pump-empty">No pump sessions logged today yet. Tap <strong>Log a pump session</strong> above when you finish.</div>';
-      } else {
-        listEl.innerHTML = today.map(e => {
-          const meta = SIDE_META[e.side] || { icon: "🥛", label: e.side };
-          const when = new Date(e.at);
-          const amt = entryAmountText(e);
-          const note = e.note ? ' · <span class="note">' + escapeHtml(e.note) + '</span>' : "";
-          return '<div class="pump-entry" data-id="' + e.id + '">' +
-                   '<div class="icon">' + meta.icon + '</div>' +
-                   '<div class="body">' +
-                     '<div class="title">' + meta.label + (amt ? ' · ' + amt : '') + '</div>' +
-                     '<div class="meta">' + fmtClock(when) + ' · ' + fmtRelative(e.at) + note + '</div>' +
-                   '</div>' +
-                   '<button class="del" type="button" aria-label="Delete session" data-del="' + e.id + '">✕</button>' +
+      // Hidden avg (preserved for any legacy access)
+      const avg = today.length > 0 ? (totalOz / today.length) : 0;
+      $("sumAvg").textContent = avg.toFixed(1);
+      $("sumAvgSub").textContent = "oz per session";
+
+      // 7-day stats + bars
+      const now = new Date(); now.setHours(0,0,0,0);
+      const buckets = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(now.getTime() - i * 86400000);
+        const k = todayKey(d);
+        const dayItems = all.filter(s => todayKey(new Date(s.at)) === k);
+        const dayOz = dayItems.reduce((acc, e) => acc + toOz(e.amount, e.unit), 0);
+        buckets.push({ date: d, oz: dayOz, isToday: i === 0 });
+      }
+      const weekTotalOz = buckets.reduce((s, b) => s + b.oz, 0);
+      const hasWeekData = weekTotalOz > 0;
+      $("weekStrip").hidden = !hasWeekData;
+      if (hasWeekData) {
+        $("weekTotal").textContent = weekTotalOz.toFixed(1);
+        $("weekAvg").textContent = (weekTotalOz / 7).toFixed(1);
+        const maxOz = Math.max(...buckets.map(b => b.oz), 0.1);
+        $("weekBars").innerHTML = buckets.map(b => {
+          const pct = (b.oz / maxOz) * 100;
+          const dow = b.date.toLocaleDateString(undefined, { weekday: "short" }).slice(0, 1);
+          return '<div class="week-bar' + (b.isToday ? ' today' : '') + '" title="' + b.oz.toFixed(1) + ' oz on ' + b.date.toLocaleDateString() + '">' +
+                   '<div class="week-bar-col" style="height:' + pct + '%"></div>' +
+                   '<div class="week-bar-day">' + dow + '</div>' +
                  '</div>';
         }).join("");
       }
 
+      // Entry list: grouped by day, default shows today + yesterday unless expanded
+      const listEl = $("pumpEntries");
+      const grouped = groupByDay(all);
+      const totalEntries = all.length;
+      $("listCount").textContent = totalEntries ? (totalEntries + " session" + (totalEntries === 1 ? "" : "s") + " total") : "";
+
+      if (all.length === 0) {
+        listEl.innerHTML = '<div class="feed-empty"><div class="em">📝</div>Nothing logged yet. Tap the button above to start.</div>';
+        $("showMoreBtn").hidden = true;
+      } else {
+        const groupsToShow = expanded ? grouped : grouped.slice(0, 2);
+        listEl.innerHTML = groupsToShow.map(([dayKey, dayItems]) => {
+          const d = new Date(dayItems[0].at);
+          const totals = sumDay(dayItems);
+          const entriesHtml = dayItems.map(e => {
+            const meta = SIDE_META[e.side] || { icon: "🥛", label: e.side };
+            const when = new Date(e.at);
+            const amt = entryAmountText(e);
+            const note = e.note ? ' · <span class="note">' + escapeHtml(e.note) + '</span>' : "";
+            return '<div class="feed-entry" data-id="' + e.id + '">' +
+                     '<div class="icon">' + meta.icon + '</div>' +
+                     '<div class="body">' +
+                       '<div class="title">' + meta.label + (amt ? ' · ' + amt : '') + '</div>' +
+                       '<div class="meta">' + fmtClock(when) + ' · ' + fmtRelative(e.at) + note + '</div>' +
+                     '</div>' +
+                     '<button class="del" type="button" aria-label="Delete session" data-del="' + e.id + '">✕</button>' +
+                   '</div>';
+          }).join("");
+          return '<div class="feed-day-group">' +
+                   '<div class="feed-day-h"><span class="name">' + dayLabel(d) + '</span><span class="summary">' + dayItems.length + ' session' + (dayItems.length === 1 ? '' : 's') + (totals.text ? ' · ' + totals.text : '') + '</span></div>' +
+                   entriesHtml +
+                 '</div>';
+        }).join("");
+        $("showMoreBtn").hidden = grouped.length <= 2;
+        $("showMoreBtn").textContent = expanded ? "Show less" : "Show all history (" + grouped.length + " days)";
+      }
+
       // Dates
-      $("todayDate").textContent = fmtDateLong();
+      $("todayDate").textContent = fmtDateShort();
       $("printDate").textContent = "Pumping log for " + fmtDateLong();
+    };
+
+    // Sync segmented side control with the hidden select (keeps legacy logic/IDs intact)
+    const bindSideSeg = () => {
+      const radios = document.querySelectorAll('input[name="pside-seg"]');
+      radios.forEach(r => {
+        r.addEventListener("change", () => {
+          if (r.checked) $("pside").value = r.value;
+        });
+      });
+    };
+    const setSideSeg = (val) => {
+      const el = document.querySelector('input[name="pside-seg"][value="' + val + '"]');
+      if (el) el.checked = true;
+      $("pside").value = val;
     };
 
     const setTimeNow = () => {
@@ -681,7 +903,7 @@
     };
 
     const resetForm = () => {
-      $("pside").value = "both";
+      setSideSeg("both");
       $("pduration").value = "";
       $("pamount").value = "";
       $("punit").value = "oz";
@@ -729,7 +951,7 @@
         const [h, m] = timeStr.split(":").map(Number);
         const d = new Date();
         d.setHours(h, m, 0, 0);
-        // If the chosen time is in the future by more than 5 min, assume it belongs to yesterday.
+        // If chosen time is more than 5 min in the future, assume it belongs to yesterday.
         if (d.getTime() - Date.now() > 5 * 60000) d.setDate(d.getDate() - 1);
         at = d.toISOString();
       } else {
@@ -776,10 +998,16 @@
       if (confirm("Delete this pumping session?")) deleteEntry(id);
     });
 
+    $("showMoreBtn").addEventListener("click", () => {
+      expanded = !expanded;
+      render();
+    });
+
     // Keep "time ago" labels fresh once a minute.
     setInterval(render, 60 * 1000);
 
     // Initial paint
+    bindSideSeg();
     resetForm();
     render();
   </script>

@@ -27,7 +27,7 @@
     "url": "https://meetpippy.com/free-wake-window-calculator.html",
     "description": "Free online wake window calculator for babies 0 to 24 months. Instantly shows the ideal wake window, next nap time, and a full sample day based on your baby's age.",
     "applicationCategory": "HealthApplication",
-    "applicationSubCategory": "Baby Tracker",
+    "applicationSubCategory": "Baby Sleep Tracker",
     "operatingSystem": "Web",
     "browserRequirements": "Requires JavaScript. Works in any modern browser.",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -41,7 +41,7 @@
   {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "How to Use a Wake Window Calculator",
+    "name": "How to use a wake window calculator",
     "description": "Use wake windows to time your baby's naps so they fall asleep easier and sleep longer.",
     "totalTime": "PT1M",
     "tool": [{ "@type": "HowToTool", "name": "Pippy Wake Window Calculator" }],
@@ -75,334 +75,428 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="manifest" href="/site.webmanifest" />
-  <meta name="theme-color" content="#7A9DB0" />
+  <meta name="theme-color" content="#F5EDE2" />
   <meta name="robots" content="index, follow" />
-  <link rel="stylesheet" href="style.css" />
   <style>
-    .lp-nav { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-    .lp-nav-inner { display: flex; align-items: center; justify-content: space-between; }
-    .lp-nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--text); text-decoration: none; }
-    .lp-nav-brand img { height: 32px; border-radius: 8px; }
-    .lp-hero { background: linear-gradient(165deg, #eaf1f6 0%, #fefaf7 55%, #f5e6d8 100%); padding: 72px 0 40px; position: relative; overflow: hidden; }
-    .lp-hero-inner { text-align: center; max-width: 720px; margin: 0 auto; }
-    .lp-hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 14px; line-height: 1.12; }
-    .lp-hero h1 .highlight { background: linear-gradient(120deg, transparent 0%, transparent 60%, #ffd77a 60%, #ffd77a 95%, transparent 95%); padding: 0 4px; }
-    .lp-hero p.sub { font-size: 1.1rem; max-width: 560px; margin: 0 auto 8px; color: var(--text-muted); line-height: 1.6; }
-    .lp-hero .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.15); color: var(--blue-dark, #7A9DB0); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
-    .lp-hero svg.wave { position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; display: block; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#F7F1E8;
+      --panel:#ffffff;
+      --ink:#2C2C34;
+      --ink-muted:rgba(44,44,52,0.58);
+      --ink-light:rgba(44,44,52,0.36);
+      --brand:#7A9DB0;
+      --brand-dark:#5f8499;
+      --brand-soft:#E4EEF3;
+      --peach:#F2C4A4;
+      --peach-soft:#FEF0E6;
+      --green:#5FA47E;
+      --green-soft:#DDF0E4;
+      --red:#C47070;
+      --line:rgba(44,44,52,0.08);
+      --line-soft:rgba(44,44,52,0.05);
+      --radius:18px;
+    }
+    html,body{height:100%;}
+    body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased;}
+    h1,h2,h3{font-family:'Nunito','Plus Jakarta Sans',sans-serif;line-height:1.2;color:var(--ink);}
+    a{color:inherit;text-decoration:none;}
+    button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+    input,select{font-family:inherit;color:var(--ink);}
+    ul{list-style:none;}
 
-    .calc-card { max-width: 680px; margin: 32px auto 0; background: #fff; border-radius: 28px; padding: 28px 28px 24px; box-shadow: 0 24px 60px -20px rgba(47,71,110,0.22), 0 0 0 1px rgba(0,0,0,0.04); }
-    .calc-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 18px; }
-    .calc-label { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); }
-    .age-input-wrap { display: flex; align-items: center; gap: 10px; }
-    .age-input-wrap input[type=number] { width: 80px; padding: 10px 12px; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.1); font-size: 1rem; font-family: inherit; font-weight: 600; text-align: center; }
-    .age-input-wrap select { padding: 10px 12px; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.1); font-size: 1rem; font-family: inherit; font-weight: 600; background: #fff; }
-    .age-input-wrap input:focus, .age-input-wrap select:focus { outline: none; border-color: var(--blue-dark, #7A9DB0); }
+    /* ==== App header (slim, sticky) ==== */
+    .app-header{position:sticky;top:0;z-index:50;background:rgba(247,241,232,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft);}
+    .app-header-inner{max-width:720px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .app-brand{display:flex;align-items:center;gap:10px;}
+    .app-brand img{height:28px;width:28px;border-radius:7px;}
+    .app-brand-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--ink);}
+    .app-brand-sep{width:1px;height:18px;background:var(--line);}
+    .app-tool-name{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;color:var(--ink);}
+    .app-chip{display:flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;color:var(--green);background:var(--green-soft);padding:5px 10px;border-radius:100px;}
+    .app-chip-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(95,164,126,0.25);}
+    @media (max-width:520px){
+      .app-brand-sep,.app-brand-name{display:none;}
+      .app-chip span.chip-long{display:none;}
+    }
 
-    .calc-slider-wrap { margin-bottom: 22px; }
-    .calc-slider-wrap input[type=range] { width: 100%; -webkit-appearance: none; height: 6px; border-radius: 4px; background: linear-gradient(90deg, #eaf1f6 0%, #ffd77a 50%, #f2c4a4 100%); outline: none; }
-    .calc-slider-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--blue-dark, #7A9DB0); cursor: pointer; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(47,71,110,0.2); }
-    .calc-slider-wrap input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--blue-dark, #7A9DB0); cursor: pointer; border: 3px solid #fff; }
-    .calc-slider-ticks { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.74rem; color: var(--text-muted); }
+    /* ==== Tool area ==== */
+    .tool-main{padding:28px 16px 48px;}
+    .tool-wrap{max-width:560px;margin:0 auto;}
+    .tool-seo-h1{font-size:1rem;font-weight:700;color:var(--ink-muted);text-align:center;margin:0 0 18px;letter-spacing:-0.005em;}
+    .tool-seo-h1 .strong{color:var(--ink);}
 
-    .calc-result { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); border-radius: 20px; padding: 24px; text-align: center; margin-top: 10px; }
-    .calc-result .window-label { font-size: 0.82rem; font-weight: 700; color: var(--blue-dark, #7A9DB0); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
-    .calc-result .window-value { font-family: 'Nunito', sans-serif; font-size: clamp(2.2rem, 6vw, 3rem); font-weight: 900; color: var(--text); line-height: 1.05; margin-bottom: 4px; }
-    .calc-result .window-sub { font-size: 0.95rem; color: var(--text-muted); }
-    .calc-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 20px; }
-    @media (max-width: 560px) { .calc-meta { grid-template-columns: 1fr; } }
-    .calc-meta-cell { background: #fff; border-radius: 14px; padding: 14px 16px; text-align: center; box-shadow: 0 2px 8px rgba(47,71,110,0.05); }
-    .calc-meta-cell .k { font-size: 0.74rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
-    .calc-meta-cell .v { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--text); }
+    .panel{background:var(--panel);border-radius:var(--radius);box-shadow:0 20px 48px -24px rgba(40,50,80,0.18),0 1px 0 rgba(44,44,52,0.04);overflow:hidden;}
 
-    .next-nap-card { max-width: 680px; margin: 18px auto 0; background: #fff; border-radius: 20px; padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); flex-wrap: wrap; }
-    .next-nap-card .nap-left { display: flex; align-items: center; gap: 14px; }
-    .next-nap-card .nap-icon { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #eaf1f6, #f5e6d8); display: flex; align-items: center; justify-content: center; font-size: 24px; }
-    .next-nap-card .nap-txt .k { font-size: 0.76rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
-    .next-nap-card .nap-txt .v { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--text); }
-    .next-nap-card input[type=time] { padding: 10px 12px; border-radius: 12px; border: 1.5px solid rgba(0,0,0,0.1); font-size: 1rem; font-family: inherit; font-weight: 600; }
+    /* Hero result */
+    .result-hero{padding:30px 28px 24px;text-align:center;background:linear-gradient(180deg,#ffffff 0%,#f4f9fc 100%);border-bottom:1px solid var(--line-soft);}
+    .result-kicker{font-size:0.76rem;font-weight:800;color:var(--brand-dark);text-transform:uppercase;letter-spacing:0.9px;margin-bottom:8px;}
+    .result-value{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(2.2rem,7vw,3rem);line-height:1.05;color:var(--ink);letter-spacing:-0.02em;margin-bottom:6px;}
+    .result-sub{font-size:0.95rem;color:var(--ink-muted);margin-bottom:14px;}
+    .result-next{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:100px;background:var(--brand-soft);font-size:0.86rem;font-weight:700;color:var(--brand-dark);}
+    .result-next .label{font-weight:600;color:var(--ink-muted);}
+    .result-next.empty{background:var(--peach-soft);color:#8a5e3c;}
+    .result-next.empty .label{color:#8a5e3c;opacity:0.75;}
 
-    .lp-section { padding: 72px 0; position: relative; }
-    .lp-section.alt { background: var(--beige, #faf4ee); }
-    .lp-section-head { text-align: center; max-width: 720px; margin: 0 auto 40px; }
-    .lp-section-head .tag { display: inline-block; padding: 6px 14px; border-radius: 20px; background: rgba(122,157,176,0.15); color: var(--blue-dark, #7A9DB0); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 14px; }
-    .lp-section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 14px; line-height: 1.2; }
-    .lp-section-head p { font-size: 1.02rem; color: var(--text-muted); line-height: 1.65; }
+    /* Primary action: age input */
+    .age-zone{padding:20px 20px 6px;background:var(--panel);}
+    .age-zone-label{font-size:0.78rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px;}
+    .age-input-row{display:flex;gap:10px;margin-bottom:14px;}
+    .age-input-row input[type=number]{flex:1;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;font-size:1.1rem;font-weight:700;font-family:'Nunito',sans-serif;text-align:center;background:#fff;color:var(--ink);}
+    .age-input-row input[type=number]:focus{outline:none;border-color:var(--brand);}
+    .age-input-row select{padding:14px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:0.95rem;font-weight:600;background:#fff;min-width:135px;}
+    .age-input-row select:focus{outline:none;border-color:var(--brand);}
+    .age-slider-wrap{padding:4px 4px 4px;}
+    .age-slider-wrap input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:4px;background:linear-gradient(90deg,var(--brand-soft) 0%,#ffd9b5 50%,var(--peach) 100%);outline:none;cursor:pointer;}
+    .age-slider-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:var(--brand);cursor:pointer;border:3px solid #fff;box-shadow:0 4px 12px rgba(122,157,176,0.4);}
+    .age-slider-wrap input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--brand);cursor:pointer;border:3px solid #fff;box-shadow:0 4px 12px rgba(122,157,176,0.4);}
+    .age-slider-ticks{display:flex;justify-content:space-between;margin-top:8px;font-size:0.7rem;color:var(--ink-light);font-weight:600;}
 
-    .ww-table-wrap { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 20px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); overflow: hidden; border: 1px solid rgba(0,0,0,0.04); }
-    .ww-table-wrap table { width: 100%; border-collapse: collapse; font-size: 0.96rem; }
-    .ww-table-wrap th, .ww-table-wrap td { padding: 14px 18px; text-align: left; }
-    .ww-table-wrap th { background: linear-gradient(135deg, #eaf1f6 0%, #f5e6d8 100%); font-weight: 800; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text); }
-    .ww-table-wrap tbody tr:nth-child(even) { background: rgba(122,157,176,0.04); }
-    .ww-table-wrap tbody tr:not(:last-child) td { border-bottom: 1px solid rgba(0,0,0,0.04); }
-    .ww-table-wrap .age-cell { font-weight: 700; color: var(--text); }
-    .ww-table-wrap .win { font-weight: 700; color: var(--blue-dark, #7A9DB0); font-family: 'Nunito', sans-serif; }
+    /* Last wake block */
+    .wake-zone{padding:18px 20px 18px;background:var(--panel);border-top:1px dashed var(--line);margin-top:14px;}
+    .wake-zone-inner{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;}
+    .wake-icon{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--brand-soft),var(--peach-soft));display:flex;align-items:center;justify-content:center;font-size:22px;}
+    .wake-text .k{font-size:0.72rem;font-weight:800;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:1px;}
+    .wake-text .v{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;color:var(--ink);}
+    .wake-zone input[type=time]{padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-size:0.95rem;font-weight:600;background:#fff;color:var(--ink);min-width:0;width:128px;}
+    .wake-zone input[type=time]:focus{outline:none;border-color:var(--brand);}
+    @media (max-width:440px){
+      .wake-zone-inner{grid-template-columns:1fr;gap:10px;}
+      .wake-zone input[type=time]{width:100%;}
+    }
 
-    .sched-card { max-width: 780px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 28px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); border: 1px solid rgba(0,0,0,0.04); }
-    .sched-row { display: grid; grid-template-columns: 90px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px dashed rgba(0,0,0,0.06); align-items: center; }
-    .sched-row:last-child { border-bottom: none; }
-    .sched-time { font-family: 'Nunito', sans-serif; font-weight: 800; color: var(--blue-dark, #7A9DB0); font-size: 1rem; }
-    .sched-event { color: var(--text); }
-    .sched-event .detail { display: block; font-size: 0.86rem; color: var(--text-muted); margin-top: 2px; }
+    /* Summary chips row */
+    .chips-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px 20px 18px;}
+    .chip-cell{background:#fbf6ef;border-radius:12px;padding:12px 10px;text-align:center;}
+    .chip-cell .k{font-size:0.68rem;font-weight:800;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;}
+    .chip-cell .v{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;color:var(--ink);}
 
-    .cue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 920px; margin: 0 auto; }
-    @media (max-width: 820px) { .cue-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 520px) { .cue-grid { grid-template-columns: 1fr; } }
-    .cue-card { background: #fff; border-radius: 20px; padding: 24px; box-shadow: 0 4px 16px rgba(47,71,110,0.06); border: 1px solid rgba(0,0,0,0.04); }
-    .cue-card .cue-emoji { font-size: 26px; margin-bottom: 10px; }
-    .cue-card h3 { font-size: 1.02rem; margin-bottom: 6px; color: var(--text); }
-    .cue-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+    /* Sample schedule */
+    .sched-wrap{padding:6px 8px 10px;border-top:1px solid var(--line-soft);}
+    .sched-h{display:flex;align-items:center;justify-content:space-between;padding:14px 12px 8px;}
+    .sched-h .t{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.9px;}
+    .sched-h .intro{font-size:0.78rem;color:var(--ink-muted);text-align:right;max-width:60%;line-height:1.4;}
+    .sched-card{padding:2px 12px 10px;}
+    .sched-row{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:10px 4px;align-items:center;}
+    .sched-row + .sched-row{border-top:1px dashed var(--line-soft);}
+    .sched-time{font-family:'Nunito',sans-serif;font-weight:800;color:var(--brand-dark);font-size:0.95rem;}
+    .sched-event{font-size:0.93rem;color:var(--ink);}
+    .sched-event .detail{display:block;font-size:0.82rem;color:var(--ink-muted);margin-top:2px;font-weight:500;}
 
-    .longform { max-width: 760px; margin: 0 auto; }
-    .longform h3 { font-size: 1.2rem; margin: 28px 0 10px; color: var(--text); }
-    .longform p { font-size: 1rem; line-height: 1.7; color: var(--text); margin-bottom: 14px; }
-    .longform ul { padding-left: 20px; margin-bottom: 14px; list-style: disc; color: var(--text); }
-    .longform ul li { margin-bottom: 6px; line-height: 1.6; }
+    /* Tool actions row */
+    .tool-actions{padding:14px 20px 20px;border-top:1px solid var(--line-soft);background:var(--panel);display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
+    .tool-actions .left{display:flex;gap:8px;flex-wrap:wrap;}
+    .tool-actions .get-app-link{color:var(--brand-dark);font-weight:700;font-size:0.88rem;display:inline-flex;align-items:center;gap:4px;}
+    .tool-actions .get-app-link:hover{text-decoration:underline;}
+    .btn-ghost{padding:8px 14px;border-radius:10px;font-size:0.86rem;font-weight:700;color:var(--ink-muted);background:#faf6ef;transition:background 0.12s;}
+    .btn-ghost:hover{background:#f3ecde;color:var(--ink);}
 
-    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 960px; margin: 0 auto; }
-    @media (max-width: 820px) { .related-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 520px) { .related-grid { grid-template-columns: 1fr; } }
-    .related-card { background: #fff; border-radius: 16px; padding: 20px 22px; box-shadow: 0 2px 8px rgba(47,71,110,0.05); border: 1px solid rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; display: block; }
-    .related-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(47,71,110,0.1); }
-    .related-card .k { font-size: 0.72rem; font-weight: 700; color: var(--blue-dark, #7A9DB0); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
-    .related-card h4 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem; color: var(--text); line-height: 1.35; }
+    /* Trust row below tool */
+    .trust-row{max-width:560px;margin:16px auto 0;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:0.82rem;color:var(--ink-light);}
+    .trust-row .chip{display:inline-flex;align-items:center;gap:6px;}
+    .trust-row svg{width:13px;height:13px;}
 
-    .lp-cta { padding: 80px 0; background: linear-gradient(165deg, #eaf1f6 0%, #f5e6d8 100%); text-align: center; position: relative; overflow: hidden; }
-    .lp-cta::before { content: ""; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,215,122,0.3) 0%, transparent 70%); }
-    .lp-cta::after { content: ""; position: absolute; bottom: -60px; left: -60px; width: 260px; height: 260px; background: radial-gradient(circle, rgba(122,157,176,0.15) 0%, transparent 70%); }
-    .lp-cta-inner { position: relative; z-index: 1; }
-    .lp-cta img.mascot { height: 96px; margin-bottom: 16px; }
-    .lp-cta h2 { margin-bottom: 12px; font-size: clamp(1.6rem, 4vw, 2.2rem); }
-    .lp-cta p { max-width: 540px; margin: 0 auto 24px; font-size: 1.05rem; color: var(--text-muted); line-height: 1.6; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: var(--blue-dark, #7A9DB0); color: #fff; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 6px 20px rgba(122,157,176,0.4); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(122,157,176,0.5); }
-    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 60px; font-weight: 700; font-size: 1rem; background: #fff; color: var(--text); text-decoration: none; border: 1.5px solid rgba(0,0,0,0.1); transition: transform 0.2s; }
-    .btn-secondary:hover { transform: translateY(-2px); }
-    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    /* ==== Below-the-fold: educational SEO content ==== */
+    .below{background:#ffffff;border-top:1px solid var(--line-soft);margin-top:48px;}
+    .below-inner{max-width:820px;margin:0 auto;padding:56px 20px 24px;}
+    .below-head{text-align:center;margin-bottom:36px;}
+    .below-kicker{display:inline-block;padding:5px 12px;border-radius:100px;background:var(--peach-soft);color:#8a5e3c;font-size:0.72rem;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:12px;}
+    .below-head h2{font-size:clamp(1.5rem,3.5vw,2rem);margin-bottom:10px;}
+    .below-head p{max-width:560px;margin:0 auto;font-size:1rem;color:var(--ink-muted);}
 
-    .fade-up { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.7s ease; }
+    .below-section{margin-bottom:48px;}
+    .below-section:last-child{margin-bottom:0;}
+    .below-section h3.sect-head{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.15rem;margin-bottom:14px;}
+
+    .amounts-table{background:#fff;border-radius:14px;border:1px solid var(--line);overflow:hidden;overflow-x:auto;}
+    .amounts-table table{width:100%;border-collapse:collapse;font-size:0.92rem;min-width:520px;}
+    .amounts-table th,.amounts-table td{padding:12px 14px;text-align:left;}
+    .amounts-table th{background:#faf6ef;font-weight:800;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.6px;color:var(--ink);}
+    .amounts-table tbody tr:not(:last-child) td{border-bottom:1px solid var(--line-soft);}
+    .amounts-table .age{font-weight:700;}
+    .amounts-table .win{font-weight:700;color:var(--brand-dark);font-family:'Nunito',sans-serif;}
+    .amounts-note{text-align:center;margin-top:12px;font-size:0.82rem;color:var(--ink-light);}
+
+    .cues-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+    @media (max-width:720px){.cues-grid{grid-template-columns:repeat(2,1fr);}}
+    @media (max-width:420px){.cues-grid{grid-template-columns:1fr;}}
+    .cue{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;}
+    .cue .em{font-size:22px;margin-bottom:8px;line-height:1;}
+    .cue h4{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;margin-bottom:4px;}
+    .cue p{font-size:0.88rem;color:var(--ink-muted);line-height:1.55;}
+
+    .longform h3{font-size:1.08rem;margin:22px 0 8px;}
+    .longform p{font-size:0.98rem;line-height:1.7;color:var(--ink);margin-bottom:12px;}
+    .longform ul{padding-left:20px;margin-bottom:12px;list-style:disc;}
+    .longform ul li{margin-bottom:5px;color:var(--ink);}
+
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    @media (max-width:720px){.related-grid{grid-template-columns:1fr 1fr;}}
+    @media (max-width:420px){.related-grid{grid-template-columns:1fr;}}
+    .rel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:transform 0.15s ease,border-color 0.15s ease;display:block;}
+    .rel:hover{transform:translateY(-2px);border-color:var(--brand);}
+    .rel .k{font-size:0.68rem;font-weight:800;color:var(--brand-dark);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;}
+    .rel h4{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.92rem;line-height:1.35;}
+
+    /* Bottom CTA band */
+    .band{background:linear-gradient(165deg,var(--peach-soft) 0%,#f5e3cf 100%);padding:48px 20px;text-align:center;margin-top:8px;}
+    .band img.mascot{height:72px;margin-bottom:10px;}
+    .band h2{font-size:clamp(1.35rem,3.2vw,1.8rem);margin-bottom:10px;}
+    .band p{max-width:520px;margin:0 auto 20px;color:var(--ink-muted);font-size:0.98rem;}
+    .band .cta{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;background:var(--ink);color:#fff;font-weight:700;font-size:0.98rem;transition:transform 0.15s;}
+    .band .cta:hover{transform:translateY(-2px);}
+    .band .tiny{display:block;margin-top:10px;font-size:0.82rem;color:var(--ink-light);}
+    .band .tiny a{font-weight:700;color:var(--brand-dark);}
+
+    /* Footer */
+    .footer{background:#ffffff;border-top:1px solid var(--line-soft);padding:28px 20px;text-align:center;}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:12px;font-size:0.88rem;color:var(--ink-muted);}
+    .footer-links a:hover{color:var(--ink);}
+    .footer-copy{font-size:0.82rem;color:var(--ink-light);}
+
+    /* Print */
+    @media print{
+      body{background:#fff;}
+      .app-header,.tool-seo-h1,.tool-actions,.trust-row,.below,.band,.footer,.age-slider-wrap,.age-zone-label{display:none !important;}
+      .panel{box-shadow:none;border-radius:0;}
+      .result-hero{background:#fff;border-bottom:2px solid #000;}
+      .sched-row{page-break-inside:avoid;}
+    }
   </style>
   <script src="/analytics-consent.js" defer></script>
 </head>
 <body>
 
-  <nav class="lp-nav">
-    <div class="container lp-nav-inner">
-      <a href="/" class="lp-nav-brand"><img src="/Pippy-Icon.png" alt="Pippy" /> Pippy</a>
-      <a href="/" class="btn-secondary" style="padding: 10px 20px; font-size: 0.92rem;">Back to Pippy</a>
+  <!-- Slim app-like header -->
+  <header class="app-header">
+    <div class="app-header-inner">
+      <a class="app-brand" href="/" aria-label="Pippy home">
+        <img src="/Pippy-Icon.png" alt="Pippy" />
+        <span class="app-brand-name">Pippy</span>
+        <span class="app-brand-sep"></span>
+        <span class="app-tool-name">Wake Window Calculator</span>
+      </a>
+      <div class="app-chip" title="Free tool, no signup required">
+        <span class="app-chip-dot"></span>
+        <span><span class="chip-long">No signup </span>&middot; Free</span>
+      </div>
     </div>
-  </nav>
+  </header>
 
-  <section class="lp-hero">
-    <div class="container lp-hero-inner">
-      <span class="tag">Free Calculator · No Signup</span>
-      <h1>Wake window calculator <span class="highlight">for babies 0 to 24 months</span>.</h1>
-      <p class="sub">Enter your baby's age. See the ideal wake window, the next nap time, and a full sample day. Runs in your browser, no app required.</p>
+  <main class="tool-main">
+    <div class="tool-wrap">
 
-      <div class="calc-card" id="calc">
-        <div class="calc-row">
-          <div class="calc-label">Baby's age</div>
-          <div class="age-input-wrap">
-            <input type="number" id="ageValue" min="0" max="104" value="16" aria-label="Age value" />
+      <!-- Small SEO H1, sits above the tool but doesn't dominate -->
+      <h1 class="tool-seo-h1">Free online <span class="strong">wake window calculator</span>. No app, no signup.</h1>
+
+      <div class="panel">
+
+        <!-- Hero result: live computed from age -->
+        <section class="result-hero">
+          <div class="result-kicker">Ideal wake window</div>
+          <div class="result-value" id="wwValue">1h 45m to 2h 15m</div>
+          <div class="result-sub" id="wwSub">for a 4 month old</div>
+          <div class="result-next" id="nextNapWrap">
+            <span class="label">Next nap approx</span>
+            <span id="nextNapTime">...</span>
+          </div>
+        </section>
+
+        <!-- Primary zone: age input -->
+        <div class="age-zone">
+          <div class="age-zone-label">Baby's age</div>
+          <div class="age-input-row">
+            <input type="number" id="ageValue" min="0" max="24" value="4" step="0.5" aria-label="Age value" inputmode="decimal" />
             <select id="ageUnit" aria-label="Age unit">
               <option value="weeks">weeks old</option>
               <option value="months" selected>months old</option>
             </select>
           </div>
-        </div>
-        <div class="calc-slider-wrap">
-          <input type="range" id="ageSlider" min="0" max="24" step="0.5" value="4" aria-label="Age slider" />
-          <div class="calc-slider-ticks">
-            <span>Newborn</span>
-            <span>3mo</span>
-            <span>6mo</span>
-            <span>9mo</span>
-            <span>12mo</span>
-            <span>18mo</span>
-            <span>24mo</span>
+          <div class="age-slider-wrap">
+            <input type="range" id="ageSlider" min="0" max="24" step="0.5" value="4" aria-label="Age slider" />
+            <div class="age-slider-ticks">
+              <span>0</span>
+              <span>3mo</span>
+              <span>6mo</span>
+              <span>9mo</span>
+              <span>12mo</span>
+              <span>18mo</span>
+              <span>24mo</span>
+            </div>
           </div>
         </div>
 
-        <div class="calc-result">
-          <div class="window-label">Ideal Wake Window</div>
-          <div class="window-value" id="wwValue">1h 45m – 2h 15m</div>
-          <div class="window-sub" id="wwSub">Awake time between sleeps</div>
-        </div>
-
-        <div class="calc-meta">
-          <div class="calc-meta-cell"><div class="k">Naps / day</div><div class="v" id="napsValue">2 – 3</div></div>
-          <div class="calc-meta-cell"><div class="k">Total day sleep</div><div class="v" id="dayValue">3h – 4h</div></div>
-          <div class="calc-meta-cell"><div class="k">Night sleep</div><div class="v" id="nightValue">10h – 12h</div></div>
-        </div>
-      </div>
-
-      <div class="next-nap-card" id="nextNapCard">
-        <div class="nap-left">
-          <div class="nap-icon">🌙</div>
-          <div class="nap-txt">
-            <div class="k">Next nap approx.</div>
-            <div class="v" id="nextNapTime">...</div>
+        <!-- Last wake time -->
+        <div class="wake-zone">
+          <div class="wake-zone-inner">
+            <div class="wake-icon" aria-hidden="true">&#9728;</div>
+            <div class="wake-text">
+              <div class="k">Last woke at</div>
+              <div class="v">Adjust to see the next nap</div>
+            </div>
+            <input type="time" id="lastWake" aria-label="Last wake time" />
           </div>
         </div>
-        <div>
-          <label for="lastWake" style="font-size: 0.82rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-right: 8px;">Last woke at</label>
-          <input type="time" id="lastWake" />
+
+        <!-- Summary chips -->
+        <div class="chips-row">
+          <div class="chip-cell"><div class="k">Naps / day</div><div class="v" id="napsValue">2 to 3</div></div>
+          <div class="chip-cell"><div class="k">Day sleep</div><div class="v" id="dayValue">3 to 4h</div></div>
+          <div class="chip-cell"><div class="k">Night sleep</div><div class="v" id="nightValue">10 to 12h</div></div>
+        </div>
+
+        <!-- Sample day schedule -->
+        <div class="sched-wrap">
+          <div class="sched-h">
+            <span class="t">Sample day</span>
+            <span class="intro" id="schedIntro">Example schedule for a 4 month old using the middle of the range.</span>
+          </div>
+          <div class="sched-card" id="schedCard">
+            <!-- populated by JS -->
+          </div>
+        </div>
+
+        <!-- Tool actions -->
+        <div class="tool-actions">
+          <div class="left">
+            <button type="button" class="btn-ghost" id="printBtn">Print schedule</button>
+          </div>
+          <a href="https://meetpippy.com/app" class="get-app-link">Get it on your phone &rarr;</a>
+        </div>
+
+      </div>
+
+      <!-- Trust strip -->
+      <div class="trust-row">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg> No signup</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg> Works in your browser</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="6" y="3" width="12" height="6"/><rect x="6" y="14" width="12" height="7"/><path d="M6 14H4a2 2 0 01-2-2v-3a2 2 0 012-2h16a2 2 0 012 2v3a2 2 0 01-2 2h-2"/></svg> Print friendly</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Educational / SEO content -->
+  <section class="below" id="learn">
+    <div class="below-inner">
+      <div class="below-head">
+        <span class="below-kicker">Learn more</span>
+        <h2>Wake windows by age, cues, and how to tune the timing</h2>
+        <p>The tool above does the math. This section answers the questions that come up once you start using it.</p>
+      </div>
+
+      <div class="below-section">
+        <h3 class="sect-head">Wake windows by age at a glance</h3>
+        <div class="amounts-table">
+          <table>
+            <thead>
+              <tr><th>Age</th><th>Wake window</th><th>Naps / day</th><th>Day sleep</th><th>Night sleep</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="age">0 to 6 weeks</td><td class="win">45 to 60 min</td><td>4 to 6</td><td>6 to 8h</td><td>8 to 10h (broken)</td></tr>
+              <tr><td class="age">6 to 12 weeks</td><td class="win">60 to 90 min</td><td>3 to 5</td><td>4 to 6h</td><td>9 to 11h</td></tr>
+              <tr><td class="age">3 to 4 months</td><td class="win">75 to 105 min</td><td>3 to 4</td><td>3.5 to 5h</td><td>10 to 12h</td></tr>
+              <tr><td class="age">4 to 5 months</td><td class="win">90 to 120 min</td><td>3 to 4</td><td>3 to 4h</td><td>10 to 12h</td></tr>
+              <tr><td class="age">5 to 7 months</td><td class="win">1h 45m to 2h 30m</td><td>2 to 3</td><td>2.5 to 3.5h</td><td>10 to 12h</td></tr>
+              <tr><td class="age">7 to 10 months</td><td class="win">2h 30m to 3h</td><td>2</td><td>2 to 3h</td><td>10 to 12h</td></tr>
+              <tr><td class="age">10 to 14 months</td><td class="win">3 to 4h</td><td>1 to 2</td><td>2 to 2.5h</td><td>10 to 12h</td></tr>
+              <tr><td class="age">14 to 18 months</td><td class="win">4 to 5h</td><td>1</td><td>1.5 to 2.5h</td><td>10 to 12h</td></tr>
+              <tr><td class="age">18 to 24 months</td><td class="win">5 to 6h</td><td>1</td><td>1.5 to 2h</td><td>10 to 12h</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="amounts-note">Averages from pediatric sleep guidance. Not medical advice. If you are worried, call your pediatrician.</p>
+      </div>
+
+      <div class="below-section">
+        <h3 class="sect-head">Signs the wake window is ending</h3>
+        <div class="cues-grid">
+          <div class="cue"><div class="em">&#128064;</div><h4>Zoning out</h4><p>Staring into space or going very still. One of the earliest signs and easy to miss.</p></div>
+          <div class="cue"><div class="em">&#129396;</div><h4>Eye rubs, ear tugs</h4><p>Classic tired cues. If you see these, you are usually already close to overtired.</p></div>
+          <div class="cue"><div class="em">&#129393;</div><h4>Yawning</h4><p>Helpful but often late. Use it as confirmation, not a first warning.</p></div>
+          <div class="cue"><div class="em">&#128545;</div><h4>Fussy for no reason</h4><p>Fed, changed, held, still upset. Very often a "please put me down" cue.</p></div>
+          <div class="cue"><div class="em">&#129331;</div><h4>Hyper and clumsy</h4><p>Older babies get a second wind near overtired. Looks like energy, reads as "get me to bed".</p></div>
+          <div class="cue"><div class="em">&#128263;</div><h4>Suddenly quiet</h4><p>Babbling stops, engagement drops. The nervous system is saying "I am done".</p></div>
         </div>
       </div>
-    </div>
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C320,80 560,0 880,50 C1100,80 1300,20 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/></svg>
-  </section>
 
-  <section class="lp-section">
-    <div class="container">
-      <div class="lp-section-head">
-        <span class="tag">Chart</span>
-        <h2>Wake windows by age, at a glance</h2>
-        <p>The awake time most babies handle well before they get overtired. Every baby is different, so use this as a starting point and tune from your baby's cues.</p>
-      </div>
-      <div class="ww-table-wrap">
-        <table>
-          <thead>
-            <tr><th>Age</th><th>Wake window</th><th>Naps / day</th><th>Total day sleep</th><th>Night sleep</th></tr>
-          </thead>
-          <tbody>
-            <tr><td class="age-cell">0 – 6 weeks</td><td class="win">45 – 60 min</td><td>4 – 6</td><td>6 – 8 h</td><td>8 – 10 h (broken)</td></tr>
-            <tr><td class="age-cell">6 – 12 weeks</td><td class="win">60 – 90 min</td><td>3 – 5</td><td>4 – 6 h</td><td>9 – 11 h</td></tr>
-            <tr><td class="age-cell">3 – 4 months</td><td class="win">75 – 105 min</td><td>3 – 4</td><td>3.5 – 5 h</td><td>10 – 12 h</td></tr>
-            <tr><td class="age-cell">4 – 5 months</td><td class="win">90 – 120 min</td><td>3 – 4</td><td>3 – 4 h</td><td>10 – 12 h</td></tr>
-            <tr><td class="age-cell">5 – 7 months</td><td class="win">1h 45m – 2h 30m</td><td>2 – 3</td><td>2.5 – 3.5 h</td><td>10 – 12 h</td></tr>
-            <tr><td class="age-cell">7 – 10 months</td><td class="win">2h 30m – 3h</td><td>2</td><td>2 – 3 h</td><td>10 – 12 h</td></tr>
-            <tr><td class="age-cell">10 – 14 months</td><td class="win">3 – 4 h</td><td>1 – 2</td><td>2 – 2.5 h</td><td>10 – 12 h</td></tr>
-            <tr><td class="age-cell">14 – 18 months</td><td class="win">4 – 5 h</td><td>1</td><td>1.5 – 2.5 h</td><td>10 – 12 h</td></tr>
-            <tr><td class="age-cell">18 – 24 months</td><td class="win">5 – 6 h</td><td>1</td><td>1.5 – 2 h</td><td>10 – 12 h</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="text-align: center; margin-top: 14px; font-size: 0.86rem; color: var(--text-muted);">Averages from pediatric sleep guidance. Not medical advice. If you are worried about your baby's sleep, talk to your pediatrician.</p>
-    </div>
-  </section>
-
-  <section class="lp-section alt">
-    <div class="container">
-      <div class="lp-section-head">
-        <span class="tag">Sample Day</span>
-        <h2>What a day with the right wake windows looks like</h2>
-        <p id="schedIntro">Example schedule for a 4-month-old using the middle of the wake window range. Tap the slider above to see other ages.</p>
-      </div>
-      <div class="sched-card" id="schedCard">
-        <!-- populated by JS -->
-      </div>
-    </div>
-  </section>
-
-  <section class="lp-section">
-    <div class="container">
-      <div class="lp-section-head">
-        <span class="tag">Cues</span>
-        <h2>Signs the wake window is ending</h2>
-        <p>The calculator gives you a number. Your baby gives you the real signal. Watch for these near the end of the window.</p>
-      </div>
-      <div class="cue-grid">
-        <div class="cue-card"><div class="cue-emoji">👀</div><h3>Zoning out</h3><p>Staring into space or getting very still. One of the earliest signs and easy to miss.</p></div>
-        <div class="cue-card"><div class="cue-emoji">🫴</div><h3>Eye rubs and ear tugs</h3><p>Classic tired cues. If you are seeing this, you are usually already close to overtired.</p></div>
-        <div class="cue-card"><div class="cue-emoji">🥱</div><h3>Yawning</h3><p>Helpful but often late. Use it as confirmation, not a first warning.</p></div>
-        <div class="cue-card"><div class="cue-emoji">😤</div><h3>Fussy with no clear reason</h3><p>Fed, changed, held, still upset. Very often a "please put me down" cue.</p></div>
-        <div class="cue-card"><div class="cue-emoji">🤹</div><h3>Hyper and clumsy</h3><p>Older babies get a second wind near overtired. Looks like energy, reads as "get me to bed".</p></div>
-        <div class="cue-card"><div class="cue-emoji">🔇</div><h3>Suddenly quiet</h3><p>Babbling stops, engagement drops. The nervous system is saying "I am done".</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="lp-section alt">
-    <div class="container">
-      <div class="longform">
-        <div class="lp-section-head" style="margin-bottom: 24px;">
-          <span class="tag">Guide</span>
-          <h2>How wake windows actually work</h2>
-        </div>
-        <p>A wake window is the time your baby spends awake between sleeps. As babies grow, their nervous system can handle longer and longer stretches without falling apart. That is why a newborn only lasts 45 minutes before needing to sleep again, and a toddler can go most of the day on one short nap.</p>
-        <p>The goal of timing naps to wake windows is simple: catch your baby in the sweet spot where they are tired enough to sleep easily, but not so tired that their body releases stress hormones and fights it. Overtired babies take shorter naps, wake more at night, and are harder to settle. Undertired babies fight the nap and resist the bedtime routine.</p>
+      <div class="below-section longform">
+        <h3>How wake windows actually work</h3>
+        <p>A wake window is the time your baby spends awake between sleeps. As babies grow, their nervous system can handle longer and longer stretches without falling apart. A newborn only lasts 45 minutes before needing to sleep again. A toddler can go most of the day on one short nap.</p>
+        <p>The goal of timing naps to wake windows is simple. Catch your baby in the sweet spot where they are tired enough to sleep easily, but not so tired that their body releases stress hormones and fights it. Overtired babies take shorter naps, wake more at night, and are harder to settle. Undertired babies fight the nap and resist the bedtime routine.</p>
         <h3>How to use the calculator</h3>
         <ul>
-          <li>Enter your baby's age. The calculator returns a wake window range, not a single number. Use the middle of the range as your default.</li>
-          <li>Note the time your baby woke up. Add the wake window to find the next nap start.</li>
+          <li>Enter your baby's age. The calculator returns a range, not a single number. Start with the middle.</li>
+          <li>Type the time your baby last woke up. The tool shows the window for the next nap.</li>
           <li>Watch for sleepy cues in the last 10 to 15 minutes of the window. Start the wind-down when you see them.</li>
-          <li>If naps keep getting shorter, your baby is probably going down overtired. Try the shorter end of the range next time.</li>
+          <li>If naps keep getting shorter, your baby is probably going down overtired. Try the shorter end next time.</li>
           <li>If your baby fights sleep and cannot settle, they may be undertired. Try the longer end.</li>
         </ul>
         <h3>When wake windows don't apply</h3>
         <p>Sleep regressions, illness, developmental leaps, travel, and newborn cluster days all throw wake windows off. Use the calculator as a baseline and give yourself room to adjust for real life. Wake windows are a tool, not a rule.</p>
         <h3>Common mistakes</h3>
         <ul>
-          <li><strong>Starting the timer when the nap ends instead of when the baby actually wakes.</strong> The window starts when your baby opens their eyes.</li>
+          <li><strong>Starting the timer when the nap ends instead of when the baby actually wakes.</strong> The window starts the moment your baby opens their eyes.</li>
           <li><strong>Waiting for yawns.</strong> Yawning is often a late cue. By then you are chasing the nap.</li>
           <li><strong>Treating the number as fixed.</strong> Wake windows shift during growth spurts and leaps. Re-check weekly.</li>
           <li><strong>Ignoring the morning window.</strong> The first wake window of the day is almost always the shortest. A longer-than-usual morning window often tanks the whole day.</li>
         </ul>
         <h3>Is this a replacement for sleep training?</h3>
-        <p>No. Wake windows help you time naps and bedtime. They do not teach your baby to fall asleep independently. You can use wake windows alongside any sleep approach: contact naps, co-sleeping, cry-free methods, or formal sleep training. They just make the timing part easier.</p>
+        <p>No. Wake windows help you time naps and bedtime. They do not teach your baby to fall asleep independently. You can use wake windows alongside any sleep approach. Contact naps, co-sleeping, cry-free methods, or formal sleep training. They just make the timing part easier.</p>
+        <h3>Privacy</h3>
+        <p>Nothing you type into this calculator is saved or sent anywhere. It all runs in your browser and disappears when you close the tab.</p>
       </div>
+
+      <div class="below-section">
+        <h3 class="sect-head">Keep reading</h3>
+        <div class="related-grid">
+          <a href="/blog/baby-nap-schedule-by-age.html" class="rel"><div class="k">Sleep</div><h4>Baby nap schedule by age, month by month</h4></a>
+          <a href="/blog/newborn-sleep-schedule.html" class="rel"><div class="k">Newborn</div><h4>Newborn sleep schedule, what's normal in the first weeks</h4></a>
+          <a href="/blog/baby-sleep-regression.html" class="rel"><div class="k">Sleep</div><h4>The 4, 8, and 12 month sleep regressions</h4></a>
+          <a href="/blog/safe-sleep-guidelines.html" class="rel"><div class="k">Safety</div><h4>Safe sleep guidelines: the essentials</h4></a>
+          <a href="/blog/baby-teething-timeline.html" class="rel"><div class="k">Health</div><h4>Baby teething timeline and night wake ups</h4></a>
+          <a href="/blog/baby-milestones-month-by-month.html" class="rel"><div class="k">Development</div><h4>Baby milestones, month by month</h4></a>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section class="lp-section">
-    <div class="container">
-      <div class="lp-section-head">
-        <span class="tag">Keep Reading</span>
-        <h2>Related Pippy guides</h2>
-      </div>
-      <div class="related-grid">
-        <a href="/blog/baby-nap-schedule-by-age.html" class="related-card"><div class="k">Sleep</div><h4>Baby nap schedule by age, month by month</h4></a>
-        <a href="/blog/newborn-sleep-schedule.html" class="related-card"><div class="k">Newborn</div><h4>Newborn sleep schedule: what's normal in the first weeks</h4></a>
-        <a href="/blog/baby-sleep-regression.html" class="related-card"><div class="k">Sleep</div><h4>The 4, 8, and 12 month sleep regressions explained</h4></a>
-        <a href="/blog/baby-fighting-sleep.html" class="related-card"><div class="k">Sleep</div><h4>Why is my baby fighting sleep? 6 real reasons</h4></a>
-        <a href="/blog/baby-early-morning-waking.html" class="related-card"><div class="k">Sleep</div><h4>Baby waking up too early? Fix the early wake</h4></a>
-        <a href="/blog/baby-day-night-confusion.html" class="related-card"><div class="k">Newborn</div><h4>Day/night confusion: how to flip it in under 2 weeks</h4></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="lp-cta">
-    <div class="container lp-cta-inner">
-      <img src="/mascot/mascot-wave.png" alt="Pippy waving" class="mascot" />
-      <h2>Want Pippy to track this for you automatically?</h2>
-      <p>Log a nap once and Pippy starts predicting the next wake window for you. No more watching the clock. Free tier includes nap predictions, family sharing, and doctor-ready reports.</p>
-      <div class="cta-row">
-        <a href="https://meetpippy.com/app" class="btn-primary">Use the free online tracker →</a>
-        <a href="/" class="btn-secondary">Get the app</a>
-      </div>
-    </div>
+  <!-- Bottom CTA -->
+  <section class="band">
+    <img src="/mascot/mascot-wave.png" alt="Pippy mascot" class="mascot" />
+    <h2>Want Pippy to watch the clock for you?</h2>
+    <p>Log one nap and Pippy predicts the next wake window automatically. The app also tracks feeds and diapers, and shares a clean summary with your partner or pediatrician.</p>
+    <a href="https://meetpippy.com/app" class="cta">Get the free app &rarr;</a>
+    <span class="tiny">Already here? Also try the <a href="/free-feeding-tracker.html">feeding tracker</a> and <a href="/free-diaper-tracker.html">diaper tracker</a>.</span>
   </section>
 
   <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="/Pippy-Logo.png" alt="Pippy" class="footer-logo" />
-        <p>An AI-powered baby tracker built for new parents.</p>
-      </div>
-      <div class="footer-links">
-        <a href="/free-baby-tracker.html">Free baby tracker</a>
-        <a href="/free-wake-window-calculator.html">Wake window calculator</a>
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Service</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-      <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="/">Pippy home</a>
+      <a href="/free-feeding-tracker.html">Feeding tracker</a>
+      <a href="/free-diaper-tracker.html">Diaper tracker</a>
+      <a href="/free-pumping-log.html">Pumping log</a>
+      <a href="/free-tummy-time-timer.html">Tummy time timer</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
     </div>
+    <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
   </footer>
 
   <script>
-    // Wake window data, ordered by max age in months
+    // --- Pippy Wake Window Calculator ---
+    // Wake window data, ordered by max age in months. Labels use "to" instead of dashes.
     const WW_DATA = [
-      { maxMonths: 1.5,  label: "Newborn (0-6 wk)",    wwMinMin: 45,  wwMaxMin: 60,  naps: "4 – 6",   daySleep: "6 – 8 h", nightSleep: "8 – 10 h (broken)" },
-      { maxMonths: 3,    label: "6 – 12 weeks",        wwMinMin: 60,  wwMaxMin: 90,  naps: "3 – 5",   daySleep: "4 – 6 h", nightSleep: "9 – 11 h" },
-      { maxMonths: 4,    label: "3 – 4 months",        wwMinMin: 75,  wwMaxMin: 105, naps: "3 – 4",   daySleep: "3.5 – 5 h", nightSleep: "10 – 12 h" },
-      { maxMonths: 5,    label: "4 – 5 months",        wwMinMin: 90,  wwMaxMin: 120, naps: "3 – 4",   daySleep: "3 – 4 h", nightSleep: "10 – 12 h" },
-      { maxMonths: 7,    label: "5 – 7 months",        wwMinMin: 105, wwMaxMin: 150, naps: "2 – 3",   daySleep: "2.5 – 3.5 h", nightSleep: "10 – 12 h" },
-      { maxMonths: 10,   label: "7 – 10 months",       wwMinMin: 150, wwMaxMin: 180, naps: "2",       daySleep: "2 – 3 h", nightSleep: "10 – 12 h" },
-      { maxMonths: 14,   label: "10 – 14 months",      wwMinMin: 180, wwMaxMin: 240, naps: "1 – 2",   daySleep: "2 – 2.5 h", nightSleep: "10 – 12 h" },
-      { maxMonths: 18,   label: "14 – 18 months",      wwMinMin: 240, wwMaxMin: 300, naps: "1",       daySleep: "1.5 – 2.5 h", nightSleep: "10 – 12 h" },
-      { maxMonths: 24,   label: "18 – 24 months",      wwMinMin: 300, wwMaxMin: 360, naps: "1",       daySleep: "1.5 – 2 h", nightSleep: "10 – 12 h" },
+      { maxMonths: 1.5,  label: "newborn (0 to 6 wk)",   wwMinMin: 45,  wwMaxMin: 60,  naps: "4 to 6", daySleep: "6 to 8h",   nightSleep: "8 to 10h (broken)" },
+      { maxMonths: 3,    label: "6 to 12 week old",      wwMinMin: 60,  wwMaxMin: 90,  naps: "3 to 5", daySleep: "4 to 6h",   nightSleep: "9 to 11h" },
+      { maxMonths: 4,    label: "3 to 4 month old",      wwMinMin: 75,  wwMaxMin: 105, naps: "3 to 4", daySleep: "3.5 to 5h", nightSleep: "10 to 12h" },
+      { maxMonths: 5,    label: "4 to 5 month old",      wwMinMin: 90,  wwMaxMin: 120, naps: "3 to 4", daySleep: "3 to 4h",   nightSleep: "10 to 12h" },
+      { maxMonths: 7,    label: "5 to 7 month old",      wwMinMin: 105, wwMaxMin: 150, naps: "2 to 3", daySleep: "2.5 to 3.5h", nightSleep: "10 to 12h" },
+      { maxMonths: 10,   label: "7 to 10 month old",     wwMinMin: 150, wwMaxMin: 180, naps: "2",      daySleep: "2 to 3h",   nightSleep: "10 to 12h" },
+      { maxMonths: 14,   label: "10 to 14 month old",    wwMinMin: 180, wwMaxMin: 240, naps: "1 to 2", daySleep: "2 to 2.5h", nightSleep: "10 to 12h" },
+      { maxMonths: 18,   label: "14 to 18 month old",    wwMinMin: 240, wwMaxMin: 300, naps: "1",      daySleep: "1.5 to 2.5h", nightSleep: "10 to 12h" },
+      { maxMonths: 24,   label: "18 to 24 month old",    wwMinMin: 300, wwMaxMin: 360, naps: "1",      daySleep: "1.5 to 2h", nightSleep: "10 to 12h" },
     ];
 
     const fmtMin = (m) => {
@@ -432,7 +526,7 @@
       const napLen = (row.wwMaxMin < 120) ? 60 : (row.wwMaxMin < 180 ? 75 : 90);
       const events = [];
       events.push({ t: pickTime(cursor, 0), e: "Wake up", d: "Start of the day" });
-      const maxNaps = parseInt(row.naps.split("–")[0].trim()) || 1;
+      const maxNaps = parseInt(row.naps.split(/to|\s/)[0].trim()) || 1;
       const planned = Math.min(maxNaps, 4);
       for (let i = 0; i < planned; i++) {
         cursor = new Date(cursor.getTime() + mid * 60000);
@@ -450,8 +544,10 @@
     const renderSchedule = (row) => {
       const card = document.getElementById("schedCard");
       const events = buildSchedule(row, "06:30");
-      card.innerHTML = events.map(e => `<div class="sched-row"><div class="sched-time">${e.t}</div><div class="sched-event">${e.e}<span class="detail">${e.d}</span></div></div>`).join("");
-      document.getElementById("schedIntro").textContent = `Example schedule for ${row.label}, assuming a 6:30am wake-up and the middle of the wake window range. Your baby's timing will differ. Use this as a template.`;
+      card.innerHTML = events.map(e =>
+        '<div class="sched-row"><div class="sched-time">' + e.t + '</div><div class="sched-event">' + e.e + '<span class="detail">' + e.d + '</span></div></div>'
+      ).join("");
+      document.getElementById("schedIntro").textContent = "Example for a " + row.label + " starting at a 6:30am wake up. Your timing will differ. Use as a template.";
     };
 
     const toMonths = (value, unit) => unit === "weeks" ? value / 4.345 : value;
@@ -463,8 +559,8 @@
       const months = Math.max(0, Math.min(24, toMonths(value, unit)));
       const row = bucketFor(months);
 
-      document.getElementById("wwValue").textContent = fmtMin(row.wwMinMin) + " – " + fmtMin(row.wwMaxMin);
-      document.getElementById("wwSub").textContent = `Typical for ${row.label}`;
+      document.getElementById("wwValue").textContent = fmtMin(row.wwMinMin) + " to " + fmtMin(row.wwMaxMin);
+      document.getElementById("wwSub").textContent = "for a " + row.label;
       document.getElementById("napsValue").textContent = row.naps;
       document.getElementById("dayValue").textContent = row.daySleep;
       document.getElementById("nightValue").textContent = row.nightSleep;
@@ -476,15 +572,18 @@
       // next nap
       const lw = document.getElementById("lastWake").value;
       const nap = document.getElementById("nextNapTime");
+      const wrap = document.getElementById("nextNapWrap");
       if (lw) {
         const [h, m] = lw.split(":").map(Number);
         const d = new Date(); d.setHours(h, m, 0, 0);
         const minMs = new Date(d.getTime() + row.wwMinMin * 60000);
         const maxMs = new Date(d.getTime() + row.wwMaxMin * 60000);
         const toStr = (dt) => { const hh = dt.getHours() % 12 || 12; const mm = dt.getMinutes().toString().padStart(2, "0"); const s = dt.getHours() >= 12 ? "pm" : "am"; return hh + ":" + mm + s; };
-        nap.textContent = toStr(minMs) + " – " + toStr(maxMs);
+        nap.textContent = toStr(minMs) + " to " + toStr(maxMs);
+        wrap.classList.remove("empty");
       } else {
-        nap.textContent = "Enter last wake time →";
+        nap.textContent = "enter last wake time";
+        wrap.classList.add("empty");
       }
 
       renderSchedule(row);
@@ -506,7 +605,10 @@
     });
     document.getElementById("lastWake").addEventListener("input", update);
 
-    // default last-wake to 90 min ago rounded, so the demo feels alive
+    const printBtn = document.getElementById("printBtn");
+    if (printBtn) printBtn.addEventListener("click", () => window.print());
+
+    // default last-wake to 90 min ago rounded, so the tool feels alive the moment it loads
     (function seed() {
       const d = new Date(); d.setMinutes(d.getMinutes() - 90);
       const hh = d.getHours().toString().padStart(2, "0");
@@ -514,6 +616,9 @@
       document.getElementById("lastWake").value = hh + ":" + mm;
       update();
     })();
+
+    // light re-render every minute so "next nap approx" stays fresh if user idles on page
+    setInterval(update, 60 * 1000);
   </script>
   <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
