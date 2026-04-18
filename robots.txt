@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /app/
+Disallow: /dashboard.html
+Disallow: /delete-account.html
 
 Sitemap: https://meetpippy.com/sitemap.xml

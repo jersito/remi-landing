@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
+  
+  
   <url>
     <loc>https://meetpippy.com/</loc>
     <lastmod>2026-04-02</lastmod>
@@ -8,12 +10,14 @@
     <priority>1.0</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/blog/</loc>
     <lastmod>2026-04-17</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/doctor-view.html</loc>
@@ -22,12 +26,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/faq.html</loc>
     <lastmod>2026-03-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/visit.html</loc>
@@ -36,6 +42,7 @@
     <priority>0.6</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/contact.html</loc>
     <lastmod>2026-03-27</lastmod>
@@ -43,12 +50,22 @@
     <priority>0.5</priority>
   </url>
 
+
   <url>
-    <loc>https://meetpippy.com/parenting-personality.html</loc>
-    <lastmod>2026-04-13</lastmod>
+    <loc>https://meetpippy.com/about.html</loc>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+
+  <url>
+    <loc>https://meetpippy.com/tools/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
 
   <url>
     <loc>https://meetpippy.com/huckleberry-alternative.html</loc>
@@ -57,12 +74,14 @@
     <priority>0.9</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/baby-tracker-for-dads.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/family-baby-tracker.html</loc>
@@ -71,12 +90,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/free-baby-tracker.html</loc>
     <lastmod>2026-04-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/free-wake-window-calculator.html</loc>
@@ -85,12 +106,14 @@
     <priority>0.9</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/free-feeding-tracker.html</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/free-diaper-tracker.html</loc>
@@ -99,12 +122,14 @@
     <priority>0.9</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/free-pumping-log.html</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/free-tummy-time-timer.html</loc>
@@ -113,152 +138,6 @@
     <priority>0.9</priority>
   </url>
 
-  <url>
-    <loc>https://meetpippy.com/parenting-personality/the-night-owl.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/parenting-personality/the-data-whisperer.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/parenting-personality/the-intuition-led-parent.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/parenting-personality/the-routine-architect.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/parenting-personality/the-wellness-curator.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/parenting-personality/the-all-in-parent.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/parenting-personality/the-night-and-day-parent.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/parenting-personality/the-present-moment-parent.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/capricorn.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/aquarius.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/pisces.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/aries.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/taurus.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/gemini.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/cancer.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/leo.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/virgo.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/libra.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/scorpio.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://meetpippy.com/baby-horoscope/sagittarius.html</loc>
-    <lastmod>2026-04-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
 
   <url>
     <loc>https://meetpippy.com/wake-windows/newborn.html</loc>
@@ -267,12 +146,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/wake-windows/1-month-old.html</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/wake-windows/2-month-old.html</loc>
@@ -281,12 +162,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/wake-windows/3-month-old.html</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/wake-windows/4-month-old.html</loc>
@@ -295,12 +178,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/wake-windows/6-month-old.html</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/wake-windows/9-month-old.html</loc>
@@ -309,12 +194,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/wake-windows/12-month-old.html</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/wake-windows/18-month-old.html</loc>
@@ -323,12 +210,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/feeding-schedule/newborn.html</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/feeding-schedule/1-week-old.html</loc>
@@ -337,12 +226,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/feeding-schedule/1-month-old.html</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/feeding-schedule/2-month-old.html</loc>
@@ -351,12 +242,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/feeding-schedule/4-month-old.html</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/feeding-schedule/6-month-old.html</loc>
@@ -365,12 +258,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/feeding-schedule/9-month-old.html</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/feeding-schedule/12-month-old.html</loc>
@@ -379,12 +274,14 @@
     <priority>0.8</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/privacy.html</loc>
     <lastmod>2026-03-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/terms.html</loc>
@@ -393,12 +290,14 @@
     <priority>0.4</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/blog/baby-nap-schedule-by-age.html</loc>
     <lastmod>2025-10-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/blog/when-do-babies-start-crawling.html</loc>
@@ -407,33 +306,30 @@
     <priority>0.7</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/blog/baby-eczema-basics.html</loc>
     <lastmod>2025-10-26</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/blog/baby-sleep-regression.html</loc>
     <lastmod>2025-10-29</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <url>
-    <loc>https://meetpippy.com/blog/index.html</loc>
-    <lastmod>2025-11-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
 
   <url>
     <loc>https://meetpippy.com/blog/baby-poop-color-guide.html</loc>
     <lastmod>2025-11-13</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/blog/when-do-babies-sit-up.html</loc>
@@ -442,12 +338,14 @@
     <priority>0.7</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/blog/baby-babbling-timeline.html</loc>
     <lastmod>2025-12-08</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/blog/tummy-time-guide.html</loc>
@@ -456,6 +354,7 @@
     <priority>0.7</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/blog/when-do-babies-walk.html</loc>
     <lastmod>2025-12-14</lastmod>
@@ -463,33 +362,38 @@
     <priority>0.7</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/blog/signs-of-dehydration-in-babies.html</loc>
     <lastmod>2025-12-15</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/blog/safe-sleep-guidelines.html</loc>
     <lastmod>2025-12-26</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/blog/how-much-should-newborn-eat.html</loc>
     <lastmod>2025-12-27</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/blog/baby-teething-timeline.html</loc>
     <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/blog/baby-feeding-schedule-by-age.html</loc>
@@ -498,19 +402,22 @@
     <priority>0.7</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/blog/baby-fever-when-to-call-doctor.html</loc>
     <lastmod>2026-02-17</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/blog/baby-constipation.html</loc>
     <lastmod>2026-02-28</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+
 
   <url>
     <loc>https://meetpippy.com/blog/newborn-sleep-schedule.html</loc>
@@ -519,6 +426,7 @@
     <priority>0.7</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/blog/when-do-babies-laugh.html</loc>
     <lastmod>2026-03-04</lastmod>
@@ -526,16 +434,53 @@
     <priority>0.7</priority>
   </url>
 
+
   <url>
     <loc>https://meetpippy.com/blog/baby-gas-relief.html</loc>
     <lastmod>2026-03-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+
+  <url>
+    <loc>https://meetpippy.com/blog/what-to-pack-in-a-diaper-bag.html</loc>
+    <lastmod>2026-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://meetpippy.com/blog/what-to-pack-in-a-diaper-bag.html</loc>
-    <lastmod>2026-04-17</lastmod>
+    <loc>https://meetpippy.com/blog/baby-milestones-month-by-month.html</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://meetpippy.com/blog/how-to-tell-if-baby-is-hungry.html</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://meetpippy.com/blog/when-do-babies-hold-head-up.html</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://meetpippy.com/blog/when-do-babies-roll-over.html</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://meetpippy.com/blog/when-do-babies-start-smiling.html</loc>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
