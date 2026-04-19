@@ -1,0 +1,104 @@
+name: IndexNow
+
+# Pings IndexNow (Bing / Yandex / Seznam / Naver) whenever indexable HTML
+# changes land on master. Google does not participate in IndexNow, so
+# Google still relies on sitemap + organic crawl / manual GSC submissions.
+#
+# Key file: /d13d5141aa9899d2c5f60d63f507e518.txt at the site root.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - '**/*.html'
+  workflow_dispatch:
+    inputs:
+      submit_all:
+        description: 'Submit every indexable HTML page (use for backfill)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    env:
+      INDEXNOW_KEY: d13d5141aa9899d2c5f60d63f507e518
+      SITE_HOST: meetpippy.com
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Collect URLs to submit
+        id: collect
+        run: |
+          set -euo pipefail
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ github.event.inputs.submit_all }}" = "true" ]; then
+            echo "Mode: backfill (all indexable HTML)"
+            mapfile -t FILES < <(find . -name "*.html" \
+              -not -path "./app/*" \
+              -not -path "./.github/*" \
+              -not -path "./node_modules/*" \
+              -not -path "./baby-horoscope/*" \
+              -not -path "./parenting-personality/*" \
+              -not -name "404.html" \
+              -not -name "dashboard.html" \
+              -not -name "baby-horoscope.html" \
+              -not -name "parenting-personality.html" \
+              | sed 's|^\./||' | sort -u)
+          else
+            echo "Mode: diff vs ${{ github.event.before }}"
+            mapfile -t FILES < <(git diff --name-only --diff-filter=ACMR \
+              "${{ github.event.before }}" "${{ github.sha }}" \
+              | grep -E '\.html$' \
+              | grep -v '^\.github/' \
+              | grep -v '^app/' \
+              | grep -v '^baby-horoscope' \
+              | grep -v '^parenting-personality' \
+              | grep -v '^404\.html$' \
+              | grep -v '^dashboard\.html$' \
+              || true)
+          fi
+
+          if [ ${#FILES[@]} -eq 0 ]; then
+            echo "No indexable HTML changed. Nothing to submit."
+            echo "count=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          URL_JSON=$(printf '%s\n' "${FILES[@]}" \
+            | sed "s|^|https://${SITE_HOST}/|" \
+            | jq -R . | jq -s .)
+
+          PAYLOAD=$(jq -n \
+            --arg host "$SITE_HOST" \
+            --arg key "$INDEXNOW_KEY" \
+            --arg kl "https://${SITE_HOST}/${INDEXNOW_KEY}.txt" \
+            --argjson urls "$URL_JSON" \
+            '{host:$host, key:$key, keyLocation:$kl, urlList:$urls}')
+
+          echo "Submitting $(echo "$URL_JSON" | jq length) URL(s):"
+          echo "$URL_JSON" | jq -r '.[]'
+          echo "$PAYLOAD" > payload.json
+          echo "count=$(echo "$URL_JSON" | jq length)" >> "$GITHUB_OUTPUT"
+
+      - name: POST to IndexNow
+        if: steps.collect.outputs.count != '0'
+        run: |
+          set -euo pipefail
+          HTTP=$(curl -sS -o response.txt -w "%{http_code}" \
+            -X POST https://api.indexnow.org/indexnow \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data-binary @payload.json)
+          echo "HTTP $HTTP"
+          cat response.txt || true
+          echo
+          case "$HTTP" in
+            200|202) echo "IndexNow accepted the submission." ;;
+            *) echo "IndexNow responded $HTTP — failing the job so we notice."; exit 1 ;;
+          esac
