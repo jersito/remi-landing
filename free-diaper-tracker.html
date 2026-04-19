@@ -313,11 +313,23 @@
     .footer-links a:hover{color:var(--ink);}
     .footer-copy{font-size:0.82rem;color:var(--ink-light);}
 
+    /* First-visit intro banner */
+    .intro-banner{background:linear-gradient(135deg,var(--green-soft) 0%,var(--brand-soft) 100%);border-bottom:1px solid var(--line-soft);}
+    .intro-banner-inner{max-width:720px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px;font-size:0.88rem;color:var(--ink);line-height:1.45;}
+    .intro-banner-inner strong{font-weight:800;}
+    .intro-banner-x{margin-left:auto;width:28px;height:28px;border-radius:50%;font-size:1.15rem;line-height:1;color:var(--ink-muted);flex-shrink:0;transition:background 0.12s,color 0.12s;display:inline-flex;align-items:center;justify-content:center;}
+    .intro-banner-x:hover{background:rgba(44,44,52,0.08);color:var(--ink);}
+
+    /* Save toast */
+    .save-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(140%);z-index:100;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:100px;background:var(--ink);color:#fff;font-weight:700;font-size:0.9rem;box-shadow:0 12px 24px -8px rgba(0,0,0,0.3);opacity:0;transition:transform 0.25s cubic-bezier(0.2,0.8,0.2,1),opacity 0.2s ease;pointer-events:none;}
+    .save-toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+    .save-toast-check{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;font-weight:900;}
+
     /* Print */
     .print-only{display:none;}
     @media print{
       body{background:#fff;}
-      .app-header,.tool-seo-h1,.stage-zone,.tap-zone,.tool-actions,.trust-row,.below,.band,.footer,.week-strip-h .legend,.row-actions,.time-edit{display:none !important;}
+      .app-header,.tool-seo-h1,.stage-zone,.tap-zone,.tool-actions,.trust-row,.below,.band,.footer,.week-strip-h .legend,.row-actions,.time-edit,.intro-banner,.save-toast{display:none !important;}
       .panel{box-shadow:none;border-radius:0;}
       .summary-hero{padding:0 0 12px;background:#fff;border-bottom:2px solid #000;}
       .summary-hero .header-row{display:none;}
@@ -336,6 +348,20 @@
 </head>
 <body>
 
+  <!-- First-visit explainer (dismissible, shown once) -->
+  <div class="intro-banner" id="introBanner" hidden>
+    <div class="intro-banner-inner">
+      <span><strong>No login needed.</strong> Your diaper log stays on this device. Tap Export CSV any time to keep a backup.</span>
+      <button type="button" class="intro-banner-x" id="introBannerX" aria-label="Dismiss">×</button>
+    </div>
+  </div>
+
+  <!-- Save toast (fixed, fires on every save/delete) -->
+  <div class="save-toast" id="saveToast" role="status" aria-live="polite" hidden>
+    <span class="save-toast-check">✓</span>
+    <span class="save-toast-text">Saved</span>
+  </div>
+
   <!-- Slim app-like header -->
   <header class="app-header">
     <div class="app-header-inner">
@@ -345,9 +371,9 @@
         <span class="app-brand-sep"></span>
         <span class="app-tool-name">Diaper Tracker</span>
       </a>
-      <div class="app-saved" title="Your entries are saved in this browser and never leave your device">
+      <div class="app-saved" title="Your entries stay on this device. They never leave it.">
         <span class="app-saved-dot"></span>
-        <span><span class="saved-long">Saved in this </span>browser</span>
+        <span>Saved<span class="saved-long"> to this device</span></span>
       </div>
     </div>
   </header>
@@ -392,7 +418,7 @@
           <div class="summary-empty" id="summaryEmpty">
             <div class="emoji">👶</div>
             <h2>Ready when you are</h2>
-            <p>Tap Wet, Dirty, or Both to log the next diaper change. Saves here instantly. No signup.</p>
+            <p>Tap Wet, Dirty, or Both to log the next diaper change. Saves to this device instantly. No signup.</p>
           </div>
         </section>
 
@@ -448,6 +474,7 @@
         <!-- Tool actions -->
         <div class="tool-actions">
           <div class="left">
+            <button type="button" class="btn-ghost" id="exportBtn">Export CSV</button>
             <button type="button" class="btn-ghost" id="printBtn">Download PDF</button>
             <button type="button" class="btn-danger" id="clearBtn">Clear all</button>
           </div>
@@ -459,7 +486,7 @@
       <!-- Trust strip -->
       <div class="trust-row">
         <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg> No signup</span>
-        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Saves to this browser</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Saves to this device</span>
         <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg> Print friendly</span>
       </div>
 
@@ -476,6 +503,11 @@
       </div>
 
       <div class="below-section">
+        <!-- Diaper counts sourced from AAP / HealthyChildren.org and La Leche League (fact-checked 2026-04).
+             AAP "How to Tell if Baby is Getting Enough Milk" https://www.healthychildren.org/English/ages-stages/baby/breastfeeding/Pages/How-to-Tell-if-Baby-is-Getting-Enough-Milk.aspx
+             AAP "Pooping By the Numbers" https://www.healthychildren.org/English/ages-stages/baby/Pages/Pooping-By-the-Numbers.aspx
+             LLLI "Poop and Pee" https://llli.org/poop-and-pee/
+             After 6 months, AAP / LLLI stop giving numeric targets; signs shift to pale-yellow urine + soft stool. -->
         <div class="amounts-table">
           <table>
             <thead>
@@ -487,9 +519,9 @@
               <tr><td class="age">Day 3</td><td class="perfeed">3 or more</td><td class="perdirty">3 or more</td><td>Milk comes in. Stool shifts from black to greenish brown.</td></tr>
               <tr><td class="age">Day 4</td><td class="perfeed">4 or more</td><td class="perdirty">3 or more</td><td>Stool turns yellow and seedy in breastfed babies.</td></tr>
               <tr><td class="age">Day 5 to 1 month</td><td class="perfeed">6 or more</td><td class="perdirty">3 to 4 or more</td><td>Six heavy wets is the hydration benchmark. Stools can be with every feed.</td></tr>
-              <tr><td class="age">1 to 6 months</td><td class="perfeed">6 to 8</td><td class="perdirty">1 to several</td><td>Breastfed babies can skip days after 6 weeks. Soft stool when it comes is still normal.</td></tr>
-              <tr><td class="age">6 to 12 months</td><td class="perfeed">4 to 6</td><td class="perdirty">1 to 2</td><td>Stools firm up and change color once solids start.</td></tr>
-              <tr><td class="age">12 months and up</td><td class="perfeed">4 to 6</td><td class="perdirty">1 to 2</td><td>Closer to adult pattern. Color and smell shift with food.</td></tr>
+              <tr><td class="age">1 to 6 months</td><td class="perfeed">6 or more</td><td class="perdirty">1 to several</td><td>Breastfed babies can skip days after 6 weeks. Soft stool when it comes is still normal.</td></tr>
+              <tr><td class="age">6 to 12 months</td><td class="perfeed">varies</td><td class="perdirty">varies</td><td>Once solids start, specific counts matter less. Watch for pale-yellow urine and soft stool.</td></tr>
+              <tr><td class="age">12 months and up</td><td class="perfeed">varies</td><td class="perdirty">varies</td><td>Closer to adult pattern. Color and smell shift with food.</td></tr>
             </tbody>
           </table>
         </div>
@@ -501,10 +533,10 @@
         <div class="cues-grid">
           <div class="cue"><div class="em">💧</div><h4>Fewer wets than expected</h4><p>Fewer than 6 heavy wets per day after day 5 in a newborn. Or a sudden drop from your baby's usual count.</p></div>
           <div class="cue"><div class="em">🩸</div><h4>Blood in the stool</h4><p>A streak of red or black in the diaper always gets a call. Could be a small fissure or a milk reaction.</p></div>
-          <div class="cue"><div class="em">💦</div><h4>Watery diarrhea</h4><p>Three or more watery explosive diapers in a row, especially with fever, can dehydrate fast.</p></div>
+          <div class="cue"><div class="em">💦</div><h4>Watery diarrhea</h4><p>Watery diarrhea, especially with fever, vomiting, or fewer wet diapers, can dehydrate a baby quickly. Call the pediatrician.</p></div>
           <div class="cue"><div class="em">🥤</div><h4>Dehydration signs</h4><p>Dry mouth, no tears crying, sunken soft spot, sleepy or limp baby. Do not wait.</p></div>
           <div class="cue"><div class="em">⚪</div><h4>White, grey, or chalky stool</h4><p>Pale putty-colored stool can point to a liver or bile duct issue. Get it checked.</p></div>
-          <div class="cue"><div class="em">🟢</div><h4>Odd color with symptoms</h4><p>Bright green frothy in a fussy baby, or jelly-like red stool. Always worth a call.</p></div>
+          <div class="cue"><div class="em">🟢</div><h4>Odd color with symptoms</h4><p>Bright green frothy in a fussy baby, or jelly-like red stool (sometimes called "currant-jelly stool," a sign of intussusception). Always worth a call.</p></div>
         </div>
       </div>
 
@@ -534,14 +566,14 @@
           <li>The banner shows if today is on track or below the normal range for the stage you picked.</li>
           <li>The 7-day chart shows trends. One low day is usually nothing. Two in a row is worth a call.</li>
           <li>Hit Download PDF for a clean log you can bring to the pediatrician or send to your partner.</li>
-          <li>Everything saves in this browser. Nothing leaves your device.</li>
+          <li>Everything stays on this device. Nothing leaves it.</li>
         </ul>
 
         <h3>What to bring to the pediatrician</h3>
         <p>For the first visits, your pediatrician will ask: how many wet diapers per day, how many dirty, what color is the stool, and how often is your baby feeding. The PDF from this tracker puts all of that on one page. The 10-minute visit goes much smoother.</p>
 
         <h3>Privacy</h3>
-        <p>Your entries are saved in this browser's localStorage. They never touch a server. Clearing your browser data or using private mode will wipe the log, so tap Download PDF before switching devices.</p>
+        <p>Your entries stay on this device, saved in the browser's local storage. They never touch a server. Clearing your browser data or using private mode will wipe the log, so tap Export CSV or Download PDF before switching devices.</p>
       </div>
 
       <div class="below-section">
@@ -702,12 +734,14 @@
     const addEntry = (type) => {
       state.entries.push({ id: uid(), ts: Date.now(), type, note: "" });
       save(); render();
+      showToast("Saved to this device");
     };
 
     const deleteEntry = (id) => {
       state.entries = state.entries.filter(x => x.id !== id);
       editingIds.delete(id);
       save(); render();
+      showToast("Deleted");
     };
 
     const updateEntry = (id, patch) => {
@@ -715,7 +749,59 @@
       if (idx >= 0) {
         state.entries[idx] = Object.assign({}, state.entries[idx], patch);
         save(); render();
+        showToast("Updated");
       }
+    };
+
+    // --- Save toast ---
+    const showToast = (msg) => {
+      const toast = $("saveToast");
+      if (!toast) return;
+      toast.querySelector(".save-toast-text").textContent = msg || "Saved";
+      toast.hidden = false;
+      requestAnimationFrame(() => toast.classList.add("show"));
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => { toast.hidden = true; }, 280);
+      }, 1600);
+    };
+
+    // --- CSV export ---
+    const csvEscape = (v) => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
+    const exportCSV = () => {
+      const all = [...state.entries].sort((a, b) => a.ts - b.ts);
+      if (all.length === 0) { alert("No diaper entries logged yet."); return; }
+      const header = ["date","time","type","note"];
+      const rows = all.map(e => {
+        const d = new Date(e.ts);
+        const date = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+        const time = String(d.getHours()).padStart(2,"0") + ":" + String(d.getMinutes()).padStart(2,"0");
+        return [date, time, e.type, e.note || ""].map(csvEscape).join(",");
+      });
+      const csv = header.map(csvEscape).join(",") + "\n" + rows.join("\n");
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "pippy-diaper-log-" + todayKey() + ".csv";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 150);
+      showToast("Exported " + all.length + " entr" + (all.length === 1 ? "y" : "ies"));
+    };
+
+    // --- First-visit banner (shown once per device) ---
+    const INTRO_KEY = "pippy_diapers_intro_v1";
+    const initIntroBanner = () => {
+      try {
+        if (localStorage.getItem(INTRO_KEY)) return;
+        $("introBanner").hidden = false;
+        $("introBannerX").addEventListener("click", () => {
+          $("introBanner").hidden = true;
+          try { localStorage.setItem(INTRO_KEY, "1"); } catch {}
+        });
+      } catch {}
     };
 
     // ----- Renderers -----
@@ -885,9 +971,11 @@
       editingIds.clear();
       save();
       render();
+      showToast("Cleared");
     });
 
     $("printBtn").addEventListener("click", () => window.print());
+    $("exportBtn").addEventListener("click", exportCSV);
 
     $("showMoreBtn").addEventListener("click", () => {
       expanded = !expanded;
@@ -933,6 +1021,7 @@
     load();
     $("ageStage").value = state.stage;
     render();
+    initIntroBanner();
 
     // Refresh "ago" once a minute
     setInterval(render, 60 * 1000);

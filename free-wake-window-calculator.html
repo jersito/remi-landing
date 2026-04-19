@@ -401,7 +401,7 @@
               <tr><td class="age">5 to 7 months</td><td class="win">1h 45m to 2h 30m</td><td>2 to 3</td><td>2.5 to 3.5h</td><td>10 to 12h</td></tr>
               <tr><td class="age">7 to 10 months</td><td class="win">2h 30m to 3h</td><td>2</td><td>2 to 3h</td><td>10 to 12h</td></tr>
               <tr><td class="age">10 to 14 months</td><td class="win">3 to 4h</td><td>1 to 2</td><td>2 to 2.5h</td><td>10 to 12h</td></tr>
-              <tr><td class="age">14 to 18 months</td><td class="win">4 to 5h</td><td>1</td><td>1.5 to 2.5h</td><td>10 to 12h</td></tr>
+              <tr><td class="age">14 to 18 months</td><td class="win">4 to 6h</td><td>1</td><td>1.5 to 2.5h</td><td>10 to 12h</td></tr>
               <tr><td class="age">18 to 24 months</td><td class="win">5 to 6h</td><td>1</td><td>1.5 to 2h</td><td>10 to 12h</td></tr>
             </tbody>
           </table>
@@ -423,7 +423,7 @@
 
       <div class="below-section longform">
         <h3>How wake windows actually work</h3>
-        <p>A wake window is the time your baby spends awake between sleeps. As babies grow, their nervous system can handle longer and longer stretches without falling apart. A newborn only lasts 45 minutes before needing to sleep again. A toddler can go most of the day on one short nap.</p>
+        <p>A wake window is the time your baby spends awake between sleeps. As babies grow, their nervous system can handle longer and longer stretches without falling apart. A newborn often lasts only 30 to 60 minutes before needing to sleep again. A toddler can go most of the day on one short nap.</p>
         <p>The goal of timing naps to wake windows is simple. Catch your baby in the sweet spot where they are tired enough to sleep easily, but not so tired that their body releases stress hormones and fights it. Overtired babies take shorter naps, wake more at night, and are harder to settle. Undertired babies fight the nap and resist the bedtime routine.</p>
         <h3>How to use the calculator</h3>
         <ul>
@@ -496,7 +496,9 @@
       { maxMonths: 7,    label: "5 to 7 month old",      wwMinMin: 105, wwMaxMin: 150, naps: "2 to 3", daySleep: "2.5 to 3.5h", nightSleep: "10 to 12h" },
       { maxMonths: 10,   label: "7 to 10 month old",     wwMinMin: 150, wwMaxMin: 180, naps: "2",      daySleep: "2 to 3h",   nightSleep: "10 to 12h" },
       { maxMonths: 14,   label: "10 to 14 month old",    wwMinMin: 180, wwMaxMin: 240, naps: "1 to 2", daySleep: "2 to 2.5h", nightSleep: "10 to 12h" },
-      { maxMonths: 18,   label: "14 to 18 month old",    wwMinMin: 240, wwMaxMin: 300, naps: "1",      daySleep: "1.5 to 2.5h", nightSleep: "10 to 12h" },
+      // 14-18mo WW sourced from Taking Cara Babies (14-24mo: 4-6h) — https://www.takingcarababies.com/blogs/sleep-schedules/nap-schedules-5-months-to-24-months
+      // Lower bound 240min accommodates 14-15mo still on 2 naps during transition.
+      { maxMonths: 18,   label: "14 to 18 month old",    wwMinMin: 240, wwMaxMin: 360, naps: "1",      daySleep: "1.5 to 2.5h", nightSleep: "10 to 12h" },
       { maxMonths: 24,   label: "18 to 24 month old",    wwMinMin: 300, wwMaxMin: 360, naps: "1",      daySleep: "1.5 to 2h", nightSleep: "10 to 12h" },
     ];
 
@@ -529,16 +531,24 @@
       events.push({ t: pickTime(cursor, 0), e: "Wake up", d: "Start of the day" });
       const maxNaps = parseInt(row.naps.split(/to|\s/)[0].trim()) || 1;
       const planned = Math.min(maxNaps, 4);
+      // Newborns and 6-12 week babies don't have a fixed bedtime — they cycle through naps all day.
+      // Source: HealthyChildren.org (AAP) — irregular newborn sleep patterns are expected.
+      // https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/getting-your-baby-to-sleep.aspx
+      const hasFixedBedtime = row.wwMinMin >= 75;
       for (let i = 0; i < planned; i++) {
         cursor = new Date(cursor.getTime() + mid * 60000);
         events.push({ t: pickTime(cursor, 0), e: "Nap " + (i + 1) + " start", d: "Wind-down 10 min before this" });
         cursor = new Date(cursor.getTime() + napLen * 60000);
         events.push({ t: pickTime(cursor, 0), e: "Nap " + (i + 1) + " end", d: "Wake window resets" });
       }
-      cursor = new Date(cursor.getTime() + mid * 60000);
-      events.push({ t: pickTime(cursor, 0), e: "Bedtime routine", d: "Bath, feed, book, dim the lights" });
-      cursor = new Date(cursor.getTime() + 30 * 60000);
-      events.push({ t: pickTime(cursor, 0), e: "Bedtime", d: "Aim for drowsy-but-awake if that works for you" });
+      if (hasFixedBedtime) {
+        cursor = new Date(cursor.getTime() + mid * 60000);
+        events.push({ t: pickTime(cursor, 0), e: "Bedtime routine", d: "Bath, feed, book, dim the lights" });
+        cursor = new Date(cursor.getTime() + 30 * 60000);
+        events.push({ t: pickTime(cursor, 0), e: "Bedtime", d: "Aim for drowsy-but-awake if that works for you" });
+      } else {
+        events.push({ t: "—", e: "No fixed bedtime yet", d: "Newborns cycle naps and feeds through the day. Follow cues, not the clock." });
+      }
       return events;
     };
 

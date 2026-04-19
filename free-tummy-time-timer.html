@@ -303,11 +303,23 @@
     .footer-links a:hover{color:var(--ink);}
     .footer-copy{font-size:0.82rem;color:var(--ink-light);}
 
+    /* First-visit intro banner */
+    .intro-banner{background:linear-gradient(135deg,var(--green-soft) 0%,var(--brand-soft) 100%);border-bottom:1px solid var(--line-soft);}
+    .intro-banner-inner{max-width:720px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:12px;font-size:0.88rem;color:var(--ink);line-height:1.45;}
+    .intro-banner-inner strong{font-weight:800;}
+    .intro-banner-x{margin-left:auto;width:28px;height:28px;border-radius:50%;font-size:1.15rem;line-height:1;color:var(--ink-muted);flex-shrink:0;transition:background 0.12s,color 0.12s;display:inline-flex;align-items:center;justify-content:center;}
+    .intro-banner-x:hover{background:rgba(44,44,52,0.08);color:var(--ink);}
+
+    /* Save toast */
+    .save-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(140%);z-index:100;display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:100px;background:var(--ink);color:#fff;font-weight:700;font-size:0.9rem;box-shadow:0 12px 24px -8px rgba(0,0,0,0.3);opacity:0;transition:transform 0.25s cubic-bezier(0.2,0.8,0.2,1),opacity 0.2s ease;pointer-events:none;}
+    .save-toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+    .save-toast-check{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;font-weight:900;}
+
     /* Print */
     .print-only{display:none;}
     @media print{
       body{background:#fff;}
-      .app-header,.tool-seo-h1,.control-zone,.note-row,.tool-actions,.trust-row,.below,.band,.footer,.age-picker{display:none !important;}
+      .app-header,.tool-seo-h1,.control-zone,.note-row,.tool-actions,.trust-row,.below,.band,.footer,.age-picker,.intro-banner,.save-toast{display:none !important;}
       .panel{box-shadow:none;border-radius:0;}
       .timer-hero{padding:0 0 12px;background:#fff;border-bottom:2px solid #000;}
       .timer-hero .header-row{display:none;}
@@ -330,6 +342,20 @@
 </head>
 <body>
 
+  <!-- First-visit explainer (dismissible, shown once) -->
+  <div class="intro-banner" id="introBanner" hidden>
+    <div class="intro-banner-inner">
+      <span><strong>No login needed.</strong> Your tummy time sessions stay on this device. Tap Export CSV any time to keep a backup.</span>
+      <button type="button" class="intro-banner-x" id="introBannerX" aria-label="Dismiss">×</button>
+    </div>
+  </div>
+
+  <!-- Save toast (fixed, fires on every save/delete) -->
+  <div class="save-toast" id="saveToast" role="status" aria-live="polite" hidden>
+    <span class="save-toast-check">✓</span>
+    <span class="save-toast-text">Saved</span>
+  </div>
+
   <!-- Slim app-like header -->
   <header class="app-header">
     <div class="app-header-inner">
@@ -339,9 +365,9 @@
         <span class="app-brand-sep"></span>
         <span class="app-tool-name">Tummy Time Timer</span>
       </a>
-      <div class="app-saved" title="Your sessions are saved in this browser and never leave your device">
+      <div class="app-saved" title="Your sessions stay on this device. They never leave it.">
         <span class="app-saved-dot"></span>
-        <span><span class="saved-long">Saved in this </span>browser</span>
+        <span>Saved<span class="saved-long"> to this device</span></span>
       </div>
     </div>
   </header>
@@ -454,6 +480,7 @@
         <!-- Tool actions -->
         <div class="tool-actions">
           <div class="left">
+            <button type="button" class="btn-ghost" id="exportBtn">Export CSV</button>
             <button type="button" class="btn-ghost" id="printBtn">Download PDF</button>
             <button type="button" class="btn-danger" id="clearBtn">Clear all</button>
           </div>
@@ -465,7 +492,7 @@
       <!-- Trust strip -->
       <div class="trust-row">
         <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg> No signup</span>
-        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Saves to this browser</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Saves to this device</span>
         <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Print friendly</span>
       </div>
 
@@ -482,6 +509,15 @@
       </div>
 
       <div class="below-section">
+        <!-- Tummy time targets: AAP specifies 3-5 min sessions from birth working up to 15-30 min/day by ~7 weeks.
+             Source: https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/back-to-sleep-tummy-to-play.aspx
+             Minute targets for 3+ months are pediatric-PT rules of thumb, not AAP.
+             Motor milestones align with CDC 2022 update:
+             https://www.cdc.gov/act-early/milestones/2-months.html
+             https://www.cdc.gov/act-early/milestones/4-months.html
+             https://www.cdc.gov/act-early/milestones/6-months.html
+             https://www.cdc.gov/act-early/milestones/9-months.html
+             CDC removed "crawls" as a milestone in 2022 because 4%+ of typical babies skip it. -->
         <div class="amounts-table">
           <table>
             <thead>
@@ -489,17 +525,16 @@
             </thead>
             <tbody>
               <tr><td class="age">Newborn (0 to 2 wk)</td><td class="perfeed">3 to 5 min / day</td><td>1 min, a few times</td><td>Briefly turns head to one side</td></tr>
-              <tr><td class="age">2 to 4 weeks</td><td class="perfeed">10 to 15 min / day</td><td>2 to 3 min</td><td>Lifts head for a second</td></tr>
-              <tr><td class="age">1 month</td><td class="perfeed">15 min / day</td><td>3 min</td><td>Head lifts 45 degrees briefly</td></tr>
-              <tr><td class="age">2 months</td><td class="perfeed">15 to 20 min / day</td><td>3 to 5 min</td><td>Holds head up, looks around</td></tr>
-              <tr><td class="age">3 months</td><td class="perfeed">~30 min / day</td><td>5 to 10 min</td><td>Props on forearms, chest lifts</td></tr>
-              <tr><td class="age">4 months</td><td class="perfeed">40 to 60 min / day</td><td>10 to 15 min</td><td>Pushes up on hands, reaches for toys</td></tr>
-              <tr><td class="age">5 to 6 months</td><td class="perfeed">60+ min / day</td><td>As long as happy</td><td>Rolls belly to back, pivots in circles</td></tr>
-              <tr><td class="age">7+ months</td><td class="perfeed">Mostly self-directed</td><td>Whenever on the floor</td><td>Rocks on hands and knees, crawls</td></tr>
+              <tr><td class="age">2 to 4 weeks</td><td class="perfeed">5 to 15 min / day</td><td>2 to 3 min</td><td>Lifts head for a second</td></tr>
+              <tr><td class="age">~7 weeks</td><td class="perfeed">15 to 30 min / day (AAP target)</td><td>3 to 5 min</td><td>Holds head up briefly</td></tr>
+              <tr><td class="age">2 months</td><td class="perfeed">15 to 30 min / day</td><td>3 to 5 min</td><td>Holds head up when on tummy (CDC)</td></tr>
+              <tr><td class="age">4 months</td><td class="perfeed">~30 min / day (PT rule of thumb)</td><td>5 to 10 min</td><td>Pushes up onto forearms, swings at toys (CDC)</td></tr>
+              <tr><td class="age">6 months</td><td class="perfeed">30 to 60 min / day (PT rule of thumb)</td><td>10 to 15 min</td><td>Rolls from tummy to back, pushes up with straight arms (CDC)</td></tr>
+              <tr><td class="age">9+ months</td><td class="perfeed">Mostly self-directed</td><td>Whenever on the floor</td><td>Gets to sitting on their own, pulls to stand (CDC)</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="amounts-note">Guidance based on AAP and common pediatric PT targets. Every baby is on their own timeline. Not medical advice.</p>
+        <p class="amounts-note">AAP specifies 3-5 minute sessions from birth, working up to 15-30 min/day by about 7 weeks. Minute targets at 4+ months are pediatric-PT rules of thumb, not AAP. Motor milestones reflect the CDC 2022 Learn the Signs update (crawling was removed because many typical babies skip it). Every baby is on their own timeline. Not medical advice.</p>
       </div>
 
       <div class="below-section">
@@ -522,7 +557,7 @@
         <p>Three things. It builds the neck, shoulder, and upper back muscles your baby needs for rolling, sitting, and crawling. It keeps pressure off the back of the skull, which lowers the risk of plagiocephaly (the flat spot that can form from back-sleeping). And it gives your baby a new view of the world, which matters for visual tracking and motor planning. Back-sleeping is non-negotiable for safety, so awake belly time has to do the muscle-building work.</p>
 
         <h3>How to start with a newborn</h3>
-        <p>You can start tummy time on day one. In the first weeks, the easiest version is chest-to-chest on you while you are reclined. That counts. Aim for a minute or two, several times a day, working up to about 15 minutes a day by the end of the first month.</p>
+        <p>You can start tummy time on day one. In the first weeks, the easiest version is chest-to-chest on you while you are reclined. That counts. Aim for a minute or two, several times a day, working up to the AAP target of 15 to 30 minutes a day by around 7 weeks.</p>
         <ul>
           <li>Pick a moment when baby is awake and calm. Right after a diaper change is perfect.</li>
           <li>Firm, flat surface only. A play mat or blanket on the floor. Never couches or beds.</li>
@@ -545,7 +580,7 @@
         <p>Plagiocephaly and torticollis are both common and both very fixable when caught early, usually with more tummy time, repositioning tricks, and sometimes a short course of physical therapy.</p>
 
         <h3>Privacy</h3>
-        <p>Your sessions are saved in this browser's localStorage under the key pippy_tummytime_v1. They never touch a server. Clearing your browser data or using private mode will wipe the log, so tap Download PDF before switching devices.</p>
+        <p>Your sessions stay on this device, saved in the browser's local storage under the key pippy_tummytime_v1. They never touch a server. Clearing your browser data or using private mode will wipe the log, so tap Export CSV or Download PDF before switching devices.</p>
       </div>
 
       <div class="below-section">
@@ -595,14 +630,17 @@
     //             dailyGoalMin    (the daily minute target used for progress bar)
     //             goalText        (the "of X min goal" pill label)
     //             sessionText     (the "Target: X min" label under the ring)
+    // Daily goals: AAP target is 15-30 min/day by ~7 weeks (~2 months).
+    // Source: https://www.healthychildren.org/English/ages-stages/baby/sleep/Pages/back-to-sleep-tummy-to-play.aspx
+    // Targets beyond 2 months are pediatric-PT rules of thumb, not AAP.
     const AGE_CONFIG = {
       newborn: { label: "Newborn (0 to 4 weeks)", sessionTargetSec: 120,  dailyGoalMin: 10, goalText: "Daily goal: 3 to 10 min", sessionText: "Target: 2 min" },
-      "1m":    { label: "1 month",                sessionTargetSec: 180,  dailyGoalMin: 15, goalText: "Daily goal: 15 min",     sessionText: "Target: 3 min" },
-      "2m":    { label: "2 months",               sessionTargetSec: 300,  dailyGoalMin: 20, goalText: "Daily goal: 15 to 20 min", sessionText: "Target: 5 min" },
-      "3m":    { label: "3 months",               sessionTargetSec: 600,  dailyGoalMin: 30, goalText: "Daily goal: ~30 min",     sessionText: "Target: 10 min" },
-      "4m":    { label: "4 months",               sessionTargetSec: 900,  dailyGoalMin: 50, goalText: "Daily goal: 40 to 60 min", sessionText: "Target: 15 min" },
-      "5_6m":  { label: "5 to 6 months",          sessionTargetSec: 1200, dailyGoalMin: 60, goalText: "Daily goal: 60+ min",     sessionText: "Target: 20 min" },
-      "7plus": { label: "7+ months",              sessionTargetSec: 1200, dailyGoalMin: 60, goalText: "Mostly self-directed",    sessionText: "Target: 20 min" },
+      "1m":    { label: "1 month",                sessionTargetSec: 180,  dailyGoalMin: 20, goalText: "Working toward: 15 to 30 min", sessionText: "Target: 3 min" },
+      "2m":    { label: "2 months",               sessionTargetSec: 300,  dailyGoalMin: 25, goalText: "AAP target: 15 to 30 min",    sessionText: "Target: 5 min" },
+      "3m":    { label: "3 months",               sessionTargetSec: 600,  dailyGoalMin: 30, goalText: "Daily goal: ~30 min",         sessionText: "Target: 10 min" },
+      "4m":    { label: "4 months",               sessionTargetSec: 900,  dailyGoalMin: 30, goalText: "Daily goal: ~30 min",         sessionText: "Target: 15 min" },
+      "5_6m":  { label: "5 to 6 months",          sessionTargetSec: 1200, dailyGoalMin: 45, goalText: "Daily goal: 30 to 60 min",    sessionText: "Target: 20 min" },
+      "7plus": { label: "7+ months",              sessionTargetSec: 1200, dailyGoalMin: 45, goalText: "Mostly self-directed",        sessionText: "Target: 20 min" },
     };
 
     const RING_CIRC = 2 * Math.PI * 52; // matches r=52 in SVG
@@ -924,12 +962,14 @@
       saveStore(store);
       $("sessionNote").value = "";
       renderTodayAndList();
+      showToast("Saved to this device");
     };
 
     const deleteSession = (id) => {
       store.sessions = store.sessions.filter(s => s.id !== id);
       saveStore(store);
       renderTodayAndList();
+      showToast("Deleted");
     };
 
     const clearAll = () => {
@@ -937,6 +977,59 @@
       store.sessions = [];
       saveStore(store);
       renderTodayAndList();
+      showToast("Cleared");
+    };
+
+    // --- Save toast ---
+    const showToast = (msg) => {
+      const toast = $("saveToast");
+      if (!toast) return;
+      toast.querySelector(".save-toast-text").textContent = msg || "Saved";
+      toast.hidden = false;
+      requestAnimationFrame(() => toast.classList.add("show"));
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => { toast.hidden = true; }, 280);
+      }, 1600);
+    };
+
+    // --- CSV export ---
+    const csvEscape = (v) => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
+    const exportCSV = () => {
+      const all = [...store.sessions].sort((a, b) => new Date(a.at) - new Date(b.at));
+      if (all.length === 0) { alert("No tummy time sessions logged yet."); return; }
+      const header = ["date","time","seconds","minutes","note"];
+      const rows = all.map(s => {
+        const d = new Date(s.at);
+        const date = d.getFullYear() + "-" + pad2(d.getMonth()+1) + "-" + pad2(d.getDate());
+        const time = pad2(d.getHours()) + ":" + pad2(d.getMinutes());
+        const minutes = (s.seconds / 60).toFixed(2);
+        return [date, time, s.seconds, minutes, s.note || ""].map(csvEscape).join(",");
+      });
+      const csv = header.map(csvEscape).join(",") + "\n" + rows.join("\n");
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "pippy-tummy-time-" + todayKey() + ".csv";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 150);
+      showToast("Exported " + all.length + " session" + (all.length === 1 ? "" : "s"));
+    };
+
+    // --- First-visit banner (shown once per device) ---
+    const INTRO_KEY = "pippy_tummytime_intro_v1";
+    const initIntroBanner = () => {
+      try {
+        if (localStorage.getItem(INTRO_KEY)) return;
+        $("introBanner").hidden = false;
+        $("introBannerX").addEventListener("click", () => {
+          $("introBanner").hidden = true;
+          try { localStorage.setItem(INTRO_KEY, "1"); } catch {}
+        });
+      } catch {}
     };
 
     const handleAgeChange = () => {
@@ -965,6 +1058,7 @@
     $("babyAge").addEventListener("change", handleAgeChange);
     $("clearBtn").addEventListener("click", clearAll);
     $("printBtn").addEventListener("click", () => window.print());
+    $("exportBtn").addEventListener("click", exportCSV);
     $("sessionEntries").addEventListener("click", (ev) => {
       const btn = ev.target.closest("[data-del]");
       if (!btn) return;
@@ -984,6 +1078,7 @@
     $("ageGoalPill").textContent = AGE_CONFIG[store.ageKey].goalText;
     renderTimerFace();
     renderTodayAndList();
+    initIntroBanner();
   </script>
   <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
