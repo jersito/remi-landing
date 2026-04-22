@@ -409,6 +409,42 @@
           </div>
         </div>
 
+        <!-- Onboarding Funnel (per-step) -->
+        <div class="section" id="section-onboarding-funnel">
+          <h2>Onboarding Funnel <span class="tag">Per-Step</span></h2>
+          <div class="chart-grid">
+            <div class="chart-card">
+              <h3>Drop-off by step (unique users; overall % vs Welcome)</h3>
+              <div id="onboardingFunnelChart"></div>
+              <div class="insight" id="onboardingFunnelInsight"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Time-on-step (median seconds)</h3>
+              <div id="onboardingDurationChart"></div>
+            </div>
+          </div>
+          <div class="chart-grid" style="margin-top:16px">
+            <div class="chart-card">
+              <h3>Household choice</h3>
+              <div id="onboardingChoiceChart"></div>
+            </div>
+            <div class="chart-card">
+              <h3>AI consent (Smart vs Private)</h3>
+              <div id="onboardingConsentChart"></div>
+            </div>
+          </div>
+          <div class="chart-grid" style="margin-top:16px">
+            <div class="chart-card">
+              <h3>Household join failures</h3>
+              <div id="onboardingJoinFailuresChart"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Step failures</h3>
+              <div id="onboardingStepFailuresChart"></div>
+            </div>
+          </div>
+        </div>
+
         <!-- Referrals -->
         <div class="section" id="section-referrals">
           <h2>Referral Program <span class="tag">Growth</span></h2>
@@ -726,6 +762,9 @@
       // Funnel
       renderFunnel(data.funnelCounts);
 
+      // Per-step onboarding funnel
+      renderOnboardingFunnel(data.onboardingFunnel);
+
       // Feature adoption
       renderFeatureChart(data.featureUsage);
 
@@ -862,6 +901,164 @@
           </div>
         </div>`;
       }).join('');
+    }
+
+    // ---------------- Onboarding Funnel (per-step) ----------------
+    // Renders the dedicated onboarding section. Largest delta between
+    // adjacent steps = the screen to redesign first.
+    function renderOnboardingFunnel(funnel) {
+      const stepsEl = document.getElementById('onboardingFunnelChart');
+      const durEl = document.getElementById('onboardingDurationChart');
+      const insightEl = document.getElementById('onboardingFunnelInsight');
+      const choiceEl = document.getElementById('onboardingChoiceChart');
+      const consentEl = document.getElementById('onboardingConsentChart');
+      const joinFailEl = document.getElementById('onboardingJoinFailuresChart');
+      const stepFailEl = document.getElementById('onboardingStepFailuresChart');
+
+      const empty = '<p style="color:var(--text-3);font-size:13px">No onboarding events in this window yet.</p>';
+      if (!funnel || !funnel.steps || !funnel.steps.length) {
+        stepsEl.innerHTML = empty;
+        durEl.innerHTML = empty;
+        choiceEl.innerHTML = empty;
+        consentEl.innerHTML = empty;
+        joinFailEl.innerHTML = empty;
+        stepFailEl.innerHTML = empty;
+        insightEl.innerHTML = '';
+        return;
+      }
+
+      const STEP_LABELS = {
+        welcome: 'Welcome',
+        household: 'Household',
+        baby_setup: 'Baby Setup',
+        ai_consent: 'AI Consent',
+        celebration: 'Celebration',
+      };
+      const STEP_COLORS = ['#7A9DB0', '#D4956A', '#4CAF50', '#8B7EC8', '#E8B08A'];
+      const baseline = funnel.steps[0]?.viewed || 0;
+
+      // Per-step funnel (drop-off bars)
+      stepsEl.innerHTML = funnel.steps.map((s, i) => {
+        const overallPct = baseline > 0 ? Math.round((s.viewed / baseline) * 100) : 0;
+        const stepPct = s.viewed > 0 ? Math.round((s.completed / s.viewed) * 100) : 0;
+        const barWidth = Math.max(overallPct, 2);
+        return `<div class="h-bar-row" style="margin-bottom:12px">
+          <div style="width:160px;text-align:right;flex-shrink:0">
+            <div style="font-size:13px;font-weight:600;color:var(--text)">${STEP_LABELS[s.step] || s.step}</div>
+            <div style="font-size:11px;color:var(--text-3)">${s.viewed} viewed → ${s.completed} done (${stepPct}%)</div>
+          </div>
+          <div class="h-bar-track">
+            <div class="h-bar-fill" style="width:${barWidth}%;background:${STEP_COLORS[i % STEP_COLORS.length]}">
+              <span>${overallPct}% of starts</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+      // Insight: identify the biggest drop-off step
+      let worstDrop = { from: null, to: null, lostPct: 0 };
+      for (let i = 0; i < funnel.steps.length - 1; i++) {
+        const a = funnel.steps[i].viewed;
+        const b = funnel.steps[i + 1].viewed;
+        if (a > 0) {
+          const lost = Math.round(((a - b) / a) * 100);
+          if (lost > worstDrop.lostPct) {
+            worstDrop = { from: funnel.steps[i].step, to: funnel.steps[i + 1].step, lostPct: lost };
+          }
+        }
+      }
+      if (worstDrop.from && worstDrop.lostPct >= 5) {
+        insightEl.innerHTML = `<strong>${worstDrop.lostPct}%</strong> of users drop off between <strong>${STEP_LABELS[worstDrop.from] || worstDrop.from}</strong> and <strong>${STEP_LABELS[worstDrop.to] || worstDrop.to}</strong>. Redesign that screen first.`;
+      } else {
+        insightEl.innerHTML = '';
+      }
+
+      // Time-on-step (median seconds)
+      const maxDur = Math.max(...funnel.steps.map(s => s.median_dur_ms || 0), 1);
+      durEl.innerHTML = funnel.steps.map((s, i) => {
+        const sec = s.median_dur_ms != null ? Math.round(s.median_dur_ms / 100) / 10 : null;
+        const pct = s.median_dur_ms ? Math.max(Math.round((s.median_dur_ms / maxDur) * 100), 2) : 2;
+        return `<div class="h-bar-row" style="margin-bottom:10px">
+          <div style="width:130px;text-align:right;flex-shrink:0;font-size:13px;font-weight:500;color:var(--text-2)">${STEP_LABELS[s.step] || s.step}</div>
+          <div class="h-bar-track">
+            <div class="h-bar-fill" style="width:${pct}%;background:${STEP_COLORS[i % STEP_COLORS.length]}">
+              <span>${sec != null ? sec + 's' : '–'}</span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+      // Household choice
+      const c = funnel.householdChoices || { create: 0, join: 0 };
+      const cTotal = c.create + c.join;
+      if (cTotal > 0) {
+        const createPct = Math.round((c.create / cTotal) * 100);
+        choiceEl.innerHTML = `<div style="display:flex;gap:16px">
+          <div style="flex:1;text-align:center;padding:16px;background:var(--track);border-radius:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--peach)">${c.create}</div>
+            <div style="font-size:12px;color:var(--text-2);margin-top:4px">Create new (${createPct}%)</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:16px;background:var(--track);border-radius:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--blue)">${c.join}</div>
+            <div style="font-size:12px;color:var(--text-2);margin-top:4px">Join existing (${100 - createPct}%)</div>
+          </div>
+        </div>`;
+      } else {
+        choiceEl.innerHTML = empty;
+      }
+
+      // AI consent
+      const ai = funnel.aiConsent || { granted: 0, declined: 0 };
+      const aiTotal = ai.granted + ai.declined;
+      if (aiTotal > 0) {
+        const grantedPct = Math.round((ai.granted / aiTotal) * 100);
+        consentEl.innerHTML = `<div style="display:flex;gap:16px">
+          <div style="flex:1;text-align:center;padding:16px;background:var(--track);border-radius:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--green)">${ai.granted}</div>
+            <div style="font-size:12px;color:var(--text-2);margin-top:4px">Smart mode (${grantedPct}%)</div>
+          </div>
+          <div style="flex:1;text-align:center;padding:16px;background:var(--track);border-radius:12px">
+            <div style="font-size:28px;font-weight:800;color:var(--purple)">${ai.declined}</div>
+            <div style="font-size:12px;color:var(--text-2);margin-top:4px">Private mode (${100 - grantedPct}%)</div>
+          </div>
+        </div>`;
+      } else {
+        consentEl.innerHTML = empty;
+      }
+
+      // Household join failures (top reasons)
+      const joinFails = Object.entries(funnel.householdJoinFailures || {}).sort((a, b) => b[1] - a[1]).slice(0, 6);
+      if (joinFails.length) {
+        const maxJF = Math.max(...joinFails.map(([, n]) => n), 1);
+        joinFailEl.innerHTML = joinFails.map(([reason, n]) => {
+          const pct = Math.max(Math.round((n / maxJF) * 100), 2);
+          return `<div class="h-bar-row" style="margin-bottom:8px">
+            <div style="width:180px;text-align:right;flex-shrink:0;font-size:12px;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${reason}</div>
+            <div class="h-bar-track">
+              <div class="h-bar-fill" style="width:${pct}%;background:var(--red)"><span>${n}</span></div>
+            </div>
+          </div>`;
+        }).join('');
+      } else {
+        joinFailEl.innerHTML = '<p style="color:var(--text-3);font-size:13px">No join failures — joins are working.</p>';
+      }
+
+      // Step failures (top reasons across all steps)
+      const stepFails = Object.entries(funnel.stepFailures || {}).sort((a, b) => b[1] - a[1]).slice(0, 6);
+      if (stepFails.length) {
+        const maxSF = Math.max(...stepFails.map(([, n]) => n), 1);
+        stepFailEl.innerHTML = stepFails.map(([reason, n]) => {
+          const pct = Math.max(Math.round((n / maxSF) * 100), 2);
+          return `<div class="h-bar-row" style="margin-bottom:8px">
+            <div style="width:180px;text-align:right;flex-shrink:0;font-size:12px;color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${reason}</div>
+            <div class="h-bar-track">
+              <div class="h-bar-fill" style="width:${pct}%;background:var(--red)"><span>${n}</span></div>
+            </div>
+          </div>`;
+        }).join('');
+      } else {
+        stepFailEl.innerHTML = '<p style="color:var(--text-3);font-size:13px">No step failures.</p>';
+      }
     }
 
     function renderFeatureChart(usage) {
