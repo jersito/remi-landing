@@ -289,6 +289,8 @@
       position: relative; width: 100%; max-width: 440px;
       filter: drop-shadow(0 20px 40px rgba(184, 106, 58, 0.18));
       animation: pFloat 6s ease-in-out infinite;
+      -webkit-mask-image: radial-gradient(circle at center, #000 55%, rgba(0,0,0,0.6) 72%, transparent 90%);
+      mask-image: radial-gradient(circle at center, #000 55%, rgba(0,0,0,0.6) 72%, transparent 90%);
     }
     @keyframes pFloat {
       0%, 100% { transform: translateY(0); }
