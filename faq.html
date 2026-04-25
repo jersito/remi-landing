@@ -7,6 +7,10 @@
   <meta name="description" content="Frequently asked questions about Pippy - Baby Tracker App. Learn about features, pricing, data security, sharing with your pediatrician, and more." />
   <link rel="canonical" href="https://meetpippy.com/faq.html" />
 
+  <link rel="alternate" hreflang="en" href="https://meetpippy.com/faq.html" />
+  <link rel="alternate" hreflang="nl" href="https://meetpippy.com/faq.html?lang=nl" />
+  <link rel="alternate" hreflang="x-default" href="https://meetpippy.com/faq.html" />
+
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://meetpippy.com/faq.html" />
   <meta property="og:title" content="FAQ | Pippy - Baby Tracker App" />
@@ -29,7 +33,74 @@
   <meta name="theme-color" content="#7A9DB0" />
   <meta name="robots" content="index, follow" />
   <link rel="stylesheet" href="style.css" />
+
+  <script>
+    (function() {
+      var lang = 'en';
+      try {
+        var fromUrl = null;
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get('lang');
+        if (p === 'en' || p === 'nl') fromUrl = p;
+        if (!fromUrl) {
+          var h = (window.location.hash || '').replace('#', '').toLowerCase();
+          if (h === 'en' || h === 'nl') fromUrl = h;
+        }
+        var stored = null;
+        try { stored = localStorage.getItem('pippy-lang'); } catch(e) {}
+        var browser = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        var browserLang = browser.indexOf('nl') === 0 ? 'nl' : 'en';
+        lang = fromUrl || stored || browserLang;
+      } catch(e) {}
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+    })();
+  </script>
+
   <style>
+    [data-lang-block] { display: none; }
+    html[data-lang="en"] [data-lang-block="en"] { display: block; }
+    html[data-lang="nl"] [data-lang-block="nl"] { display: block; }
+
+    .lang-switcher {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 999px;
+      padding: 4px;
+      display: flex;
+      gap: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .lang-switcher button {
+      border: 0;
+      background: transparent;
+      color: #2a3a4a;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+    .lang-switcher button.active {
+      background: #2a3a4a;
+      color: #fff;
+    }
+    .lang-switcher button:not(.active):hover {
+      background: rgba(0,0,0,0.05);
+    }
+    .lang-switcher button:focus-visible {
+      outline: 2px solid #7A9DB0;
+      outline-offset: 2px;
+    }
+
     .faq-hero {
       background: linear-gradient(135deg, #7A9DB0 0%, #93B5C6 50%, #A8C5D6 100%);
       padding: 100px 0 60px;
@@ -186,7 +257,14 @@
 </head>
 <body>
 
-  <!-- Hero -->
+  <div class="lang-switcher" role="group" aria-label="Language / Taal">
+    <button data-set-lang="en" type="button" aria-label="English">EN</button>
+    <button data-set-lang="nl" type="button" aria-label="Nederlands">NL</button>
+  </div>
+
+  <!-- ============== ENGLISH ============== -->
+  <div data-lang-block="en">
+
   <section class="faq-hero">
     <div class="container">
       <h1>Frequently Asked Questions</h1>
@@ -194,7 +272,6 @@
     </div>
   </section>
 
-  <!-- Content -->
   <div class="faq-content">
     <a href="/" class="faq-back">&larr; Back to Pippy</a>
 
@@ -337,7 +414,6 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -359,6 +435,222 @@
     </div>
   </footer>
 
-  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </div><!-- /lang en -->
+
+  <!-- ============== NEDERLANDS ============== -->
+  <div data-lang-block="nl">
+
+  <section class="faq-hero">
+    <div class="container">
+      <h1>Veelgestelde vragen</h1>
+      <p>Alles wat je over Pippy moet weten.</p>
+    </div>
+  </section>
+
+  <div class="faq-content">
+    <a href="/" class="faq-back">&larr; Terug naar Pippy</a>
+
+    <h2 class="faq-section-title">Aan de slag</h2>
+
+    <div class="faq-item">
+      <details>
+        <summary>Is Pippy echt gratis?</summary>
+        <div class="faq-answer">
+          <p>Ja. De kernfuncties van Pippy zijn volledig gratis, zonder creditcard. Je kunt voedingen, slaap, luiers en mijlpalen vastleggen via spraak of tekst, synchroniseren met je partner en bezoek-overzichten delen met je jeugdarts, helemaal kosteloos.</p>
+          <p>We bieden ook Pippy Premium, een optionele upgrade met extra functies voor ouders die meer willen. De basis-trackingervaring blijft altijd gratis.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Op welke platforms is Pippy beschikbaar?</summary>
+        <div class="faq-answer">
+          <p>Pippy is beschikbaar voor iOS (App Store) en Android (Google Play). Download de app gratis en begin meteen met bijhouden.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Kunnen beide ouders hetzelfde account gebruiken?</summary>
+        <div class="faq-answer">
+          <p>Ja. Elke ouder maakt een eigen account aan. Daarna genereert één ouder een deelcode in Instellingen en voert de ander die in om bij hetzelfde gezin te horen. Eenmaal gekoppeld zien beide ouders dezelfde babygegevens in real time. Wanneer één ouder om 3 uur 's nachts een voeding vastlegt, ziet de ander dat direct.</p>
+        </div>
+      </details>
+    </div>
+
+    <h2 class="faq-section-title">Functies</h2>
+
+    <div class="faq-item">
+      <details>
+        <summary>Hoe werkt AI-chatinvoer (en wat is er met spraak)?</summary>
+        <div class="faq-answer">
+          <p>Chat staat voorop. Typ gewoon wat er is gebeurd: "ze had 120 ml om 14:00" of "hij heeft een uur geslapen" en Pippy legt het automatisch vast. Geen menu's, geen commando's om te onthouden, stil om 3 uur 's nachts.</p>
+          <p>Heb je je handen vol? Tik dan op de microfoon en spreek dezelfde zin in. Pippy begrijpt natuurlijke taal in meerdere talen, op beide manieren.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Wat kan ik bijhouden met Pippy?</summary>
+        <div class="faq-answer">
+          <p>Pippy ondersteunt het vastleggen van:</p>
+          <ul>
+            <li><strong>Voeding</strong>: borst, fles, vaste voeding, met hoeveelheden en duur.</li>
+            <li><strong>Slaap</strong>: dutjes en nachtelijke slaap, met begin- en eindtijden.</li>
+            <li><strong>Luiers</strong>: nat, vies of allebei, met optionele notities over kleur en consistentie.</li>
+            <li><strong>Kolven</strong>: kolfsessies met hoeveelheden en duur.</li>
+            <li><strong>Mijlpalen</strong>: eerste lach, eerste stapjes, en alles ertussenin.</li>
+            <li><strong>Gezondheidsnotities</strong>: temperaturen, symptomen, medicatie en alles wat het waard is om te onthouden.</li>
+            <li><strong>Herinneringen en zorgplannen</strong>: consultatiebureau-afspraken, vragen om te stellen, en meer.</li>
+          </ul>
+          <p>Beschrijf gewoon wat er is gebeurd in duidelijke taal en Pippy regelt de rest.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Hoe deel ik gegevens met mijn jeugdarts?</summary>
+        <div class="faq-answer">
+          <p>Pippy genereert een net, gestructureerd bezoek-overzicht dat je jeugdarts in elke webbrowser kan bekijken. Aan hun kant is geen app nodig.</p>
+          <p>Ga naar het tabblad Dashboard en tik bovenin op "Doctor View". Scroll vervolgens naar onderen waar je twee deelopties vindt:</p>
+          <ul>
+            <li><strong>QR-code tonen</strong>: je arts scant de code met de cameraapp van zijn telefoon. Geen app nodig.</li>
+            <li><strong>PDF delen</strong>: download of print een overzicht om mee te nemen naar de afspraak.</li>
+          </ul>
+          <p>Het bezoek-overzicht bevat trendgrafieken, daggemiddelden en richtlijnen-gebaseerde meldingen. <a href="/doctor-view.html">Bekijk een demo van hoe het eruitziet.</a></p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Wat is Pippy Premium?</summary>
+        <div class="faq-answer">
+          <p>Pippy Premium is een optionele upgrade die het volgende bevat:</p>
+          <ul>
+            <li><strong>Smart Insights</strong>: wekelijkse AI-gegenereerde overzichten die patronen in de gegevens van je baby uitlichten.</li>
+            <li><strong>Foto-invoer</strong>: voeg foto's toe aan invoeren, met AI-analyse.</li>
+            <li><strong>Slimmere AI</strong>: toegang tot een geavanceerder AI-model voor complexe vragen en genuanceerde antwoorden.</li>
+            <li><strong>Volledige geschiedenis</strong>: bekijk logs ouder dan 30 dagen (gratis accounts bewaren de meest recente 30 dagen).</li>
+            <li><strong>Meerdere kinderen</strong>: volg meer dan één baby onder hetzelfde account.</li>
+          </ul>
+          <p>Eén abonnement geldt voor je hele gezin. De basis-trackingervaring (vastleggen, synchroniseren, delen met de arts) blijft altijd gratis.</p>
+        </div>
+      </details>
+    </div>
+
+    <h2 class="faq-section-title">Privacy en beveiliging</h2>
+
+    <div class="faq-item">
+      <details>
+        <summary>Zijn de gegevens van mijn baby veilig?</summary>
+        <div class="faq-answer">
+          <p>Absoluut. Beveiliging is voor ons een topprioriteit. Je gegevens worden beschermd met:</p>
+          <ul>
+            <li><strong>Versleuteling tijdens overdracht en in rust</strong>: alle gegevens worden versleuteld met TLS/SSL en versleutelde opslag.</li>
+            <li><strong>Beveiliging op rijniveau</strong>: databasebeleid zorgt dat je alleen toegang hebt tot je eigen gegevens.</li>
+            <li><strong>Geen advertenties, geen verkoop van gegevens</strong>: we zullen je gegevens nooit verkopen, verhuren of delen met adverteerders of datahandelaren.</li>
+            <li><strong>AVG-conform</strong>: we volgen strenge gegevensbeschermingsstandaarden.</li>
+          </ul>
+          <p>Lees voor volledige details ons <a href="/privacy.html">Privacybeleid</a>.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Kan ik mijn gegevens verwijderen?</summary>
+        <div class="faq-answer">
+          <p>Ja. Je hebt op elk moment volledige controle over je gegevens. Je kunt individuele invoeren vanuit de app verwijderen, of je hele account verwijderen om alle gegevens definitief van onze servers te halen. Eenmaal verwijderd kunnen je gegevens niet meer worden hersteld.</p>
+        </div>
+      </details>
+    </div>
+
+    <h2 class="faq-section-title">Belangrijke disclaimer</h2>
+
+    <div class="faq-item">
+      <details open>
+        <summary>Vervangt Pippy medisch advies?</summary>
+        <div class="faq-answer">
+          <p><strong>Nee.</strong> Pippy is een tool voor bijhouden en organiseren, geen medisch hulpmiddel. Hoewel Pippy trends kan tonen en gegevens kan markeren die buiten gepubliceerde richtlijnen vallen (zoals AAP- of AASM-benchmarks), zijn dit informatieve meldingen, geen diagnoses.</p>
+          <p>Raadpleeg altijd je jeugdarts of een gekwalificeerde zorgverlener voor medisch advies over de gezondheid van je baby. Pippy is bedoeld als aanvulling op je doktersbezoeken door je arts betere gegevens te geven, niet als vervanging van professionele zorg.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="faq-cta">
+      <h3>Nog vragen?</h3>
+      <p>We helpen je graag. Neem contact op en we reageren binnen 24 uur.</p>
+      <a href="/contact.html">&#9993; Neem contact op</a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="pippy-logo.png" alt="Pippy" class="footer-logo" />
+        <p>Met liefde gemaakt (en heel weinig slaap) &#128155;</p>
+      </div>
+      <div class="footer-trust">
+        <span>&#128274; Versleuteld</span>
+        <span>&#128737;&#65039; AVG-conform</span>
+        <span>&#128581; Geen advertenties, geen verkoop van gegevens</span>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacybeleid</a>
+        <a href="/terms.html">Gebruiksvoorwaarden</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/faq.html">Veelgestelde vragen</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. Alle rechten voorbehouden.</div>
+    </div>
+  </footer>
+
+  </div><!-- /lang nl -->
+
+  <script>
+    (function() {
+      var TITLES = {
+        en: 'FAQ | Pippy - Baby Tracker App',
+        nl: 'Veelgestelde vragen | Pippy - Baby Tracker App'
+      };
+      var META_DESC = {
+        en: "Frequently asked questions about Pippy - Baby Tracker App. Learn about features, pricing, data security, sharing with your pediatrician, and more.",
+        nl: "Veelgestelde vragen over Pippy - Baby Tracker App. Lees over functies, prijzen, gegevensbeveiliging, delen met je jeugdarts en meer."
+      };
+      function applyLang(lang) {
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+        document.title = TITLES[lang] || TITLES.en;
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', META_DESC[lang] || META_DESC.en);
+        document.querySelectorAll('[data-set-lang]').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-set-lang') === lang);
+        });
+      }
+      function setLang(lang) {
+        if (lang !== 'en' && lang !== 'nl') return;
+        applyLang(lang);
+        try { localStorage.setItem('pippy-lang', lang); } catch(e) {}
+        try {
+          var url = new URL(window.location.href);
+          url.searchParams.set('lang', lang);
+          history.replaceState(null, '', url.toString());
+        } catch(e) {}
+      }
+      document.querySelectorAll('[data-set-lang]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          setLang(btn.getAttribute('data-set-lang'));
+        });
+      });
+      applyLang(document.documentElement.getAttribute('data-lang') || 'en');
+    })();
+  </script>
+
+  <script data-goatcounter="https://meetpippy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

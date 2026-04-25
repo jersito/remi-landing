@@ -7,6 +7,10 @@
   <meta name="description" content="Request deletion of your Pippy account and all associated data. Required by Google Play and provided for users who cannot access the app." />
   <link rel="canonical" href="https://meetpippy.com/delete-account.html" />
 
+  <link rel="alternate" hreflang="en" href="https://meetpippy.com/delete-account.html" />
+  <link rel="alternate" hreflang="nl" href="https://meetpippy.com/delete-account.html?lang=nl" />
+  <link rel="alternate" hreflang="x-default" href="https://meetpippy.com/delete-account.html" />
+
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://meetpippy.com/delete-account.html" />
   <meta property="og:title" content="Delete Your Account | Pippy" />
@@ -27,9 +31,76 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#7A9DB0" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="noindex, follow" />
   <link rel="stylesheet" href="style.css" />
+
+  <script>
+    (function() {
+      var lang = 'en';
+      try {
+        var fromUrl = null;
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get('lang');
+        if (p === 'en' || p === 'nl') fromUrl = p;
+        if (!fromUrl) {
+          var h = (window.location.hash || '').replace('#', '').toLowerCase();
+          if (h === 'en' || h === 'nl') fromUrl = h;
+        }
+        var stored = null;
+        try { stored = localStorage.getItem('pippy-lang'); } catch(e) {}
+        var browser = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        var browserLang = browser.indexOf('nl') === 0 ? 'nl' : 'en';
+        lang = fromUrl || stored || browserLang;
+      } catch(e) {}
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+    })();
+  </script>
+
   <style>
+    [data-lang-block] { display: none; }
+    html[data-lang="en"] [data-lang-block="en"] { display: block; }
+    html[data-lang="nl"] [data-lang-block="nl"] { display: block; }
+
+    .lang-switcher {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 999px;
+      padding: 4px;
+      display: flex;
+      gap: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .lang-switcher button {
+      border: 0;
+      background: transparent;
+      color: #2a3a4a;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+    .lang-switcher button.active {
+      background: #2a3a4a;
+      color: #fff;
+    }
+    .lang-switcher button:not(.active):hover {
+      background: rgba(0,0,0,0.05);
+    }
+    .lang-switcher button:focus-visible {
+      outline: 2px solid #7A9DB0;
+      outline-offset: 2px;
+    }
+
     .delete-hero {
       background: linear-gradient(135deg, #7A9DB0 0%, #93B5C6 50%, #A8C5D6 100%);
       padding: 100px 0 60px;
@@ -76,61 +147,6 @@
       text-decoration: none;
     }
     .delete-back:hover { color: var(--navy); }
-    .delete-form {
-      background: #ffffff;
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 16px;
-      padding: 28px;
-      margin: 24px 0 32px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    }
-    .delete-form label {
-      display: block;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 6px;
-      font-size: 0.95rem;
-    }
-    .delete-form input,
-    .delete-form textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid rgba(0,0,0,0.15);
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      margin-bottom: 16px;
-      background: #fafafa;
-    }
-    .delete-form textarea { min-height: 100px; resize: vertical; }
-    .delete-form input:focus,
-    .delete-form textarea:focus {
-      outline: none;
-      border-color: #7A9DB0;
-      background: #fff;
-    }
-    .delete-form .checkbox-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .delete-form .checkbox-row input { width: auto; margin: 3px 0 0; }
-    .delete-form .checkbox-row label { font-weight: 400; font-size: 0.92rem; color: var(--text-muted); }
-    .delete-form button {
-      background: #c75b5b;
-      color: #fff;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      width: 100%;
-      font-family: inherit;
-    }
-    .delete-form button:hover { background: #b04949; }
-    .delete-form button:disabled { opacity: 0.5; cursor: not-allowed; }
     .note-box {
       background: #fff8ed;
       border-left: 4px solid #D4956A;
@@ -160,23 +176,20 @@
       color: var(--navy);
       margin-bottom: 32px;
     }
-    .status-msg {
-      padding: 14px 18px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      font-size: 0.95rem;
-      display: none;
-    }
-    .status-msg.success { background: #e9f7ef; color: #1e7a3c; border: 1px solid #b8e0c6; display: block; }
-    .status-msg.error { background: #fde8e8; color: #a3292f; border: 1px solid #f5c2c2; display: block; }
   </style>
 <!-- Analytics consent loader (handles EU + Microsoft Clarity) -->
 <script src="/analytics-consent.js" defer></script>
-  <meta name="robots" content="noindex, follow" />
 </head>
 <body>
 
-  <!-- Hero -->
+  <div class="lang-switcher" role="group" aria-label="Language / Taal">
+    <button data-set-lang="en" type="button" aria-label="English">EN</button>
+    <button data-set-lang="nl" type="button" aria-label="Nederlands">NL</button>
+  </div>
+
+  <!-- ============== ENGLISH ============== -->
+  <div data-lang-block="en">
+
   <section class="delete-hero">
     <div class="container">
       <h1>Delete Your Account</h1>
@@ -184,7 +197,6 @@
     </div>
   </section>
 
-  <!-- Content -->
   <div class="delete-content">
     <a href="/" class="delete-back">&larr; Back to Pippy</a>
 
@@ -248,7 +260,6 @@
     <p>Contact us at <a href="mailto:support@meetpippy.com">support@meetpippy.com</a>.</p>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -269,6 +280,143 @@
       <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
     </div>
   </footer>
+
+  </div><!-- /lang en -->
+
+  <!-- ============== NEDERLANDS ============== -->
+  <div data-lang-block="nl">
+
+  <section class="delete-hero">
+    <div class="container">
+      <h1>Account verwijderen</h1>
+      <p>Verwijder je Pippy-account en alle bijbehorende gegevens</p>
+    </div>
+  </section>
+
+  <div class="delete-content">
+    <a href="/" class="delete-back">&larr; Terug naar Pippy</a>
+
+    <div class="effective-date">Laatst bijgewerkt: 12 april 2026</div>
+
+    <p>Pippy gebruikt anonieme accounts. We verzamelen je naam, e-mailadres of telefoonnummer niet. Verwijdering is definitief en kan niet ongedaan worden gemaakt.</p>
+
+    <div class="note-box">
+      <p><strong>Hoe Pippy je herkent:</strong> wanneer je de app voor het eerst opent, maken we een willekeurig ID aan op je apparaat en gebruiken dat om je babylogs op te slaan. Er is geen e-mailadres, gebruikersnaam of wachtwoord. Je account bestaat alleen op het apparaat waarop je de app hebt geïnstalleerd.</p>
+    </div>
+
+    <h2>Beste manier: verwijder vanuit de app</h2>
+    <p>Heb je Pippy nog geïnstalleerd? Dan is dit de enige betrouwbare manier om je gegevens te verwijderen:</p>
+    <ul>
+      <li>Open Pippy op je telefoon</li>
+      <li>Ga naar <strong>Instellingen</strong></li>
+      <li>Scroll naar <strong>Privacy &amp; Gegevens</strong></li>
+      <li>Tik op <strong>Verwijder mijn gegevens</strong> (verwijdert alleen jouw gegevens) of <strong>Verwijder gezinsgegevens</strong> (verwijdert alles van je gezin, alleen voor de eigenaar)</li>
+      <li>Bevestig wanneer daarom wordt gevraagd</li>
+    </ul>
+    <p>Je gegevens worden direct van onze servers verwijderd.</p>
+
+    <h2>Als je de app niet meer hebt</h2>
+    <p>Omdat accounts anoniem zijn, kunnen we je gegevens niet opzoeken via een e-mailadres of telefoonnummer. Die informatie is daar nooit aan gekoppeld geweest. Heb je Pippy verwijderd zonder eerst je gegevens te wissen? Stuur ons dan toch een mail:</p>
+
+    <div class="alt-method">
+      <h3>E-mail: <a href="mailto:support@meetpippy.com?subject=Verzoek%20tot%20verwijdering%20account">support@meetpippy.com</a></h3>
+      <p style="margin: 0;">Vermeld details die je je nog herinnert (ongeveer de datum waarop je het account aanmaakte, de naam van je baby, het apparaat dat je gebruikte). We doen ons best om de gegevens te vinden en te verwijderen, en we schrijven je sowieso binnen 30 dagen terug.</p>
+    </div>
+
+    <p style="color: var(--text-muted); font-size: 0.95rem;">In de praktijk heeft een anoniem account zonder gekoppeld apparaat weinig data over om te vinden, omdat we geen contactgegevens of foto's van jou bewaren, maar we doen wel een serieuze poging.</p>
+
+    <h2>Wat wordt verwijderd</h2>
+    <p>Wanneer je account wordt verwijderd, verwijderen we definitief:</p>
+    <ul>
+      <li>Alle baby-trackinginvoeren (voeding, slaap, luier, kolven, groei, gezondheidsnotities, mijlpalen, algemene notities)</li>
+      <li>Foto's die je aan invoeren hebt toegevoegd</li>
+      <li>Chat-geschiedenis met de Pippy-assistent</li>
+      <li>Prestaties, inzichten, herinneringen en bezoek-overzichten</li>
+      <li>Gezinslidmaatschap en uitnodigingscodes</li>
+      <li>Pushmeldingstokens</li>
+      <li>Je anonieme accountrij</li>
+    </ul>
+
+    <h2>Wat mogelijk wordt bewaard</h2>
+    <p>Een kleine hoeveelheid gegevens kan voor een beperkte tijd bewaard blijven om legitieme redenen:</p>
+    <ul>
+      <li><strong>Anonieme, geaggregeerde statistieken.</strong> Bevatten geen identifiers waarmee gebeurtenissen aan jou kunnen worden gekoppeld.</li>
+      <li><strong>Abonnements- en betalingsgegevens.</strong> Alleen bewaard voor zover wettelijk vereist (belasting, boekhouding, fraudepreventie). Betalingsgegevens zelf bereiken Pippy nooit; die worden afgehandeld door Google Play of de App Store.</li>
+      <li><strong>Beveiligings- en misbruikpreventielogs.</strong> Kort bewaard zoals nodig om de dienst te beschermen.</li>
+    </ul>
+
+    <div class="note-box">
+      <p><strong>Abonnementen:</strong> Het verwijderen van je gegevens zegt een actief abonnement niet automatisch op. Om toekomstige kosten te voorkomen, zeg je je abonnement op via <a href="https://play.google.com/store/account/subscriptions" target="_blank" rel="noopener">Google Play-abonnementen</a> (Android) of <a href="https://apps.apple.com/account/subscriptions" target="_blank" rel="noopener">App Store-abonnementen</a> (iOS).</p>
+    </div>
+
+    <h2>Tijdlijn</h2>
+    <p>In-app verwijdering is direct. E-mailverzoeken worden binnen 30 dagen verwerkt.</p>
+
+    <h2>Vragen</h2>
+    <p>Neem contact met ons op via <a href="mailto:support@meetpippy.com">support@meetpippy.com</a>.</p>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="pippy-logo.png" alt="Pippy" class="footer-logo" />
+        <p>Met liefde gemaakt (en heel weinig slaap) &#128155;</p>
+      </div>
+      <div class="footer-trust">
+        <span>&#128274; Versleuteld</span>
+        <span>&#128737;&#65039; AVG-conform</span>
+        <span>&#128581; Geen advertenties, geen verkoop van gegevens</span>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacybeleid</a>
+        <a href="/terms.html">Gebruiksvoorwaarden</a>
+        <a href="/delete-account.html">Account verwijderen</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. Alle rechten voorbehouden.</div>
+    </div>
+  </footer>
+
+  </div><!-- /lang nl -->
+
+  <script>
+    (function() {
+      var TITLES = {
+        en: 'Delete Your Account | Pippy',
+        nl: 'Account verwijderen | Pippy'
+      };
+      var META_DESC = {
+        en: "Request deletion of your Pippy account and all associated data. Required by Google Play and provided for users who cannot access the app.",
+        nl: "Vraag verwijdering aan van je Pippy-account en alle bijbehorende gegevens. Verplicht door Google Play en beschikbaar voor gebruikers die de app niet meer kunnen openen."
+      };
+      function applyLang(lang) {
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+        document.title = TITLES[lang] || TITLES.en;
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', META_DESC[lang] || META_DESC.en);
+        document.querySelectorAll('[data-set-lang]').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-set-lang') === lang);
+        });
+      }
+      function setLang(lang) {
+        if (lang !== 'en' && lang !== 'nl') return;
+        applyLang(lang);
+        try { localStorage.setItem('pippy-lang', lang); } catch(e) {}
+        try {
+          var url = new URL(window.location.href);
+          url.searchParams.set('lang', lang);
+          history.replaceState(null, '', url.toString());
+        } catch(e) {}
+      }
+      document.querySelectorAll('[data-set-lang]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          setLang(btn.getAttribute('data-set-lang'));
+        });
+      });
+      applyLang(document.documentElement.getAttribute('data-lang') || 'en');
+    })();
+  </script>
 
   <script data-goatcounter="https://meetpippy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>

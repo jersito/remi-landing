@@ -7,6 +7,10 @@
   <meta name="description" content="Terms of Service for Pippy - Baby Tracker App. Read about the terms and conditions that govern your use of the Pippy app and website." />
   <link rel="canonical" href="https://meetpippy.com/terms.html" />
 
+  <link rel="alternate" hreflang="en" href="https://meetpippy.com/terms.html" />
+  <link rel="alternate" hreflang="nl" href="https://meetpippy.com/terms.html?lang=nl" />
+  <link rel="alternate" hreflang="x-default" href="https://meetpippy.com/terms.html" />
+
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://meetpippy.com/terms.html" />
   <meta property="og:title" content="Terms of Service | Pippy - Baby Tracker App" />
@@ -29,7 +33,74 @@
   <meta name="theme-color" content="#7A9DB0" />
   <meta name="robots" content="index, follow" />
   <link rel="stylesheet" href="style.css" />
+
+  <script>
+    (function() {
+      var lang = 'en';
+      try {
+        var fromUrl = null;
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get('lang');
+        if (p === 'en' || p === 'nl') fromUrl = p;
+        if (!fromUrl) {
+          var h = (window.location.hash || '').replace('#', '').toLowerCase();
+          if (h === 'en' || h === 'nl') fromUrl = h;
+        }
+        var stored = null;
+        try { stored = localStorage.getItem('pippy-lang'); } catch(e) {}
+        var browser = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        var browserLang = browser.indexOf('nl') === 0 ? 'nl' : 'en';
+        lang = fromUrl || stored || browserLang;
+      } catch(e) {}
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+    })();
+  </script>
+
   <style>
+    [data-lang-block] { display: none; }
+    html[data-lang="en"] [data-lang-block="en"] { display: block; }
+    html[data-lang="nl"] [data-lang-block="nl"] { display: block; }
+
+    .lang-switcher {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 999px;
+      padding: 4px;
+      display: flex;
+      gap: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .lang-switcher button {
+      border: 0;
+      background: transparent;
+      color: #2a3a4a;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+    .lang-switcher button.active {
+      background: #2a3a4a;
+      color: #fff;
+    }
+    .lang-switcher button:not(.active):hover {
+      background: rgba(0,0,0,0.05);
+    }
+    .lang-switcher button:focus-visible {
+      outline: 2px solid #7A9DB0;
+      outline-offset: 2px;
+    }
+
     .terms-hero {
       background: linear-gradient(135deg, #7A9DB0 0%, #93B5C6 50%, #A8C5D6 100%);
       padding: 100px 0 60px;
@@ -142,7 +213,14 @@
 </head>
 <body>
 
-  <!-- Hero -->
+  <div class="lang-switcher" role="group" aria-label="Language / Taal">
+    <button data-set-lang="en" type="button" aria-label="English">EN</button>
+    <button data-set-lang="nl" type="button" aria-label="Nederlands">NL</button>
+  </div>
+
+  <!-- ============== ENGLISH ============== -->
+  <div data-lang-block="en">
+
   <section class="terms-hero">
     <div class="container">
       <h1>Terms of Service</h1>
@@ -150,7 +228,6 @@
     </div>
   </section>
 
-  <!-- Content -->
   <div class="terms-content">
     <a href="/" class="terms-back">&larr; Back to Pippy</a>
 
@@ -246,7 +323,6 @@
     </ul>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -268,6 +344,175 @@
     </div>
   </footer>
 
-  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </div><!-- /lang en -->
+
+  <!-- ============== NEDERLANDS ============== -->
+  <div data-lang-block="nl">
+
+  <section class="terms-hero">
+    <div class="container">
+      <h1>Gebruiksvoorwaarden</h1>
+      <p>De spelregels voor het gebruik van Pippy.</p>
+    </div>
+  </section>
+
+  <div class="terms-content">
+    <a href="/" class="terms-back">&larr; Terug naar Pippy</a>
+
+    <div class="effective-date">Ingangsdatum: 28 maart 2026</div>
+
+    <p>Welkom bij Pippy. Deze Gebruiksvoorwaarden ("Voorwaarden") zijn van toepassing op je gebruik van de mobiele app Pippy (de "app") en de website op <a href="https://meetpippy.com">meetpippy.com</a> (de "website"), beheerd door Pippy Baby App ("wij", "onze" of "ons"). Door Pippy te gebruiken, ga je akkoord met deze Voorwaarden. Ga je niet akkoord? Gebruik de app of website dan niet.</p>
+
+    <div class="terms-toc">
+      <h3>Inhoudsopgave</h3>
+      <ol>
+        <li><a href="#nl-acceptance">Aanvaarding van de voorwaarden</a></li>
+        <li><a href="#nl-description">Beschrijving van de dienst</a></li>
+        <li><a href="#nl-accounts">Gebruikersaccounts</a></li>
+        <li><a href="#nl-acceptable-use">Toegestaan gebruik</a></li>
+        <li><a href="#nl-ip">Intellectueel eigendom</a></li>
+        <li><a href="#nl-liability">Beperking van aansprakelijkheid</a></li>
+        <li><a href="#nl-termination">Beëindiging</a></li>
+        <li><a href="#nl-changes">Wijzigingen in deze voorwaarden</a></li>
+        <li><a href="#nl-governing-law">Toepasselijk recht</a></li>
+        <li><a href="#nl-contact">Contact</a></li>
+      </ol>
+    </div>
+
+    <h2 id="nl-acceptance">1. Aanvaarding van de voorwaarden</h2>
+    <p>Door een account aan te maken, de app te downloaden of een onderdeel van de dienst te gebruiken, bevestig je dat je minimaal 18 jaar oud bent (of de meerderjarigheidsleeftijd in jouw land) en dat je akkoord gaat met deze Voorwaarden. Gebruik je Pippy namens iemand anders (bijvoorbeeld als verzorger)? Dan verklaar je dat je bevoegd bent om deze Voorwaarden namens die persoon te aanvaarden.</p>
+
+    <h2 id="nl-description">2. Beschrijving van de dienst</h2>
+    <p>Pippy is een AI-gedreven baby-trackingapp waarmee ouders en verzorgers voedings-, slaap-, luier- en gezondheidsgegevens kunnen vastleggen via natuurlijke taal, spraak of tekstinvoer. De app verwerkt je invoer om gestructureerde records aan te maken en biedt onder meer de volgende functies:</p>
+    <ul>
+      <li>Spraak- en tekst-gebaseerde invoer voor voedingen, slaap, luiers en mijlpalen.</li>
+      <li>AI-gedreven verwerking van natuurlijke taal naar gestructureerde invoeren.</li>
+      <li>Trendgrafieken en overzichten van de gegevens van je baby.</li>
+      <li>Deelbare bezoek-overzichten voor het consultatiebureau of de jeugdarts.</li>
+      <li>Slimme herinneringen en follow-up-meldingen.</li>
+      <li>Synchronisatie tussen meerdere verzorgers, zodat beide ouders dezelfde gegevens kunnen zien.</li>
+    </ul>
+    <p>Pippy is gratis te gebruiken voor de kernfuncties. We bieden ook een optioneel premium-abonnement ("Pippy Premium") met extra functies, dat duidelijk wordt aangegeven en geprijsd in de app.</p>
+    <ul>
+      <li>Bij bevestiging van je aankoop wordt het bedrag in rekening gebracht via je Apple ID of Google Play-account.</li>
+      <li>Abonnementen verlengen automatisch, tenzij automatische verlenging minimaal 24 uur voor het einde van de huidige periode wordt uitgezet.</li>
+      <li>Je account wordt voor de verlenging belast binnen 24 uur voor het einde van de huidige periode, tegen het tarief van het gekozen abonnement.</li>
+      <li>Je kunt je abonnement op elk moment beheren en opzeggen via de abonnementsinstellingen op je apparaat (App Store of Google Play Store).</li>
+      <li>Er worden geen restituties gegeven voor het ongebruikte deel van een abonnementsperiode, behalve waar de wet dit verplicht.</li>
+    </ul>
+
+    <h2 id="nl-accounts">3. Gebruikersaccounts</h2>
+    <p>Om Pippy te gebruiken, moet je een account aanmaken met een geldig e-mailadres. Je bent verantwoordelijk voor:</p>
+    <ul>
+      <li>Het veilig en vertrouwelijk houden van je inloggegevens.</li>
+      <li>Alle activiteit die plaatsvindt onder jouw account.</li>
+      <li>Ons direct op de hoogte stellen wanneer je vermoedt dat iemand zonder toestemming toegang heeft tot je account.</li>
+    </ul>
+    <p>Je mag je account delen met een mede-ouder of verzorger. Je bent ervoor verantwoordelijk dat iedereen met wie je toegang deelt zich ook aan deze Voorwaarden houdt.</p>
+
+    <h2 id="nl-acceptable-use">4. Toegestaan gebruik</h2>
+    <p>Je gebruikt Pippy alleen voor het beoogde doel: het bijhouden en beheren van de dagelijkse activiteiten en gezondheidsinformatie van je baby. Je verklaart dat je het volgende niet doet:</p>
+    <ul>
+      <li>De app gebruiken voor onwettige doeleinden of in strijd met geldende wetgeving.</li>
+      <li>Pogingen ondernemen om zonder toestemming toegang te krijgen tot onze systemen, servers of accounts van andere gebruikers.</li>
+      <li>De app reverse-engineeren, decompileren of disassembleren.</li>
+      <li>Geautomatiseerde tools (bots, scrapers, enzovoort) gebruiken om toegang te krijgen tot de app of gegevens te onttrekken.</li>
+      <li>Schadelijke code, virussen of schadelijke inhoud uploaden of versturen.</li>
+      <li>Verzoeken aan de AI-assistent sturen die niets te maken hebben met baby-tracking, opvoeding of zuigelingenzorg.</li>
+      <li>De app gebruiken op een manier die de dienst kan beschadigen, uitschakelen of verstoren.</li>
+    </ul>
+
+    <h2 id="nl-ip">5. Intellectueel eigendom</h2>
+    <p>De Pippy-app, de website en alle gerelateerde inhoud, inclusief maar niet beperkt tot ontwerp, code, afbeeldingen, logo's en tekst, zijn eigendom van Pippy Baby App en worden beschermd door auteursrecht en andere intellectuele eigendomsrechten.</p>
+    <p><strong>Je gegevens zijn van jou.</strong> Je behoudt het volledige eigendom van alle baby-trackinggegevens, notities en andere inhoud die je in Pippy invoert. We claimen geen eigendomsrechten op je gegevens. Je geeft ons een beperkte licentie om je gegevens op te slaan, te verwerken en weer te geven, uitsluitend om de dienst aan jou te leveren.</p>
+
+    <h2 id="nl-liability">6. Beperking van aansprakelijkheid</h2>
+    <p><strong>Pippy is geen medisch hulpmiddel en geeft geen medisch advies.</strong> De app is bedoeld om je te helpen de dagelijkse activiteiten van je baby bij te houden en te organiseren. Het is geen vervanging van professioneel medisch advies, een diagnose of behandeling. Raadpleeg altijd je jeugdarts of een gekwalificeerde zorgverlener bij vragen over de gezondheid van je baby.</p>
+    <p>De AI-gedreven functies in Pippy (zoals natuurlijke-taalverwerking, trendoverzichten en richtlijnen-gebaseerde meldingen) worden alleen voor informatieve doeleinden aangeboden. We streven naar nauwkeurigheid, maar kunnen niet garanderen dat AI-gegenereerde interpretaties altijd kloppen.</p>
+    <p>Voor zover wettelijk toegestaan, is Pippy Baby App niet aansprakelijk voor indirecte, incidentele, bijzondere, gevolg- of punitieve schade die voortvloeit uit of verband houdt met je gebruik van de dienst. Onze totale aansprakelijkheid voor enige claim met betrekking tot de dienst is beperkt tot het bedrag dat je in de 12 maanden voorafgaand aan de claim aan ons hebt betaald (of 0 euro als je het gratis abonnement gebruikt).</p>
+    <p>De dienst wordt geleverd "as is" en "as available" zonder enige garantie, expliciet of impliciet, inclusief maar niet beperkt tot impliciete garanties van verkoopbaarheid, geschiktheid voor een bepaald doel en niet-inbreuk.</p>
+
+    <h2 id="nl-termination">7. Beëindiging</h2>
+    <p>Je kunt op elk moment stoppen met het gebruik van Pippy en je account verwijderen. Wanneer je je account verwijdert, worden al je gegevens definitief van onze servers verwijderd.</p>
+    <p>We kunnen je toegang tot de dienst opschorten of beëindigen als je deze Voorwaarden schendt, als we daartoe wettelijk verplicht zijn, of als we redelijkerwijs vermoeden dat je gebruik van de dienst een risico vormt voor andere gebruikers of voor onze systemen. We zullen redelijke moeite doen om je hierover te informeren voordat we dergelijke maatregelen nemen, tenzij dit onpraktisch is of wettelijk niet mag.</p>
+
+    <h2 id="nl-changes">8. Wijzigingen in deze voorwaarden</h2>
+    <p>We kunnen deze Voorwaarden van tijd tot tijd bijwerken. Bij belangrijke wijzigingen brengen we je minimaal 30 dagen voordat de wijzigingen ingaan op de hoogte via de app of per e-mail. Door de dienst te blijven gebruiken nadat de wijzigingen van kracht zijn, ga je akkoord met de bijgewerkte Voorwaarden.</p>
+    <p>We raden je aan deze Voorwaarden regelmatig te lezen. De "Ingangsdatum" bovenaan deze pagina geeft aan wanneer deze Voorwaarden voor het laatst zijn bijgewerkt.</p>
+
+    <h2 id="nl-governing-law">9. Toepasselijk recht</h2>
+    <p>Deze Voorwaarden vallen onder het recht van de Verenigde Staten en worden uitgelegd in overeenstemming met dat recht, zonder rekening te houden met collisiebepalingen. Geschillen die voortvloeien uit deze Voorwaarden of uit je gebruik van de dienst, worden beslecht door de bevoegde rechter.</p>
+
+    <h2 id="nl-contact">10. Contact</h2>
+    <p>Heb je vragen over deze Gebruiksvoorwaarden? Neem dan contact met ons op:</p>
+    <ul>
+      <li><strong>E-mail:</strong> <a href="mailto:support@meetpippy.com">support@meetpippy.com</a></li>
+      <li><strong>Website:</strong> <a href="https://meetpippy.com">meetpippy.com</a></li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="pippy-logo.png" alt="Pippy" class="footer-logo" />
+        <p>Met liefde gemaakt (en heel weinig slaap) &#128155;</p>
+      </div>
+      <div class="footer-trust">
+        <span>&#128274; Versleuteld</span>
+        <span>&#128737;&#65039; AVG-conform</span>
+        <span>&#128581; Geen advertenties, geen verkoop van gegevens</span>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacybeleid</a>
+        <a href="/terms.html">Gebruiksvoorwaarden</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/faq.html">Veelgestelde vragen</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. Alle rechten voorbehouden.</div>
+    </div>
+  </footer>
+
+  </div><!-- /lang nl -->
+
+  <script>
+    (function() {
+      var TITLES = {
+        en: 'Terms of Service | Pippy - Baby Tracker App',
+        nl: 'Gebruiksvoorwaarden | Pippy - Baby Tracker App'
+      };
+      var META_DESC = {
+        en: "Terms of Service for Pippy - Baby Tracker App. Read about the terms and conditions that govern your use of the Pippy app and website.",
+        nl: "Gebruiksvoorwaarden van Pippy - Baby Tracker App. Lees onder welke voorwaarden je de Pippy-app en website kunt gebruiken."
+      };
+      function applyLang(lang) {
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+        document.title = TITLES[lang] || TITLES.en;
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', META_DESC[lang] || META_DESC.en);
+        document.querySelectorAll('[data-set-lang]').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-set-lang') === lang);
+        });
+      }
+      function setLang(lang) {
+        if (lang !== 'en' && lang !== 'nl') return;
+        applyLang(lang);
+        try { localStorage.setItem('pippy-lang', lang); } catch(e) {}
+        try {
+          var url = new URL(window.location.href);
+          url.searchParams.set('lang', lang);
+          history.replaceState(null, '', url.toString());
+        } catch(e) {}
+      }
+      document.querySelectorAll('[data-set-lang]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          setLang(btn.getAttribute('data-set-lang'));
+        });
+      });
+      applyLang(document.documentElement.getAttribute('data-lang') || 'en');
+    })();
+  </script>
+
+  <script data-goatcounter="https://meetpippy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

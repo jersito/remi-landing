@@ -7,6 +7,10 @@
   <meta name="description" content="Get in touch with the Pippy team. We're here to help with questions about the baby tracker app, your account, or anything else." />
   <link rel="canonical" href="https://meetpippy.com/contact.html" />
 
+  <link rel="alternate" hreflang="en" href="https://meetpippy.com/contact.html" />
+  <link rel="alternate" hreflang="nl" href="https://meetpippy.com/contact.html?lang=nl" />
+  <link rel="alternate" hreflang="x-default" href="https://meetpippy.com/contact.html" />
+
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://meetpippy.com/contact.html" />
   <meta property="og:title" content="Contact Us | Pippy - Baby Tracker App" />
@@ -29,7 +33,74 @@
   <meta name="theme-color" content="#7A9DB0" />
   <meta name="robots" content="index, follow" />
   <link rel="stylesheet" href="style.css" />
+
+  <script>
+    (function() {
+      var lang = 'en';
+      try {
+        var fromUrl = null;
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get('lang');
+        if (p === 'en' || p === 'nl') fromUrl = p;
+        if (!fromUrl) {
+          var h = (window.location.hash || '').replace('#', '').toLowerCase();
+          if (h === 'en' || h === 'nl') fromUrl = h;
+        }
+        var stored = null;
+        try { stored = localStorage.getItem('pippy-lang'); } catch(e) {}
+        var browser = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        var browserLang = browser.indexOf('nl') === 0 ? 'nl' : 'en';
+        lang = fromUrl || stored || browserLang;
+      } catch(e) {}
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+    })();
+  </script>
+
   <style>
+    [data-lang-block] { display: none; }
+    html[data-lang="en"] [data-lang-block="en"] { display: block; }
+    html[data-lang="nl"] [data-lang-block="nl"] { display: block; }
+
+    .lang-switcher {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 999px;
+      padding: 4px;
+      display: flex;
+      gap: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .lang-switcher button {
+      border: 0;
+      background: transparent;
+      color: #2a3a4a;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+    .lang-switcher button.active {
+      background: #2a3a4a;
+      color: #fff;
+    }
+    .lang-switcher button:not(.active):hover {
+      background: rgba(0,0,0,0.05);
+    }
+    .lang-switcher button:focus-visible {
+      outline: 2px solid #7A9DB0;
+      outline-offset: 2px;
+    }
+
     .contact-hero {
       background: linear-gradient(135deg, #7A9DB0 0%, #93B5C6 50%, #A8C5D6 100%);
       padding: 100px 0 60px;
@@ -167,7 +238,14 @@
 </head>
 <body>
 
-  <!-- Hero -->
+  <div class="lang-switcher" role="group" aria-label="Language / Taal">
+    <button data-set-lang="en" type="button" aria-label="English">EN</button>
+    <button data-set-lang="nl" type="button" aria-label="Nederlands">NL</button>
+  </div>
+
+  <!-- ============== ENGLISH ============== -->
+  <div data-lang-block="en">
+
   <section class="contact-hero">
     <div class="container">
       <h1>Contact Us</h1>
@@ -175,7 +253,6 @@
     </div>
   </section>
 
-  <!-- Content -->
   <div class="contact-content">
     <a href="/" class="contact-back">&larr; Back to Pippy</a>
 
@@ -217,7 +294,6 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -239,6 +315,121 @@
     </div>
   </footer>
 
-  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </div><!-- /lang en -->
+
+  <!-- ============== NEDERLANDS ============== -->
+  <div data-lang-block="nl">
+
+  <section class="contact-hero">
+    <div class="container">
+      <h1>Contact</h1>
+      <p>We horen graag van je.</p>
+    </div>
+  </section>
+
+  <div class="contact-content">
+    <a href="/" class="contact-back">&larr; Terug naar Pippy</a>
+
+    <div class="contact-card">
+      <div class="contact-icon">&#128140;</div>
+      <h2>Neem contact op</h2>
+      <p>Heb je een vraag, suggestie of wil je gewoon hallo zeggen? We zijn een klein team van ouders dat Pippy heeft gemaakt omdat we het zelf nodig hadden. We lezen elk bericht en willen oprecht helpen.</p>
+      <a href="mailto:support@meetpippy.com" class="contact-email">
+        &#9993; support@meetpippy.com
+      </a>
+    </div>
+
+    <div class="contact-response">
+      <p><strong>Reactietijden:</strong> we streven ernaar om op werkdagen binnen 24 uur te reageren. Berichten in het weekend beantwoorden we de maandag erop. Voor dringende account- of beveiligingsvragen zet je "URGENT" in het onderwerp.</p>
+    </div>
+
+    <h3 style="font-size: 1.1rem; margin-bottom: 16px; color: var(--navy);">Handige links</h3>
+    <div class="contact-links">
+      <a href="/faq.html" class="contact-link-card">
+        <div class="link-icon">&#10067;</div>
+        <h3>Veelgestelde vragen</h3>
+        <p>Antwoorden op veelgestelde vragen over Pippy, functies en je account.</p>
+      </a>
+      <a href="/privacy.html" class="contact-link-card">
+        <div class="link-icon">&#128274;</div>
+        <h3>Privacybeleid</h3>
+        <p>Lees hoe we de gegevens van je gezin verzamelen, gebruiken en beschermen.</p>
+      </a>
+      <a href="/terms.html" class="contact-link-card">
+        <div class="link-icon">&#128220;</div>
+        <h3>Gebruiksvoorwaarden</h3>
+        <p>De voorwaarden voor het gebruik van Pippy.</p>
+      </a>
+      <a href="/doctor-view.html" class="contact-link-card">
+        <div class="link-icon">&#129658;</div>
+        <h3>Voor jeugdartsen</h3>
+        <p>Ontdek hoe Pippy helpt tijdens consultatiebureau-bezoeken.</p>
+      </a>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="pippy-logo.png" alt="Pippy" class="footer-logo" />
+        <p>Met liefde gemaakt (en heel weinig slaap) &#128155;</p>
+      </div>
+      <div class="footer-trust">
+        <span>&#128274; Versleuteld</span>
+        <span>&#128737;&#65039; AVG-conform</span>
+        <span>&#128581; Geen advertenties, geen verkoop van gegevens</span>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacybeleid</a>
+        <a href="/terms.html">Gebruiksvoorwaarden</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/faq.html">Veelgestelde vragen</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. Alle rechten voorbehouden.</div>
+    </div>
+  </footer>
+
+  </div><!-- /lang nl -->
+
+  <script>
+    (function() {
+      var TITLES = {
+        en: 'Contact Us | Pippy - Baby Tracker App',
+        nl: 'Contact | Pippy - Baby Tracker App'
+      };
+      var META_DESC = {
+        en: "Get in touch with the Pippy team. We're here to help with questions about the baby tracker app, your account, or anything else.",
+        nl: "Neem contact op met het Pippy-team. We helpen je graag met vragen over de baby-tracker-app, je account of iets anders."
+      };
+      function applyLang(lang) {
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+        document.title = TITLES[lang] || TITLES.en;
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', META_DESC[lang] || META_DESC.en);
+        document.querySelectorAll('[data-set-lang]').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-set-lang') === lang);
+        });
+      }
+      function setLang(lang) {
+        if (lang !== 'en' && lang !== 'nl') return;
+        applyLang(lang);
+        try { localStorage.setItem('pippy-lang', lang); } catch(e) {}
+        try {
+          var url = new URL(window.location.href);
+          url.searchParams.set('lang', lang);
+          history.replaceState(null, '', url.toString());
+        } catch(e) {}
+      }
+      document.querySelectorAll('[data-set-lang]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          setLang(btn.getAttribute('data-set-lang'));
+        });
+      });
+      applyLang(document.documentElement.getAttribute('data-lang') || 'en');
+    })();
+  </script>
+
+  <script data-goatcounter="https://meetpippy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

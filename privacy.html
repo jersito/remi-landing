@@ -7,6 +7,10 @@
   <meta name="description" content="Privacy Policy for New Mom App - Pippy. Learn how we collect, use, and protect your data. Your privacy and your family's safety are our top priorities." />
   <link rel="canonical" href="https://meetpippy.com/privacy.html" />
 
+  <link rel="alternate" hreflang="en" href="https://meetpippy.com/privacy.html" />
+  <link rel="alternate" hreflang="nl" href="https://meetpippy.com/privacy.html?lang=nl" />
+  <link rel="alternate" hreflang="x-default" href="https://meetpippy.com/privacy.html" />
+
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://meetpippy.com/privacy.html" />
   <meta property="og:title" content="Privacy Policy | New Mom App - Pippy" />
@@ -29,7 +33,76 @@
   <meta name="theme-color" content="#7A9DB0" />
   <meta name="robots" content="index, follow" />
   <link rel="stylesheet" href="style.css" />
+
+  <script>
+    // Resolve language before paint to avoid flicker.
+    // Priority: ?lang=xx URL param > #xx hash > localStorage > navigator.language > 'en'.
+    (function() {
+      var lang = 'en';
+      try {
+        var fromUrl = null;
+        var params = new URLSearchParams(window.location.search);
+        var p = params.get('lang');
+        if (p === 'en' || p === 'nl') fromUrl = p;
+        if (!fromUrl) {
+          var h = (window.location.hash || '').replace('#', '').toLowerCase();
+          if (h === 'en' || h === 'nl') fromUrl = h;
+        }
+        var stored = null;
+        try { stored = localStorage.getItem('pippy-lang'); } catch(e) {}
+        var browser = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+        var browserLang = browser.indexOf('nl') === 0 ? 'nl' : 'en';
+        lang = fromUrl || stored || browserLang;
+      } catch(e) {}
+      document.documentElement.setAttribute('data-lang', lang);
+      document.documentElement.setAttribute('lang', lang);
+    })();
+  </script>
+
   <style>
+    [data-lang-block] { display: none; }
+    html[data-lang="en"] [data-lang-block="en"] { display: block; }
+    html[data-lang="nl"] [data-lang-block="nl"] { display: block; }
+
+    .lang-switcher {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 999px;
+      padding: 4px;
+      display: flex;
+      gap: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .lang-switcher button {
+      border: 0;
+      background: transparent;
+      color: #2a3a4a;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      font-family: inherit;
+    }
+    .lang-switcher button.active {
+      background: #2a3a4a;
+      color: #fff;
+    }
+    .lang-switcher button:not(.active):hover {
+      background: rgba(0,0,0,0.05);
+    }
+    .lang-switcher button:focus-visible {
+      outline: 2px solid #7A9DB0;
+      outline-offset: 2px;
+    }
+
     .privacy-hero {
       background: linear-gradient(135deg, #7A9DB0 0%, #93B5C6 50%, #A8C5D6 100%);
       padding: 100px 0 60px;
@@ -142,7 +215,14 @@
 </head>
 <body>
 
-  <!-- Hero -->
+  <div class="lang-switcher" role="group" aria-label="Language / Taal">
+    <button data-set-lang="en" type="button" aria-label="English">EN</button>
+    <button data-set-lang="nl" type="button" aria-label="Nederlands">NL</button>
+  </div>
+
+  <!-- ============== ENGLISH ============== -->
+  <div data-lang-block="en">
+
   <section class="privacy-hero">
     <div class="container">
       <h1>Privacy Policy</h1>
@@ -150,7 +230,6 @@
     </div>
   </section>
 
-  <!-- Content -->
   <div class="privacy-content">
     <a href="/" class="privacy-back">&larr; Back to Pippy</a>
 
@@ -315,7 +394,6 @@
     </ul>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -337,6 +415,250 @@
       <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
     </div>
   </footer>
+
+  </div><!-- /lang en -->
+
+  <!-- ============== NEDERLANDS ============== -->
+  <div data-lang-block="nl">
+
+  <section class="privacy-hero">
+    <div class="container">
+      <h1>Privacybeleid</h1>
+      <p>De privacy van je gezin is belangrijk voor ons. Zo beschermen we die.</p>
+    </div>
+  </section>
+
+  <div class="privacy-content">
+    <a href="/" class="privacy-back">&larr; Terug naar Pippy</a>
+
+    <div class="effective-date">Ingangsdatum: 6 april 2026</div>
+
+    <p>Pippy ("wij", "onze" of "ons") beheert de mobiele app New Mom App - Pippy (de "app") en de website <a href="https://meetpippy.com">meetpippy.com</a> (de "website"). In dit privacybeleid leggen we uit welke gegevens we verzamelen, hoe we ze gebruiken en welke keuzes je hebt.</p>
+
+    <div class="privacy-toc">
+      <h3>Inhoudsopgave</h3>
+      <ol>
+        <li><a href="#nl-info-collect">Welke gegevens we verzamelen</a></li>
+        <li><a href="#nl-info-use">Hoe we je gegevens gebruiken</a></li>
+        <li><a href="#nl-data-storage">Opslag en beveiliging</a></li>
+        <li><a href="#nl-permissions">App-rechten</a></li>
+        <li><a href="#nl-third-parties">Externe diensten</a></li>
+        <li><a href="#nl-no-selling">Geen verkoop van gegevens</a></li>
+        <li><a href="#nl-no-ads">Geen advertenties of advertentietracking</a></li>
+        <li><a href="#nl-age">Alleen voor volwassenen (18+)</a></li>
+        <li><a href="#nl-coppa">Privacy van kinderen (COPPA)</a></li>
+        <li><a href="#nl-data-retention">Bewaren en verwijderen van gegevens</a></li>
+        <li><a href="#nl-how-to-delete">Hoe verwijder je je account</a></li>
+        <li><a href="#nl-your-rights">Je rechten</a></li>
+        <li><a href="#nl-changes">Wijzigingen in dit beleid</a></li>
+        <li><a href="#nl-contact">Contact</a></li>
+      </ol>
+    </div>
+
+    <h2 id="nl-info-collect">1. Welke gegevens we verzamelen</h2>
+    <p>We verzamelen alleen de gegevens die nodig zijn om Pippy goed te laten werken. Daarbij gaat het om:</p>
+
+    <h3>Accountgegevens</h3>
+    <ul>
+      <li><strong>E-mailadres</strong>: gebruikt voor het aanmaken van je account, inloggen en belangrijke meldingen over je account.</li>
+    </ul>
+
+    <h3>Gegevens over je baby</h3>
+    <p>Wanneer je de app gebruikt, kun je de volgende informatie over je baby vastleggen:</p>
+    <ul>
+      <li><strong>Voedingsgegevens</strong>: type voeding (fles, borstvoeding, vaste voeding), hoeveelheid, duur en tijd.</li>
+      <li><strong>Slaapgegevens</strong>: dutjes en slaaptijden, duur en bijbehorende notities.</li>
+      <li><strong>Luiergegevens</strong>: luierwissels, type en tijd.</li>
+      <li><strong>Kolfgegevens</strong>: kolfsessies, gekolfde hoeveelheid en tijd.</li>
+      <li><strong>Groeigegevens</strong>: gewicht, lengte en hoofdomtrek.</li>
+      <li><strong>Gezondheidsnotities</strong>: gezondheidsobservaties of notities die je vastlegt.</li>
+      <li><strong>Mijlpaalgegevens</strong>: ontwikkelingsmijlpalen en de datum waarop ze plaatsvinden.</li>
+      <li><strong>Algemene notities</strong>: vrije notities die je over je baby toevoegt.</li>
+    </ul>
+
+    <h3>Spraakinvoer</h3>
+    <p>De app ondersteunt spraakinvoer via spraak-naar-tekst-functionaliteit. Wanneer je de spraakfunctie gebruikt, wordt je spraak realtime omgezet naar tekst. <strong>We slaan geen audio op, bewaren geen opnames en houden geen geluidsbestanden bij.</strong> Spraakgegevens worden uitsluitend verwerkt om je spraak om te zetten naar tekst voor invoer in de app.</p>
+
+    <h3>Website-statistieken</h3>
+    <p>Onze website gebruikt twee analysetools:</p>
+    <ul>
+      <li><strong>GoatCounter</strong>: een privacy-vriendelijke, open source analysetool. GoatCounter gebruikt geen cookies, verzamelt geen persoonsgegevens en volgt geen gebruikers tussen websites. Er worden alleen geaggregeerde, anonieme paginaweergavestatistieken verzameld.</li>
+      <li><strong>Microsoft Clarity</strong>: een tool voor gedragsanalyse die ons helpt begrijpen hoe bezoekers onze marketingpagina's gebruiken. Clarity legt geanonimiseerde sessieopnames, heatmaps en klikpatronen vast (bijvoorbeeld op welke knoppen wordt geklikt, hoe ver de pagina wordt gescrold en waar bezoekers aarzelen). Clarity gebruikt cookies en kan je IP-adres en apparaatgegevens vastleggen. Microsoft bewaart deze gegevens maximaal 13 maanden. Microsoft mag geaggregeerde, anonieme gedragsgegevens gebruiken om eigen producten te verbeteren. Clarity is alleen geïnstalleerd op onze marketingwebsite (meetpippy.com) en wordt <strong>niet</strong> gebruikt in de Pippy-app, waar Clarity geen baby-trackinggegevens, log-invoeren of persoonlijke accountgegevens te zien krijgt. Zie de <a href="https://privacy.microsoft.com/nl-nl/privacystatement" target="_blank" rel="noopener">Microsoft Privacyverklaring</a> voor volledige details.</li>
+    </ul>
+
+    <h3>Statistieken in de app</h3>
+    <p>De app verzamelt anonieme, geaggregeerde gebruiksgegevens om ons te helpen begrijpen hoe functies worden gebruikt en waar we kunnen verbeteren. Deze gegevens bevatten algemene handelingen, zoals welke schermen worden bekeken, welke functies worden gebruikt en hoe vaak de app wordt geopend. <strong>We verzamelen via onze analytics geen persoonlijk identificeerbare informatie (PII).</strong> Concreet:</p>
+    <ul>
+      <li>Er worden geen gebruikers-ID's, namen, e-mailadressen of IP-adressen vastgelegd.</li>
+      <li>Er wordt geen device fingerprinting of tracking tussen sessies uitgevoerd.</li>
+      <li>Er worden geen gegevens gedeeld met externe analytics-aanbieders. Alle analytics-gegevens worden veilig in onze eigen database opgeslagen.</li>
+      <li>Analytics-gebeurtenissen zijn volledig anoniem en kunnen niet worden gekoppeld aan een individuele gebruiker.</li>
+    </ul>
+    <p>Deze gegevens worden alleen gebruikt om de app voor alle gebruikers te verbeteren. Je kunt de app gewoon blijven gebruiken in de wetenschap dat je persoonlijke gegevens nooit deel uitmaken van onze analytics.</p>
+
+    <h2 id="nl-info-use">2. Hoe we je gegevens gebruiken</h2>
+    <p>We gebruiken de gegevens die we verzamelen voor de volgende doeleinden:</p>
+    <ul>
+      <li>Om de app en functies te leveren, te onderhouden en te verbeteren.</li>
+      <li>Om je account aan te maken en te beheren.</li>
+      <li>Om je baby-trackinggegevens te synchroniseren tussen apparaten en verzorgers.</li>
+      <li>Om belangrijke meldingen over je account te versturen (zoals beveiligingswaarschuwingen of service-updates).</li>
+      <li>Om te begrijpen hoe de app wordt gebruikt, zodat we hem kunnen verbeteren.</li>
+      <li>Om optionele functies in de app aan te bieden zoals <em>Parenting Personality</em> en <em>Baby's Star Sign</em> die je trackingpatronen samenvatten. Deze functies worden berekend op basis van je bestaande log-gegevens, zijn alleen zichtbaar binnen je eigen account en worden niet extern gedeeld.</li>
+    </ul>
+    <p>We verkopen je gegevens niet, gebruiken ze niet voor gedragsgerichte reclame en delen ze niet met derden voor profilering of geautomatiseerde besluitvorming buiten de app.</p>
+
+    <h2 id="nl-data-storage">3. Opslag en beveiliging</h2>
+    <p>Je gegevens worden veilig opgeslagen via <strong>Supabase</strong>, een cloud-databaseplatform met ingebouwde beveiligingsfuncties, waaronder:</p>
+    <ul>
+      <li>Versleuteling van gegevens tijdens overdracht (TLS/SSL) en in rust.</li>
+      <li>Beveiligingsbeleid op rijniveau, zodat gebruikers alleen toegang hebben tot hun eigen gegevens.</li>
+      <li>Regelmatige beveiligingsupdates en monitoring.</li>
+    </ul>
+    <p>Hoewel we redelijke maatregelen nemen om je gegevens te beschermen, is geen enkele methode van elektronische overdracht of opslag 100% veilig. We raden je aan een sterk, uniek wachtwoord te gebruiken voor je Pippy-account.</p>
+
+    <h2 id="nl-permissions">4. App-rechten</h2>
+    <p>De app vraagt de volgende apparaatrechten aan:</p>
+    <ul>
+      <li><strong>Microfoon</strong>: uitsluitend gebruikt voor spraak-naar-tekst-invoer. Wanneer je op de microfoonknop tikt, wordt je spraak omgezet naar tekst zodat je handsfree gegevens kunt invoeren. Er wordt geen audio opgenomen, opgeslagen of als geluidsbestand naar een server verzonden. Je kunt de app volledig gebruiken zonder microfoontoegang door je invoer te typen.</li>
+      <li><strong>Camera</strong>: optioneel gebruikt om foto's te maken van maaltijden, luiers of andere zaken voor AI-gestuurde analyse. Foto's die je maakt, worden naar onze AI-service gestuurd voor analyse en opgeslagen bij de bijbehorende invoer in je account. Je kunt de app volledig gebruiken zonder cameratoegang.</li>
+    </ul>
+    <p>De app vraagt <strong>geen</strong> toegang tot locatiegegevens, contacten of andere apparaatrechten buiten wat hierboven is vermeld.</p>
+
+    <h2 id="nl-third-parties">5. Externe diensten</h2>
+    <p>We gebruiken de volgende externe diensten om de app te laten werken:</p>
+    <ul>
+      <li><strong>Supabase</strong>: voor veilige cloud-opslag en authenticatie. <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Privacybeleid van Supabase</a></li>
+      <li><strong>OpenAI</strong>: voor AI-gedreven functies, waaronder natuurlijke taalverwerking van je invoer en, voor Premium-gebruikers, foto-analyse. Berichten en foto's die je invoert, worden naar de OpenAI API gestuurd om antwoorden en inzichten te genereren. OpenAI verwerkt deze gegevens volgens hun API-databeleid en gebruikt via de API ingediende gegevens niet om hun modellen te trainen. <a href="https://openai.com/policies/privacy-policy" target="_blank" rel="noopener">Privacybeleid van OpenAI</a></li>
+      <li><strong>RevenueCat</strong>: voor het beheren van in-app abonnementen en aankoopverificatie. Wanneer je een aankoop doet, worden transactiegegevens (zoals aankoopbevestiging en abonnementsstatus) verwerkt door RevenueCat. Betaalkaartgegevens worden niet door ons of RevenueCat verwerkt; betalingen worden afgehandeld door Apple of Google. <a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">Privacybeleid van RevenueCat</a></li>
+      <li><strong>GoatCounter</strong>: voor anonieme, cookieloze website-statistieken. <a href="https://www.goatcounter.com/help/privacy" target="_blank" rel="noopener">Privacybeleid van GoatCounter</a></li>
+      <li><strong>Microsoft Clarity</strong>: voor gedragsanalyse (heatmaps, sessieopnames) alleen op onze marketingwebsite. Niet gebruikt in de app. <a href="https://privacy.microsoft.com/nl-nl/privacystatement" target="_blank" rel="noopener">Microsoft Privacyverklaring</a></li>
+    </ul>
+    <p>We delen je persoonsgegevens niet met andere derden. We zijn niet gekoppeld aan advertentienetwerken, datahandelaren of social-mediatrackingplatforms.</p>
+
+    <h2 id="nl-no-selling">6. Geen verkoop van gegevens</h2>
+    <p><strong>We verkopen, verhuren, leasen of verhandelen je persoonsgegevens nooit aan derden.</strong> Dit geldt voor alle gegevens die we verzamelen, inclusief accountgegevens, baby-trackinggegevens en gebruiksgegevens. Dit is een kernprincipe van ons bedrijf, niet alleen een wettelijke verplichting.</p>
+
+    <h2 id="nl-no-ads">7. Geen advertenties of advertentietracking</h2>
+    <p>De app bevat <strong>geen advertenties</strong> en gebruikt <strong>geen advertentie-trackingtechnologieën</strong>. We gebruiken geen advertentie-identifiers, trackingpixels of welke vorm van gedragstracking dan ook voor advertentiedoeleinden.</p>
+
+    <h2 id="nl-age">8. Alleen voor volwassenen (18+)</h2>
+    <p>Pippy is <strong>uitsluitend bedoeld voor gebruik door volwassenen (18 jaar of ouder)</strong> die ouders, voogden of bevoegde verzorgers zijn van een kind. Door een account aan te maken en de app te gebruiken, verklaar je dat je minimaal 18 jaar bent en dat je de juridische bevoegdheid hebt om informatie vast te leggen over het kind dat je bijhoudt.</p>
+    <p>De app is niet ontworpen voor, niet gericht op en niet bedoeld voor gebruik door kinderen of minderjarigen. Ben je jonger dan 18? Gebruik de app dan niet en stuur geen gegevens naar ons toe.</p>
+
+    <h2 id="nl-coppa">9. Privacy van kinderen (COPPA-naleving)</h2>
+    <p>New Mom App - Pippy is ontworpen voor gebruik door <strong>ouders en verzorgers</strong>, niet door kinderen. De app is niet gericht op kinderen jonger dan 13, en we verzamelen niet bewust persoonsgegevens van kinderen jonger dan 13 als gebruikers van de app.</p>
+    <p>De babygerelateerde gegevens die in de app worden ingevoerd (zoals voedingstijden, slaapschema's, foto's en groeimetingen) worden volledig ingevoerd en beheerd door de ouder of verzorger, die de geverifieerde volwassen accounteigenaar is. Kinderen hebben geen directe interactie met de app.</p>
+    <p>We delen gegevens over het kind dat wordt gevolgd niet met derden voor advertenties of profilering, we tonen geen gedragsgerichte advertenties en verkopen geen gegevens. Gegevens over het kind worden alleen verwerkt om de app-functionaliteit aan de ouder/verzorger te leveren.</p>
+    <p>Als we erachter komen dat we per ongeluk persoonsgegevens hebben verzameld van een kind jonger dan 13 dat de app als gebruiker gebruikt (in tegenstelling tot informatie die door een ouder over hun kind is ingevoerd), zullen we deze informatie direct verwijderen. Als je vermoedt dat een kind jonger dan 13 ons als gebruiker persoonsgegevens heeft verstrekt, neem dan contact met ons op via onderstaand adres en we zullen het verwijderen.</p>
+
+    <h2 id="nl-data-retention">10. Bewaren en verwijderen van gegevens</h2>
+    <p>We bewaren je gegevens zolang je account actief is. Je hebt op elk moment volledige controle over je gegevens:</p>
+    <ul>
+      <li><strong>Individuele invoeren verwijderen</strong>: je kunt elke voedings-, slaap-, luier- of mijlpaalinvoer op elk gewenst moment vanuit de app verwijderen.</li>
+      <li><strong>Account verwijderen</strong>: je kunt je hele account en alle bijbehorende gegevens op elk moment verwijderen. Het verwijderen van een account is definitief en haalt al je gegevens van onze servers, inclusief alle baby-trackinggegevens, accountgegevens en alle andere gegevens die aan je account zijn gekoppeld.</li>
+    </ul>
+    <p>Zodra je account is verwijderd, kunnen je gegevens niet meer worden hersteld.</p>
+
+    <h2 id="nl-how-to-delete">11. Hoe verwijder je je account</h2>
+    <p>Je kunt je account en alle bijbehorende gegevens op twee manieren verwijderen:</p>
+    <ul>
+      <li><strong>In de app:</strong> open Pippy, ga naar <em>Instellingen &rarr; Privacy &amp; Gegevens</em> en tik op <em>Verwijder mijn gegevens</em> of <em>Verwijder gezinsgegevens</em>. De verwijdering wordt direct verwerkt.</li>
+      <li><strong>Via de website (geen app-installatie nodig):</strong> bezoek onze account-verwijderpagina op <a href="https://meetpippy.com/delete-account.html"><strong>meetpippy.com/delete-account.html</strong></a>. Op deze pagina kun je een verwijderverzoek indienen via e-mail of formulier; verzoeken worden binnen 30 dagen verwerkt.</li>
+    </ul>
+    <p>Het verwijderen van je account zegt een actief abonnement niet automatisch op. Om toekomstige kosten te voorkomen, zeg je je abonnement op via <a href="https://play.google.com/store/account/subscriptions" target="_blank" rel="noopener">Google Play-abonnementen</a> of <a href="https://apps.apple.com/account/subscriptions" target="_blank" rel="noopener">App Store-abonnementen</a>.</p>
+
+    <h2 id="nl-your-rights">12. Je rechten</h2>
+    <p>Afhankelijk van je locatie heb je mogelijk de volgende rechten met betrekking tot je persoonsgegevens:</p>
+    <ul>
+      <li><strong>Inzage</strong>: je kunt een kopie opvragen van de persoonsgegevens die we van je bewaren.</li>
+      <li><strong>Correctie</strong>: je kunt je gegevens op elk moment via de app bijwerken of corrigeren.</li>
+      <li><strong>Verwijdering</strong>: je kunt je account en alle bijbehorende gegevens op elk moment verwijderen.</li>
+      <li><strong>Dataportabiliteit</strong>: je kunt je gegevens opvragen in een overdraagbaar formaat.</li>
+      <li><strong>Bezwaar</strong>: je kunt bezwaar maken tegen bepaalde verwerkingen van je gegevens.</li>
+    </ul>
+    <p>Wil je een van deze rechten uitoefenen? Neem dan contact met ons op via de gegevens in het hoofdstuk Contact hieronder.</p>
+
+    <h2 id="nl-changes">13. Wijzigingen in dit beleid</h2>
+    <p>We kunnen dit privacybeleid van tijd tot tijd bijwerken. Bij belangrijke wijzigingen brengen we je op de hoogte via de app of per e-mail. De "Ingangsdatum" bovenaan deze pagina geeft aan wanneer dit beleid voor het laatst is bijgewerkt.</p>
+    <p>We raden je aan dit privacybeleid regelmatig door te nemen om op de hoogte te blijven van hoe we je gegevens beschermen.</p>
+
+    <h2 id="nl-contact">14. Contact</h2>
+    <p>Heb je vragen, zorgen of verzoeken over dit privacybeleid of over je persoonsgegevens? Neem dan contact met ons op:</p>
+    <ul>
+      <li><strong>Ontwikkelaar:</strong> Pippy</li>
+      <li><strong>Website:</strong> <a href="https://meetpippy.com">meetpippy.com</a></li>
+      <li><strong>E-mail:</strong> <a href="mailto:support@meetpippy.com">support@meetpippy.com</a></li>
+    </ul>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="pippy-logo.png" alt="Pippy" class="footer-logo" />
+        <p>Met liefde gemaakt (en heel weinig slaap) &#128155;</p>
+      </div>
+      <div class="footer-trust">
+        <span>&#128274; Versleuteld</span>
+        <span>&#128737;&#65039; AVG-conform</span>
+        <span>&#128581; Geen advertenties, geen verkoop van gegevens</span>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacybeleid</a>
+        <a href="/terms.html">Gebruiksvoorwaarden</a>
+        <a href="/delete-account.html">Account verwijderen</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/faq.html">Veelgestelde vragen</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Pippy. Alle rechten voorbehouden.</div>
+    </div>
+  </footer>
+
+  </div><!-- /lang nl -->
+
+  <script>
+    (function() {
+      var TITLES = {
+        en: 'Privacy Policy | New Mom App - Pippy',
+        nl: 'Privacybeleid | New Mom App - Pippy'
+      };
+      var META_DESC = {
+        en: "Privacy Policy for New Mom App - Pippy. Learn how we collect, use, and protect your data. Your privacy and your family's safety are our top priorities.",
+        nl: "Privacybeleid van New Mom App - Pippy. Lees hoe we je gegevens verzamelen, gebruiken en beschermen. Jouw privacy en de veiligheid van je gezin staan bij ons voorop."
+      };
+
+      function applyLang(lang) {
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.setAttribute('lang', lang);
+        document.title = TITLES[lang] || TITLES.en;
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute('content', META_DESC[lang] || META_DESC.en);
+        document.querySelectorAll('[data-set-lang]').forEach(function(btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-set-lang') === lang);
+        });
+      }
+
+      function setLang(lang) {
+        if (lang !== 'en' && lang !== 'nl') return;
+        applyLang(lang);
+        try { localStorage.setItem('pippy-lang', lang); } catch(e) {}
+        try {
+          var url = new URL(window.location.href);
+          url.searchParams.set('lang', lang);
+          history.replaceState(null, '', url.toString());
+        } catch(e) {}
+      }
+
+      document.querySelectorAll('[data-set-lang]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          setLang(btn.getAttribute('data-set-lang'));
+        });
+      });
+
+      // Apply current language (resolved by inline script in <head>) to title/meta/buttons.
+      applyLang(document.documentElement.getAttribute('data-lang') || 'en');
+    })();
+  </script>
 
   <script data-goatcounter="https://meetpippy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
