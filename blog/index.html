@@ -85,6 +85,15 @@
   <!-- Post Grid -->
   <div class="blog-grid" id="posts">
 
+    <a href="/blog/first-week-home-with-newborn.html" class="post-card" data-cat="tips">
+      <div class="post-card-body">
+        <span class="post-card-cat tips">Parenting Tips</span>
+        <h2 class="post-card-title">First Week Home With Newborn: A Survival Guide for New Parents</h2>
+        <p class="post-card-excerpt">A gentle, realistic look at week one: feeds, sleep, diapers, visitors, and how to take care of yourself when everything feels new.</p>
+        <span class="post-card-meta">April 25, 2026</span>
+      </div>
+    </a>
+
     <a href="/blog/what-to-pack-in-a-diaper-bag.html" class="post-card" data-cat="tips">
       <div class="post-card-body">
         <span class="post-card-cat tips">Parenting Tips</span>
@@ -331,21 +340,4 @@
     pills.forEach(pill => {
       pill.addEventListener('click', () => {
         const cat = pill.dataset.cat;
-        pills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        cards.forEach(card => {
-          const catSpan = card.querySelector('.post-card-cat');
-          if (cat === 'all' || (catSpan && catSpan.classList.contains(cat))) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  </script>
-
-  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-
-</body>
-</html>
+        pills.forE
