@@ -102,7 +102,7 @@
   <section class="privacy-hero">
     <h1>Contraction Timer Pippy Privacy Policy</h1>
     <p>Everything you time stays on your phone.</p>
-    <div class="privacy-updated">Last updated: April 23, 2026</div>
+    <div class="privacy-updated">Last updated: April 24, 2026</div>
   </section>
 
   <article class="privacy-content">
@@ -123,12 +123,15 @@
 
     <h2>What we don't do</h2>
     <ul>
-      <li>We don't have servers that receive your data.</li>
+      <li>We don't run our own servers that receive your contraction log.</li>
       <li>We don't use analytics, crash reporting, or telemetry of any kind.</li>
       <li>We don't show ads.</li>
       <li>We don't track you across apps or websites.</li>
       <li>We don't sell, share, or rent your data, because we don't have it.</li>
     </ul>
+
+    <h2>App updates</h2>
+    <p>The app is built with the Expo framework. When it launches, it quietly checks for over-the-air app updates by making an HTTPS request to Expo's update server at <code>u.expo.dev</code>. That request contains only standard information every HTTPS request contains: your device's IP address, the app's version, your platform (iOS), and the project identifier. No contractions, settings, or anything you've logged is sent. Expo's privacy policy is at <a href="https://expo.dev/privacy" target="_blank" rel="noopener">expo.dev/privacy</a>. You can see this check happen in the app's source by searching for "checkForUpdatesSilently."</p>
 
     <h2>Sharing your log with someone</h2>
     <p>The app has a share button that builds a short plain-text summary of your last hour (e.g., "Last hour: 8 contractions. Avg length 52s. Avg 4m 30s apart.") and hands it to your phone's share sheet. When you pick Messages, WhatsApp, or email, your phone sends it through that app. We never see it.</p>
