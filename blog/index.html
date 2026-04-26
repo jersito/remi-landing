@@ -85,6 +85,24 @@
   <!-- Post Grid -->
   <div class="blog-grid" id="posts">
 
+    <a href="/blog/how-to-increase-milk-supply.html" class="post-card" data-cat="feeding">
+      <div class="post-card-body">
+        <span class="post-card-cat feeding">Feeding</span>
+        <h2 class="post-card-title">How to Increase Milk Supply: Practical Tips for Parents</h2>
+        <p class="post-card-excerpt">A gentle guide to nursing rhythm, pumping, hydration, foods, rest, and when to talk to a lactation consultant or pediatrician.</p>
+        <span class="post-card-meta">April 26, 2026</span>
+      </div>
+    </a>
+
+    <a href="/blog/going-back-to-work-after-maternity-leave.html" class="post-card" data-cat="tips">
+      <div class="post-card-body">
+        <span class="post-card-cat tips">Parenting Tips</span>
+        <h2 class="post-card-title">Going Back to Work After Maternity Leave: A Calm, Practical Guide</h2>
+        <p class="post-card-excerpt">A warm, practical guide to childcare, feeding plans, schedules, and finding your footing in those first weeks back at work.</p>
+        <span class="post-card-meta">April 25, 2026</span>
+      </div>
+    </a>
+
     <a href="/blog/first-week-home-with-newborn.html" class="post-card" data-cat="tips">
       <div class="post-card-body">
         <span class="post-card-cat tips">Parenting Tips</span>
@@ -340,4 +358,19 @@
     pills.forEach(pill => {
       pill.addEventListener('click', () => {
         const cat = pill.dataset.cat;
-        pills.forE
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        cards.forEach(card => {
+          const catSpan = card.querySelector('.post-card-cat');
+          if (cat === 'all' || (catSpan && catSpan.classList.contains(cat))) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
