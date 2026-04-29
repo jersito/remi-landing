@@ -85,6 +85,15 @@
   <!-- Post Grid -->
   <div class="blog-grid" id="posts">
 
+    <a href="/blog/how-to-get-breastfed-baby-to-take-bottle.html" class="post-card" data-cat="feeding">
+      <div class="post-card-body">
+        <span class="post-card-cat feeding">Feeding</span>
+        <h2 class="post-card-title">How to Get a Breastfed Baby to Take a Bottle</h2>
+        <p class="post-card-excerpt">A gentle, practical guide to helping a breastfed baby accept a bottle, from timing and who should offer to nipple flow, milk temperature, and what to try when refusal feels stuck.</p>
+        <span class="post-card-meta">April 29, 2026</span>
+      </div>
+    </a>
+
     <a href="/blog/baby-bedtime-routine.html" class="post-card" data-cat="sleep">
       <div class="post-card-body">
         <span class="post-card-cat sleep">Sleep</span>
@@ -375,12 +384,12 @@
     const cards = document.querySelectorAll('.post-card');
     pills.forEach(pill => {
       pill.addEventListener('click', () => {
+
         const cat = pill.dataset.cat;
         pills.forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
         cards.forEach(card => {
-          const catSpan = card.querySelector('.post-card-cat');
-          if (cat === 'all' || (catSpan && catSpan.classList.contains(cat))) {
+          if (cat === 'all' || card.dataset.cat === cat) {
             card.style.display = '';
           } else {
             card.style.display = 'none';
