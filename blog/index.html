@@ -85,6 +85,15 @@
   <!-- Post Grid -->
   <div class="blog-grid" id="posts">
 
+    <a href="/blog/how-to-split-baby-duties-with-partner.html" class="post-card" data-cat="tips">
+      <div class="post-card-body">
+        <span class="post-card-cat tips">Parenting Tips</span>
+        <h2 class="post-card-title">How to Split Baby Duties With Your Partner Fairly</h2>
+        <p class="post-card-excerpt">A warm, practical guide to dividing newborn care, night feeds, and the invisible work of parenting without resentment, with a sample task split and weekly reset routine.</p>
+        <span class="post-card-meta">April 30, 2026</span>
+      </div>
+    </a>
+
     <a href="/blog/how-to-get-breastfed-baby-to-take-bottle.html" class="post-card" data-cat="feeding">
       <div class="post-card-body">
         <span class="post-card-cat feeding">Feeding</span>
@@ -381,25 +390,4 @@
 
   <script>
     const pills = document.querySelectorAll('.cat-pill');
-    const cards = document.querySelectorAll('.post-card');
-    pills.forEach(pill => {
-      pill.addEventListener('click', () => {
-
-        const cat = pill.dataset.cat;
-        pills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        cards.forEach(card => {
-          if (cat === 'all' || card.dataset.cat === cat) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  </script>
-
-  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-
-</body>
-</html>
+    const cards = document.querySelectorAll('.post-card

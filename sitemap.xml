@@ -21,7 +21,7 @@
 
   <url>
     <loc>https://meetpippy.com/blog/</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -541,6 +541,12 @@
   <url>
     <loc>https://remibabyapp.com/blog/how-to-get-breastfed-baby-to-take-bottle.html</loc>
     <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://remibabyapp.com/blog/how-to-split-baby-duties-with-partner.html</loc>
+    <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
