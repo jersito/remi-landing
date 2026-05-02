@@ -21,7 +21,7 @@
 
   <url>
     <loc>https://meetpippy.com/blog/</loc>
-    <lastmod>2026-04-30</lastmod>
+    <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -550,5 +550,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-</urlset>
+  <url>
+    <loc>https://remibabyapp.com/blog/day-night-confusion-in-newborns.html</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+   

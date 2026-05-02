@@ -85,6 +85,24 @@
   <!-- Post Grid -->
   <div class="blog-grid" id="posts">
 
+    <a href="/blog/how-to-store-breast-milk.html" class="post-card" data-cat="feeding">
+      <div class="post-card-body">
+        <span class="post-card-cat feeding">Feeding</span>
+        <h2 class="post-card-title">How to Store Breast Milk: Fridge, Freezer, and Counter Guide</h2>
+        <p class="post-card-excerpt">How long pumped milk lasts in the fridge, freezer, and at room temperature, plus container, labeling, thawing, and warming tips.</p>
+        <span class="post-card-meta">May 2, 2026</span>
+      </div>
+    </a>
+
+    <a href="/blog/day-night-confusion-in-newborns.html" class="post-card" data-cat="sleep">
+      <div class="post-card-body">
+        <span class="post-card-cat sleep">Sleep</span>
+        <h2 class="post-card-title">Day Night Confusion in Newborns: How to Gently Help Baby Sleep at Night</h2>
+        <p class="post-card-excerpt">Why newborns mix up day and night, when most babies start to sort it out, and gentle steps many parents find helpful in the meantime.</p>
+        <span class="post-card-meta">May 1, 2026</span>
+      </div>
+    </a>
+
     <a href="/blog/how-to-split-baby-duties-with-partner.html" class="post-card" data-cat="tips">
       <div class="post-card-body">
         <span class="post-card-cat tips">Parenting Tips</span>
@@ -390,4 +408,6 @@
 
   <script>
     const pills = document.querySelectorAll('.cat-pill');
-    const cards = document.querySelectorAll('.post-card
+    const cards = document.querySelectorAll('.post-card');
+    pills.forEach(pill => {
+      pill.addEventListener('cli
