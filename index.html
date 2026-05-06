@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pippy: AI Baby Tracker App | Smart Voice Logging for Feeds & Sleep</title>
-  <meta name="description" content="Pippy is the AI baby tracker app that logs feeds, sleep, diapers, and milestones by voice. Smart, hands-free, and free on iOS. Built by parents, for parents." />
+  <meta name="description" content="Pippy is the AI baby tracker app that logs feeds, sleep, diapers, and milestones by voice. Smart, hands-free, and free on iOS and Android. Built by parents, for parents." />
   <link rel="canonical" href="https://meetpippy.com/" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://meetpippy.com/" />
   <meta property="og:title" content="Pippy: AI Baby Tracker App | Smart Voice Logging for Feeds & Sleep" />
-  <meta property="og:description" content="The smart baby tracker that actually listens. Just say what happened and Pippy logs feeds, sleep, diapers, and milestones. Free on iOS." />
+  <meta property="og:description" content="The smart baby tracker that actually listens. Just say what happened and Pippy logs feeds, sleep, diapers, and milestones. Free on iOS and Android." />
   <meta property="og:image" content="https://meetpippy.com/pippy-og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -21,7 +21,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Pippy: AI Baby Tracker for Feeds, Sleep & Diapers" />
-  <meta name="twitter:description" content="The smart baby tracker that listens. Log feeds, sleep, and diapers by voice. Free on iOS." />
+  <meta name="twitter:description" content="The smart baby tracker that listens. Log feeds, sleep, and diapers by voice. Free on iOS and Android." />
   <meta name="twitter:image" content="https://meetpippy.com/pippy-og-image.png" />
 
   <!-- Structured Data: SoftwareApplication with ratings -->
@@ -33,11 +33,11 @@
     "alternateName": ["Pippy", "AI Baby Tracker Pippy", "Pippy AI Baby Tracker"],
     "applicationCategory": "HealthApplication",
     "applicationSubCategory": "Baby Tracker",
-    "operatingSystem": "iOS",
-    "description": "Pippy is the AI baby tracker app that logs feeds, sleep, diapers, pumping, and milestones by voice. A smart, hands-free baby tracker built for new parents. Free on iOS.",
+    "operatingSystem": "iOS, Android",
+    "description": "Pippy is the AI baby tracker app that logs feeds, sleep, diapers, pumping, and milestones by voice. A smart, hands-free baby tracker built for new parents. Free on iOS and Android.",
     "url": "https://meetpippy.com",
     "downloadUrl": "https://apps.apple.com/us/app/ai-baby-tracker-pippy/id6761399646",
-    "installUrl": "https://apps.apple.com/us/app/ai-baby-tracker-pippy/id6761399646",
+    "installUrl": "https://play.google.com/store/apps/details?id=com.remibabyapp.remi",
     "screenshot": "https://meetpippy.com/pippy-og-image.png",
     "featureList": "AI chat logging, Voice logging, Smart feed tracking, Sleep tracker, Diaper tracker, Pumping log, Milestone tracker, Co-parent sync, Doctor-ready reports, Reminders, Notes",
     "offers": {
@@ -60,7 +60,10 @@
     "name": "Pippy",
     "url": "https://meetpippy.com",
     "logo": "https://meetpippy.com/pippy-logo.png",
-    "sameAs": ["https://apps.apple.com/us/app/ai-baby-tracker-pippy/id6761399646"],
+    "sameAs": [
+      "https://apps.apple.com/us/app/ai-baby-tracker-pippy/id6761399646",
+      "https://play.google.com/store/apps/details?id=com.remibabyapp.remi"
+    ],
     "description": "Pippy is an AI-powered voice baby tracker app built by parents, for parents."
   }
   </script>
@@ -95,7 +98,7 @@
         "name": "Is Pippy baby tracker free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Pippy is free to download on iOS. There are no ads, and your family's data is never sold. Optional premium features are available but the core tracking is free forever."
+          "text": "Yes. Pippy is free to download on iOS and Android. There are no ads, and your family's data is never sold. Optional premium features are available but the core tracking is free forever."
         }
       },
       {
@@ -251,19 +254,9 @@
       display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
       margin-bottom: 18px;
     }
-    .p-appstore { display: inline-block; transition: transform 0.2s; }
-    .p-appstore:hover { transform: translateY(-2px); }
-    .p-appstore img { height: 56px; display: block; }
-    .p-android-soon {
-      position: relative; opacity: 0.55; display: inline-block;
-    }
-    .p-android-soon img { height: 56px; display: block; filter: grayscale(1); }
-    .p-android-soon .lbl {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      background: rgba(58, 46, 40, 0.85); color: #fff; font-size: 0.7rem;
-      font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap;
-      text-transform: uppercase; letter-spacing: 0.5px;
-    }
+    .p-appstore, .p-playstore { display: inline-block; transition: transform 0.2s; }
+    .p-appstore:hover, .p-playstore:hover { transform: translateY(-2px); }
+    .p-appstore img, .p-playstore img { height: 56px; display: block; }
     .p-hero-meta {
       display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
       font-size: 0.82rem; color: var(--p-ink-mute); font-weight: 600;
@@ -694,10 +687,9 @@
           <a href="https://apps.apple.com/us/app/ai-baby-tracker-pippy/id6761399646" class="p-appstore" target="_blank" rel="noopener">
             <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download Pippy baby tracker on the App Store" />
           </a>
-          <div class="p-android-soon">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Pippy on Google Play (coming soon)" />
-            <span class="lbl">Coming Soon</span>
-          </div>
+          <a href="https://play.google.com/store/apps/details?id=com.remibabyapp.remi" class="p-playstore" target="_blank" rel="noopener">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get Pippy baby tracker on Google Play" />
+          </a>
         </div>
         <div class="p-hero-meta">
           <span>Free forever</span>
@@ -1036,13 +1028,13 @@
         <div class="p-faq-item open">
           <button class="p-faq-q" aria-expanded="true">What is Pippy baby tracker?</button>
           <div class="p-faq-a">
-            <p>Pippy is an AI baby tracker app that lets you log feeds, sleep, diapers, pumping sessions, and milestones by voice. Instead of tapping through forms, you just say what happened and Pippy logs it to a shared timeline for both parents. It is free on iOS, with Android coming soon.</p>
+            <p>Pippy is an AI baby tracker app that lets you log feeds, sleep, diapers, pumping sessions, and milestones by voice. Instead of tapping through forms, you just say what happened and Pippy logs it to a shared timeline for both parents. Free on iOS and Android.</p>
           </div>
         </div>
         <div class="p-faq-item">
           <button class="p-faq-q" aria-expanded="false">Is Pippy baby tracker free?</button>
           <div class="p-faq-a">
-            <p>Yes. Pippy is free to download on iOS and the core tracking is free forever. No ads. Your family's data is never sold. Optional premium features are available, but you can use Pippy as a full-featured baby tracker without paying.</p>
+            <p>Yes. Pippy is free to download on iOS and Android, and the core tracking is free forever. No ads. Your family's data is never sold. Optional premium features are available, but you can use Pippy as a full-featured baby tracker without paying.</p>
           </div>
         </div>
         <div class="p-faq-item">
@@ -1137,10 +1129,9 @@
         <a href="https://apps.apple.com/us/app/ai-baby-tracker-pippy/id6761399646" class="p-appstore" target="_blank" rel="noopener">
           <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download Pippy on the App Store" />
         </a>
-        <div class="p-android-soon">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Pippy on Google Play (coming soon)" />
-          <span class="lbl">Coming Soon</span>
-        </div>
+        <a href="https://play.google.com/store/apps/details?id=com.remibabyapp.remi" class="p-playstore" target="_blank" rel="noopener">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get Pippy on Google Play" />
+        </a>
       </div>
       <p class="p-cta-note">Free forever · No ads · No data selling</p>
     </div>
