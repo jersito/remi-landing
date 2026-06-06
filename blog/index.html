@@ -85,6 +85,24 @@
   <!-- Post Grid -->
   <div class="blog-grid" id="posts">
 
+    <a href="/blog/how-to-soothe-a-crying-baby.html" class="post-card" data-cat="tips">
+      <div class="post-card-body">
+        <span class="post-card-cat tips">Parenting Tips</span>
+        <h2 class="post-card-title">How to Soothe a Crying Baby: Gentle Tips That Actually Help</h2>
+        <p class="post-card-excerpt">Why babies cry, a quick checklist to run through in the moment, calming techniques that really help, and when it is worth a call to your pediatrician.</p>
+        <span class="post-card-meta">June 6, 2026</span>
+      </div>
+    </a>
+
+    <a href="/blog/how-to-prevent-diaper-blowouts.html" class="post-card" data-cat="diapers">
+      <div class="post-card-body">
+        <span class="post-card-cat diapers">Diapers &amp; Health</span>
+        <h2 class="post-card-title">How to Prevent Diaper Blowouts: A Practical Guide for Parents</h2>
+        <p class="post-card-excerpt">Why blowouts happen and how to stop them, from getting the fit and size right to the back-roll trick, plus when to check in with your pediatrician.</p>
+        <span class="post-card-meta">June 5, 2026</span>
+      </div>
+    </a>
+
     <a href="/blog/how-to-introduce-allergenic-foods-to-baby.html" class="post-card" data-cat="feeding">
       <div class="post-card-body">
         <span class="post-card-cat feeding">Feeding</span>
@@ -495,36 +513,4 @@
   <footer class="blog-footer">
     <div class="blog-footer-inner">
       <p>Made with love (and very little sleep) by the <a href="https://meetpippy.com">Pippy</a> team.</p>
-      <p>This blog is for informational purposes only. Always consult your pediatrician for medical advice.</p>
-      <div class="blog-footer-links">
-        <a href="https://meetpippy.com">Home</a>
-        <a href="/blog/">Blog</a>
-        <a href="https://meetpippy.com/privacy.html">Privacy Policy</a>
-        <a href="https://meetpippy.com/terms.html">Terms of Service</a>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    const pills = document.querySelectorAll('.cat-pill');
-    const cards = document.querySelectorAll('.post-card');
-    pills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        pills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        const cat = pill.getAttribute('data-cat');
-        cards.forEach(card => {
-          if (cat === 'all' || card.getAttribute('data-cat') === cat) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  </script>
-
-  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-
-</body>
-</html>
+      <p>This blo
