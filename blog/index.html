@@ -85,6 +85,15 @@
   <!-- Post Grid -->
   <div class="blog-grid" id="posts">
 
+    <a href="/blog/keeping-baby-cool-in-hot-weather.html" class="post-card" data-cat="diapers">
+      <div class="post-card-body">
+        <span class="post-card-cat diapers">Diapers &amp; Health</span>
+        <h2 class="post-card-title">How to Keep Your Baby Cool in Hot Weather</h2>
+        <p class="post-card-excerpt">What to dress your baby in, safe room temperatures for summer sleep, hydration on hot days, shade and car safety, and the overheating signs worth a call.</p>
+        <span class="post-card-meta">July 27, 2026</span>
+      </div>
+    </a>
+
     <a href="/blog/when-to-stop-swaddling-baby.html" class="post-card" data-cat="sleep">
       <div class="post-card-body">
         <span class="post-card-cat sleep">Sleep</span>
@@ -510,4 +519,48 @@
 
     <a href="/blog/baby-milestones-month-by-month.html" class="post-card" data-cat="milestones">
       <div class="post-card-body">
-      
+        <span class="post-card-cat milestones">Milestones</span>
+        <h2 class="post-card-title">Baby Milestones, Month by Month</h2>
+        <p class="post-card-excerpt">A realistic, CDC-aligned milestone guide from 1 to 12 months, with what to celebrate and what to keep an eye on.</p>
+        <span class="post-card-meta">April 2026</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer class="blog-footer">
+    <div class="blog-footer-inner">
+      <p>Made with love (and very little sleep) by the <a href="https://meetpippy.com">Pippy</a> team.</p>
+      <p>This blog is for informational purposes only. Always consult your pediatrician for medical advice.</p>
+      <div class="blog-footer-links">
+        <a href="https://meetpippy.com">Home</a>
+        <a href="/blog/">Blog</a>
+        <a href="https://meetpippy.com/privacy.html">Privacy Policy</a>
+        <a href="https://meetpippy.com/terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const pills = document.querySelectorAll('.cat-pill');
+    const cards = document.querySelectorAll('.post-card');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const cat = pill.getAttribute('data-cat');
+        cards.forEach(card => {
+          if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>

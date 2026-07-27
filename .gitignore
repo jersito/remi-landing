@@ -15,3 +15,7 @@ Thumbs.db
 # Env
 .env
 .env.*
+
+# Local artifacts
+blog/images/_resp.json
+_synctest.txt
