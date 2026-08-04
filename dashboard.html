@@ -588,6 +588,10 @@
               <table class="data-table" id="costModelTable"><thead><tr><th>Model</th><th>Requests</th><th>Tokens</th><th>Cost</th></tr></thead><tbody></tbody></table>
             </div>
             <div class="chart-card">
+              <h3>Cost by Request Type</h3>
+              <table class="data-table" id="costTierTable"><thead><tr><th>Type</th><th>Requests</th><th>Premium</th><th>Cost</th></tr></thead><tbody></tbody></table>
+            </div>
+            <div class="chart-card">
               <h3>Daily Cost</h3>
               <div class="bar-chart" id="dailyCostChart"></div>
             </div>
@@ -750,7 +754,12 @@
       document.getElementById('statEvents').textContent = data.totalEvents.toLocaleString();
       document.getElementById('statHouseholds').textContent = (data.totalHouseholds ?? 0).toLocaleString();
       document.getElementById('statBabies').textContent = (data.totalBabies ?? 0).toLocaleString();
-      document.getElementById('statPremium').textContent = (data.totalSubscriptions ?? 0).toLocaleString();
+      // "Premium" = active subs only; trialing/canceled shown small so 0
+      // active with hundreds trialing doesn't read as "no subscribers at all"
+      const subsByStatus = data.subscriptionsByStatus || {};
+      const otherSubs = Object.entries(subsByStatus).filter(([s]) => s !== 'active').map(([s, n]) => `${n.toLocaleString()} ${s}`).join(', ');
+      document.getElementById('statPremium').innerHTML = (data.totalSubscriptions ?? 0).toLocaleString() +
+        (otherSubs ? ` <span style="font-size:11px;font-weight:600;color:var(--text-3)">(${otherSubs})</span>` : '');
       document.getElementById('statReferrals').textContent = (data.totalReferrals ?? 0).toLocaleString();
 
       // Retention curve
@@ -828,7 +837,7 @@
         const pct = Math.max((c.opens / maxVal) * 100, 2);
         return `<div class="bar-col">
           <div class="bar peach" style="height:${pct}%">
-            <div class="bar-tooltip">Day ${c.day}: ${c.opens} opens</div>
+            <div class="bar-tooltip">Day ${c.day}: ${c.opens} users</div>
           </div>
           <div class="bar-label">D${c.day}</div>
         </div>`;
@@ -1413,6 +1422,16 @@
       } else {
         tbody.innerHTML = models.map(([model, d]) =>
           `<tr><td>${model}</td><td>${d.requests.toLocaleString()}</td><td>${d.tokens.toLocaleString()}</td><td>$${d.cost.toFixed(4)}</td></tr>`
+        ).join('');
+      }
+
+      const tierTbody = document.querySelector('#costTierTable tbody');
+      const tiers = Object.entries(aiCost.byTier || {}).sort((a, b) => b[1].cost - a[1].cost);
+      if (tiers.length === 0) {
+        tierTbody.innerHTML = '<tr><td colspan="4" style="color:var(--text-3)">No usage yet</td></tr>';
+      } else {
+        tierTbody.innerHTML = tiers.map(([tier, d]) =>
+          `<tr><td>${tier}</td><td>${d.requests.toLocaleString()}</td><td>${d.premium.toLocaleString()}</td><td>$${d.cost.toFixed(4)}</td></tr>`
         ).join('');
       }
 
