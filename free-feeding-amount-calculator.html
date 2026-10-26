@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baby Feeding Amount Calculator | Ounces by Age and Weight | Pippy</title>
+  <meta name="description" content="Free baby feeding calculator. Enter age and weight to see how many ounces of formula or breast milk per bottle and per day, based on AAP guidance." />
+  <link rel="canonical" href="https://meetpippy.com/free-feeding-amount-calculator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://meetpippy.com/free-feeding-amount-calculator.html" />
+  <meta property="og:title" content="Baby Feeding Amount Calculator by Age and Weight" />
+  <meta property="og:description" content="How many ounces per bottle and per day? Enter age and weight for formula or breast milk. Free, no signup, runs in your browser." />
+  <meta property="og:image" content="https://meetpippy.com/pippy-og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Pippy" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Baby Feeding Amount Calculator" />
+  <meta name="twitter:description" content="Ounces per bottle and per day for formula or breast milk, by age and weight." />
+  <meta name="twitter:image" content="https://meetpippy.com/pippy-og-image.png" />
+  <meta name="apple-itunes-app" content="app-id=6761399646" />
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Pippy Baby Feeding Amount Calculator",
+  "url": "https://meetpippy.com/free-feeding-amount-calculator.html",
+  "description": "Free baby feeding calculator. Enter age and weight to see how many ounces of formula or breast milk per bottle and per day, based on AAP guidance.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires JavaScript. Works in any modern browser.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "isAccessibleForFree": true,
+  "inLanguage": "en-US",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Pippy",
+    "url": "https://meetpippy.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://meetpippy.com/pippy-logo.png"
+    }
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Pippy",
+      "item": "https://meetpippy.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Free Tools",
+      "item": "https://meetpippy.com/tools/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Feeding Amount Calculator",
+      "item": "https://meetpippy.com/free-feeding-amount-calculator.html"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many ounces of formula should my baby drink?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The AAP's average guideline is about 2.5 ounces of formula per pound of body weight per day, and usually no more than about 32 ounces in 24 hours. In the first week that is often 1 to 2 ounces per feed, rising to 3 to 4 ounces per feed by the end of the first month, and 6 to 8 ounces at each of 4 or 5 feeds by 6 months."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much breast milk should a baby drink from a bottle?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Between 1 and 6 months, exclusively breastfed babies take in about 25 ounces (750 ml) a day on average, with a typical range of about 19 to 30 ounces. Divide that by the number of feeds in a day to estimate a bottle. For example, 25 ounces over 8 feeds is about 3 ounces per bottle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the calculator medical advice?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It shows averages from public pediatric guidance. Babies regulate their own intake and needs vary. If you are worried about how much your baby eats, wet diapers, or weight gain, call your pediatrician."
+      }
+    }
+  ]
+}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" href="https://fonts.gstatic.com/s/nunito/v26/XRXI3I6Li01BKofiOc5wtlZ2di8HDLshdTQ3j6zbXWjgeg.woff2" as="font" type="font/woff2" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#F5EDE2" />
+  <meta name="robots" content="index, follow" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#F7F1E8;
+      --panel:#ffffff;
+      --ink:#2C2C34;
+      --ink-muted:rgba(44,44,52,0.58);
+      --ink-light:rgba(44,44,52,0.36);
+      --brand:#7A9DB0;
+      --brand-dark:#5f8499;
+      --brand-soft:#E4EEF3;
+      --peach:#F2C4A4;
+      --peach-soft:#FEF0E6;
+      --green:#5FA47E;
+      --green-soft:#DDF0E4;
+      --red:#C47070;
+      --line:rgba(44,44,52,0.08);
+      --line-soft:rgba(44,44,52,0.05);
+      --radius:18px;
+    }
+    html,body{height:100%;}
+    body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased;}
+    h1,h2,h3{font-family:'Nunito','Plus Jakarta Sans',sans-serif;line-height:1.2;color:var(--ink);}
+    a{color:inherit;text-decoration:none;}
+    button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+    input,select{font-family:inherit;color:var(--ink);}
+    ul{list-style:none;}
+
+    /* ==== App header (slim, sticky) ==== */
+    .app-header{position:sticky;top:0;z-index:50;background:rgba(247,241,232,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft);}
+    .app-header-inner{max-width:720px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .app-brand{display:flex;align-items:center;gap:10px;}
+    .app-brand img{height:28px;width:28px;border-radius:7px;}
+    .app-brand-name{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.95rem;color:var(--ink);}
+    .app-brand-sep{width:1px;height:18px;background:var(--line);}
+    .app-tool-name{font-family:'Nunito',sans-serif;font-weight:700;font-size:0.95rem;color:var(--ink);}
+    .app-chip{display:flex;align-items:center;gap:6px;font-size:0.78rem;font-weight:600;color:var(--green);background:var(--green-soft);padding:5px 10px;border-radius:100px;}
+    .app-chip-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(95,164,126,0.25);}
+    @media (max-width:520px){
+      .app-brand-sep,.app-brand-name{display:none;}
+      .app-chip span.chip-long{display:none;}
+    }
+
+    /* ==== Tool area ==== */
+    .tool-main{padding:28px 16px 48px;}
+    .tool-wrap{max-width:560px;margin:0 auto;}
+    .tool-seo-h1{font-size:1rem;font-weight:700;color:var(--ink-muted);text-align:center;margin:0 0 18px;letter-spacing:-0.005em;}
+    .tool-seo-h1 .strong{color:var(--ink);}
+
+    .panel{background:var(--panel);border-radius:var(--radius);box-shadow:0 20px 48px -24px rgba(40,50,80,0.18),0 1px 0 rgba(44,44,52,0.04);overflow:hidden;}
+
+    /* Hero result */
+    .result-hero{padding:30px 28px 24px;text-align:center;background:linear-gradient(180deg,#ffffff 0%,#f4f9fc 100%);border-bottom:1px solid var(--line-soft);}
+    .result-kicker{font-size:0.76rem;font-weight:800;color:var(--brand-dark);text-transform:uppercase;letter-spacing:0.9px;margin-bottom:8px;}
+    .result-value{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(2.2rem,7vw,3rem);line-height:1.05;color:var(--ink);letter-spacing:-0.02em;margin-bottom:6px;}
+    .result-sub{font-size:0.95rem;color:var(--ink-muted);margin-bottom:14px;}
+    .result-next{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:100px;background:var(--brand-soft);font-size:0.86rem;font-weight:700;color:var(--brand-dark);}
+    .result-next .label{font-weight:600;color:var(--ink-muted);}
+    .result-next.empty{background:var(--peach-soft);color:#8a5e3c;}
+    .result-next.empty .label{color:#8a5e3c;opacity:0.75;}
+
+    /* Primary action: age input */
+    .age-zone{padding:20px 20px 6px;background:var(--panel);}
+    .age-zone-label{font-size:0.78rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:10px;}
+    .age-input-row{display:flex;gap:10px;margin-bottom:14px;}
+    .age-input-row input[type=number]{flex:1;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;font-size:1.1rem;font-weight:700;font-family:'Nunito',sans-serif;text-align:center;background:#fff;color:var(--ink);}
+    .age-input-row input[type=number]:focus{outline:none;border-color:var(--brand);}
+    .age-input-row select{padding:14px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:0.95rem;font-weight:600;background:#fff;min-width:135px;}
+    .age-input-row select:focus{outline:none;border-color:var(--brand);}
+    .age-slider-wrap{padding:4px 4px 4px;}
+    .age-slider-wrap input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:4px;background:linear-gradient(90deg,var(--brand-soft) 0%,#ffd9b5 50%,var(--peach) 100%);outline:none;cursor:pointer;}
+    .age-slider-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:var(--brand);cursor:pointer;border:3px solid #fff;box-shadow:0 4px 12px rgba(122,157,176,0.4);}
+    .age-slider-wrap input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:var(--brand);cursor:pointer;border:3px solid #fff;box-shadow:0 4px 12px rgba(122,157,176,0.4);}
+    .age-slider-ticks{display:flex;justify-content:space-between;margin-top:8px;font-size:0.7rem;color:var(--ink-light);font-weight:600;}
+
+    /* Last wake block */
+    .wake-zone{padding:18px 20px 18px;background:var(--panel);border-top:1px dashed var(--line);margin-top:14px;}
+    .wake-zone-inner{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;}
+    .wake-icon{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--brand-soft),var(--peach-soft));display:flex;align-items:center;justify-content:center;font-size:22px;}
+    .wake-text .k{font-size:0.72rem;font-weight:800;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:1px;}
+    .wake-text .v{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;color:var(--ink);}
+    .wake-zone input[type=time]{padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-size:0.95rem;font-weight:600;background:#fff;color:var(--ink);min-width:0;width:128px;}
+    .wake-zone input[type=time]:focus{outline:none;border-color:var(--brand);}
+    @media (max-width:440px){
+      .wake-zone-inner{grid-template-columns:1fr;gap:10px;}
+      .wake-zone input[type=time]{width:100%;}
+    }
+
+    /* Summary chips row */
+    .chips-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px 20px 18px;}
+    .chip-cell{background:#fbf6ef;border-radius:12px;padding:12px 10px;text-align:center;}
+    .chip-cell .k{font-size:0.68rem;font-weight:800;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;}
+    .chip-cell .v{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;color:var(--ink);}
+
+    /* Sample schedule */
+    .sched-wrap{padding:6px 8px 10px;border-top:1px solid var(--line-soft);}
+    .sched-h{display:flex;align-items:center;justify-content:space-between;padding:14px 12px 8px;}
+    .sched-h .t{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.82rem;color:var(--ink-light);text-transform:uppercase;letter-spacing:0.9px;}
+    .sched-h .intro{font-size:0.78rem;color:var(--ink-muted);text-align:right;max-width:60%;line-height:1.4;}
+    .sched-card{padding:2px 12px 10px;}
+    .sched-row{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:10px 4px;align-items:center;}
+    .sched-row + .sched-row{border-top:1px dashed var(--line-soft);}
+    .sched-time{font-family:'Nunito',sans-serif;font-weight:800;color:var(--brand-dark);font-size:0.95rem;}
+    .sched-event{font-size:0.93rem;color:var(--ink);}
+    .sched-event .detail{display:block;font-size:0.82rem;color:var(--ink-muted);margin-top:2px;font-weight:500;}
+
+    /* Tool actions row */
+    .tool-actions{padding:14px 20px 20px;border-top:1px solid var(--line-soft);background:var(--panel);display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;}
+    .tool-actions .left{display:flex;gap:8px;flex-wrap:wrap;}
+    .tool-actions .get-app-link{color:var(--brand-dark);font-weight:700;font-size:0.88rem;display:inline-flex;align-items:center;gap:4px;}
+    .tool-actions .get-app-link:hover{text-decoration:underline;}
+    .btn-ghost{padding:8px 14px;border-radius:10px;font-size:0.86rem;font-weight:700;color:var(--ink-muted);background:#faf6ef;transition:background 0.12s;}
+    .btn-ghost:hover{background:#f3ecde;color:var(--ink);}
+
+    /* Trust row below tool */
+    .trust-row{max-width:560px;margin:16px auto 0;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:0.82rem;color:var(--ink-light);}
+    .trust-row .chip{display:inline-flex;align-items:center;gap:6px;}
+    .trust-row svg{width:13px;height:13px;}
+
+    /* ==== Below-the-fold: educational SEO content ==== */
+    .below{background:#ffffff;border-top:1px solid var(--line-soft);margin-top:48px;}
+    .below-inner{max-width:820px;margin:0 auto;padding:56px 20px 24px;}
+    .below-head{text-align:center;margin-bottom:36px;}
+    .below-kicker{display:inline-block;padding:5px 12px;border-radius:100px;background:var(--peach-soft);color:#8a5e3c;font-size:0.72rem;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:12px;}
+    .below-head h2{font-size:clamp(1.5rem,3.5vw,2rem);margin-bottom:10px;}
+    .below-head p{max-width:560px;margin:0 auto;font-size:1rem;color:var(--ink-muted);}
+
+    .below-section{margin-bottom:48px;}
+    .below-section:last-child{margin-bottom:0;}
+    .below-section h3.sect-head{font-family:'Nunito',sans-serif;font-weight:800;font-size:1.15rem;margin-bottom:14px;}
+
+    .amounts-table{background:#fff;border-radius:14px;border:1px solid var(--line);overflow:hidden;overflow-x:auto;}
+    .amounts-table table{width:100%;border-collapse:collapse;font-size:0.92rem;min-width:520px;}
+    .amounts-table th,.amounts-table td{padding:12px 14px;text-align:left;}
+    .amounts-table th{background:#faf6ef;font-weight:800;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.6px;color:var(--ink);}
+    .amounts-table tbody tr:not(:last-child) td{border-bottom:1px solid var(--line-soft);}
+    .amounts-table .age{font-weight:700;}
+    .amounts-table .win{font-weight:700;color:var(--brand-dark);font-family:'Nunito',sans-serif;}
+    .amounts-note{text-align:center;margin-top:12px;font-size:0.82rem;color:var(--ink-light);}
+
+    .cues-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+    @media (max-width:720px){.cues-grid{grid-template-columns:repeat(2,1fr);}}
+    @media (max-width:420px){.cues-grid{grid-template-columns:1fr;}}
+    .cue{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;}
+    .cue .em{font-size:22px;margin-bottom:8px;line-height:1;}
+    .cue h4{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.98rem;margin-bottom:4px;}
+    .cue p{font-size:0.88rem;color:var(--ink-muted);line-height:1.55;}
+
+    .longform h3{font-size:1.08rem;margin:22px 0 8px;}
+    .longform p{font-size:0.98rem;line-height:1.7;color:var(--ink);margin-bottom:12px;}
+    .longform ul{padding-left:20px;margin-bottom:12px;list-style:disc;}
+    .longform ul li{margin-bottom:5px;color:var(--ink);}
+
+    .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    @media (max-width:720px){.related-grid{grid-template-columns:1fr 1fr;}}
+    @media (max-width:420px){.related-grid{grid-template-columns:1fr;}}
+    .rel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:transform 0.15s ease,border-color 0.15s ease;display:block;}
+    .rel:hover{transform:translateY(-2px);border-color:var(--brand);}
+    .rel .k{font-size:0.68rem;font-weight:800;color:var(--brand-dark);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:4px;}
+    .rel h4{font-family:'Nunito',sans-serif;font-weight:800;font-size:0.92rem;line-height:1.35;}
+
+    /* Bottom CTA band */
+    .band{background:linear-gradient(165deg,var(--peach-soft) 0%,#f5e3cf 100%);padding:48px 20px;text-align:center;margin-top:8px;}
+    .band img.mascot{height:72px;margin-bottom:10px;}
+    .band h2{font-size:clamp(1.35rem,3.2vw,1.8rem);margin-bottom:10px;}
+    .band p{max-width:520px;margin:0 auto 20px;color:var(--ink-muted);font-size:0.98rem;}
+    .band .cta{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:100px;background:var(--ink);color:#fff;font-weight:700;font-size:0.98rem;transition:transform 0.15s;}
+    .band .cta:hover{transform:translateY(-2px);}
+    .band .tiny{display:block;margin-top:10px;font-size:0.82rem;color:var(--ink-light);}
+    .band .tiny a{font-weight:700;color:var(--brand-dark);}
+
+    /* Footer */
+    .footer{background:#ffffff;border-top:1px solid var(--line-soft);padding:28px 20px;text-align:center;}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:12px;font-size:0.88rem;color:var(--ink-muted);}
+    .footer-links a:hover{color:var(--ink);}
+    .footer-copy{font-size:0.82rem;color:var(--ink-light);}
+
+    /* Print */
+    @media print{
+      body{background:#fff;}
+      .app-header,.tool-seo-h1,.tool-actions,.trust-row,.below,.band,.footer,.age-slider-wrap,.age-zone-label{display:none !important;}
+      .panel{box-shadow:none;border-radius:0;}
+      .result-hero{background:#fff;border-bottom:2px solid #000;}
+      .sched-row{page-break-inside:avoid;}
+    }
+
+    .seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#faf6ef;border-radius:12px;padding:4px;margin-bottom:14px;}
+    .seg button{padding:11px 8px;border-radius:9px;font-weight:700;font-size:0.92rem;color:var(--ink-muted);}
+    .seg button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(40,50,80,0.1);}
+    .field-label{font-size:0.78rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.6px;margin:4px 0 10px;}
+    .feeds-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0 16px;}
+    .feeds-row .k{font-size:0.92rem;font-weight:600;color:var(--ink);}
+    .stepper{display:flex;align-items:center;gap:8px;}
+    .stepper button{width:40px;height:40px;border-radius:50%;background:var(--brand-soft);color:var(--brand-dark);font-size:1.3rem;font-weight:800;}
+    .stepper output{min-width:34px;text-align:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:1.2rem;}
+    .weight-zone[hidden]{display:none;}
+    .disclaimer{max-width:560px;margin:14px auto 0;font-size:0.82rem;line-height:1.5;color:var(--ink-muted);background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;}
+    .note-line{padding:0 20px 18px;font-size:0.86rem;color:var(--ink-muted);line-height:1.5;}
+    .longform a,.amounts-note a,.disclaimer a{color:var(--brand-dark);font-weight:700;}
+    .band .store{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  </style>
+  <script src="/analytics-consent.js" defer></script>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="app-header-inner">
+      <a class="app-brand" href="/" aria-label="Pippy home">
+        <img src="/pippy-icon.png" alt="Pippy" />
+        <span class="app-brand-name">Pippy</span>
+        <span class="app-brand-sep"></span>
+        <span class="app-tool-name">Feeding Calculator</span>
+      </a>
+      <div class="app-chip" title="Free tool, no signup required">
+        <span class="app-chip-dot"></span>
+        <span><span class="chip-long">No signup </span>&middot; Free</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="tool-main">
+    <div class="tool-wrap">
+      <h1 class="tool-seo-h1">Free <span class="strong">baby feeding amount calculator</span>. Ounces per bottle, by age and weight.</h1>
+
+      <div class="panel">
+        <section class="result-hero" aria-live="polite">
+          <div class="result-kicker">About per bottle</div>
+          <div class="result-value" id="perFeed">3 to 4 oz</div>
+          <div class="result-sub" id="perFeedSub">for a 1 month old on formula</div>
+          <div class="result-next"><span class="label">Per day</span><span id="perDay">about 24 oz</span></div>
+        </section>
+
+        <div class="age-zone">
+          <div class="field-label">Milk type</div>
+          <div class="seg" role="group" aria-label="Milk type">
+            <button type="button" id="mFormula" aria-pressed="true">Formula</button>
+            <button type="button" id="mBreast" aria-pressed="false">Breast milk</button>
+          </div>
+
+          <div class="field-label">Baby's age</div>
+          <div class="age-input-row">
+            <input type="number" id="ageValue" min="0" max="12" value="1" step="0.5" aria-label="Age value" inputmode="decimal" />
+            <select id="ageUnit" aria-label="Age unit">
+              <option value="weeks">weeks old</option>
+              <option value="months" selected>months old</option>
+            </select>
+          </div>
+
+          <div class="weight-zone" id="weightZone">
+            <div class="field-label">Baby's weight</div>
+            <div class="age-input-row">
+              <input type="number" id="weightValue" min="3" max="40" value="10" step="0.1" aria-label="Weight value" inputmode="decimal" />
+              <select id="weightUnit" aria-label="Weight unit">
+                <option value="lb" selected>pounds (lb)</option>
+                <option value="kg">kilograms (kg)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="feeds-row">
+            <span class="k">Feeds per day</span>
+            <div class="stepper">
+              <button type="button" id="feedsMinus" aria-label="Fewer feeds">&minus;</button>
+              <output id="feedsOut" aria-live="polite">7</output>
+              <button type="button" id="feedsPlus" aria-label="More feeds">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="chips-row">
+          <div class="chip-cell"><div class="k">Per bottle</div><div class="v" id="chipMl">90 to 120 ml</div></div>
+          <div class="chip-cell"><div class="k">Typical feeds</div><div class="v" id="chipFeeds">6 to 8</div></div>
+          <div class="chip-cell"><div class="k">Daily max</div><div class="v" id="chipMax">32 oz</div></div>
+        </div>
+        <p class="note-line" id="noteLine"></p>
+
+        <div class="tool-actions">
+          <div class="left"><button type="button" class="btn-ghost" id="printBtn">Print</button></div>
+          <a href="https://apps.apple.com/us/app/ai-baby-tracker-pippy/id6761399646" class="get-app-link" target="_blank" rel="noopener">Log feeds in Pippy &rarr;</a>
+        </div>
+      </div>
+
+      <p class="disclaimer"><strong>Not medical advice.</strong> These are averages from AAP and public health guidance. Babies regulate their own intake, so follow hunger and fullness cues over the number. If your baby has fewer wet diapers than usual, is not gaining weight, or you are worried, call your pediatrician.</p>
+
+      <div class="trust-row">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg> No signup</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg> Runs in your browser</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="6" y="3" width="12" height="6"/><rect x="6" y="14" width="12" height="7"/><path d="M6 14H4a2 2 0 01-2-2v-3a2 2 0 012-2h16a2 2 0 012 2v3a2 2 0 01-2 2h-2"/></svg> Print friendly</span>
+      </div>
+    </div>
+  </main>
+
+  <section class="below" id="learn">
+    <div class="below-inner">
+      <div class="below-head">
+        <span class="below-kicker">Learn more</span>
+        <h2>How much should a baby eat? Amounts by age</h2>
+        <p>The calculator does the math. Here is the guidance behind it, and what to watch for.</p>
+      </div>
+
+      <div class="below-section">
+        <h3 class="sect-head">Formula amounts by age</h3>
+        <div class="amounts-table">
+          <table>
+            <thead><tr><th>Age</th><th>Per feed</th><th>Feeds / day</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td class="age">First week</td><td class="win">1 to 2 oz (30 to 60 ml)</td><td>8 to 12, on demand</td><td>Tiny stomach, small amounts</td></tr>
+              <tr><td class="age">End of month 1</td><td class="win">3 to 4 oz (90 to 120 ml)</td><td>About 6 to 8</td><td>Often every 3 to 4 hours</td></tr>
+              <tr><td class="age">2 to 4 months</td><td class="win">4 to 6 oz</td><td>About 5 to 7</td><td>Use the 2.5 oz per lb rule</td></tr>
+              <tr><td class="age">6 months</td><td class="win">6 to 8 oz (180 to 240 ml)</td><td>4 to 5</td><td>Solids begin around now</td></tr>
+              <tr><td class="age">Any age</td><td class="win">Up to about 32 oz a day</td><td></td><td>AAP average upper limit</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="amounts-note">Based on the AAP's HealthyChildren.org guidance on formula amounts. The 2 to 4 month row comes from the weight rule.</p>
+      </div>
+
+      <div class="below-section longform">
+        <h3>The weight rule for formula</h3>
+        <p>The American Academy of Pediatrics gives an average of about 2.5 ounces of formula per pound of body weight per day, which is about 165 ml per kilogram. A 10 pound baby averages around 25 ounces a day. Spread over 7 feeds, that is about 3.5 ounces per bottle. Most babies should not need more than about 32 ounces in 24 hours.</p>
+        <h3>Breast milk in a bottle</h3>
+        <p>Breastfed babies take in a fairly steady amount between 1 and 6 months: about 25 ounces (750 ml) a day on average, with a normal range of roughly 19 to 30 ounces. Unlike formula, the daily total does not climb much with weight during this stretch. Divide the daily amount by the number of feeds to estimate a bottle. In the first weeks, bottles are smaller, often 1 to 2 ounces in week one and 2 to 3 ounces by weeks two to four.</p>
+        <h3>Hungry or full?</h3>
+        <ul>
+          <li><strong>Hunger cues:</strong> rooting, sucking on hands, lip smacking, and fussing. Crying is a late cue.</li>
+          <li><strong>Fullness cues:</strong> turning away, slowing down, relaxed hands, and falling asleep.</li>
+          <li>Paced bottle feeding helps babies stop when full. Let your baby set the pace instead of finishing the bottle.</li>
+        </ul>
+        <h3>When to call your pediatrician</h3>
+        <p>Call if your baby has noticeably fewer wet diapers, seems hungry after every feed for days, regularly wants more than about 32 ounces of formula, vomits forcefully, or is not gaining weight. Our guides on <a href="/blog/signs-of-dehydration-in-babies.html">signs of dehydration</a> and <a href="/blog/how-to-tell-if-baby-is-hungry.html">hunger cues</a> go deeper.</p>
+        <h3>Common questions</h3>
+        <h3>How many ounces of formula should my baby drink?</h3>
+        <p>The AAP's average guideline is about 2.5 ounces of formula per pound of body weight per day, and usually no more than about 32 ounces in 24 hours. In the first week that is often 1 to 2 ounces per feed, rising to 3 to 4 ounces per feed by the end of the first month, and 6 to 8 ounces at each of 4 or 5 feeds by 6 months.</p>
+        <h3>How much breast milk should a baby drink from a bottle?</h3>
+        <p>Between 1 and 6 months, exclusively breastfed babies take in about 25 ounces (750 ml) a day on average, with a typical range of about 19 to 30 ounces. Divide that by the number of feeds in a day to estimate a bottle. For example, 25 ounces over 8 feeds is about 3 ounces per bottle.</p>
+        <h3>Is the calculator medical advice?</h3>
+        <p>No. It shows averages from public pediatric guidance. Babies regulate their own intake and needs vary. If you are worried about how much your baby eats, wet diapers, or weight gain, call your pediatrician.</p>
+        <h3>Privacy</h3>
+        <p>Nothing you enter is saved or sent anywhere. The calculator runs in your browser and resets when you close the tab.</p>
+      </div>
+
+      <div class="below-section">
+        <h3 class="sect-head">Sources</h3>
+        <div class="longform">
+          <ul>
+            <li><a href="https://www.healthychildren.org/English/ages-stages/baby/formula-feeding/Pages/Amount-and-Schedule-of-Formula-Feedings.aspx" target="_blank" rel="noopener">AAP HealthyChildren.org: Amount and schedule of formula feedings</a></li>
+            <li><a href="https://www.cdc.gov/infant-toddler-nutrition/breastfeeding/how-much-and-how-often.html" target="_blank" rel="noopener">CDC: How much and how often to breastfeed</a></li>
+            <li><a href="https://www2.hse.ie/babies-children/breastfeeding/expressing-pumping/how-much-breast-milk-express/" target="_blank" rel="noopener">HSE (Ireland): How much breast milk to express</a></li>
+            <li><a href="https://kellymom.com/bf/pumpingmoms/pumping/milkcalc/" target="_blank" rel="noopener">KellyMom: How much expressed milk will my baby need?</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="below-section">
+        <h3 class="sect-head">Keep reading</h3>
+        <div class="related-grid">
+          <a href="/blog/how-much-formula-by-age.html" class="rel"><div class="k">Formula</div><h4>How much formula by age</h4></a>
+          <a href="/blog/how-much-should-newborn-eat.html" class="rel"><div class="k">Newborn</div><h4>How much should a newborn eat?</h4></a>
+          <a href="/blog/baby-feeding-schedule-by-age.html" class="rel"><div class="k">Schedule</div><h4>Baby feeding schedule by age</h4></a>
+          <a href="/feeding-schedule/newborn.html" class="rel"><div class="k">Schedule</div><h4>Newborn feeding schedule</h4></a>
+          <a href="/free-feeding-tracker.html" class="rel"><div class="k">Free tool</div><h4>Free feeding tracker</h4></a>
+          <a href="/best-baby-tracker-apps.html" class="rel"><div class="k">Compare</div><h4>Best baby tracker apps in 2026</h4></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <img src="/mascot/mascot-wave.png" alt="Pippy mascot" class="mascot" />
+    <h2>Stop doing feeding math at 3 a.m.</h2>
+    <p>Type or say "she had 4oz at 2am" and Pippy logs it, adds up today's total, and shows when the last feed was. Free on iPhone, with family sharing included.</p>
+    <div class="store"><a href="https://apps.apple.com/us/app/ai-baby-tracker-pippy/id6761399646" class="cta" target="_blank" rel="noopener">Download on the App Store &rarr;</a></div>
+    <span class="tiny">On Android? <a href="https://play.google.com/store/apps/details?id=com.remibabyapp.remi" target="_blank" rel="noopener">Get Pippy on Google Play</a>. Also try the <a href="/free-wake-window-calculator.html">wake window calculator</a> and <a href="/free-feeding-tracker.html">feeding tracker</a>.</span>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="/">Pippy home</a>
+      <a href="/tools/">All free tools</a>
+      <a href="/free-wake-window-calculator.html">Wake window calculator</a>
+      <a href="/free-feeding-tracker.html">Feeding tracker</a>
+      <a href="/free-diaper-tracker.html">Diaper tracker</a>
+      <a href="/free-pumping-log.html">Pumping log</a>
+      <a href="/best-baby-tracker-apps.html">Best baby tracker apps</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Pippy. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const OZ_ML = 29.5735;
+    const state = { milk: "formula", feeds: 7, feedsTouched: false };
+    const $ = (id) => document.getElementById(id);
+
+    const roundHalf = (x) => Math.round(x * 2) / 2;
+    const fmtOz = (x) => (Math.round(x * 2) / 2).toString().replace(/\.0$/, "");
+    const ozRange = (a, b) => fmtOz(a) === fmtOz(b) ? "about " + fmtOz(a) + " oz" : fmtOz(a) + " to " + fmtOz(b) + " oz";
+    const mlRange = (a, b) => {
+      const r = (x) => Math.round(x * OZ_ML / 5) * 5;
+      return r(a) === r(b) ? "about " + r(a) + " ml" : r(a) + " to " + r(b) + " ml";
+    };
+
+    const months = () => {
+      const v = Math.max(0, parseFloat($("ageValue").value) || 0);
+      return Math.min(12, $("ageUnit").value === "weeks" ? v / 4.345 : v);
+    };
+    const weightLb = () => {
+      const v = Math.max(0, parseFloat($("weightValue").value) || 0);
+      return $("weightUnit").value === "kg" ? v * 2.2046 : v;
+    };
+
+    const defaultFeeds = (m) => m < 1 ? 8 : m < 2 ? 7 : m < 6 ? 6 : 5;
+    const typicalFeeds = (m) => m < 0.25 ? "8 to 12" : m < 1 ? "8 to 12" : m < 2 ? "6 to 8" : m < 6 ? "5 to 7" : "4 to 5";
+
+    const ageLabel = (m) => {
+      if (m < 1) { const w = Math.max(0, Math.round(m * 4.345)); return w <= 1 ? (w === 0 ? "newborn" : "1 week old") : w + " week old"; }
+      const r = Math.round(m * 2) / 2;
+      return r + " month old";
+    };
+
+    function calc() {
+      const m = months();
+      const feeds = state.feeds;
+      let lo, hi, dayLo, dayHi, note;
+      if (state.milk === "formula") {
+        if (m < 0.25) {
+          lo = 1; hi = 2; dayLo = lo * feeds; dayHi = hi * feeds;
+          note = "First week: about 1 to 2 oz per feed, on demand (AAP). Weight does not matter much yet.";
+        } else if (m < 6) {
+          const daily = Math.min(2.5 * weightLb(), 32);
+          const per = daily / feeds;
+          lo = Math.max(1, per - 0.5); hi = per + 0.5; dayLo = daily; dayHi = daily;
+          note = "About 2.5 oz per pound of body weight per day, spread over " + feeds + " feeds, capped at 32 oz (AAP average).";
+          if (2.5 * weightLb() > 32) note += " Your baby's weight hits the 32 oz cap.";
+        } else {
+          lo = 6; hi = 8; dayLo = Math.min(lo * feeds, 32); dayHi = Math.min(hi * feeds, 32);
+          note = "From about 6 months: 6 to 8 oz at each of 4 or 5 feeds, up to about 32 oz a day, as solids start (AAP).";
+        }
+      } else {
+        if (m < 0.25) {
+          lo = 1; hi = 2; dayLo = lo * feeds; dayHi = hi * feeds;
+          note = "Week one: bottles of breast milk are small, often 1 to 2 oz.";
+        } else if (m < 1) {
+          lo = 2; hi = 3; dayLo = lo * feeds; dayHi = hi * feeds;
+          note = "Weeks two to four: often 2 to 3 oz per bottle as intake builds toward about 25 oz a day.";
+        } else {
+          lo = 19 / feeds; hi = 30 / feeds; dayLo = 19; dayHi = 30;
+          note = "From 1 to 6 months, breastfed babies average about 25 oz (750 ml) a day, normal range 19 to 30 oz, divided over " + feeds + " feeds.";
+          if (m >= 6) note += " After 6 months, milk stays the main food while solids slowly take a bigger share.";
+        }
+      }
+      $("perFeed").textContent = ozRange(lo, hi);
+      const lbl = ageLabel(m);
+      $("perFeedSub").textContent = (/^(8|11|18)\b/.test(lbl) ? "for an " : "for a ") + lbl + " on " + (state.milk === "formula" ? "formula" : "breast milk");
+      $("perDay").textContent = dayLo === dayHi ? "about " + fmtOz(dayLo) + " oz" : ozRange(dayLo, dayHi);
+      $("chipMl").textContent = mlRange(lo, hi);
+      $("chipFeeds").textContent = typicalFeeds(m);
+      $("chipMax").textContent = state.milk === "formula" ? "32 oz" : "Follow cues";
+      $("noteLine").textContent = note;
+      $("feedsOut").textContent = feeds;
+      $("weightZone").hidden = state.milk !== "formula";
+    }
+
+    function onAge() {
+      if (!state.feedsTouched) state.feeds = defaultFeeds(months());
+      calc();
+    }
+
+    function setMilk(kind) {
+      state.milk = kind;
+      $("mFormula").setAttribute("aria-pressed", String(kind === "formula"));
+      $("mBreast").setAttribute("aria-pressed", String(kind === "breast"));
+      calc();
+    }
+
+    $("mFormula").addEventListener("click", () => setMilk("formula"));
+    $("mBreast").addEventListener("click", () => setMilk("breast"));
+    $("ageValue").addEventListener("input", onAge);
+    $("ageUnit").addEventListener("change", () => {
+      const el = $("ageValue");
+      const v = parseFloat(el.value) || 0;
+      if ($("ageUnit").value === "weeks") { el.max = 52; el.step = 1; el.value = Math.round(v * 4.345); }
+      else { el.max = 12; el.step = 0.5; el.value = Math.round((v / 4.345) * 2) / 2; }
+      onAge();
+    });
+    $("weightValue").addEventListener("input", calc);
+    $("weightUnit").addEventListener("change", () => {
+      const el = $("weightValue");
+      const v = parseFloat(el.value) || 0;
+      el.value = $("weightUnit").value === "kg" ? (v / 2.2046).toFixed(1) : (v * 2.2046).toFixed(1);
+      calc();
+    });
+    $("feedsMinus").addEventListener("click", () => { state.feedsTouched = true; state.feeds = Math.max(3, state.feeds - 1); calc(); });
+    $("feedsPlus").addEventListener("click", () => { state.feedsTouched = true; state.feeds = Math.min(12, state.feeds + 1); calc(); });
+    $("printBtn").addEventListener("click", () => window.print());
+    onAge();
+  </script>
+  <script data-goatcounter="https://remibabyapp.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
