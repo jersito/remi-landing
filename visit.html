@@ -409,9 +409,9 @@ function getHealthEvents(entries) {
 
 function computeWarnings(ageMonths, feeding, sleep, diaper, entries) {
   var w = [];
-  if (ageMonths < 6 && diaper.avgWetPerDay > 0 && diaper.avgWetPerDay < 6) w.push('Average wet diapers is ' + diaper.avgWetPerDay + '/day. The AAP recommends at least 6 per day for babies under 6 months.');
-  if (ageMonths < 6 && feeding.avgFeedingsPerDay > 0 && feeding.avgFeedingsPerDay < 6) w.push('Average feeds is ' + feeding.avgFeedingsPerDay + '/day. Babies under 6 months typically need 6-8 feeds per day.');
-  if (ageMonths >= 4 && sleep.avgHoursPerDay > 0) {
+  if (ageMonths < 6 && !diaper.partialOnly && diaper.avgWetPerDay > 0 && diaper.avgWetPerDay < 6) w.push('Average wet diapers is ' + diaper.avgWetPerDay + '/day. The AAP recommends at least 6 per day for babies under 6 months.');
+  if (ageMonths < 6 && !feeding.partialOnly && feeding.avgFeedingsPerDay > 0 && feeding.avgFeedingsPerDay < 6) w.push('Average feeds is ' + feeding.avgFeedingsPerDay + '/day. Babies under 6 months typically need 6-8 feeds per day.');
+  if (ageMonths >= 4 && !sleep.partialOnly && sleep.avgHoursPerDay > 0) {
     if (ageMonths < 12 && sleep.avgHoursPerDay < 12) w.push('Average sleep is ' + sleep.avgHoursPerDay + 'h/day. The AASM recommends 12-16 hours for babies 4-12 months.');
     else if (ageMonths >= 12 && ageMonths < 24 && sleep.avgHoursPerDay < 11) w.push('Average sleep is ' + sleep.avgHoursPerDay + 'h/day. The AASM recommends 11-14 hours for toddlers 1-2 years.');
   }
@@ -689,7 +689,7 @@ function renderSummary(data) {
   var breastPct = splitData.breastPct;
   var bottlePct = splitData.bottlePct;
   var healthEvents = getHealthEvents(entries);
-  var avgNaps = computeAvgNaps(entries, totalDays);
+  var avgNaps = sleep.avgNapsPerDay != null ? sleep.avgNapsPerDay : computeAvgNaps(entries, totalDays);
   var warnings = computeWarnings(ageMonths, feeding, sleep, diaper, entries);
 
   var feedChart = feeding.totalFeedings > 0 ? buildBarSVG(feedsByType.breast, '#7A9DB0', feedsByType.bottle, '#F2C4A4', ['Breast', 'Bottle'], 'feeding', startDate) : '';
@@ -719,7 +719,7 @@ function renderSummary(data) {
       '</div>';
   }
 
-  return '<div class="header"><div class="brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" class="brand-logo" alt="Pippy"/></div><h1>' + esc(babyName) + '</h1><p class="age">' + esc(ageLabel) + '</p>' + (dobLabel ? '<p class="dob">' + esc(dobLabel) + '</p>' : '') + '<p class="period">' + start + ' to ' + end + '</p></div>' +
+  return '<div class="header"><div class="brand"><img src="data:image/png;base64,' + LOGO_BASE64 + '" class="brand-logo" alt="Pippy"/></div><h1>' + esc(babyName) + '</h1><p class="age">' + esc(ageLabel) + '</p>' + (dobLabel ? '<p class="dob">' + esc(dobLabel) + '</p>' : '') + '<p class="period">' + start + ' to ' + end + '</p>' + (feeding.partialOnly !== undefined ? '<p class="period" style="font-size:12px;opacity:0.75;">' + (feeding.partialOnly && diaper.partialOnly ? 'No full day logged yet, so averages use the partial days so far.' : 'Averages count full days only, not today or a partial birth day.') + '</p>' : '') + '</div>' +
     rangeSelector +
     '<div class="card"><div class="card-header"><span class="card-icon">&#x1F37C;</span><span class="card-title">Feeding</span></div>' + (feeding.totalFeedings > 0 ? '<div class="stats-row"><div class="stat-pill accent-blue"><div class="stat-value">' + feeding.avgFeedingsPerDay + '</div><div class="stat-label">Avg Feeds / Day</div></div>' + (feeding.avgAmountMl !== null ? '<div class="stat-pill accent-peach"><div class="stat-value">' + feeding.avgAmountMl + ' mL</div><div class="stat-label">Avg per Bottle</div></div>' : '') + (feeding.avgDurationMin !== null ? '<div class="stat-pill accent-blue" style="background:rgba(122,157,176,0.08);"><div class="stat-value">' + feeding.avgDurationMin + ' min</div><div class="stat-label">Avg per Breast</div></div>' : '') + '</div>' + breakdownBar + '<p class="chart-label">Daily feed counts</p>' + feedChart + feedNotable + '<div class="day-detail" id="detail-feeding"></div>' : '<p class="empty">No feeding data recorded</p>') + '</div>' +
     '<div class="card"><div class="card-header"><span class="card-icon">&#x1F4A7;</span><span class="card-title">Diapers</span></div>' + (diaper.avgTotalPerDay > 0 ? '<div class="stats-row"><div class="stat-pill accent-sky"><div class="stat-value">' + diaper.avgWetPerDay + '</div><div class="stat-label">Avg Wet / Day</div></div><div class="stat-pill accent-peach"><div class="stat-value">' + diaper.avgDirtyPerDay + '</div><div class="stat-label">Avg Dirty / Day</div></div></div><p class="chart-label">Daily diaper counts</p>' + diaperChart + diaperNotable + '<div class="day-detail" id="detail-diaper"></div>' : '<p class="empty">No diaper data recorded</p>') + '</div>' +
